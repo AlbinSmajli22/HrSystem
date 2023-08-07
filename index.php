@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +14,22 @@
 
     <div id="sidebar">
         <div id="profile">
-            <img src="images/person.png" alt="">
+            <img src="images/albin-smajli.png" alt="">
             <h3>Albin Smajli</h3>
         </div>
-
-        <a href="?page=page1">HOME</a>
-        <a href="?page=page2">ABOUT</a>
+         <ul>
+            <li>
+            <a href="?page=page1">HOME</a>
+            </li>
+            <li>
+            <a href="?page=page2">ABOUT</a>
+            </li>
+            <li>
+            <a href="logout.php">Log out</a>
+            </li>
+         </ul>
+        
+        
     </div>
     <div id="content">
    

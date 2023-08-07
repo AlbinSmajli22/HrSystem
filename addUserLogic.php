@@ -9,11 +9,12 @@ if (isset($_POST['submit'])) {
     $surname= $_POST['surname'];
     $email= $_POST['email'];
     $role= $_POST['role'];
+    $position= $_POST['position'];
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
 
 
-    $sql = "INSERT INTO users (name, surname, email, password, role) VALUES (:name, :surname, :email, :password,:role)";
+    $sql = "INSERT INTO users (name, surname, email, password, role, position) VALUES (:name, :surname, :email, :password,:role, :position)";
 
     $prep = $con->prepare($sql);
 
@@ -22,6 +23,7 @@ if (isset($_POST['submit'])) {
     $prep->bindParam(':email', $email);
     $prep->bindParam(':password', $password);
     $prep->bindParam(':role', $role);
+    $prep->bindParam(':position', $position);
     $prep->execute();
     
     Header("Location:login.php");
