@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
     $prep->bindParam(':role', $role);
     $prep->execute();
     
+    Header("Location:login.php");
 }
 
 ?>
