@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
     }
     elseif (password_verify($password, $data['password'])) {
         $_SESSION['email']=$data['email'];
+        $_SESSION['name']=$data['name'];
 
         header("Location: index.php");  
     }

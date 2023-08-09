@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@ session_start();
     <div id="sidebar">
         <div id="profile">
             <img src="images/albin-smajli.png" alt="">
-            <h3>Albin Smajli</h3>
+            <?php echo "<h2> ". $_SESSION['name'] . "</h2>"; ?>
         </div>
          <ul id="sidebarElements" >
             <li>
