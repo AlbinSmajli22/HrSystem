@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+session_start();
 
 if (isset($_POST['submit'])) {
     
@@ -20,9 +21,9 @@ if (isset($_POST['submit'])) {
     }
     elseif (password_verify($password, $data['password'])) {
         $_SESSION['email']=$data['email'];
-        $_SESSION['name']=$data['name'];
+        $_SESSION['name']=$data['name']." ".$data['surname'];
 
-        header("Location: index.php");  
+        header("Location: main.php");  
     }
     else{
         echo 'Woops! fullname or Password is Wrong.';

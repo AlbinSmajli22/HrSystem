@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'config.php';
+include_once 'loginlogic.php';
 
 ?>
 
@@ -8,98 +9,38 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/login.css">
     <title>Document</title>
 </head>
 <body>
-
-    <div id="sidebar">
-        <div id="profile">
-            <img src="images/albin-smajli.png" alt="">
-            <?php echo "<h2> ". $_SESSION['name'] . "</h2>"; ?>
+    <div id="main">
+        <div id="intro">
+            <div id="foto">
+                <img src="images/hrpartner.png" alt="">
+            </div>
+            <h2>MetDaan</h2>
+            <h3>Employee Portal</h3>
+            <p>Welcome. Please login login below.</p>
         </div>
-         <ul id="sidebarElements" >
-            <li>
-            <i class="fa-solid fa-house-chimney"></i>
-            <a href="?page=page1">Home</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-user"></i>
-            <a href="?page=page2">My Profile</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-list"></i>
-            <a href="?page=page3">Directory</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-sitemap"></i>
-            <a href="?page=page4">Org. Chart</a>
-            </li>
-            <li>
-            <i class="fa-regular fa-calendar-days"></i>
-            <a href="?page=page5">Calendar</a>
-            </li>
-            <li>
-            <i class="fa fa-plane"></i>
-            <a href="?page=page6">Time Off & Leave</a>
-            </li>
-            <li>
-            <i class="fa fa-check-square-o"></i>
-            <a href="?page=page7">Checklist</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-money-bill-1-wave"></i>
-            <a href="?page=page8">Expenses</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-bullseye"></i>
-            <a href="?page=page9">Goals</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-square-pen"></i>
-            <a href="?page=page10">Forms</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-book"></i>
-            <a href="?page=page11">Library</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-newspaper"></i>
-            <a href="?page=page12">News</a>
-            </li>
-            <li>
-            <i class="fa-solid fa-thumbtack"></i>
-            <a href="?page=page13">Pinboard</a>
-            </li>
-            <li>
-            <a href="logout.php">Log out</a>
-            </li>
-         </ul>
-        
-        
-    </div>
-    <div id="content">
-   
-        <?php
-         if(!isset($_GET['page']) || $_GET['page'] == ''){
-            $page = 'page1'; //If no page specified
-        } else {
-            $page = $_GET['page'];
-        }
-            switch ($page) {
-                case 'page1':
-                    include 'pages/home.php';
-                    break;
+        <form action="loginlogic.php" method="POST">
+            <input type="email" name="email" id="email" placeholder="Username">
+            <input type="password" name="password" id="password"placeholder="Password">
+            <button type="submit" name="submit">Login</button>
 
-                case 'page2':
-                    include 'pages/about.php';
-                    break;
-                    
-                default:
-                     include 'pages/notfound.php';
-            }
-        ?>
+            <a href=""> <small>Forgot your password</small></a>
+            <p Style="margin-bottom: 10px; margin-top: 20px;">
+                <small>
+                    Note: This login is for employees only.
+                    <br>
+                    Admin users please use the <a href="">admin login form.</a>
+                </small>
+            </p>
+            <p>
+                <small>
+                    © 2023 HR Partner Software Pty Ltd
+                </small>
+            </p>
+        </form>
     </div>
 </body>
 </html>

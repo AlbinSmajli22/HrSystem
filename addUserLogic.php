@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     $prep->bindParam(':position', $position);
     $prep->execute();
     
-    Header("Location:login.php");
+    Header("Location:index.php");
 }
 
 ?>
