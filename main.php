@@ -18,7 +18,7 @@ session_start();
     <div id="sidebar">
         <div id="profile">
             <img src="images/albin-smajli.png" alt="">
-            <?php echo "<h2>" . $_SESSION['name'] . "</h2>"; ?>
+            <?php echo "<h3>" . $_SESSION['name'] . "</h3>"; ?>
         </div>
          <ul id="sidebarElements" >
             <li>
