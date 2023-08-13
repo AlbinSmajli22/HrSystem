@@ -23,55 +23,55 @@ session_start();
          <ul id="sidebarElements" >
             <li>
             <i class="fa-solid fa-house-chimney"></i>
-            <a href="?page=page1">Home</a>
+            <a href="?page=home">Home</a>
             </li>
             <li>
             <i class="fa-solid fa-user"></i>
-            <a href="?page=page2">My Profile</a>
+            <a href="?page=myProfile">My Profile</a>
             </li>
             <li>
             <i class="fa-solid fa-list"></i>
-            <a href="?page=page3">Directory</a>
+            <a href="?page=directory">Directory</a>
             </li>
             <li>
             <i class="fa-solid fa-sitemap"></i>
-            <a href="?page=page4">Org. Chart</a>
+            <a href="?page=orgChart">Org. Chart</a>
             </li>
             <li>
             <i class="fa-regular fa-calendar-days"></i>
-            <a href="?page=page5">Calendar</a>
+            <a href="?page=calendar">Calendar</a>
             </li>
             <li>
             <i class="fa fa-plane"></i>
-            <a href="?page=page6">Time Off & Leave</a>
+            <a href="?page=timeOff">Time Off & Leave</a>
             </li>
             <li>
             <i class="fa fa-check-square-o"></i>
-            <a href="?page=page7">Checklist</a>
+            <a href="?page=checklist">Checklist</a>
             </li>
             <li>
             <i class="fa-solid fa-money-bill-1-wave"></i>
-            <a href="?page=page8">Expenses</a>
+            <a href="?page=expenses">Expenses</a>
             </li>
             <li>
             <i class="fa-solid fa-bullseye"></i>
-            <a href="?page=page9">Goals</a>
+            <a href="?page=goals">Goals</a>
             </li>
             <li>
             <i class="fa-solid fa-square-pen"></i>
-            <a href="?page=page10">Forms</a>
+            <a href="?page=forms">Forms</a>
             </li>
             <li>
             <i class="fa-solid fa-book"></i>
-            <a href="?page=page11">Library</a>
+            <a href="?page=library">Library</a>
             </li>
             <li>
             <i class="fa-solid fa-newspaper"></i>
-            <a href="?page=page12">News</a>
+            <a href="?page=news">News</a>
             </li>
             <li>
             <i class="fa-solid fa-thumbtack"></i>
-            <a href="?page=page13">Pinboard</a>
+            <a href="?page=pinboard">Pinboard</a>
             </li>
             <li>
             <a href="logout.php">Log out</a>
@@ -84,20 +84,56 @@ session_start();
    
         <?php
          if(!isset($_GET['page']) || $_GET['page'] == ''){
-            $page = 'page1'; //If no page specified
+            $page = 'home'; //If no page specified
         } else {
             $page = $_GET['page'];
         }
             switch ($page) {
-                case 'page1':
+                case 'home':
                     include 'pages/home.php';
                     break;
 
-                case 'page2':
+                case 'myProfile':
                     include 'pages/about.php';
                     break;
-                    
-                default:
+
+                case 'directory':
+                    include 'pages/directory.php';
+                    break;
+
+                case 'orgChart':
+                    include 'pages/orgChart.php';
+                    break;
+                
+                case 'calendar':
+                    include 'pages/calendar.php';
+                    break;    
+                
+                case 'timeOff':
+                    include 'pages/timeOff.php';
+                    break;
+                case 'checklist':
+                    include 'pages/checklist.php';
+                    break;
+                case 'expenses':
+                    include 'pages/expenses.php';
+                    break;
+                case 'goals':
+                    include 'pages/goals.php';
+                    break;
+                case 'forms':
+                    include 'pages/forms.php';
+                    break;
+                case 'library':
+                    include 'pages/library.php';
+                    break;
+                case 'news':
+                    include 'pages/news.php';
+                    break;
+                case 'pinboard':
+                    include 'pages/pinboard.php';
+                    break;
+                    default:
                      include 'pages/notfound.php';
             }
         ?>

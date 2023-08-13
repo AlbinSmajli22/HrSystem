@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2023 at 01:28 AM
+-- Generation Time: Aug 14, 2023 at 01:45 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -77,16 +77,19 @@ CREATE TABLE `users` (
   `surname` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(500) NOT NULL,
-  `role` int(10) NOT NULL,
-  `position` varchar(100) NOT NULL
+  `Position_ID` int(11) NOT NULL,
+  `Departament_ID` int(11) NOT NULL,
+  `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `role`, `position`) VALUES
-(4, 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$8JXPAwpEhY4P7ZJF/StUlO82s5cpacqbstHMnTLrCH4W.xeSTTt/.', 0, '');
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `password`, `Position_ID`, `Departament_ID`, `role`) VALUES
+(4, 'Albin', 'Smajli', 'Albin@metdaan.com', '$2y$10$8JXPAwpEhY4P7ZJF/StUlO82s5cpacqbstHMnTLrCH4W.xeSTTt/.', 5, 7, 0),
+(7, 'Gezim', 'Berisha', 'Gezim@metdaan.com', '$2y$10$Dpoy8PwyXVdz4p4xsMsoP./8fC9p8jcRx.kEMgdsT9IUpB5vsTTla', 1, 5, 1),
+(8, 'Arben', 'Berisha', 'Arben@metdaan.com', '$2y$10$aSdV5ZVDFvXbEkvghiIOAum.aSXis3s2xl3flagdd7cJCLDepNuse', 2, 5, 1);
 
 --
 -- Indexes for dumped tables
@@ -131,7 +134,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

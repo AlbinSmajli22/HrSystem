@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +10,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>ABOUT</h1>
+<?php echo "<h1>" . $_SESSION['name'] . "</h1>"; ?>
 </body>
 </html>
