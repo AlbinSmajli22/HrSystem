@@ -12,6 +12,7 @@ $datas= $prep->fetchAll();
     <link rel="stylesheet" href="./css/directory.css">
 </head>
 <div id="main">
+    <a href="./notfound.php">click</a>
     <table id="userTable">
         <thead>
             <tr>
@@ -31,7 +32,7 @@ $datas= $prep->fetchAll();
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
                     <td>Main Office</td>
-                    <td><a style="text-decoration:none; color:black;" href="editEmp.php?id=<?= $data['id']; ?>">EDIT</a> | <a style="text-decoration:none; color:black;" href="deleteEmp.php?id=<?= $data['id']; ?>">DELETE</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="editEmp.php?id=<?= $data['id']; ?>">EDIT</a> | <a style="text-decoration:none; color:black;" href="./pages/deleteDirectory.php?id=<?= $data['id']; ?>">DELETE</a></td>
                 </tr>
            <?php endforeach; ?>
         </tbody>
