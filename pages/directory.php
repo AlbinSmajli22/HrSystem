@@ -8,9 +8,11 @@ $prep->execute();
 $datas= $prep->fetchAll();
 
 ?>
-
+<head>
+    <link rel="stylesheet" href="./css/directory.css">
+</head>
 <div id="main">
-    <table>
+    <table id="userTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -28,6 +30,7 @@ $datas= $prep->fetchAll();
                     <td><?= $data['email'] ?></td>
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
+                    <td>Main Office</td>
                     <td><a style="text-decoration:none; color:black;" href="editEmp.php?id=<?= $data['id']; ?>">EDIT</a> | <a style="text-decoration:none; color:black;" href="deleteEmp.php?id=<?= $data['id']; ?>">DELETE</a></td>
                 </tr>
            <?php endforeach; ?>

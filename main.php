@@ -94,7 +94,7 @@ session_start();
                     break;
 
                 case 'myProfile':
-                    include 'pages/about.php';
+                    include 'pages/myProfile.php';
                     break;
 
                 case 'directory':

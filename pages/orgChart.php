@@ -1,9 +1,3 @@
-<?php
-require_once './config.php';
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +6,6 @@ require_once './config.php';
     <title>Document</title>
 </head>
 <body>
-<?php echo "<h1>" . $_SESSION['name'] . "</h1>"; ?>
+    <h3>Org. Chart</h3>
 </body>
 </html>

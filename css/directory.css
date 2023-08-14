@@ -1,0 +1,11 @@
+body{
+    display: flex;
+    flex-direction: row;
+}
+
+#main{
+    width: 100%;
+}
+#userTable {
+ width: 100%;
+}
