@@ -1,5 +1,5 @@
 <?php
-require_once './config.php';
+require_once '../config.php';
 
     $id=$_GET['id'];
 
@@ -7,8 +7,15 @@ require_once './config.php';
     $prep = $con->prepare($sql);
     $prep->bindParam(':id', $id);
     $prep->execute();
+    if($prep->execute()){
+        echo'user was delited';
+        header("Location: ../main.php?page=directory");
+    }
+    else {
+        echo'user was not delited';
+    }
 
-    header("Location: main.php");
+    
 
 ?>
 

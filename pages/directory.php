@@ -32,7 +32,7 @@ $datas= $prep->fetchAll();
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
                     <td>Main Office</td>
-                    <td><a style="text-decoration:none; color:black;" href="editEmp.php?id=<?= $data['id']; ?>">EDIT</a> | <a style="text-decoration:none; color:black;" href="./pages/deleteDirectory.php?id=<?= $data['id']; ?>">DELETE</a></td>
+                    <td><a style="text-decoration:none; color:black;" href="pages/editDirectory.php?id=<?= $data['id']; ?>">EDIT</a> | <a style="text-decoration:none; color:black;" href="pages/deleteDirectory.php?id=<?= $data['id']; ?>">DELETE</a></td>
                 </tr>
            <?php endforeach; ?>
         </tbody>
