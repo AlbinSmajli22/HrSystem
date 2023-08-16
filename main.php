@@ -3,15 +3,8 @@ require_once 'config.php';
 session_start();
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
-    <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+<?php include_once 'template/header.php' ?>
 </head>
 <body>
 

@@ -25,7 +25,7 @@
 				<h1 class="h2">Edit Employe</h1>
 			</div>
 
-			<form class="form-signin" method="POST" action="">
+			<form class="form-signin" method="POST" action="editDirectoryLogic.php">
 
 				<input type="hidden" id="id" name="id" value="<?= $datas['id']; ?>">
 				<input type="text" name="emri" id="emri" value="<?= $datas['name'];?>" placeholder="Emri" required autofocus class="form-control">
