@@ -28,12 +28,14 @@
 			<form class="form-signin" method="POST" action="editDirectoryLogic.php">
 
 				<input type="hidden" id="id" name="id" value="<?= $datas['id']; ?>">
-				<input type="text" name="emri" id="emri" value="<?= $datas['name'];?>" placeholder="Emri" required autofocus class="form-control">
-                <input type="text" name="mbiemri" id="mbiemri" value="<?= $datas['surname'];?>" placeholder="Mbiemri" aria-label="Mbiemri" required autofocus class="form-control">
-                <input type="text" name="adresa" id="adresa" value="<?= $datas['email'];?>" placeholder="Adresa" aria-label="Adresa" required autofocus class="form-control">
-                <input type="text" name="nrtel" id="nrtel" value="<?= $datas['position_name'];?>" placeholder="Nr.Tel" aria-label="Nr.Tel" required autofocus class="form-control">
-                <input type="text" name="email" id="email" value="<?= $datas['departament_name'];?>" placeholder="E-mail" aria-label="E-mail" required autofocus class="form-control">
-                <input type="password" name="password" id="password" value="<?= $datas['password'];?>" placeholder="Password" aria-label="Password" required autofocus class="form-control">
+				<input type="text" name="name" id="name" value="<?= $datas['name'];?>" >
+                <input type="text" name="surname" id="surname" value="<?= $datas['surname'];?>">
+                <input type="email" name="adresa" id="adresa" value="<?= $datas['email'];?>">
+                <input type="number" name="Position_ID" id="Position_ID" value="<?= $datas['Position_ID'];?>">
+                <input type="number" name="Departament_ID" id="Departament_ID" value="<?= $datas['Departament_ID'];?>">
+                <input type="password" name="password" id="password" value="<?= $datas['password'];?>">
+                <input type="number" name="role" id="role" value="<?= $datas['role'];?>">
+
                
 				
 				<button class="btn btn-lg btn-success btn-block" name="update" type="submit">Update</button>

@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
    
     $prep->execute();
     
-    Header("Location:index.php");
+    Header("Location:main.php");
 }
 
 ?>
