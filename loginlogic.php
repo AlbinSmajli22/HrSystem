@@ -21,6 +21,7 @@ if (isset($_POST['submit'])) {
     }
     elseif (password_verify($password, $data['password'])) {
         $_SESSION['email']=$data['email'];
+        $_SESSION['role']=$data['role'];
         $_SESSION['name']=$data['name']." ".$data['surname'];
 
         header("Location: main.php");  

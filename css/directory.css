@@ -9,3 +9,6 @@ body{
 #userTable {
  width: 100%;
 }
+a{
+    text-decoration: none;
+}

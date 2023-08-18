@@ -14,7 +14,6 @@
 	$datas = $prep->fetch();
 ?>
 
-
 <body class="bg-secondary">
 	
 
