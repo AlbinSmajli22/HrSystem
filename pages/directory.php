@@ -1,12 +1,11 @@
 <?php
 require_once './config.php';
 $sql= "SELECT * from users
-        LEFT JOIN position ON users.Position_ID = position.id
-        LEFT JOIN departament ON users.Departament_ID = departament.id";
+        LEFT JOIN position ON users.Position_ID = position.position_id
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
 $prep=$con->prepare($sql);
 $prep->execute();
 $datas= $prep->fetchAll();
-
 ?>
 
 
@@ -21,7 +20,10 @@ $datas= $prep->fetchAll();
 </head>
 <?php if ($_SESSION['role']==1) { ?>
 <div id="main">
-   
+   <div>
+    <h5>Employee Directory</h5>
+    <button>Filter</button>
+   </div>
     <table id="userTable">
         <thead>
       
@@ -78,6 +80,7 @@ $datas= $prep->fetchAll();
   </div>
 </div>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Contact</th>
                 <th>Position</th>
@@ -89,62 +92,21 @@ $datas= $prep->fetchAll();
         <tbody>
            <?php foreach($datas as $data): ?>
                 <tr>
-                    <td><?= $data['name'] ?> <?= $data['surname']   ?></td>
+                  <td><?= $data['user_id'] ?></td>
+                    <td><?= $data['name'] ?> <?= $data['surname']?></td>
                     <td><?= $data['email'] ?></td>
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
                     <td>Main Office</td>
                     <td>
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="editemployee?id=<?= $data['id']; ?>">Edit </button> | 
-                      <button type="button" class="btn btn-danger" > <a href="pages/deleteDirectory.php?id=<?= $data['id']; ?>">Delete </a></button>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editemployee">
+                        <a Style="color:white;" href="pages/editDirectory.php?user_id=<?= $data['user_id']; ?>">Edit </a>
+                      </button> | 
+                      <button type="button" class="btn btn-danger" >
+                         <a Style="color:white;" href="pages/deleteDirectory.php?user_id=<?= $data['user_id']; ?>">Delete </a>
+                      </button>
                     </td>
-                    <!-- Modal -->
-<div class="modal fade" id="editemployee" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Employee</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="editDirectoryLogic.php" method="POST">
-          <div class="mb-3">
-            <label for="name" class="col-form-label">Name:</label>
-            <input type="text" class="form-control" name="name" id="name" required value="">
-          </div>
-          <div class="mb-3">
-            <label for="surname" class="col-form-label">Surname:</label>
-            <input type="text" class="form-control" name="surname" id="surname" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="col-form-label">E-mail:</label>
-            <input type="email" class="form-control" name="email" id="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="password" class="col-form-label">Password:</label>
-            <input type="password" class="form-control" name="password" id="password" required>
-          </div>
-          <div class="mb-3">
-            <label for="Position_ID" class="col-form-label">Position_ID:</label>
-            <input type="number" class="form-control" name="Position_ID" id="Position_ID" required>
-          </div>
-          <div class="mb-3">
-            <label for="Departament_ID" class="col-form-label">Departament_ID:</label>
-            <input type="number" class="form-control" name="Departament_ID" id="Departament_ID" required>
-          </div>
-          <div class="mb-3">
-            <label for="role" class="col-form-label">Role:</label >
-            <input type="number" class="form-control" name="role" id="role" required>
-          </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="submit" class="btn btn-success" >Registre Employee</button>
-            </div>
-      </form>
-      </div>  
-    </div>
-  </div>
-</div>
+
                 </tr>
            <?php endforeach; ?>
         </tbody>

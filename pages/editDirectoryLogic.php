@@ -3,7 +3,7 @@
 include_once '../config.php';
 
 if (isset($_POST['update'])) {
-
+    $user_id = $_POST['user_id'];
     $name= $_POST['name'];
     $surname= $_POST['surname'];
     $email= $_POST['email'];
@@ -13,13 +13,13 @@ if (isset($_POST['update'])) {
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
 
-	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role WHERE id=:id";
+	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role WHERE user_id=:user_id";
 
 
 
     $prep = $con->prepare($sql);
 
-    $prep->bindParam(":id", $id);
+    $prep->bindParam(":user_id", $user_id);
     $prep->bindParam(':name', $name);
     $prep->bindParam(':surname', $surname);
     $prep->bindParam(':email', $email);
@@ -30,6 +30,7 @@ if (isset($_POST['update'])) {
    
     $prep->execute();
 
-	header("Location: ../main.php?page=directory");
+    header("Location: ../main.php?page=directory");
+
 }
 ?>

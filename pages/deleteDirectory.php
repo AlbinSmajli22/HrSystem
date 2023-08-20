@@ -1,11 +1,11 @@
 <?php
 require_once '../config.php';
 
-    $id=$_GET['id'];
+    $user_id=$_GET['user_id'];
 
-    $sql = "DELETE FROM users WHERE id=:id";
+    $sql = "DELETE FROM users WHERE user_id=:user_id";
     $prep = $con->prepare($sql);
-    $prep->bindParam(':id', $id);
+    $prep->bindParam(':user_id', $user_id);
     $prep->execute();
     if($prep->execute()){
         echo'user was delited';
