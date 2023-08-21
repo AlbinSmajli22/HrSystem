@@ -18,21 +18,25 @@ $datas= $prep->fetchAll();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/directory.css">
 </head>
+<body>
+  
+
 <?php if ($_SESSION['role']==1) { ?>
 <div id="main">
-   <div>
+<div id="usersData">
+   <div id="filters">
     <h5>Employee Directory</h5>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Add Employee
+    </button>
     <button>Filter</button>
+   </div>
+   <div id="serachBar">
+    <input type="text" name="search" id="search">
+    <button type="submit">Search</button>
    </div>
     <table id="userTable">
         <thead>
-      
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Add Employee
-</button>
-
-<!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -111,12 +115,21 @@ $datas= $prep->fetchAll();
            <?php endforeach; ?>
         </tbody>
     </table>
+           </div>
 </div>
 <?php
 } else { ?>
 
 <div id="main">
-   
+  <div id="usersData">
+<div id="filters">
+    <h5>Employee Directory</h5>
+    <button>Filter</button>
+   </div>
+   <div id="serachBar">
+    <input type="text" name="search" id="search">
+    <button type="submit">Search</button>
+   </div>
     <table id="userTable">
         <thead>     
             <tr>
@@ -140,8 +153,10 @@ $datas= $prep->fetchAll();
            <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
 </div>
 
 <?php
 }
 ?>
+</body>

@@ -5,10 +5,36 @@ body{
 }
 
 #main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    padding: 10px;
+    background-color: #F4F6FA;
+}
+#usersData{
+    width: 100%;
+    background-color: white;
+}
+#filters{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+  
+}
+#serachBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
 }
 #userTable {
- width: 100%;
+    padding-left: 10px;
+    width: 90%;
+  
 }
 a{
     text-decoration: none;
