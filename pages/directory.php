@@ -3,9 +3,24 @@ require_once './config.php';
 $sql= "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
+
+
+if (isset($_POST['search'])) {
+
+  $searchRequest = $_POST['search-box'];
+
+  $sql= "SELECT * from users
+        LEFT JOIN position ON users.Position_ID = position.position_id
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id
+        WHERE name LIKE '{$searchRequest}%' ";
+}
+
 $prep=$con->prepare($sql);
 $prep->execute();
 $datas= $prep->fetchAll();
+
+$currentTime = date('h:i A');
+
 ?>
 
 
@@ -23,6 +38,32 @@ $datas= $prep->fetchAll();
 
 <?php if ($_SESSION['role']==1) { ?>
 <div id="main">
+<div>
+  <h3>MetDaan</h3>
+</div>
+<div id="clocks">
+    <div id="clock1">
+      <div id="clock1-1">
+        
+        <a href="">Main Office</a>
+      </div>
+      <div id="clock1-2">
+        <i class="fa-regular fa-clock  fa-2xl" style="color: #3772d7;"></i>
+        <?php echo '<h2>'.$currentTime.'</h2>' ?>
+      </div>
+    </div>
+    <div id="clock2">
+      <div id="clock2-1">
+        
+        <a href="">Production Office</a>
+      </div>
+      <div id="clock2-2">
+        <i class="fa-regular fa-clock fa-2xl" style="color: #3772d7;"></i>
+        <?php echo '<h2>'.$currentTime.'</h2>' ?>
+      </div>  
+    </div>
+</div>
+
 <div id="usersData">
    <div id="filters">
     <h5>Employee Directory</h5>
@@ -31,10 +72,10 @@ $datas= $prep->fetchAll();
     </button>
     <button>Filter</button>
    </div>
-   <div id="serachBar">
-    <input type="text" name="search" id="search">
-    <button type="submit">Search</button>
-   </div>
+   <form id="serachBar" method="POST">
+    <input type="text" name="search-box" id="search-box">
+    <button type="submit" name='search'>Search</button>
+</form>
     <table id="userTable">
         <thead>
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

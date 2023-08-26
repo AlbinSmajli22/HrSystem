@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700;800&family=Ubuntu:wght@300&display=swap');
 body{
     display: flex;
     flex-direction: row;
     background-color: #F4F6FA;
+    
 }
 
 #main{
@@ -12,10 +14,83 @@ body{
     width: 100%;
     padding: 10px;
     background-color: #F4F6FA;
+    
+}
+#clocks{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+#clock1{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 100px;
+    background-color: white;
+    margin-right: 10px;
+    border: solid 0.5px #e7eaec;
+}
+#clock1-1{
+    width: 100%;
+    height: 50px;
+    text-align: start;
+    padding: 5px;
+}
+#clock1-1 a{
+    margin-left: 20px;
+}
+#clock1-2{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#clock1-2 h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 24px;
+    color: #4caf50;
+    margin-left: 5px;
+}
+
+#clock2{
+    width: 200px;
+    height: 100px;
+    background-color: white;
+    border: solid 0.5px #e7eaec;
+}
+#clock2-1{
+    width: 100%;
+    height: 50px;
+    text-align: start;
+    padding: 5px;
+}
+#clock2-1 a{
+    margin-left: 20px;
+}
+#clock2-2{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+#clock2-2 h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 24px;
+    color: #676A6C;
+    margin-left: 5px;
 }
 #usersData{
     width: 100%;
     background-color: white;
+    border: solid #e7eaec;
 }
 #filters{
     width: 90%;
