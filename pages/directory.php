@@ -38,8 +38,8 @@ $currentTime = date('h:i A');
 
 <?php if ($_SESSION['role']==1) { ?>
 <div id="main">
-<div>
-  <h3>MetDaan</h3>
+<div id="name">
+  <h2>MetDaan</h2>
 </div>
 <div id="clocks">
     <div id="clock1">
@@ -73,7 +73,7 @@ $currentTime = date('h:i A');
     <button>Filter</button>
    </div>
    <form id="serachBar" method="POST">
-    <input type="text" name="search-box" id="search-box">
+    <input type="text" name="search-box" id="search-box" placeholder="Search directory...">
     <button type="submit" name='search'>Search</button>
 </form>
     <table id="userTable">

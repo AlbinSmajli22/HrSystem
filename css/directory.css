@@ -16,6 +16,16 @@ body{
     background-color: #F4F6FA;
     
 }
+#name{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: start;
+}
+#name h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+}
 #clocks{
     display: flex;
     flex-direction: row;
@@ -33,6 +43,7 @@ body{
     border: solid 0.5px #e7eaec;
 }
 #clock1-1{
+    margin-top: 20px;
     width: 100%;
     height: 50px;
     text-align: start;
@@ -40,14 +51,17 @@ body{
 }
 #clock1-1 a{
     margin-left: 20px;
+    font-size: 15px;
 }
 #clock1-2{
+    margin-left: 25px;
+    margin-bottom: 10px;
     height: 50px;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items:center;
 }
 #clock1-2 h2{
     font-family: Arial, Helvetica, sans-serif;
@@ -58,12 +72,15 @@ body{
 }
 
 #clock2{
+    display: flex;
+    flex-direction: column;
     width: 200px;
     height: 100px;
     background-color: white;
     border: solid 0.5px #e7eaec;
 }
 #clock2-1{
+    margin-top: 20px;
     width: 100%;
     height: 50px;
     text-align: start;
@@ -71,13 +88,16 @@ body{
 }
 #clock2-1 a{
     margin-left: 20px;
+    font-size: 15px;
 }
 #clock2-2{
+    margin-left: 25px;
+    margin-bottom: 10px;
     height: 50px;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 #clock2-2 h2{
@@ -93,7 +113,8 @@ body{
     border: solid #e7eaec;
 }
 #filters{
-    width: 90%;
+    background-color: #E3F2FD;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -101,14 +122,31 @@ body{
   
 }
 #serachBar{
+    padding: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    width: 100%;
+}
+#search-box{
+    padding: 10px;
     width: 90%;
+    height: 35px;
+    border: solid 0.5px #e7eaec;
+    border-radius: 4px;
+    color: #e7eaec;
+}
+#serachBar button{
+    border: solid 0.5px #4caf50;
+    width: 8%;
+    background-color: #4caf50;
+    color: white;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 #userTable {
     padding-left: 10px;
-    width: 90%;
+    width: 100%;
   
 }
 a{
