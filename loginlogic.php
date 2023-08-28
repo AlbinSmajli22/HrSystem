@@ -26,8 +26,11 @@ if (isset($_POST['submit'])) {
 
         header("Location: main.php");  
     }
-    else{
-        echo 'Woops! fullname or Password is Wrong.';
+    elseif(!password_verify($password, $data['password'])){
+        echo 'Password is Wrong.';
+    }else
+    {
+        echo"user does not exist";
     }
 
 

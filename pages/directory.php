@@ -38,26 +38,26 @@ $currentTime = date('h:i A');
 
 <?php if ($_SESSION['role']==1) { ?>
 <div id="main">
-<div id="name">
+<div class="name">
   <h2>MetDaan</h2>
 </div>
-<div id="clocks">
-    <div id="clock1">
-      <div id="clock1-1">
+<div class="clocks">
+    <div class="clock1">
+      <div class="clock1-1">
         
         <a href="">Main Office</a>
       </div>
-      <div id="clock1-2">
+      <div class="clock1-2">
         <i class="fa-regular fa-clock  fa-2xl" style="color: #3772d7;"></i>
         <?php echo '<h2>'.$currentTime.'</h2>' ?>
       </div>
     </div>
-    <div id="clock2">
-      <div id="clock2-1">
+    <div class="clock2">
+      <div class="clock2-1">
         
         <a href="">Production Office</a>
       </div>
-      <div id="clock2-2">
+      <div class="clock2-2">
         <i class="fa-regular fa-clock fa-2xl" style="color: #3772d7;"></i>
         <?php echo '<h2>'.$currentTime.'</h2>' ?>
       </div>  
@@ -65,18 +65,23 @@ $currentTime = date('h:i A');
 </div>
 
 <div id="usersData">
-   <div id="filters">
+   <div class="filters">
     <h5>Employee Directory</h5>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       Add Employee
     </button>
-    <button>Filter</button>
+    <!--<button  class="addFilter">
+      <p>Filters</p>
+    </button>-->
+    <a class="addFilter" data-target="#filterModal" data-toggle="modal">
+      Filters
+    </a>
    </div>
-   <form id="serachBar" method="POST">
-    <input type="text" name="search-box" id="search-box" placeholder="Search directory...">
+   <form class="serachBar" method="POST">
+    <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
     <button type="submit" name='search'>Search</button>
 </form>
-    <table id="userTable">
+    <table class="userTable">
         <thead>
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -162,16 +167,41 @@ $currentTime = date('h:i A');
 } else { ?>
 
 <div id="main">
+<div class="name">
+  <h2>MetDaan</h2>
+</div>
+<div class="clocks">
+    <div class="clock1">
+      <div class="clock1-1">
+        
+        <a href="">Main Office</a>
+      </div>
+      <div class="clock1-2">
+        <i class="fa-regular fa-clock  fa-2xl" style="color: #3772d7;"></i>
+        <?php echo '<h2>'.$currentTime.'</h2>' ?>
+      </div>
+    </div>
+    <div class="clock2">
+      <div class="clock2-1">
+        
+        <a href="">Production Office</a>
+      </div>
+      <div class="clock2-2">
+        <i class="fa-regular fa-clock fa-2xl" style="color: #3772d7;"></i>
+        <?php echo '<h2>'.$currentTime.'</h2>' ?>
+      </div>  
+    </div>
+</div>
   <div id="usersData">
-<div id="filters">
+<div class="filters">
     <h5>Employee Directory</h5>
     <button>Filter</button>
    </div>
-   <div id="serachBar">
-    <input type="text" name="search" id="search">
+   <div class="serachBar">
+   <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
     <button type="submit">Search</button>
    </div>
-    <table id="userTable">
+    <table class="userTable">
         <thead>     
             <tr>
                 <th>Name</th>
