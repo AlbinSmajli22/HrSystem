@@ -3,7 +3,7 @@ body{
     display: flex;
     flex-direction: row;
     background-color: #F4F6FA;
-    
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #main{
@@ -23,7 +23,7 @@ body{
     text-align: start;
 }
 .name h2{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 100;
     color: #676A6C;
 }
@@ -65,7 +65,7 @@ body{
     align-items:center;
 }
 .clock1-2 h2{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 100;
     font-size: 24px;
     color: #4caf50;
@@ -102,7 +102,7 @@ body{
     align-items: center;
 }
 .clock2-2 h2{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 100;
     font-size: 24px;
     color: #676A6C;
@@ -162,6 +162,25 @@ body{
     padding-left: 10px;
     width: 100%;
   
+}
+.userTable thead{
+    font-size: 13px;
+    font-weight: bold;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #676A6C;
+    text-align: center;
+}
+.userTable tbody{
+    text-align: center;
+}
+.userTable tbody tr{
+    height: 70px;
+    border-bottom: #676A6C solid 0.5px;
+    font-size: 13px;
+    font-style: italic;
+}
+.userTable tbody tr:nth-child(even){
+    background-color: #e7eaec;
 }
 a{
     text-decoration: none;

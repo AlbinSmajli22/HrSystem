@@ -130,7 +130,6 @@ $currentTime = date('h:i A');
   </div>
 </div>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Contact</th>
                 <th>Position</th>
@@ -142,7 +141,6 @@ $currentTime = date('h:i A');
         <tbody>
            <?php foreach($datas as $data): ?>
                 <tr>
-                  <td><?= $data['user_id'] ?></td>
                     <td><?= $data['name'] ?> <?= $data['surname']?></td>
                     <td><?= $data['email'] ?></td>
                     <td><?= $data['position_name'] ?></td>
@@ -197,10 +195,10 @@ $currentTime = date('h:i A');
     <h5>Employee Directory</h5>
     <button>Filter</button>
    </div>
-   <div class="serachBar">
-   <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
-    <button type="submit">Search</button>
-   </div>
+   <form class="serachBar" method="POST">
+    <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
+    <button type="submit" name='search'>Search</button>
+</form>
     <table class="userTable">
         <thead>     
             <tr>
