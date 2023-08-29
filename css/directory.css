@@ -175,12 +175,12 @@ body{
 }
 .userTable tbody tr{
     height: 70px;
-    border-bottom: #676A6C solid 0.5px;
+    border-bottom: #e7eaec solid 1px;
     font-size: 13px;
     font-style: italic;
 }
 .userTable tbody tr:nth-child(even){
-    background-color: #e7eaec;
+    background-color: #f9f9f9;
 }
 a{
     text-decoration: none;
