@@ -26,6 +26,7 @@ body{
     font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 100;
     color: #676A6C;
+    font-size: 24px;
 }
 .clocks{
     display: flex;
@@ -126,6 +127,7 @@ body{
     font-size: 15px;
     color: #676A6C;
     margin-left: 10px;
+    font-weight: 600;
 }
 .addFilter{
     width: 80px;
