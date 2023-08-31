@@ -31,6 +31,10 @@
                 <input type="number" name="Departament_ID" id="Departament_ID" value="<?= $datas['Departament_ID'];?>">
                 <input type="password" name="password" id="password" value="<?= $datas['password'];?>">
                 <input type="number" name="role" id="role" value="<?= $datas['role'];?>">
+				<select id="location" name="location">
+            		<option value="Main Office">Main Office</option>
+              		<option value="Production">Production</option>
+            	</select>
 
                
 				

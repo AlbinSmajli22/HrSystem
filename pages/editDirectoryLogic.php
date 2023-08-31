@@ -10,10 +10,11 @@ if (isset($_POST['update'])) {
     $Position_ID= $_POST['Position_ID'];
     $Departament_ID= $_POST['Departament_ID'];
     $role= $_POST['role'];
+    $location= $_POST['location'];
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
 
-	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role WHERE user_id=:user_id";
+	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role, location=:location WHERE user_id=:user_id";
 
 
 
@@ -27,6 +28,7 @@ if (isset($_POST['update'])) {
     $prep->bindParam(':Position_ID', $Position_ID);
     $prep->bindParam(':Departament_ID', $Departament_ID);
     $prep->bindParam(':role', $role);
+    $prep->bindParam(':location', $location);
    
     $prep->execute();
 

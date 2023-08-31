@@ -1,5 +1,12 @@
 <?php
 require_once './config.php';
+
+$filterquery= "SELECT * from departament";
+
+$prep=$con->prepare($filterquery);
+$prep->execute();
+$filterdatas= $prep->fetchAll();
+
 $sql= "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
@@ -85,13 +92,35 @@ $currentTime = date('h:i A');
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="recipient-name" class="col-form-label">Show Departament</label>
+            <select id="showDepartament" name="location">
+              <?php foreach ($filterdatas as $filterdata): ?>
+              <option value="<?= $filterdata['departament_name'] ?>"><?= $filterdata['departament_name'] ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="recipient-name" class="col-form-label">Show Location</label>
+            <select id="showLocation" name="location">
+              <option value="Main Office">Main Office</option>
+              <option value="Production">Production</option>
+            </select>
           </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Show Position</label>
+            <select id="showPosition" name="location">
+              <option value="Main Office">Main Office</option>
+              <option value="Production">Production</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Show Employment Status</label>
+            <<select id="showEmploymentStatus" name="location">
+              <option value="Main Office">Main Office</option>
+              <option value="Production">Production</option>
+            </select>
+          </div>
+          
         </form>
       </div>
       <div class="modal-footer">
@@ -145,6 +174,13 @@ $currentTime = date('h:i A');
             <label for="role" class="col-form-label">Role:</label >
             <input type="number" class="form-control" name="role" id="role" required>
           </div>
+          <div class="mb-3">
+            <label for="role" class="col-form-label">Location:</label >
+            <select id="location" name="location">
+              <option value="Main Office">Main Office</option>
+              <option value="Production">Production</option>
+            </select>
+          </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" name="submit" class="btn btn-success" >Registre Employee</button>
@@ -170,7 +206,7 @@ $currentTime = date('h:i A');
                     <td><?= $data['email'] ?></td>
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
-                    <td>Main Office</td>
+                    <td><?= $data['location'] ?></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editemployee">
                         <a Style="color:white;" href="pages/editDirectory.php?user_id=<?= $data['user_id']; ?>">Edit </a>
@@ -242,7 +278,7 @@ $currentTime = date('h:i A');
                     <td><?= $data['email'] ?></td>
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
-                    <td>Main Office</td>
+                    <td><?= $data['location'] ?></td>
                 </tr>
            <?php endforeach; ?>
         </tbody>

@@ -11,11 +11,12 @@ if (isset($_POST['submit'])) {
     $Position_ID= $_POST['Position_ID'];
     $Departament_ID= $_POST['Departament_ID'];
     $role= $_POST['role'];
+    $location= $_POST['location'];
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
 
 
-    $sql = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role) VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role)";
+    $sql = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location) VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location)";
 
     $prep = $con->prepare($sql);
 
@@ -26,6 +27,7 @@ if (isset($_POST['submit'])) {
     $prep->bindParam(':Position_ID', $Position_ID);
     $prep->bindParam(':Departament_ID', $Departament_ID);
     $prep->bindParam(':role', $role);
+    $prep->bindParam(':location', $location);
    
     $prep->execute();
     

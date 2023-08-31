@@ -13,7 +13,7 @@
     flex-direction: column;
     background-color: #0277bd;
     width: 14.3%;
-    height: 900px;
+    height:max-content;
 }
 #profile{
     width: 100%;
