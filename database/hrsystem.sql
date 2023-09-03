@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2023 at 01:34 AM
+-- Generation Time: Sep 04, 2023 at 01:14 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -41,7 +41,9 @@ INSERT INTO `departament` (`departament_id`, `departament_name`) VALUES
 (2, 'Publishing'),
 (5, 'Management'),
 (6, 'Business Development'),
-(7, 'Researching');
+(7, 'Researching'),
+(8, 'E-commerce'),
+(9, 'Finance');
 
 -- --------------------------------------------------------
 
@@ -69,6 +71,22 @@ INSERT INTO `position` (`position_id`, `position_name`, `Departament_ID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `timeoff`
+--
+
+CREATE TABLE `timeoff` (
+  `timeoff_id` int(11) NOT NULL,
+  `annual_leave` int(5) NOT NULL,
+  `child_born` int(5) NOT NULL,
+  `death_of_amily_member` int(5) NOT NULL,
+  `moving_day` int(5) NOT NULL,
+  `wedding_day` int(5) NOT NULL,
+  `sick_leave` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -80,21 +98,26 @@ CREATE TABLE `users` (
   `password` varchar(500) NOT NULL,
   `Position_ID` int(11) NOT NULL,
   `Departament_ID` int(11) NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `name`, `surname`, `email`, `password`, `Position_ID`, `Departament_ID`, `role`) VALUES
-(4, 'Gezim', 'Berisha', 'gezim@metdaan.com', '$2y$10$Dpoy8PwyXVdz4p4xsMsoP./8fC9p8jcRx.kEMgdsT9IUpB5vsTTla', 1, 5, 1),
-(7, 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$M91vAKdvn4fnwEk2ytQdXevUaIeFbgK99ZdcFd3FGHyE1QuqrEaW2', 5, 7, 1),
-(8, 'Arben', 'Berisha', 'arben@metdaan.com', '$2y$10$aX4t7/Rb.8TNYHQO1hCLnu8qA1JKp6RvBuQdid4nMjrbmrC74bH.C', 2, 5, 1),
-(9, 'Meriton', 'Feka', 'meriton@metdaan.com', '$2y$10$t4RQUE7iXMbHSSYPj2iEm.bSMICn1us06nZ.DuBHz.YJKcAEvcTWm', 6, 1, 0),
-(10, 'Gazmend', 'Berisha', 'gazmend@metdaan.com', '$2y$10$3tEdolNwZUIdoPpZ8xReC.bt.f6dDyQQodDXNgG6Pt3gBvkV837QO', 9, 2, 0),
-(11, 'Granit', 'Gashi', 'granit@metdaan.com', '$2y$10$GuSEiN4Nlu6rewrEnpsTj.Xq9nsjklkqQSoFLaAShWdiVTzobmarS', 9, 2, 0),
-(12, 'Valmir', 'Leci', 'valmir@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0);
+INSERT INTO `users` (`user_id`, `name`, `surname`, `email`, `password`, `Position_ID`, `Departament_ID`, `role`, `location`, `status`) VALUES
+(4, 'Gezim', 'Berisha', 'gezim@metdaan.com', '$2y$10$Dpoy8PwyXVdz4p4xsMsoP./8fC9p8jcRx.kEMgdsT9IUpB5vsTTla', 1, 5, 1, 'Main Office', 'Full Time'),
+(8, 'Arben', 'Berisha', 'arben@metdaan.com', '$2y$10$aX4t7/Rb.8TNYHQO1hCLnu8qA1JKp6RvBuQdid4nMjrbmrC74bH.C', 2, 5, 1, 'Main Office', 'Full Time'),
+(9, 'Meriton', 'Feka', 'meriton@metdaan.com', '$2y$10$t4RQUE7iXMbHSSYPj2iEm.bSMICn1us06nZ.DuBHz.YJKcAEvcTWm', 6, 1, 0, 'Main Office', 'Full Time'),
+(10, 'Gazmend', 'Berisha', 'gazmend@metdaan.com', '$2y$10$3tEdolNwZUIdoPpZ8xReC.bt.f6dDyQQodDXNgG6Pt3gBvkV837QO', 9, 2, 0, 'Main Office', 'Full Time'),
+(11, 'Granit', 'Gashi', 'granit@metdaan.com', '$2y$10$GuSEiN4Nlu6rewrEnpsTj.Xq9nsjklkqQSoFLaAShWdiVTzobmarS', 9, 2, 0, 'Main Office', 'Full Time'),
+(12, 'Valmir', 'Leci', 'valmir@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0, 'Main Office', 'Full Time'),
+(15, ' Rinor', 'Berisha', 'rinor@metdaan.com', '$2y$10$PB6FHjvF3PbIsu/Lz9k1huXmA1Go2Dr/thStoa6ht9G0U1dLMWWbm', 1, 5, 1, 'Main Office', 'Full Time'),
+(17, 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$yIkR0ZKjZPbik1BDXS9/JOsE6C7PT0hJ4nDX0BNDez8X.vpECUUOO', 5, 7, 1, 'Main Office', 'Full Time'),
+(18, 'Fatlind', 'Rashica', 'fatlind@metdaan.com', '$2y$10$y1yTZpuu4SPiPrfZQnVTsuIwQsWRs7o992j8aU7KpXM/GXFiQDaCW', 6, 1, 0, 'Main Office', 'Full Time'),
+(19, 'Arian', 'Mehmeti', 'arian@metdaan.com', '$2y$10$25BKuMIaT9R9UTN32iwLzOJPsDacreCFxYDW8Mn6o/icaDxP/Tu0u', 6, 1, 0, 'Main Office', 'Full Time');
 
 --
 -- Indexes for dumped tables
@@ -114,6 +137,12 @@ ALTER TABLE `position`
   ADD KEY `Departament_ID` (`Departament_ID`);
 
 --
+-- Indexes for table `timeoff`
+--
+ALTER TABLE `timeoff`
+  ADD PRIMARY KEY (`timeoff_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -127,7 +156,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `departament`
 --
 ALTER TABLE `departament`
-  MODIFY `departament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `departament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `position`
@@ -136,10 +165,16 @@ ALTER TABLE `position`
   MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `timeoff`
+--
+ALTER TABLE `timeoff`
+  MODIFY `timeoff_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

@@ -35,6 +35,14 @@
             		<option value="Main Office">Main Office</option>
               		<option value="Production">Production</option>
             	</select>
+					<select id="status" name="status">
+					<option value="Casual">Casual</option>
+              		<option value="Contract">Contract</option>
+              		<option value="Full Time">Full Time</option>
+              		<option value="Part">Part Time</option>
+              		<option value="Unpaid">Unpaid</option>
+            	</select>
+				
 
                
 				

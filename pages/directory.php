@@ -7,6 +7,12 @@ $prep=$con->prepare($filterquery);
 $prep->execute();
 $filterdatas= $prep->fetchAll();
 
+$filterquery2= "SELECT * from position";
+
+$prep=$con->prepare($filterquery2);
+$prep->execute();
+$filterdatas2= $prep->fetchAll();
+
 $sql= "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
@@ -20,6 +26,18 @@ if (isset($_POST['search'])) {
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id
         WHERE name LIKE '{$searchRequest}%' ";
+}
+if(isset($_POST['applayFilter'])){
+  $showDepartament = $_POST['showDepartament'];
+  $showLocation = $_POST['showLocation'];
+  $showPosition = $_POST['showPosition'];
+  $showEmploymentStatus = $_POST['showEmploymentStatus'];
+
+  $sql= "SELECT * from users
+        LEFT JOIN position ON users.Position_ID = position.position_id
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id
+        WHERE departament.departament_name LIKE '{$showDepartament}%' && location LIKE '{$showLocation}%'  && position.position_name LIKE '{$showPosition}%' && status LIKE '{$showEmploymentStatus}%'";
+  
 }
 
 $prep=$con->prepare($sql);
@@ -76,11 +94,14 @@ $currentTime = date('h:i A');
     <h5>Employee Directory</h5>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       Add Employee
+      
     </button>
-    <!--<button  class="addFilter">
-      <p>Filters</p>
-    </button>-->
-    <button type="button" class="addFilter" data-bs-toggle="modal" data-bs-target="#filtersModal" data-bs-whatever="@mdo">Filters</button>
+    
+    <button type="button" class="addFilter" data-bs-toggle="modal" data-bs-target="#filtersModal" data-bs-whatever="@mdo">
+      <i class="fa-solid fa-filter " style="color: #888;"></i>
+      <a>Filter</a>
+      <i class="fa-solid fa-toggle-off " ></i>
+    </button>
 
     <div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -90,10 +111,11 @@ $currentTime = date('h:i A');
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="" method="POST">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Show Departament</label>
-            <select id="showDepartament" name="location">
+            <select id="showDepartament" name="showDepartament">
+            <option value=""></option>
               <?php foreach ($filterdatas as $filterdata): ?>
               <option value="<?= $filterdata['departament_name'] ?>"><?= $filterdata['departament_name'] ?></option>
               <?php endforeach; ?>
@@ -101,32 +123,39 @@ $currentTime = date('h:i A');
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Show Location</label>
-            <select id="showLocation" name="location">
-              <option value="Main Office">Main Office</option>
-              <option value="Production">Production</option>
+            <select id="showLocation" name="showLocation">
+            <option value=""></option>
+            <?php foreach ($filterdatas2 as $filterdata2): ?>
+              <option value="<?= $filterdata2['position_name'] ?>"><?= $filterdata2['position_name'] ?></option>
+              <?php endforeach; ?>
             </select>
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Show Position</label>
-            <select id="showPosition" name="location">
+            <select id="showPosition" name="showPosition">
+            <option value=""></option>
               <option value="Main Office">Main Office</option>
               <option value="Production">Production</option>
             </select>
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Show Employment Status</label>
-            <<select id="showEmploymentStatus" name="location">
-              <option value="Main Office">Main Office</option>
-              <option value="Production">Production</option>
+            <select id="showEmploymentStatus" name="showEmploymentStatus">
+              <option value=""></option>
+              <option value="Casual">Casual</option>
+              <option value="Contract">Contract</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part">Part Time</option>
+              <option value="Unpaid">Unpaid</option>
             </select>
           </div>
-          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset Filter</button>
+            <button type="submit" name="applayFilter" class="btn btn-success">Applay Filter</button>
+          </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
+      
     </div>
   </div>
 </div>
@@ -163,12 +192,22 @@ $currentTime = date('h:i A');
             <input type="password" class="form-control" name="password" id="password" required>
           </div>
           <div class="mb-3">
-            <label for="Position_ID" class="col-form-label">Position_ID:</label>
-            <input type="number" class="form-control" name="Position_ID" id="Position_ID" required>
+            <label for="Position_ID" class="col-form-label">Position Name:</label>
+            <select id="status" name="Position_ID" id="Position_ID" class="form-control" placeholder="Chose Position">
+              <option value="">Chose Position</option>
+            <?php foreach ($filterdatas2 as $filterdata2): ?>
+              <option value="<?= $filterdata2['position_id'] ?>"><?= $filterdata2['position_name'] ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="mb-3">
-            <label for="Departament_ID" class="col-form-label">Departament_ID:</label>
-            <input type="number" class="form-control" name="Departament_ID" id="Departament_ID" required>
+            <label for="Departament_ID" class="col-form-label">Departament_Name:</label>
+            <select id="status" name="Departament_ID" id="Departament_ID" class="form-control" placeholder="Chose Departament">
+              <option value="">Chose Departament</option>
+            <?php foreach ($filterdatas as $filterdata): ?>
+              <option value="<?= $filterdata['departament_id'] ?>"><?= $filterdata['departament_name'] ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="mb-3">
             <label for="role" class="col-form-label">Role:</label >
@@ -176,9 +215,21 @@ $currentTime = date('h:i A');
           </div>
           <div class="mb-3">
             <label for="role" class="col-form-label">Location:</label >
-            <select id="location" name="location">
+            <select id="location" name="location" class="form-control" placeholder="Chose Location">
+              <option value="">Chose Location</option>
               <option value="Main Office">Main Office</option>
               <option value="Production">Production</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="role" class="col-form-label">Location:</label >
+            <select id="status" name="status" class="form-control" placeholder="Chose Status">
+              <option value="">Chose Status</option>
+              <option value="Casual">Casual</option>
+              <option value="Contract">Contract</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part">Part Time</option>
+              <option value="Unpaid">Unpaid</option>
             </select>
           </div>
             <div class="modal-footer">
@@ -254,7 +305,68 @@ $currentTime = date('h:i A');
   <div id="usersData">
 <div class="filters">
     <h5>Employee Directory</h5>
-    <button>Filter</button>
+    <button type="button" class="addFilter" data-bs-toggle="modal" data-bs-target="#filtersModal2" data-bs-whatever="@mdo">
+    <i class="fa-solid fa-filter " style="color: #888;"></i>
+      <a>Filter</a>
+      <i class="fa-solid fa-toggle-off " ></i>
+    </button>
+    <div class="modal fade" id="filtersModal2" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="filtersleModalLabel">Filter</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Show Departament</label>
+            <select id="showDepartament" name="showDepartament">
+            <option value=""></option>
+              <?php foreach ($filterdatas as $filterdata): ?>
+              <option value="<?= $filterdata['departament_name'] ?>"><?= $filterdata['departament_name'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Show Location</label>
+            <select id="showLocation" name="showLocation">
+            <option value=""></option>
+            <?php foreach ($filterdatas2 as $filterdata2): ?>
+              <option value="<?= $filterdata2['position_name'] ?>"><?= $filterdata2['position_name'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Show Position</label>
+            <select id="showPosition" name="showPosition">
+            <option value=""></option>
+              <option value="Main Office">Main Office</option>
+              <option value="Production">Production</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Show Employment Status</label>
+            <select id="showEmploymentStatus" name="showEmploymentStatus">
+              <option value=""></option>
+              <option value="Casual">Casual</option>
+              <option value="Contract">Contract</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part">Part Time</option>
+              <option value="Unpaid">Unpaid</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reset Filter</button>
+            <button type="submit" name="applayFilter" class="btn btn-success">Applay Filter</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+   </div>
    </div>
    <form class="serachBar" method="POST">
     <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
@@ -268,6 +380,7 @@ $currentTime = date('h:i A');
                 <th>Position</th>
                 <th>Departament</th>
                 <th>Location</th>
+                <th></th>
                             
             </tr>
         </thead>
@@ -279,6 +392,7 @@ $currentTime = date('h:i A');
                     <td><?= $data['position_name'] ?></td>
                     <td><?= $data['departament_name'] ?></td>
                     <td><?= $data['location'] ?></td>
+                    <td></td>
                 </tr>
            <?php endforeach; ?>
         </tbody>
