@@ -115,25 +115,25 @@ $currentTime = date('h:i A');
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Show Departament</label>
             <select id="showDepartament" name="showDepartament">
-            <option value=""></option>
+            <option value="">Chose Departament:</option>
               <?php foreach ($filterdatas as $filterdata): ?>
               <option value="<?= $filterdata['departament_name'] ?>"><?= $filterdata['departament_name'] ?></option>
               <?php endforeach; ?>
             </select>
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Show Location</label>
+            <label for="recipient-name" class="col-form-label">Show Position</label>
             <select id="showLocation" name="showLocation">
-            <option value=""></option>
+            <option value="">Chose Position:</option>
             <?php foreach ($filterdatas2 as $filterdata2): ?>
               <option value="<?= $filterdata2['position_name'] ?>"><?= $filterdata2['position_name'] ?></option>
               <?php endforeach; ?>
             </select>
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Show Position</label>
+            <label for="recipient-name" class="col-form-label">Show Location </label>
             <select id="showPosition" name="showPosition">
-            <option value=""></option>
+            <option value="">Chose Location</option>
               <option value="Main Office">Main Office</option>
               <option value="Production">Production</option>
             </select>
@@ -141,7 +141,7 @@ $currentTime = date('h:i A');
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Show Employment Status</label>
             <select id="showEmploymentStatus" name="showEmploymentStatus">
-              <option value=""></option>
+              <option value="">Chose Status:</option>
               <option value="Casual">Casual</option>
               <option value="Contract">Contract</option>
               <option value="Full Time">Full Time</option>
