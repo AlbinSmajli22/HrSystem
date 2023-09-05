@@ -36,7 +36,7 @@ if(isset($_POST['applayFilter'])){
   $sql= "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id
-        WHERE departament.departament_name LIKE '{$showDepartament}%' && location LIKE '{$showLocation}%'  && position.position_name LIKE '{$showPosition}%' && status LIKE '{$showEmploymentStatus}%'";
+        WHERE departament.departament_name LIKE '{$showDepartament}%' && location LIKE '{$showLocation}%' && position.position_name LIKE '{$showPosition}%' && status LIKE '{$showEmploymentStatus}%'";
   
 }
 
@@ -113,7 +113,7 @@ $currentTime = date('h:i A');
       <div class="modal-body">
         <form action="" method="POST">
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Show Departament</label>
+            <label for="showDepartament" class="col-form-label">Show Departament</label>
             <select id="showDepartament" name="showDepartament">
             <option value="">Chose Departament:</option>
               <?php foreach ($filterdatas as $filterdata): ?>
@@ -122,8 +122,16 @@ $currentTime = date('h:i A');
             </select>
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Show Position</label>
+            <label for="showLocation" class="col-form-label">Show Location </label>
             <select id="showLocation" name="showLocation">
+            <option value="">Chose Location</option>
+              <option value="Main Office">Main Office</option>
+              <option value="Production">Production</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="showPosition" class="col-form-label">Show Position</label>
+            <select id="showPosition" name="showPosition">
             <option value="">Chose Position:</option>
             <?php foreach ($filterdatas2 as $filterdata2): ?>
               <option value="<?= $filterdata2['position_name'] ?>"><?= $filterdata2['position_name'] ?></option>
@@ -131,15 +139,7 @@ $currentTime = date('h:i A');
             </select>
           </div>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Show Location </label>
-            <select id="showPosition" name="showPosition">
-            <option value="">Chose Location</option>
-              <option value="Main Office">Main Office</option>
-              <option value="Production">Production</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Show Employment Status</label>
+            <label for="showEmploymentStatus" class="col-form-label">Show Employment Status</label>
             <select id="showEmploymentStatus" name="showEmploymentStatus">
               <option value="">Chose Status:</option>
               <option value="Casual">Casual</option>

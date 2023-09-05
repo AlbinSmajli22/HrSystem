@@ -15,7 +15,7 @@ if (isset($_POST['update'])) {
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
 
-	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role, location=:location status=:status WHERE user_id=:user_id";
+	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role, location=:location, status=:status WHERE user_id=:user_id";
 
 
 
