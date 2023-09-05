@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2023 at 01:14 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Generation Time: Sep 05, 2023 at 04:50 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `departament` (
   `departament_id` int(11) NOT NULL,
   `departament_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `departament`
@@ -55,7 +55,7 @@ CREATE TABLE `position` (
   `position_id` int(11) NOT NULL,
   `position_name` varchar(100) NOT NULL,
   `Departament_ID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `position`
@@ -76,13 +76,22 @@ INSERT INTO `position` (`position_id`, `position_name`, `Departament_ID`) VALUES
 
 CREATE TABLE `timeoff` (
   `timeoff_id` int(11) NOT NULL,
+  `user_id_fk` int(11) NOT NULL,
   `annual_leave` int(5) NOT NULL,
   `child_born` int(5) NOT NULL,
   `death_of_amily_member` int(5) NOT NULL,
   `moving_day` int(5) NOT NULL,
   `wedding_day` int(5) NOT NULL,
   `sick_leave` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `timeoff`
+--
+
+INSERT INTO `timeoff` (`timeoff_id`, `user_id_fk`, `annual_leave`, `child_born`, `death_of_amily_member`, `moving_day`, `wedding_day`, `sick_leave`) VALUES
+(3, 9, 20, 3, 5, 1, 5, 20),
+(7, 17, 20, 3, 5, 1, 5, 20);
 
 -- --------------------------------------------------------
 
@@ -101,7 +110,7 @@ CREATE TABLE `users` (
   `role` int(11) NOT NULL,
   `location` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -140,7 +149,8 @@ ALTER TABLE `position`
 -- Indexes for table `timeoff`
 --
 ALTER TABLE `timeoff`
-  ADD PRIMARY KEY (`timeoff_id`);
+  ADD PRIMARY KEY (`timeoff_id`),
+  ADD KEY `user_id_fk` (`user_id_fk`);
 
 --
 -- Indexes for table `users`
@@ -168,7 +178,7 @@ ALTER TABLE `position`
 -- AUTO_INCREMENT for table `timeoff`
 --
 ALTER TABLE `timeoff`
-  MODIFY `timeoff_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `timeoff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -185,6 +195,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `position`
   ADD CONSTRAINT `Departament_ID` FOREIGN KEY (`Departament_ID`) REFERENCES `departament` (`departament_id`);
+
+--
+-- Constraints for table `timeoff`
+--
+ALTER TABLE `timeoff`
+  ADD CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id_fk`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
