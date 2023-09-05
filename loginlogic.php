@@ -20,6 +20,7 @@ if (isset($_POST['submit'])) {
         echo "user does not exist";
     }
     elseif (password_verify($password, $data['password'])) {
+        $_SESSION['user_id']=$data['user_id'];
         $_SESSION['email']=$data['email'];
         $_SESSION['role']=$data['role'];
         $_SESSION['name']=$data['name']." ".$data['surname'];
