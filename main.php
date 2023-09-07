@@ -74,7 +74,7 @@ session_start();
         
     </div>
     <div id="content">
-   
+    <?php include './template/navbar.php' ?>
         <?php
          if(!isset($_GET['page']) || $_GET['page'] == ''){
             $page = 'home'; //If no page specified

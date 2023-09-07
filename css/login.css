@@ -9,7 +9,7 @@ body{
     color: #676A6C;
     font-family:  "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 13px;
-    opacity: 0.9    ;
+    opacity: 0.9;
 }
 #main{
     display: flex;
