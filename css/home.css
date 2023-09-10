@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700;800&family=Ubuntu:wght@300&display=swap');
+body{
+    display: flex;
+    flex-direction: row;
+    background-color: #F4F6FA;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+#main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #F4F6FA;
+    
+}
+.name{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: start;
+}
+.name h2{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    color: #676A6C;
+    font-size: 24px;
+}
+.shortcuts{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+.shortcutsHead{
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #E3F2FD;
+    border: 1px solid #e7eaec;
+    }
+.shortcuts i{
+    color: #2196f3;
+    margin-right:10px ;
+}
+.shortcuts h4{
+    font-size: 15px;
+    font-weight: 600;
+    color:#676A6C ;
+}
+.shortcutsBody{
+width: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+padding-left: 20px;
+padding-top: 20px;
+padding-bottom: 20px;
+border: 1px solid #e7eaec;
+background-color: white;
+}
+.shortcutsBodyElements{
+    padding: 10px;
+margin-right: 25px;
+margin-bottom: 15px;
+display: flex;
+flex-direction: row;
+align-items: center;
+height: 80px;
+width: 290px;
+border-radius: 15px;
+border: 1px solid #e7eaec;
+}
+.shortcutsBodyElements h3{
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    color: blue;
+    font-weight: 600;
+    margin-left: 20px;
+}
