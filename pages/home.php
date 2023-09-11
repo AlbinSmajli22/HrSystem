@@ -15,6 +15,10 @@ require_once './config.php';
             <h2>MetDaan</h2>
         </div>
         <div style="height:20px;"></div>
+        <div class="homeHead">
+            <?php echo'<h2>'.$_SESSION['name'].'</h2>'; ?>
+            <?php echo'<h4>'.$_SESSION['position'].'</h4>'; ?>
+        </div>
         <div class="shortcuts">
             <div class="shortcutsHead">
                 <h4>
@@ -51,6 +55,36 @@ require_once './config.php';
                     <img src="./images/expense_claim3.png" alt="" width="48px" height="48px">
                     <h3>File an Expens Claim</h3>
                 </div>
+            </div>
+
+        </div>
+        <div class="thirdContainer">
+            <div class="leftDiv">
+                <div class="Activechecklists">
+                    <div class="ActivechecklistsHead">
+                        <h5>
+                            <img src="./images/checklist.png" alt="" height="24px" width="24px" >
+                            Active Checklists
+                        </h5>
+                    </div>
+                    <div class="ActivechecklistsBody">
+                        <p>You have 1 active checklist that needs completing.</p>
+                        <div>
+                            <a href="">Onboarding</a>
+                            <a class="btn btn-primary btn-xs" href="">
+                                <i class="fa fa-edit"></i>
+                                Update
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="midDiv">
+
+            </div>
+            <div class="rightDiv">
+
             </div>
 
         </div>

@@ -27,10 +27,30 @@ body{
     color: #676A6C;
     font-size: 24px;
 }
+.homeHead{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    /* align-items: start; */
+}
+.homeHead h2{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 25px;
+    color: #676a6c;
+}
+.homeHead h4{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #676a6c;
+}
 .shortcuts{
 display: flex;
 flex-direction: column;
 width: 100%;
+margin-bottom: 30px;
 }
 .shortcutsHead{
     width: 100%;
@@ -78,7 +98,88 @@ border: 1px solid #e7eaec;
 .shortcutsBodyElements h3{
     font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 15px;
-    color: blue;
+    color: #337AB7;
     font-weight: 600;
     margin-left: 20px;
+}
+.thirdContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.leftDiv{
+    height: 500px;
+    width: 33%;
+    margin-right: 20px;
+}
+.Activechecklists{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.ActivechecklistsHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border: 1px solid #e7eaec;
+}
+.ActivechecklistsHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+}
+.ActivechecklistsBody{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #e7eaec;
+}
+.ActivechecklistsBody p{
+    color: #888;
+    font-size: 13px;
+}
+.ActivechecklistsBody div{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f9f9f9;
+    
+}
+.ActivechecklistsBody div a{
+    font-size: 13px;
+    text-decoration: none;
+    
+}
+.ActivechecklistsBody div .btn{
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: #fff;
+    width: 80px;
+    height: 20;
+    display: inline-block;
+    font-size: 11px;
+    vertical-align: middle;
+    text-align: center;
+}
+.midDiv{
+    height: 500px;
+    width: 33%;
+    margin-right: 20px;
+}
+.rightDiv{
+    height: 500px;
+    width: 33%;
 }
