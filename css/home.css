@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700;800&family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:wght@300&display=swap');
 body{
     display: flex;
     flex-direction: row;
@@ -84,7 +84,7 @@ border: 1px solid #e7eaec;
 background-color: white;
 }
 .shortcutsBodyElements{
-    padding: 10px;
+padding: 10px;
 margin-right: 25px;
 margin-bottom: 15px;
 display: flex;
@@ -116,6 +116,7 @@ border: 1px solid #e7eaec;
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
 }
 .ActivechecklistsHead{
     width: 100%;
@@ -135,44 +136,83 @@ border: 1px solid #e7eaec;
     font-weight: 600;
 }
 .ActivechecklistsBody{
-    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 10px;
+    justify-content: flex-start;
     background-color: white;
-    border: 1px solid #e7eaec;
+    height: 120px;
 }
-.ActivechecklistsBody p{
-    color: #888;
-    font-size: 13px;
-}
-.ActivechecklistsBody div{
+.ActivechecklistsNotification{
     width: 100%;
-    height: 40px;
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.ActivechecklistsNotification p{
+    padding:0px;
+    margin: 0px;
+    font-size: 13px;
+    color: #888;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.ActivechecklistsContent{
+    padding: 5;
+    border-top: 1px #e7eaec solid;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    background-color: #f9f9f9;
-    
+    justify-content: flex-start;
+    background-color:#F5F5F5;
+    height: 40px;
+    width: 92%;
 }
-.ActivechecklistsBody div a{
+.ActivechecklistsContent1 a{
+    color: #337ab7;
     font-size: 13px;
-    text-decoration: none;
-    
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;    
 }
-.ActivechecklistsBody div .btn{
+.ActivechecklistsContent3 a{
     background-color: #4caf50;
     border-color: #4caf50;
     color: #fff;
-    width: 80px;
-    height: 20;
+    border-radius: 3px;
+    padding: 1px 5px;
+    padding-bottom: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+.timeOff{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.timeOffHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border: 1px solid #e7eaec;
+}
+.timeOffHead h5{
     display: inline-block;
-    font-size: 11px;
-    vertical-align: middle;
-    text-align: center;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
 }
 .midDiv{
     height: 500px;

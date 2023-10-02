@@ -68,17 +68,34 @@ require_once './config.php';
                         </h5>
                     </div>
                     <div class="ActivechecklistsBody">
-                        <p>You have 1 active checklist that needs completing.</p>
-                        <div>
-                            <a href="">Onboarding</a>
-                            <a class="btn btn-primary btn-xs" href="">
-                                <i class="fa fa-edit"></i>
-                                Update
-                            </a>
+                        <div class="ActivechecklistsNotification">
+                            <p>
+                                <em> You have 1 active checklist that needs completing.</em>
+                            </p>
+                        </div>
+                        <div class="ActivechecklistsContent">
+                            <div class="ActivechecklistsContent1">
+                                <a style="color: #337ab7;">Onboarding</a>
+                            </div>
+                            <div class="ActivechecklistsContent2" style="width:220px;"></div>
+                            <div class="ActivechecklistsContent3">
+                                <a style="color: #fff;">
+                                    <i class="fa-solid fa-pen-to-square" style="color: #fafcff;"></i>
+                                    Update
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="timeOff">
+                <div class="timeOffHead">
+                        <h5>
+                            <img src="./images/balance.png" alt="" height="24px" width="24px" >
+                            Time Off/Leave Balances
+                        </h5>
+                    </div>
 
+                </div>
             </div>
             <div class="midDiv">
 
