@@ -104,157 +104,69 @@ require_once './config.php';
                         </h5>
                     </div>
                     <div class="timeOffBody">
-                        <div class="timeOffBodyMain">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td>
-                                            <span class="hidden-sm hidden-xs">
-                                                <strong>Time Off/Leave Type</strong>
-                                            </span>
-                                            <span class="hidden-lg hidden-md">
-                                                <strong>Type</strong>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <strong>Allowance</strong>
-                                            <br>
-                                            <small>(Annual)</small>
-                                        </td>
-                                        <td>
-                                            <strong>Balance</strong>
-                                            <br>
-                                            <small>(Accrued)</small>
-                                        </td>
-                                        <td>
-                                            <strong>Planned</strong>
-                                            <br>
-                                            <small>(In the future)</small>
-                                        </td>
-                                        <td>
-                                            <strong>Available</strong>
-                                            <br>
-                                            <small>(To take)</small>
-                                        </td>
-                                        <td>
-                                            <strong>Units</strong>
-                                            <br>
-                                            <small></small>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <table class="leavs">
+                            <thead>
+                                <tr>
+                                    <td>Time Off/Leave Type</td>
+                                    <td>Allowance <br> (Annual)</td>
+                                    <td>Balance <br> (Accrued)</td>
+                                    <td>Planned <br> (In the future)</td>
+                                    <td>Available <br> (To take)</td>
+                                    <td>Units</td>
+                                </tr>
+                            </thead>
+                            <tbody>
                                     <tr>
                                         <td>Annual Leave</td>
-                                        <td>
-                                            <h3 class="text-muted">20.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">1.97</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-success">1.97</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">Days</h3>
-                                        </td>
+                                        <td>20.00</td>
+                                        <td>1.97</td>
+                                        <td>0.00</td>
+                                        <td>1.97</td>
+                                        <td>Days</td>
                                     </tr>
                                     <tr>
                                         <td>Child born</td>
-                                        <td>
-                                            <h3 class="text-muted">3.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-danger">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">Days</h3>
-                                        </td>
+                                        <td>3.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>Days</td>
                                     </tr>
                                     <tr>
                                         <td>Death of Family Member</td>
-                                        <td>
-                                            <h3 class="text-muted">5.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-danger">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">Days</h3>
-                                        </td>
+                                        <td>5.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>Days</td>
                                     </tr>
                                     <tr>
                                         <td>Moving Day</td>
-                                        <td>
-                                            <h3 class="text-muted">1.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-danger">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">Days</h3>
-                                        </td>
+                                        <td>1.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>Days</td>
                                     </tr>
                                     <tr>
                                         <td>Wedding Day</td>
-                                        <td>
-                                            <h3 class="text-muted">5.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-danger">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">Days</h3>
-                                        </td>
+                                        <td>5.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td>Days</td>
                                     </tr>
                                     <tr>
                                         <td>Sick Leave</td>
-                                        <td>
-                                            <h3 class="text-muted">20.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">2.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">0.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-success">2.00</h3>
-                                        </td>
-                                        <td>
-                                            <h3 class="text-muted">Days</h3>
-                                        </td>
+                                        <td>20.00</td>
+                                        <td>2.00</td>
+                                        <td>0.00</td>
+                                        <td>2.00</td>
+                                        <td>Days</td>
                                     </tr>
                                 </tbody>
-                            </table>
-                        </div>
+                        </table>
+                            
                     </div>
                 </div>
             </div>

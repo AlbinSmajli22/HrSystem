@@ -216,18 +216,77 @@ border: 1px solid #e7eaec;
 }
 
 .timeOffBody{
+    padding: 10px;
     width: 100%;
-    height: 500px;
+    height: 400px;
     background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: start;
-}
-.timeOffBodyMain{
-    width: 100%;
     overflow-x: scroll;
 }
+
+ .leavs{
+    width: 600px;
+    border-collapse: collapse;
+    margin: 20px 10px;
+    font-size: 13px;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    min-width: 500px;
+}
+.leavs thead tr{
+    text-align: left;
+    font-weight: 600;
+    color: #676a6c;
+    font-size: 13px;
+}
+.leavs thead tr td {
+    margin-right: 5px;
+    padding-bottom: 20px;
+
+}
+.leavs tbody tr{
+    text-align: left;
+    font-weight: 400;
+    color: #676A6C;
+    border-top: 1px black solid;
+}
+.leavs tbody tr td{
+    padding-top: 10px;
+    padding-bottom: 20px;
+
+}
+/*
+.timeOffBodyMain .leavs thead{
+    width: 1000px;
+    color: #888;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    background-color: white;
+    text-align: center;
+}
+.timeOffBodyMain .leavs thead tr td{
+    padding: 5px;
+    text-align: center;
+}
+.timeOffBodyMain .leavs tbody{
+    width: 100%;
+    font-size: 15px;
+    background-color: white;
+}
+.timeOffBodyMain .leavs thead tr td{
+    width: 30%;
+    font-size: 13px;
+    background-color: white;
+    margin-right: 10px;
+    padding: 5px;
+}
+.timeOffBodyMain .leavs tbody tr td{
+    width: 100%;
+    font-size: 13px;
+    background-color: white;
+    margin-right: 10px;
+    padding: 5px;
+}
+*/
 .midDiv{
     height: 500px;
     width: 33%;
