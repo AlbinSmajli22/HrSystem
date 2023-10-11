@@ -165,10 +165,10 @@ require_once './config.php';
                                         <td>Days</td>
                                     </tr>
                                 </tbody>
-                        </table>
-                            
+                        </table> 
                     </div>
                 </div>
+                
             </div>
             <div class="midDiv">
 
