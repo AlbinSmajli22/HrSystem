@@ -117,7 +117,7 @@ require_once './config.php';
                             </thead>
                             <tbody>
                                     <tr>
-                                        <td>Annual Leave</td>
+                                        <td class="leavType">Annual Leave</td>
                                         <td>20.00</td>
                                         <td>1.97</td>
                                         <td>0.00</td>
@@ -125,7 +125,7 @@ require_once './config.php';
                                         <td>Days</td>
                                     </tr>
                                     <tr>
-                                        <td>Child born</td>
+                                        <td class="leavType">Child born</td>
                                         <td>3.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
@@ -133,7 +133,7 @@ require_once './config.php';
                                         <td>Days</td>
                                     </tr>
                                     <tr>
-                                        <td>Death of Family Member</td>
+                                        <td class="leavType">Death of Family Member</td>
                                         <td>5.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
@@ -141,7 +141,7 @@ require_once './config.php';
                                         <td>Days</td>
                                     </tr>
                                     <tr>
-                                        <td>Moving Day</td>
+                                        <td class="leavType">Moving Day</td>
                                         <td>1.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
@@ -149,7 +149,7 @@ require_once './config.php';
                                         <td>Days</td>
                                     </tr>
                                     <tr>
-                                        <td>Wedding Day</td>
+                                        <td class="leavType">Wedding Day</td>
                                         <td>5.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
@@ -157,7 +157,7 @@ require_once './config.php';
                                         <td>Days</td>
                                     </tr>
                                     <tr>
-                                        <td>Sick Leave</td>
+                                        <td class="leavType">Sick Leave</td>
                                         <td>20.00</td>
                                         <td>2.00</td>
                                         <td>0.00</td>
