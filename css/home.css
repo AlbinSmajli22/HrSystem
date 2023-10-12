@@ -116,7 +116,7 @@ border: 1px solid #e7eaec;
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     border: 1px solid #e7eaec;
 }
 .ActivechecklistsHead{
@@ -196,7 +196,7 @@ border: 1px solid #e7eaec;
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     border: 1px solid #e7eaec;
 }
 .timeOffHead{
@@ -242,6 +242,7 @@ border: 1px solid #e7eaec;
 .leavs thead tr td {
     margin-right: 5px;
     padding-bottom: 20px;
+    font-weight: 700;
 
 }
 .leavs tbody tr{
@@ -265,40 +266,72 @@ border: 1px solid #e7eaec;
 .leavs tbody tr:nth-child(odd){
     background-color: #f9f9f9;
 }
-/*
-.timeOffBodyMain .leavs thead{
-    width: 1000px;
-    color: #888;
+.recentLeaveRequests{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    border: 1px solid #e7eaec;
+
+}
+.recentLeaveRequestsHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.recentLeaveRequestsHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+}
+.recentLeaveRequestsBody{
+    padding: 20px;
+    width: 100%;
+    height: 300px;
+    background-color: white;
+}
+.recentLeave{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 10px;
+    font-size: 13px;
     font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.recentLeave head tr{
+    text-align: left;
+    font-weight: 600;
+    color: #676a6c;
+    font-size: 13px;
+}
+.recentLeave thead tr td {
+    margin-right: 20px;
+    padding-bottom: 10px;
+    font-weight: 700;
+    color: #676A6C;
+}
+.recentLeave tbody tr{
+    text-align: left;
     font-weight: 400;
+    color: #676A6C;
+    border-top:  1px #e7eaec solid;
+}
+.recentLeave tbody tr td{
+    padding-bottom: 20px;
     font-size: 13px;
-    background-color: white;
-    text-align: center;
+    font-weight: 400;
+
 }
-.timeOffBodyMain .leavs thead tr td{
-    padding: 5px;
-    text-align: center;
+
+.recentLeave tbody tr:nth-child(odd){
+    background-color: #f9f9f9;
 }
-.timeOffBodyMain .leavs tbody{
-    width: 100%;
-    font-size: 15px;
-    background-color: white;
-}
-.timeOffBodyMain .leavs thead tr td{
-    width: 30%;
-    font-size: 13px;
-    background-color: white;
-    margin-right: 10px;
-    padding: 5px;
-}
-.timeOffBodyMain .leavs tbody tr td{
-    width: 100%;
-    font-size: 13px;
-    background-color: white;
-    margin-right: 10px;
-    padding: 5px;
-}
-*/
 .midDiv{
     height: 500px;
     width: 33%;

@@ -194,6 +194,58 @@ $data= $prep->fetch();
                         </table> 
                     </div>
                 </div>
+                <div class="recentLeaveRequests">
+                    <div class="recentLeaveRequestsHead">
+                        <h5>
+                            <img src="./images/plan.png" alt="" height="24px" width="24px">
+                            Recent Leave Requests
+                        </h5>
+                    </div>
+                    <div class="recentLeaveRequestsBody">
+                        <table class="recentLeave">
+                            <thead>
+                                <tr>
+                                    <td>Description</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Status</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>Lorem ipsum</td>
+                                        <td>13/09/2023</td>
+                                        <td>13/09/2023</td>
+                                        <td>Approved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lorem ipsum</td>
+                                        <td>13/09/2023</td>
+                                        <td>13/09/2023</td>
+                                        <td>Approved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lorem ipsum</td>
+                                        <td>13/09/2023</td>
+                                        <td>13/09/2023</td>
+                                        <td>Approved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lorem ipsum</td>
+                                        <td>13/09/2023</td>
+                                        <td>13/09/2023</td>
+                                        <td>Approved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lorem ipsum</td>
+                                        <td>13/09/2023</td>
+                                        <td>13/09/2023</td>
+                                        <td>Approved</td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 
             </div>
             <div class="midDiv">
