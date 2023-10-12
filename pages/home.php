@@ -1,5 +1,31 @@
 <?php
 require_once './config.php';
+
+$userId=$_SESSION['user_id'];
+$annualLeave;
+$childBorn;
+$deathofFamilyMember;
+$movingDay;
+$weddingDay;
+$sickLeave;
+
+$sql="  SELECT * FROM timeoff WHERE User_ID = $userId";
+$prep= $con->prepare($sql);
+
+$prep->execute();
+$data= $prep->fetch();
+
+    $annualLeave = $data['annual_leave'];
+    $childBorn = $data['child_born'];
+    $deathofFamilyMember = $data['death_of_family_member'];
+    $movingDay = $data['moving_day'];
+    $weddingDay = $data['wedding_day'];
+    $sickLeave = $data['sick_leave'];
+
+
+
+
+
 ?>
 
 <head>
@@ -119,9 +145,9 @@ require_once './config.php';
                                     <tr>
                                         <td class="leavType">Annual Leave</td>
                                         <td>20.00</td>
-                                        <td>1.97</td>
+                                        <td><?=$annualLeave?></td>
                                         <td>0.00</td>
-                                        <td>1.97</td>
+                                        <td><?=$annualLeave?></td>
                                         <td>Days</td>
                                     </tr>
                                     <tr>
@@ -129,7 +155,7 @@ require_once './config.php';
                                         <td>3.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
-                                        <td>0.00</td>
+                                        <td><?= $childBorn?></td>
                                         <td>Days</td>
                                     </tr>
                                     <tr>
@@ -137,7 +163,7 @@ require_once './config.php';
                                         <td>5.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
-                                        <td>0.00</td>
+                                        <td><?= $deathofFamilyMember?><td>
                                         <td>Days</td>
                                     </tr>
                                     <tr>
@@ -145,7 +171,7 @@ require_once './config.php';
                                         <td>1.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
-                                        <td>0.00</td>
+                                        <td><?= $movingDay?></td>
                                         <td>Days</td>
                                     </tr>
                                     <tr>
@@ -153,15 +179,15 @@ require_once './config.php';
                                         <td>5.00</td>
                                         <td>0.00</td>
                                         <td>0.00</td>
-                                        <td>0.00</td>
+                                        <td><?= $weddingDay?></td>
                                         <td>Days</td>
                                     </tr>
                                     <tr>
                                         <td class="leavType">Sick Leave</td>
                                         <td>20.00</td>
-                                        <td>2.00</td>
+                                        <td><?= $sickLeave?></td>
                                         <td>0.00</td>
-                                        <td>2.00</td>
+                                        <td><?= $sickLeave?></td>
                                         <td>Days</td>
                                     </tr>
                                 </tbody>
