@@ -42,6 +42,13 @@
 #logout1 i{
     font-size:10px;
 }
+#logout1 a{
+    color:#e0e0e0 ;
+    text-decoration: none;
+    font-size:11px;
+    font-family:  "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+}
 
 </Style>
 <link rel="stylesheet" href="./css/navbar.css">
@@ -50,7 +57,7 @@
 <div id="logout">
     <div id="logout1">
         <i class="fa-solid fa-right-from-bracket"></i><br>
-        <small>Log Out</small>
+        <small><a href="logout.php">Log out</a></small>
     </div>
 <img src="./images/hrpartner-header.png" alt="" height= "40px" width="120px">
 </div>

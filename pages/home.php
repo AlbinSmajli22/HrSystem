@@ -1,5 +1,12 @@
 <?php
 require_once './config.php';
+require 'Calendar.php';
+
+$calendar = new Calendar(new CurrentDate(), new CalendarDate() );
+
+$calendar->setSundayFirst(false);
+
+$calendar->create();
 
 $userId=$_SESSION['user_id'];
 $annualLeave;
@@ -248,7 +255,38 @@ $data= $prep->fetch();
                         </table>
                     </div>
                 </div>
-                
+            <div class="Calendar">
+                <div class="calendarHead">
+                    <h5>
+                        <img src="./images/calendar.png" alt="" height="24px" width="24px">
+                        Calendar
+                    </h5>
+                </div>
+                <div class="calendarBody">
+                    <table class="calendarTable">
+                        <thead>
+                            <?php foreach ($calendar->getDayLabels() as $dayLabel):?>
+                            <th>
+                                <?php echo $dayLabel ?>
+                            </th>    
+                            <?php endforeach; ?>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($calendar->getWeeks() as $week):?>
+                                <tr>
+                                    <?php foreach ($week as $day):?>
+                                        <td <?php if(!$day['currentMonth']): ?> style="color:gray;" <?php endif; ?>>
+                                            <span <?php if($calendar->isCurrentDate($day['dayNumber'])):?> style=" background-color:blue; color:white;" <?php endif; ?>>
+                                            <?php echo $day['dayNumber']; ?>
+                                            </span>
+                                         </td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             </div>
             <div class="midDiv">
 

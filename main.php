@@ -66,9 +66,6 @@ session_start();
             <i class="fa-solid fa-thumbtack"></i>
             <a href="?page=pinboard">Pinboard</a>
             </li>
-            <li>
-            <a href="logout.php">Log out</a>
-            </li>
          </ul>
         
         

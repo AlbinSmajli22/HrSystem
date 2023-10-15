@@ -332,6 +332,37 @@ border: 1px solid #e7eaec;
 .recentLeave tbody tr:nth-child(odd){
     background-color: #f9f9f9;
 }
+
+.Calendar{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+}
+.calendarHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.calendarHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+}
+.calendarBody{
+    padding: 20px;
+    width: 100%;
+    height: 300px;
+    background-color: white;
+}
 .midDiv{
     height: 500px;
     width: 33%;
