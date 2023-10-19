@@ -108,7 +108,6 @@ border: 1px solid #e7eaec;
     flex-direction: row;
 }
 .leftDiv{
-    height: 500px;
     width: 33%;
     margin-right: 20px;
 }
@@ -358,17 +357,258 @@ border: 1px solid #e7eaec;
     font-weight: 600;
 }
 .calendarBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
     padding: 20px;
     width: 100%;
-    height: 300px;
+    height: 500px;
     background-color: white;
+    
+}
+.currentDate{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.currentDate button{
+    border: #888;
+    background-color: #F5F5F5;
+    border:1px solid #e7eaec;
+    margin-right: -4px;
+    width: 40px;
+    border-radius: 5px;
+}
+.calendarTableDiv{
+    overflow-y: scroll;
+    width: 100%;
+    height: 300px;
+}
+.calendarTable{
+    width:100%;
+    border:1px solid#e7eaec ; 
+    height: 400px;
+}
+.calendarTable thead tr th{
+    border:1px solid#e7eaec ; 
+    text-align: center;
+    width: 20px;
+    color: #676a6c;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.calendarTable tbody tr td{
+    border:1px solid#e7eaec ; 
+    text-align:end;
+    color: #676a6c;
+    padding: 0;
+}
+.calendarTable tbody tr td span{
+    display: block;
+    width: 100%;
+    height:100%;
+    padding:2px;
+    font-size: 14px;
+}
+
+.legendGuide{
+    border-top:1px solid#e7eaec ; 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top:20px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    font-size: 13px;
+}
+.legendColor{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3px;
+}
+.legendColor div{
+    margin-right: 2px;
+}
+.legendColor p {
+    margin-right: 5px;
+    padding: 0px;
+    margin-bottom: 0;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    font-size: 13px;
+}
+.legend{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.clocks{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.clock1{
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    height: 100px;
+    background-color: white;
+    margin-right: 10px;
+    border: solid 0.5px #e7eaec;
+}
+.clock1-1{
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    text-align: start;
+    padding: 5px;
+}
+.clock1-1 a{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #337ab7;
+    margin-left: 20px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+.clock1-2{
+    margin-left: 25px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items:center;
+}
+.clock1-2 i{
+    font-size: 30px;
+}
+.clock1-2 h2{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: #4caf50;
+    margin-left: 5px;
+}
+
+.clock2{
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    height: 100px;
+    background-color: white;
+    border: solid 0.5px #e7eaec;
+}
+.clock2-1{
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    text-align: start;
+    padding: 5px;
+}
+.clock2-1 a{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #337ab7;
+    margin-left: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+.clock2-2{
+    margin-left: 25px;
+    margin-bottom: 10px;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+.clock2-2 i{
+    font-size: 30px;
+}
+.clock2-2 h2{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: #676A6C;
+    margin-left: 5px;
+    padding: 0;
 }
 .midDiv{
-    height: 500px;
+ 
     width: 33%;
     margin-right: 20px;
 }
+.MyInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.MyInfoHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.MyInfoHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+}
+
+.MyInfoBody{
+    padding: 10px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+}
+.MyInfoContent{
+    width: 100%;
+    display: block;
+}
+
+.personalInfo{
+    width: 100%;
+    font-size: 12px;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.personalInfo tbody tr{
+    text-align: left;
+    font-weight: 400;
+    color: #676A6C;
+    border-top:  1px #e7eaec solid;
+    font-size: 13px;
+}
+.personalInfo tbody tr td{
+    padding: 8px;
+
+}
+
 .rightDiv{
-    height: 500px;
+
     width: 33%;
 }

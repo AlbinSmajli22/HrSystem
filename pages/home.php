@@ -16,6 +16,8 @@ $movingDay;
 $weddingDay;
 $sickLeave;
 
+$currentTime = date('h:i A');
+
 $sql="  SELECT * FROM timeoff WHERE User_ID = $userId";
 $prep= $con->prepare($sql);
 
@@ -263,6 +265,15 @@ $data= $prep->fetch();
                     </h5>
                 </div>
                 <div class="calendarBody">
+                    <div class="currentDate">
+                    <h5> October 2023</h5>
+                    <div>
+                        <button style="font-size:12px; height:28px; margin-right: 5px; width:60px;">today</button>
+                        <button><</button>
+                        <button>></button>
+                    </div>  
+                    </div>
+                    <div class="calendarTableDiv">
                     <table class="calendarTable">
                         <thead>
                             <?php foreach ($calendar->getDayLabels() as $dayLabel):?>
@@ -272,11 +283,13 @@ $data= $prep->fetch();
                             <?php endforeach; ?>
                         </thead>
                         <tbody>
+                            <div>
+                            </div>
                             <?php foreach ($calendar->getWeeks() as $week):?>
                                 <tr>
                                     <?php foreach ($week as $day):?>
-                                        <td <?php if(!$day['currentMonth']): ?> style="color:gray;" <?php endif; ?>>
-                                            <span <?php if($calendar->isCurrentDate($day['dayNumber'])):?> style=" background-color:blue; color:white;" <?php endif; ?>>
+                                        <td <?php if(!$day['currentMonth']): ?> style="color:#e7eaec;" <?php endif; ?>>
+                                            <span <?php if($calendar->isCurrentDate($day['dayNumber'])):?> style=" background-color:fcf8e3;" <?php endif; ?>>
                                             <?php echo $day['dayNumber']; ?>
                                             </span>
                                          </td>
@@ -285,11 +298,94 @@ $data= $prep->fetch();
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                    </div>
+                    <div class="legendGuide">
+                        <p>Legend:</p>
+                        <div class="legendColor">
+                            <div class="legend" style="background-color:#B8B790;"></div><p>Annual Leave</p>
+                            <div class="legend" style="background-color:#C0A8A5;"></div><p>Child born</p>
+                            <div class="legend" style="background-color:#87CFE3;"></div><p>Death of Family Member</p>
+                            <div class="legend" style="background-color:#8BD2AC;"></div><p>Maternity Leave</p>
+                            <div class="legend" style="background-color:#D3AB9D;"></div><p>Moving Day</p>
+                            <div class="legend" style="background-color:#F3B188;"></div><p>Sick Leave</p>
+                            <div class="legend" style="background-color:#CACDAF;"></div><p>Wedding Day</p>
+                            <div class="legend" style="background-color:#AAE6A0;"></div><p>Work from Home</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            </div>
+            <div class="clocks">
+                <div class="clock1">
+                    <div class="clock1-1">
+                        <a href="">Main Office</a>
+                    </div>
+                    <div class="clock1-2">
+                        <i class="fa-regular fa-clock  fa-2xl" style="color: #3772d7;"></i>
+                        <?php echo '<h2>' . $currentTime . '</h2>' ?>
+                    </div>
+                </div>
+                <div class="clock2">
+                    <div class="clock2-1">
+                        <a href="">Production Office</a>
+                    </div>
+                    <div class="clock2-2">
+                        <i class="fa-regular fa-clock fa-2xl" style="color: #3772d7;"></i>
+                        <?php echo '<h2>' . $currentTime . '</h2>' ?>
+                    </div>
                 </div>
             </div>
             </div>
             <div class="midDiv">
-
+            <div class="MyInfo">
+                    <div class="MyInfoHead">
+                        <h5>
+                            <img src="./images/information.png" alt="" height="24px" width="24px">
+                            My Information
+                        </h5>
+                    </div>
+                    <div class="MyInfoBody">
+                        <div class="MyInfoContent">
+                            <table class="personalInfo">
+                                <tbody>
+                                    <tr>
+                                        <td>Code</td>
+                                        <th>208</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Department</td>
+                                        <th>Video Research</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Location</td>
+                                        <th>Main Office</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <th>Full Time</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <th>Male</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Born</td>
+                                        <th>N/A</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Age</td>
+                                        <th>N/A</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Employed For</td>
+                                        <th>7 months 2 weeks 4 days</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="rightDiv">
 

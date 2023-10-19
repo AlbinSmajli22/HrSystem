@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['user_id']=$data['user_id'];
         $_SESSION['email']=$data['email'];
         $_SESSION['position']=$data['position_name'];
+        $_SESSION['departament']=$data['departament_name'];
         $_SESSION['role']=$data['role'];
         $_SESSION['name']=$data['name']." ".$data['surname'];
         

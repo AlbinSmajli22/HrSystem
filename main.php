@@ -127,6 +127,8 @@ session_start();
                      include 'pages/notfound.php';
             }
         ?>
+        <?php include_once 'template/footer.php' ?>
     </div>
+    
 </body>
 </html>

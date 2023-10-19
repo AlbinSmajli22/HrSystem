@@ -6,6 +6,7 @@
     padding: 0;
     line-height: 1.42857143;
     font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    height: max-content;
 }
 #sidebar{
     padding: 0;
@@ -13,8 +14,7 @@
     flex-direction: column;
     background-color: #0277bd;
     width: 14.3%;
-    height:max-content;
-    height: 1100px;
+    height: revert;
 }
 #profile{
     width: 100%;
@@ -72,5 +72,6 @@
     flex-direction: column;
     padding: 0px;
     width: 85.7%;
+    height: max-content;
 }
 

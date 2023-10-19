@@ -33,7 +33,7 @@ body{
     flex-direction: row;
     width: 100%;
     justify-content: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 .clock1{
     display: flex;
@@ -54,6 +54,7 @@ body{
 .clock1-1 a{
     margin-left: 20px;
     font-size: 15px;
+    text-decoration: none;
 }
 .clock1-2{
     margin-left: 25px;
@@ -91,6 +92,7 @@ body{
 .clock2-1 a{
     margin-left: 20px;
     font-size: 15px;
+    text-decoration:none;
 }
 .clock2-2{
     margin-left: 25px;
