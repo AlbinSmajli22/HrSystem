@@ -134,6 +134,8 @@ border: 1px solid #e7eaec;
     font-size: 14px;
     font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 600;
+    color: #676A6C;
+    
 }
 .ActivechecklistsBody{
     display: flex;
@@ -214,6 +216,7 @@ border: 1px solid #e7eaec;
     font-size: 14px;
     font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 600;
+    color: #676A6C;
 }
 
 .timeOffBody{
@@ -289,6 +292,7 @@ border: 1px solid #e7eaec;
     font-size: 14px;
     font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 600;
+    color: #676A6C;
 }
 .recentLeaveRequestsBody{
     padding: 20px;
@@ -355,6 +359,7 @@ border: 1px solid #e7eaec;
     font-size: 14px;
     font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 600;
+    color: #676A6C;
 }
 .calendarBody{
     display: flex;
@@ -577,6 +582,7 @@ border: 1px solid #e7eaec;
     font-size: 14px;
     font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 600;
+    color: #676A6C;
 }
 
 .MyInfoBody{
@@ -605,10 +611,369 @@ border: 1px solid #e7eaec;
 }
 .personalInfo tbody tr td{
     padding: 8px;
+}
+.ReportsTo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.ReportsToHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.ReportsToHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
 
+.ReportsToBody{
+    padding: 20px 30px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.ReportsToBody img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.ReportsToBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+    color: #676A6C;
+}
+.ReportsToBody p strong{
+    font-weight:700 ;
+}
+.RecentReviews{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.RecentReviewsHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.RecentReviewsHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.RecentReviewsBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.RecentReviewsBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #676A6C;
+}
+.RecentTraining{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.RecentTrainingHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.RecentTrainingHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.RecentTrainingBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.RecentTrainingBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #676A6C;
+}
+.RenewableDocuments{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.RenewableDocumentsHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.RenewableDocumentsHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.RenewableDocumentsBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.RenewableDocumentsBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #676A6C;
+}
+.SalaryHistory{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.SalaryHistoryHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.SalaryHistoryHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.SalaryHistoryBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.SalaryHistoryBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #676A6C;
+}
+.AssetsInYourCare{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.AssetsInYourCareHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.AssetsInYourCareHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.AssetsInYourCareBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.AssetsInYourCareBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #676A6C;
+}
+.YourDependents{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.YourDependentsHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.YourDependentsHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.YourDependentsBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.YourDependentsBody p{
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #676A6C;
 }
 
 .rightDiv{
 
     width: 33%;
+}
+.JobPortal{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border: 1px solid #e7eaec;
+   
+}
+.JobPortalHead{
+    width: 100%;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding-left: 20px;
+    padding-top:10px ;
+    border-bottom: 1px solid #e7eaec;
+}
+.JobPortalHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.JobPortalBody{
+    padding: 20px 25px;
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.JobPortalBody a{
+    padding: 0;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.JobPortalBody p{
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #676A6C;
 }

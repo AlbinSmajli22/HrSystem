@@ -386,8 +386,115 @@ $data= $prep->fetch();
                         </div>
                     </div>
                 </div>
+                <div class="ReportsTo">
+                    <div class="ReportsToHead">
+                        <h5>
+                            <img src="./images/orgchart.png" alt="" height="24px" width="24px">
+                            You Report To
+                        </h5>
+                    </div>
+                    <div class="ReportsToBody">
+                        <img src="./images/albin-smajli.png" alt="">
+                        <p><Strong>Arbenita Krasniqi</Strong> , Project Manager</p>
+                    </div>
+                </div>
+                <div class="RecentReviews">
+                    <div class="RecentReviewsHead">
+                        <h5>
+                            <img src="./images/review.png" alt="" height="24px" width="24px">
+                            Recent Reviews
+                        </h5>
+                    </div>
+                    <div class="RecentReviewsBody">
+                        <p>
+                            You have no performance reviews on file at the moment. As you undertake them, the most recent reviews will be shown here.
+                        </p>
+                    </div>
+                </div>
+                <div class="RecentTraining">
+                    <div class="RecentTrainingHead">
+                        <h5>
+                            <img src="./images/training.png" alt="" height="24px" width="24px">
+                            Recent Training
+                        </h5>
+                    </div>
+                    <div class="RecentTrainingBody">
+                        <p>
+                        There are no recent courses in your file at the moment. As you complete internal training courses, they will be displayed here.
+                        </p>
+                    </div>
+                </div>
+                <div class="RenewableDocuments">
+                    <div class="RenewableDocumentsHead">
+                        <h5>
+                            <img src="./images/renewable.png" alt="" height="24px" width="24px">
+                            Renewable Documents
+                        </h5>
+                    </div>
+                    <div class="RenewableDocumentsBody">
+                        <p>
+                        There are no renewable documents in your file at the moment. These are documents pertaining to your work, such as a certificates or licences that must be renewed periodically.
+                        </p>
+                    </div>
+                </div>
+                <div class="SalaryHistory">
+                    <div class="SalaryHistoryHead">
+                        <h5>
+                            <img src="./images/position.png" alt="" height="24px" width="24px">                           
+                            Your Position/Salary History
+                        </h5>
+                    </div>
+                    <div class="SalaryHistoryBody">
+                        <p>
+                            There is no position history recorded on your file at the moment.
+                        </p>
+                    </div>
+                </div>
+                <div class="AssetsInYourCare">
+                    <div class="AssetsInYourCareHead">
+                        <h5>
+                            <img src="./images/asset.png" alt="" height="24px" width="24px">                           
+                            Assets In Your Care
+                        </h5>
+                    </div>
+                    <div class="AssetsInYourCareBody">
+                        <p>
+                        There are no company assets currently marked as being out on loan to you. If you are loaned a company asset such as a phone, laptop or keycard etc., then they will show in here.
+                        </p>
+                    </div>
+                </div>
+                <div class="YourDependents">
+                    <div class="YourDependentsHead">
+                        <h5>
+                            <img src="./images/dependent.png" alt="" height="24px" width="24px">                           
+                            Your Dependents
+                        </h5>
+                    </div>
+                    <div class="YourDependentsBody">
+                        <p>
+                        There are no dependents recorded on your file at the moment.
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="rightDiv">
+            <div class="JobPortal">
+                    <div class="JobPortalHead">
+                        <h5>
+                            <img src="./images/jobs.png" alt="" height="24px" width="24px">                           
+                            Job Portal
+                        </h5>
+                    </div>
+                    <div class="JobPortalBody">
+                        <p>
+                        Your company jobs portal is at:
+                        </p>
+                        <a href="https://metdaan.hrpartner.io/jobs">https://metdaan.hrpartner.io/jobs</a>
+                        <p>
+                        <small style=" color: #888;">(There are no jobs currently listed)</small>
+                        </p>
+                    </div>
+                </div>
 
             </div>
 
