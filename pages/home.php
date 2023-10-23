@@ -351,27 +351,32 @@ $data= $prep->fetch();
                                 <tbody>
                                     <tr>
                                         <td>Code</td>
-                                        <th>208</th>
+                                        <?php echo '<th>' . $_SESSION['user_id'] . '</th>'; ?>
                                     </tr>
                                     <tr>
                                         <td>Department</td>
-                                        <th>Video Research</th>
+                                        <?php echo '<th>' . $_SESSION['departament'] . '</th>'; ?>
                                     </tr>
                                     <tr>
                                         <td>Location</td>
-                                        <th>Main Office</th>
+                                        <?php echo '<th>' . $_SESSION['location'] . '</th>'; ?>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
-                                        <th>Full Time</th>
+                                        <?php echo '<th>' . $_SESSION['status'] . '</th>'; ?>
                                     </tr>
                                     <tr>
                                         <td>Gender</td>
-                                        <th>Male</th>
+                                        <?php echo '<th>' . $_SESSION['gender'] . '</th>'; ?>
                                     </tr>
                                     <tr>
                                         <td>Born</td>
+                                        
+                                        <?php if ($_SESSION['gender'] == ""){?>
                                         <th>N/A</th>
+                                        <?php}else{?>
+                                            <?php echo '<th>' . $_SESSION['born'] . '</th>'; ?>
+                                            <?php }?>
                                     </tr>
                                     <tr>
                                         <td>Age</td>

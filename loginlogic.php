@@ -29,6 +29,10 @@ if (isset($_POST['submit'])) {
         $_SESSION['departament']=$data['departament_name'];
         $_SESSION['role']=$data['role'];
         $_SESSION['name']=$data['name']." ".$data['surname'];
+        $_SESSION['location']=$data['location'];
+        $_SESSION['status']=$data['status'];
+        $_SESSION['gender']=$data['gender'];
+        $_SESSION['born']=$data['born'];
         
 
         header("Location: main.php");  
