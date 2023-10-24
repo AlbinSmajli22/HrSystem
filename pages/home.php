@@ -33,7 +33,11 @@ $data= $prep->fetch();
 
 
 
-
+    $sql="  SELECT * FROM users WHERE User_ID = $userId";
+    $prep= $con->prepare($sql);
+    
+    $prep->execute();
+    $data2= $prep->fetch();
 
 ?>
 
@@ -367,24 +371,51 @@ $data= $prep->fetch();
                                     </tr>
                                     <tr>
                                         <td>Gender</td>
-                                        <?php echo '<th>' . $_SESSION['gender'] . '</th>'; ?>
+                                        <?php if ($_SESSION['gender'] == null ){
+
+                                            echo '<th>  N/A  </th>'; 
+                                    
+                                        } else {
+                                            echo '<th>' . $_SESSION['gender'] . '</th>'; 
+                                            }?>
+                                       
                                     </tr>
                                     <tr>
                                         <td>Born</td>
-                                        
-                                        <?php if ($_SESSION['gender'] == ""){?>
-                                        <th>N/A</th>
-                                        <?php}else{?>
-                                            <?php echo '<th>' . $_SESSION['born'] . '</th>'; ?>
-                                            <?php }?>
+                                        <?php echo '<th>' . $_SESSION['born'] . '</th>'; ?>   
                                     </tr>
                                     <tr>
                                         <td>Age</td>
-                                        <th>N/A</th>
+                                        <?php
+                                         if (!$_SESSION['born'] == null ){
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate =date_create($currentDate);
+                                            $birthDay = $data2['born'];
+                                            $birthDay = date_create($birthDay);
+
+                                            $mosha = date_diff($birthDay , $currentDate );
+
+                                             echo '<th>'. $mosha->y .'</th>';
+                                            } else {
+                                            echo '<th>  N/A  </th>';
+                                            }?>
+                                            
+                                           
+
+                                        ?>
                                     </tr>
                                     <tr>
                                         <td>Employed For</td>
-                                        <th>7 months 2 weeks 4 days</th>
+                                        <?php
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate =date_create($currentDate);
+                                            $startedDate = $data2['started'];
+                                            $startedDate = date_create($startedDate);
+
+                                            $worksFor = date_diff($startedDate , $currentDate );
+
+                                             echo '<th>'. $worksFor->m .' months '.$worksFor->d.' days'.'</th>';
+                                             ?>
                                     </tr>
                                 </tbody>
                             </table>

@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['status']=$data['status'];
         $_SESSION['gender']=$data['gender'];
         $_SESSION['born']=$data['born'];
+        $_SESSION['started']=$data['started'];
         
 
         header("Location: main.php");  
