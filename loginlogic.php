@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['role']=$data['role'];
         $_SESSION['name']=$data['name']." ".$data['surname'];
         $_SESSION['location']=$data['location'];
+        $_SESSION['report_to']=$data['report_to'];
         $_SESSION['status']=$data['status'];
         $_SESSION['gender']=$data['gender'];
         $_SESSION['born']=$data['born'];

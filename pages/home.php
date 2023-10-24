@@ -39,6 +39,22 @@ $data= $prep->fetch();
     $prep->execute();
     $data2= $prep->fetch();
 
+
+    $leaderID = $_SESSION['report_to'];
+
+    $sql= "SELECT * from users
+        LEFT JOIN position ON users.Position_ID = position.position_id
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id
+        WHERE User_ID = $leaderID";
+
+    $prep= $con->prepare($sql);
+    
+    $prep->execute();
+    $leaderData= $prep->fetch();
+
+    $leaderName = $leaderData["name"];
+    $leaderSurname = $leaderData["surname"];
+    $leaderPosition = $leaderData["position_name"];
 ?>
 
 <head>
@@ -431,7 +447,7 @@ $data= $prep->fetch();
                     </div>
                     <div class="ReportsToBody">
                         <img src="./images/albin-smajli.png" alt="">
-                        <p><Strong>Arbenita Krasniqi</Strong> , Project Manager</p>
+                        <p><Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> , <?=  $leaderPosition ?></p>
                     </div>
                 </div>
                 <div class="RecentReviews">
