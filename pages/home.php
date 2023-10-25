@@ -369,7 +369,7 @@ $data= $prep->fetch();
                         <div class="MyInfoContent">
                             <table class="personalInfo">
                                 <tbody>
-                                    <tr>
+                                     <tr>
                                         <td>Code</td>
                                         <?php echo '<th>' . $_SESSION['user_id'] . '</th>'; ?>
                                     </tr>
@@ -394,7 +394,6 @@ $data= $prep->fetch();
                                         } else {
                                             echo '<th>' . $_SESSION['gender'] . '</th>'; 
                                             }?>
-                                       
                                     </tr>
                                     <tr>
                                         <td>Born</td>
@@ -415,10 +414,6 @@ $data= $prep->fetch();
                                             } else {
                                             echo '<th>  N/A  </th>';
                                             }?>
-                                            
-                                           
-
-                                        ?>
                                     </tr>
                                     <tr>
                                         <td>Employed For</td>
@@ -433,7 +428,8 @@ $data= $prep->fetch();
                                              echo '<th>'. $worksFor->m .' months '.$worksFor->d.' days'.'</th>';
                                              ?>
                                     </tr>
-                                </tbody>
+                                </tbody>        
+
                             </table>
                         </div>
                     </div>

@@ -214,7 +214,7 @@ $currentTime = date('h:i A');
             <input type="number" class="form-control" name="role" id="role" required>
           </div>
           <div class="mb-3">
-            <label for="role" class="col-form-label">Location:</label >
+            <label for="location" class="col-form-label">Location:</label >
             <select id="location" name="location" class="form-control" placeholder="Chose Location">
               <option value="">Chose Location</option>
               <option value="Main Office">Main Office</option>
@@ -222,7 +222,7 @@ $currentTime = date('h:i A');
             </select>
           </div>
           <div class="mb-3">
-            <label for="role" class="col-form-label">Location:</label >
+            <label for="status" class="col-form-label">Status:</label >
             <select id="status" name="status" class="form-control" placeholder="Chose Status">
               <option value="">Chose Status</option>
               <option value="Casual">Casual</option>
@@ -231,6 +231,31 @@ $currentTime = date('h:i A');
               <option value="Part">Part Time</option>
               <option value="Unpaid">Unpaid</option>
             </select>
+          </div>
+          <div class="mb-3">
+            <label for="report_to" class="col-form-label">Report to:</label >
+            <select id="report_to" name="report_to" class="form-control" placeholder="Chose Leader">
+              <option value="">Chose Leader</option>
+              <?php foreach ($datas as $data): ?>
+              <option value="<?= $data['user_id'] ?>"><?= $data['name'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="gender" class="col-form-label">Chose Gender:</label >
+            <select id="gender" name="gender" class="form-control" placeholder="Chose Gender">
+              <option value="">Chose Gender</option>
+              <option value="Male">Male</option>
+              <option value="Fmale">Fmale</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="born" class="col-form-label">Birth Date:</label >
+            <input type="date" name="born" id="born">
+          </div>
+          <div class="mb-3">
+            <label for="started" class="col-form-label">Started Date:</label >
+            <input type="date" name="started" id="started">
           </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -15,9 +15,13 @@ if (isset($_POST['submit'])) {
     $status= $_POST['status'];
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
+    $report_to = $_POST['report_to'];
+    $gender= $_POST['gender'];
+    $born= $_POST['born'];
+    $started = $_POST['started'];
 
 
-    $sql = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status) VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status)";
+    $sql = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started) VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status, :report_to, :gender, :born, :started)";
 
     $prep = $con->prepare($sql);
 
@@ -30,6 +34,10 @@ if (isset($_POST['submit'])) {
     $prep->bindParam(':role', $role);
     $prep->bindParam(':location', $location);
     $prep->bindParam(':status', $status);
+    $prep->bindParam(':report_to', $report_to);
+    $prep->bindParam(':gender', $gender);
+    $prep->bindParam(':born', $born);
+    $prep->bindParam(':started', $started);
    
     $prep->execute();
     

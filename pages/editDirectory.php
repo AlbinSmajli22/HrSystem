@@ -3,12 +3,24 @@
 
 
 	$user_id = $_GET['user_id'];
-	$sql = "SELECT * from users WHERE user_id=:user_id LIMIT 1";
+	$sql= "SELECT * from users
+        LEFT JOIN position ON users.Position_ID = position.position_id
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id
+        WHERE user_id=:user_id LIMIT 1";
+	 		
 
 	$prep = $con->prepare($sql);
 	$prep->bindParam(':user_id', $user_id);
 	$prep->execute();
 	$datas = $prep->fetch();
+
+	$usersql= "SELECT * from users
+        LEFT JOIN position ON users.Position_ID = position.position_id
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
+
+		$prep = $con->prepare($usersql);
+		$prep->execute();
+		$userDatas = $prep->fetch();
 ?>
 
 <body class="bg-secondary">
@@ -35,17 +47,27 @@
             		<option value="Main Office">Main Office</option>
               		<option value="Production">Production</option>
             	</select>
-					<select id="status" name="status">
+				<select id="status" name="status">
 					<option value="Casual">Casual</option>
               		<option value="Contract">Contract</option>
               		<option value="Full Time">Full Time</option>
               		<option value="Part">Part Time</option>
               		<option value="Unpaid">Unpaid</option>
             	</select>
-				
-
-               
-				
+				<br>
+            	<select id="report_to" name="report_to">
+              		<option value="<?= $datas['report_to'];?>">Current Leader</option>
+              		<?php foreach ($userDatas as $data): ?>
+            			<option value="<?= $data['user_id'] ?>"><?= $data['name'] ?></option>
+              		<?php endforeach; ?>
+            	</select>
+				<select id="gender" name="gender" class="form-control">
+              		<option value="<?= $datas['gender'];?>"><?= $datas['gender'];?></option>
+              		<option value="Male">Male</option>
+              		<option value="Fmale">Fmale</option>
+            	</select>
+				<input type="date" name="born" id="born">
+				<input type="date" name="started" id="started">
 				<button class="btn btn-lg btn-success btn-block" name="update" type="submit">Update</button>
 			</form>
 
