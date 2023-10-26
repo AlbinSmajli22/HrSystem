@@ -29,6 +29,7 @@ $usersql= "SELECT * from users
 
 		
 ?>
+
 <body class="bg-secondary">
 	
 
@@ -61,14 +62,7 @@ $usersql= "SELECT * from users
               		<option value="Unpaid">Unpaid</option>
             	</select>
 				<br>
-            	<select name="" id="">
-				<option value="<?= $datas['report_to'];?>"><?= $datas['report_to'];?></option>
-					<?php foreach($userdatas as $userdata):?>
-						<option value="<?$userdata['user_id']?>"><?$userdata['name']?></option>
-					<?php endforeach; ?>
-						
-					
-				</select>
+            	
 				<input type="text" name="gender" id="gender" value="<?= $datas['gender'];?>">
 				
 				<button class="btn btn-lg btn-success btn-block" name="update" type="submit">Update</button>
