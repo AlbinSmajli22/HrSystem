@@ -14,21 +14,10 @@
 	$prep->execute();
 	$datas = $prep->fetch();
 
-	
+
 ?>
 
-<?php
 
-$usersql= "SELECT * from users
-        LEFT JOIN position ON users.Position_ID = position.position_id
-        LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
-
-		$prep = $con->prepare($usersql);
-		$prep->execute();
-		$userdatas = $prep->fetch();
-
-		
-?>
 
 <body class="bg-secondary">
 	
@@ -67,6 +56,7 @@ $usersql= "SELECT * from users
 				
 				<button class="btn btn-lg btn-success btn-block" name="update" type="submit">Update</button>
 			</form>
+			
 
 			</div>
 		</main>

@@ -54,5 +54,6 @@ class Calendar extends DateTime {
 
 }
 */
+<a Style="color:white;" href="pages/editDirectory.php?user_id=<?= $data['user_id']; ?>" >Edit </a>
 
  

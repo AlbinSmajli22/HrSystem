@@ -51,7 +51,6 @@
 }
 
 </Style>
-<link rel="stylesheet" href="./css/navbar.css">
 <div id="navbar">
 <i id="threedots" class="fa-solid fa-bars"></i>
 <div id="logout">
