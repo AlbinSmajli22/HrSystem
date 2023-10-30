@@ -317,7 +317,7 @@ $currentTime = date('h:i A');
                   <?= $data['location'] ?>
                 </td>
                 <td>
-                  <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@mdo">
+                  <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $data['user_id']; ?>" data-bs-whatever="@mdo">
                     Edit
                   </button> |
                   <button type="button" class="btn btn-danger">
@@ -327,7 +327,7 @@ $currentTime = date('h:i A');
                 
               </tr>
             <?php endforeach; ?>
-            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editModal<?= $data['user_id']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
