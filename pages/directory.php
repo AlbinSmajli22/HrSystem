@@ -317,7 +317,7 @@ $currentTime = date('h:i A');
                   <?= $data['location'] ?>
                 </td>
                 <td>
-                  <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?= $data['user_id']; ?>" data-bs-whatever="@mdo">
+                  <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<?php echo $data['user_id']; ?>" data-bs-whatever="@mdo">
                     Edit
                   </button> |
                   <button type="button" class="btn btn-danger">
@@ -326,9 +326,9 @@ $currentTime = date('h:i A');
                 </td>
                 
               </tr>
-            <?php endforeach; ?>
-            <div class="modal fade" id="editModal<?= $data['user_id']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            
+            <div class="modal fade" id="editModal<?php echo $data['user_id']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="editModalLabel">New message</h1>
@@ -337,16 +337,108 @@ $currentTime = date('h:i A');
                 <div class="modal-body">
 
                
+                <form action="./editDirectoryLogic.php" method="POST">
+                      <div class="mb-3">
+                        <input type="hidden" class="form-control" name="user_id" id="user_id" value="<?= $data['user_id']; ?>" >
+                      </div>
+                      <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" name="name" id="name" value="<?= $data['name']; ?>">
+                      </div>
+                      <div class="mb-3">
+                        <label for="surname" class="col-form-label">Surname:</label>
+                        <input type="text" class="form-control" name="surname" id="surname" value="<?= $data['surname']; ?>">
+                      </div>
+                      <div class="mb-3">
+                        <label for="email" class="col-form-label">E-mail:</label>
+                        <input type="email" class="form-control" name="email" id="email" value="<?= $data['email']; ?>">
+                      </div>
+                      
+                      <div class="mb-3">
+                        <label for="Position_ID" class="col-form-label">Position Name:</label>
+                        <select id="status" name="Position_ID" id="Position_ID" class="form-control">
+                          <option value="<?= $data['Position_ID'] ?>"><?= $data['position_name']?></option>
+                          <?php foreach ($filterdatas2 as $filterdata2): ?>
+                            <option value="<?= $filterdata2['position_id'] ?>">
+                              <?= $filterdata2['position_name'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="Departament_ID" class="col-form-label">Departament_Name:</label>
+                        <select id="status" name="Departament_ID" id="Departament_ID" class="form-control"
+                          placeholder="Chose Departament">
+                          <option value="<?= $data['Departament_ID'] ?>"><?= $data['departament_name'] ?></option>
+                          <?php foreach ($filterdatas as $filterdata): ?>
+                            <option value="<?= $filterdata['departament_id'] ?>">
+                              <?= $filterdata['departament_name'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="role" class="col-form-label">Role:</label>
+                        <input type="number" class="form-control" name="role" id="role" <?= $data['role'] ?>>
+                      </div>
+                      <div class="mb-3">
+                        <label for="location" class="col-form-label">Location:</label>
+                        <select id="location" name="location" class="form-control" placeholder="Chose Location">
+                          <option value="<?= $data['location'] ?>"><?= $data['location'] ?></option>
+                          <option value="Main Office">Main Office</option>
+                          <option value="Production">Production</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="status" class="col-form-label">Status:</label>
+                        <select id="status" name="status" class="form-control" placeholder="Chose Status">
+                          <option value="<?= $data['status'] ?>"><?= $data['status'] ?></option>
+                          <option value="Casual">Casual</option>
+                          <option value="Contract">Contract</option>
+                          <option value="Full Time">Full Time</option>
+                          <option value="Part">Part Time</option>
+                          <option value="Unpaid">Unpaid</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="report_to" class="col-form-label">Report to:</label>
+                        <select id="report_to" name="report_to" class="form-control" placeholder="Chose Leader">
+                          <option value="<?= $data['report_to'] ?>">Current Leader</option>
+                          <?php foreach ($datas as $data): ?>
+                            <option value="<?= $data['user_id'] ?>">
+                              <?= $data['name'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="gender" class="col-form-label">Chose Gender:</label>
+                        <select id="gender" name="gender" class="form-control" placeholder="Chose Gender">
+                          <option value="<?= $data['gender'] ?>"><?= $data['gender'] ?></option>
+                          <option value="Male">Male</option>
+                          <option value="Fmale">Fmale</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="born" class="col-form-label">Birth Date:</label>
+                        <input type="date" name="born" id="born" value="<?= $data['born'] ?>">
+                      </div>
+                      <div class="mb-3">
+                        <label for="started" class="col-form-label">Started Date:</label>
+                        <input type="date" name="started" id="started" value="<?= $data['started'] ?>">
+                      </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" name="submit" class="btn btn-success">Edit Employee</button>
+                        <button type="submit" name="edit" class="btn btn-success">Edit Employee</button>
                       </div>
+                    </form>
                     
                 </div>
 
               </div>
+              </div>
             </div>
-          </div>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>
