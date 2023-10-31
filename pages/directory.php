@@ -379,7 +379,7 @@ $currentTime = date('h:i A');
                       </div>
                       <div class="mb-3">
                         <label for="role" class="col-form-label">Role:</label>
-                        <input type="number" class="form-control" name="role" id="role" <?= $data['role'] ?>>
+                        <input type="number" class="form-control" name="role" id="role" value="<?= $data['role'] ?>">
                       </div>
                       <div class="mb-3">
                         <label for="location" class="col-form-label">Location:</label>

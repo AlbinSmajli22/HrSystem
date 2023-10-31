@@ -2,7 +2,7 @@
 <?php 
 include_once '../config.php';
 
-if (isset($_POST['update'])) {
+if (isset($_POST['edit'])) {
     $user_id = $_POST['user_id'];
     $name= $_POST['name'];
     $surname= $_POST['surname'];
@@ -21,7 +21,7 @@ if (isset($_POST['update'])) {
 
 	$sql = "UPDATE users SET name=:name, surname=:surname, email=:email, password=:password, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role, location=:location, status=:status, 
             report_to=:report_to, gender=:gender, born=:born, started=:started
-            WHERE user_id=:user_id";
+            WHERE user_id = :user_id";
 
 
 
