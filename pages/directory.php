@@ -337,10 +337,7 @@ $currentTime = date('h:i A');
                 <div class="modal-body">
 
                
-                <form action="./editDirectoryLogic.php" method="POST">
-                      <div class="mb-3">
-                        <input type="hidden" class="form-control" name="user_id" id="user_id" value="<?= $data['user_id']; ?>" >
-                      </div>
+                <form action="editDirectoryLogic.php" method="POST">
                       <div class="mb-3">
                         <label for="name" class="col-form-label">Name:</label>
                         <input type="text" class="form-control" name="name" id="name" value="<?= $data['name']; ?>">
@@ -428,13 +425,12 @@ $currentTime = date('h:i A');
                         <input type="date" name="started" id="started" value="<?= $data['started'] ?>">
                       </div>
                       <div class="modal-footer">
+                      <input type="hidden" class="form-control" name="user_id" id="user_id" value="<?= $data['user_id']; ?>" >
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" name="edit" class="btn btn-success">Edit Employee</button>
                       </div>
                     </form>
-                    
                 </div>
-
               </div>
               </div>
             </div>
