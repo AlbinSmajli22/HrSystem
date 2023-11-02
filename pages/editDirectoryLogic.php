@@ -1,6 +1,6 @@
 
 <?php 
-include_once '../config.php';
+//include_once '../config.php';
 
 if (isset($_POST['edit'])) {
     $user_id = $_POST['user_id'];
@@ -12,21 +12,22 @@ if (isset($_POST['edit'])) {
     $role= $_POST['role'];
     $location= $_POST['location'];
     $status= $_POST['status'];
-    $temPass = $_POST['password'];
-    $password = password_hash($temPass, PASSWORD_DEFAULT);
     $report_to = $_POST['report_to'];
     $gender= $_POST['gender'];
-    $born= $_POST['born'];
-    $started = $_POST['started'];
+    //$born= $_POST['born']->date_format("y-m-d");
+    //$started = $_POST['started']->date_format("y-m-d");
+    $temPass = $_POST['password'];
+    $password = password_hash($temPass, PASSWORD_DEFAULT);
 
-	$sql = "UPDATE users SET name='$name', surname='$surname', email='$email', Position_ID='$Position_ID', Departament_ID='$Departament_ID', role='$role',  location='$location', status=$status, password='$password', 
-            report_to='$report_to', gender='$gender', born='$born', started='$started' WHERE user_id=$user_id ";
+
+	$sql = "UPDATE users SET user_id=:user_id, name=:name, surname=:surname, email=:email, Position_ID=:Position_ID, Departament_ID=:Departament_ID, role=:role,  location=:location, status=:status, password=:password, 
+            report_to=:report_to, gender=:gender WHERE user_id =:user_id ";
 
 
 
     $prep = $con->prepare($sql);
 
-    $prep->bindParam(":user_id", $user_id);
+    $prep->bindParam("user_id", $user_id);
     $prep->bindParam(':name', $name);
     $prep->bindParam(':surname', $surname);
     $prep->bindParam(':email', $email);
@@ -38,9 +39,10 @@ if (isset($_POST['edit'])) {
     $prep->bindParam(':status', $status);
     $prep->bindParam(':report_to', $report_to);
     $prep->bindParam(':gender', $gender);
-    $prep->bindParam(':born', $born);
-    $prep->bindParam(':started', $started);
-   
+    //$prep->bindParam(':born', $born);
+    //$prep->bindParam(':started', $started);
+
+    
     $prep->execute();
 
     header("Location: ../main.php?page=directory");

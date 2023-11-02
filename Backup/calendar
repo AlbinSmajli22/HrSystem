@@ -56,4 +56,34 @@ class Calendar extends DateTime {
 */
 <a Style="color:white;" href="pages/editDirectory.php?user_id=<?= $data['user_id']; ?>" >Edit </a>
 
- 
+<div class="mb-3">
+                        <label for="report_to" class="col-form-label">Report to:</label>
+                        <select id="report_to" name="report_to" class="form-control" placeholder="Chose Leader">
+                          <option value="<?= $data['report_to'] ?>">Current Leader</option>
+                          <?php foreach ($datas as $data): ?>
+                            <option value="<?= $data['user_id'] ?>">
+                              <?= $data['name'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+
+                      <label for="Departament_ID" class="col-form-label">Departament_Name:</label>
+                        <select id="status" name="Departament_ID" id="Departament_ID" class="form-control"
+                          placeholder="Chose Departament">
+                          <option value="<?= $data['Departament_ID'] ?>"><?= $data['departament_name'] ?></option>
+                          <?php foreach ($filterdatas as $filterdata): ?>
+                            <option value="<?= $filterdata['departament_id'] ?>">
+                              <?= $filterdata['departament_name'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+
+                        <select id="status" name="Position_ID" id="Position_ID" class="form-control">
+                          <option value="<?= $data['Position_ID'] ?>"><?= $data['position_name']?></option>
+                          <?php foreach ($filterdatas2 as $filterdata2): ?>
+                            <option value="<?= $filterdata2['position_id'] ?>">
+                              <?= $filterdata2['position_name'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>

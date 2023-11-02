@@ -1,5 +1,6 @@
 <?php
 require_once './config.php';
+include 'editDirectoryLogic.php';
 
 $filterquery = "SELECT * from departament";
 
@@ -337,7 +338,7 @@ $currentTime = date('h:i A');
                 <div class="modal-body">
 
                
-                <form action="editDirectoryLogic.php" method="POST">
+                <form action="" method="POST">
                       <div class="mb-3">
                         <label for="name" class="col-form-label">Name:</label>
                         <input type="text" class="form-control" name="name" id="name" value="<?= $data['name']; ?>">
@@ -350,29 +351,18 @@ $currentTime = date('h:i A');
                         <label for="email" class="col-form-label">E-mail:</label>
                         <input type="email" class="form-control" name="email" id="email" value="<?= $data['email']; ?>">
                       </div>
+                      <div class="mb-3">
+                        <label for="password" class="col-form-label">Password:</label>
+                        <input type="password" class="form-control" name="password" id="password" value="<?= $data['password']; ?>">
+                      </div>
                       
                       <div class="mb-3">
                         <label for="Position_ID" class="col-form-label">Position Name:</label>
-                        <select id="status" name="Position_ID" id="Position_ID" class="form-control">
-                          <option value="<?= $data['Position_ID'] ?>"><?= $data['position_name']?></option>
-                          <?php foreach ($filterdatas2 as $filterdata2): ?>
-                            <option value="<?= $filterdata2['position_id'] ?>">
-                              <?= $filterdata2['position_name'] ?>
-                            </option>
-                          <?php endforeach; ?>
-                        </select>
+                        <input type="number" class="form-control" name="Position_ID" id="Position_ID" value="<?= $data['Position_ID'] ?>">
                       </div>
                       <div class="mb-3">
-                        <label for="Departament_ID" class="col-form-label">Departament_Name:</label>
-                        <select id="status" name="Departament_ID" id="Departament_ID" class="form-control"
-                          placeholder="Chose Departament">
-                          <option value="<?= $data['Departament_ID'] ?>"><?= $data['departament_name'] ?></option>
-                          <?php foreach ($filterdatas as $filterdata): ?>
-                            <option value="<?= $filterdata['departament_id'] ?>">
-                              <?= $filterdata['departament_name'] ?>
-                            </option>
-                          <?php endforeach; ?>
-                        </select>
+                      <label for="Departament_ID" class="col-form-label">Departament_Name:</label>
+                      <input type="number" name="Departament_ID" id="Departament_ID" value="<?= $data['Departament_ID'] ?>">
                       </div>
                       <div class="mb-3">
                         <label for="role" class="col-form-label">Role:</label>
@@ -398,15 +388,8 @@ $currentTime = date('h:i A');
                         </select>
                       </div>
                       <div class="mb-3">
-                        <label for="report_to" class="col-form-label">Report to:</label>
-                        <select id="report_to" name="report_to" class="form-control" placeholder="Chose Leader">
-                          <option value="<?= $data['report_to'] ?>">Current Leader</option>
-                          <?php foreach ($datas as $data): ?>
-                            <option value="<?= $data['user_id'] ?>">
-                              <?= $data['name'] ?>
-                            </option>
-                          <?php endforeach; ?>
-                        </select>
+                      <label for="report_to" class="col-form-label">Report to:</label>
+                      <input type="number" name="report_to" id="report_to" value="<?= $data['report_to'] ?>">
                       </div>
                       <div class="mb-3">
                         <label for="gender" class="col-form-label">Chose Gender:</label>
