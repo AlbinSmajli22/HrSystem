@@ -358,15 +358,26 @@ $currentTime = date('h:i A');
                       
                       <div class="mb-3">
                         <label for="Position_ID" class="col-form-label">Position Name:</label>
-                        <input type="number" class="form-control" name="Position_ID" id="Position_ID" value="<?= $data['Position_ID'] ?>">
+                        <select name="Position_ID" id="Position_ID" class="form-control">
+                          <?php foreach( $filterdatas2 as $positions): ?>
+                          <option value="<?= $positions['position_id'] ?>"><?= $positions['position_name'] ?></option>
+                          <?php endforeach ?>
+                        </select>
                       </div>
                       <div class="mb-3">
                       <label for="Departament_ID" class="col-form-label">Departament_Name:</label>
-                      <input type="number" name="Departament_ID" id="Departament_ID" value="<?= $data['Departament_ID'] ?>">
+                      <select name="Departament_ID" id="Departament_ID" class="form-control">
+                            <?php foreach ($filterdatas as $departaments):?>
+                              <option value="<?=$departaments['departament_id']?>"> <?=$departaments['departament_name']?> </option>
+                              <?php endforeach ?>
+                      </select>
                       </div>
                       <div class="mb-3">
                         <label for="role" class="col-form-label">Role:</label>
-                        <input type="number" class="form-control" name="role" id="role" value="<?= $data['role'] ?>">
+                        <select name="role" class="form-control" id="role">
+                          <option value="0">User</option>
+                          <option value="1">Admin</option>
+                        </select>
                       </div>
                       <div class="mb-3">
                         <label for="location" class="col-form-label">Location:</label>
