@@ -37,6 +37,17 @@ session_start();
             <li>
             <i class="fa fa-plane"></i>
             <a href="?page=timeOff">Time Off & Leave</a>
+            <ul class="dropdown">
+                <li>
+                    <a href="">Request</a>
+                </li>
+                <li>
+                    <a href="">Approve</a>
+                </li>
+                <li>
+                    <a href="">History</a>
+                </li>
+            </ul>
             </li>
             <li>
             <i class="fa fa-check-square-o"></i>
