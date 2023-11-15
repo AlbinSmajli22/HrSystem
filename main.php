@@ -34,18 +34,18 @@ session_start();
             <i class="fa-regular fa-calendar-days"></i>
             <a href="?page=calendar">Calendar</a>
             </li>
-            <li>
-            <i class="fa fa-plane"></i>
-            <a href="?page=timeOff">Time Off & Leave</a>
-            <ul class="dropdown">
-                <li>
-                    <a href="">Request</a>
-                </li>
-                <li>
-                    <a href="">Approve</a>
-                </li>
-                <li>
-                    <a href="">History</a>
+            <li class="dropdownbutton" onclick="myfunction()">
+                <i class="fa fa-plane"></i>
+                <a>Time Off & Leave</a>
+                <ul class="dropdown">
+                    <li>
+                        <a href="">Request</a>
+                    </li>
+                    <li>
+                        <a href="">Approve</a>
+                    </li>
+                    <li>
+                        <a href="">History</a>
                 </li>
             </ul>
             </li>
