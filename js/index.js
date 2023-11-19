@@ -1,8 +1,17 @@
-// Get the button, and when the user clicks on it, execute myFunction
-document.getElementByClass("dropdownbutton").onclick = function() {myFunction()};
-
-/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
 function myFunction() {
-  //document.getElementByClass("dropdown").classList.toggle("show");
-  document.getElementById("dropdown").style.display = "block";
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }

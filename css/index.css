@@ -56,14 +56,26 @@
 #sidebar .dropdownbutton:hover{
  cursor: pointer;
 }
-#sidebar .dropdownbutton .dropdown{
-display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #0277bd;
+    height: 100px;
+    width: 100%;
+    margin-top: 130px;
+    margin-left: 200px;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
 }
+.dropdown-content a{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.show {display: flex;
+flex-direction:column;}
+
 #sidebar a{
     width: 100%;
     text-decoration: none;

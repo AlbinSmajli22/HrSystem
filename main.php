@@ -3,143 +3,140 @@ require_once 'config.php';
 session_start();
 
 ?>
+
 <head>
-<?php include_once 'template/header.php' ?>
+    <?php include_once 'template/header.php' ?>
 </head>
+
 <body>
 
     <div id="sidebar">
         <div id="profile">
             <img src="images/albin-smajli.png" alt="">
-            <?php echo "<h3>". $_SESSION['name'] . "</h3>"; ?>
+            <?php echo "<h3>" . $_SESSION['name'] . "</h3>"; ?>
         </div>
-         <ul id="sidebarElements" >
+        <ul id="sidebarElements">
             <li>
-            <i class="fa-solid fa-house-chimney"></i>
-            <a href="?page=home">Home</a>
+                <i class="fa-solid fa-house-chimney"></i>
+                <a href="?page=home">Home</a>
             </li>
             <li>
-            <i class="fa-solid fa-user"></i>
-            <a href="?page=myProfile">My Profile</a>
+                <i class="fa-solid fa-user"></i>
+                <a href="?page=myProfile">My Profile</a>
             </li>
             <li>
-            <i class="fa-solid fa-list"></i>
-            <a href="?page=directory">Directory</a>
+                <i class="fa-solid fa-list"></i>
+                <a href="?page=directory">Directory</a>
             </li>
             <li>
-            <i class="fa-solid fa-sitemap"></i>
-            <a href="?page=orgChart">Org. Chart</a>
+                <i class="fa-solid fa-sitemap"></i>
+                <a href="?page=orgChart">Org. Chart</a>
             </li>
             <li>
-            <i class="fa-regular fa-calendar-days"></i>
-            <a href="?page=calendar">Calendar</a>
+                <i class="fa-regular fa-calendar-days"></i>
+                <a href="?page=calendar">Calendar</a>
             </li>
-            <li class="dropdownbutton" onclick="myfunction()">
+            <li class="dropdown">
                 <i class="fa fa-plane"></i>
-                <a>Time Off & Leave</a>
-                <ul class="dropdown">
-                    <li>
-                        <a href="">Request</a>
-                    </li>
-                    <li>
-                        <a href="">Approve</a>
-                    </li>
-                    <li>
-                        <a href="">History</a>
-                </li>
-            </ul>
+                <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="?page=request"><i class="fa-solid fa-suitcase"></i> Request</a>
+                    <a href="?page=approve"> <i class="fa fa-calendar-check-o"></i> Approve</a>
+                    <a href="?page=history"><i class="fa fa-list"></i> History</a>
+                </div>
             </li>
             <li>
-            <i class="fa fa-check-square-o"></i>
-            <a href="?page=checklist">Checklist</a>
+                <i class="fa fa-check-square-o"></i>
+                <a href="?page=checklist">Checklist</a>
             </li>
             <li>
-            <i class="fa-solid fa-money-bill-1-wave"></i>
-            <a href="?page=expenses">Expenses</a>
+                <i class="fa-solid fa-money-bill-1-wave"></i>
+                <a href="?page=expenses">Expenses</a>
             </li>
             <li>
-            <i class="fa-solid fa-bullseye"></i>
-            <a href="?page=goals">Goals</a>
+                <i class="fa-solid fa-bullseye"></i>
+                <a href="?page=goals">Goals</a>
             </li>
             <li>
-            <i class="fa-solid fa-square-pen"></i>
-            <a href="?page=forms">Forms</a>
+                <i class="fa-solid fa-square-pen"></i>
+                <a href="?page=forms">Forms</a>
             </li>
             <li>
-            <i class="fa-solid fa-book"></i>
-            <a href="?page=library">Library</a>
+                <i class="fa-solid fa-book"></i>
+                <a href="?page=library">Library</a>
             </li>
             <li>
-            <i class="fa-solid fa-newspaper"></i>
-            <a href="?page=news">News</a>
+                <i class="fa-solid fa-newspaper"></i>
+                <a href="?page=news">News</a>
             </li>
             <li>
-            <i class="fa-solid fa-thumbtack"></i>
-            <a href="?page=pinboard">Pinboard</a>
+                <i class="fa-solid fa-thumbtack"></i>
+                <a href="?page=pinboard">Pinboard</a>
             </li>
-         </ul>
-        
-        
+        </ul>
+
+
     </div>
     <div id="content">
-    <?php include './template/navbar.php' ?>
+        <?php include './template/navbar.php' ?>
         <?php
-         if(!isset($_GET['page']) || $_GET['page'] == ''){
+        if (!isset($_GET['page']) || $_GET['page'] == '') {
             $page = 'home'; //If no page specified
         } else {
             $page = $_GET['page'];
         }
-            switch ($page) {
-                case 'home':
-                    include 'pages/home.php';
-                    break;
+        switch ($page) {
+            case 'home':
+                include 'pages/home.php';
+                break;
 
-                case 'myProfile':
-                    include 'pages/myProfile.php';
-                    break;
+            case 'myProfile':
+                include 'pages/myProfile.php';
+                break;
 
-                case 'directory':
-                    include 'pages/directory.php';
-                    break;
+            case 'directory':
+                include 'pages/directory.php';
+                break;
 
-                case 'orgChart':
-                    include 'pages/orgChart.php';
-                    break;
-                
-                case 'calendar':
-                    include 'pages/calendar.php';
-                    break;    
-                
-                case 'timeOff':
-                    include 'pages/timeOff.php';
-                    break;
-                case 'checklist':
-                    include 'pages/checklist.php';
-                    break;
-                case 'expenses':
-                    include 'pages/expenses.php';
-                    break;
-                case 'goals':
-                    include 'pages/goals.php';
-                    break;
-                case 'forms':
-                    include 'pages/forms.php';
-                    break;
-                case 'library':
-                    include 'pages/library.php';
-                    break;
-                case 'news':
-                    include 'pages/news.php';
-                    break;
-                case 'pinboard':
-                    include 'pages/pinboard.php';
-                    break;
-                    default:
-                     include 'pages/notfound.php';
-            }
+            case 'orgChart':
+                include 'pages/orgChart.php';
+                break;
+
+            case 'calendar':
+                include 'pages/calendar.php';
+                break;
+
+            case 'timeOff':
+                include 'pages/timeOff.php';
+                break;
+            case 'checklist':
+                include 'pages/checklist.php';
+                break;
+            case 'expenses':
+                include 'pages/expenses.php';
+                break;
+            case 'goals':
+                include 'pages/goals.php';
+                break;
+            case 'forms':
+                include 'pages/forms.php';
+                break;
+            case 'library':
+                include 'pages/library.php';
+                break;
+            case 'news':
+                include 'pages/news.php';
+                break;
+            case 'pinboard':
+                include 'pages/pinboard.php';
+                break;
+            default:
+                include 'pages/notfound.php';
+        }
         ?>
         <?php include_once 'template/footer.php' ?>
     </div>
-    
+
 </body>
+
 </html>
