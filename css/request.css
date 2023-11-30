@@ -1,0 +1,10 @@
+.requestBody{
+    display: flex;
+    flex-direction: column;
+}
+.requestTableHead{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

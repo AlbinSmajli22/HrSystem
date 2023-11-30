@@ -130,6 +130,18 @@ session_start();
             case 'pinboard':
                 include 'pages/pinboard.php';
                 break;
+            case 'request':
+                include 'pages/request.php';
+                break;                
+            case 'newrequest':
+                include 'pages/newrequest.php';
+                break;                
+            case 'approve':
+                include 'pages/approve.php';
+                break;                
+            case 'history':
+                include 'pages/history.php';
+                break;                
             default:
                 include 'pages/notfound.php';
         }
