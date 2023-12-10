@@ -14,14 +14,10 @@
     color: #676A6C;
     font-size: 24px;
 }
-.requestTableHead{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 .requestTableHead{
+    background-color: #E3F2FD;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -32,3 +28,11 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+table, td, th {
+    border: 1px solid;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }

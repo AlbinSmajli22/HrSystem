@@ -1,3 +1,14 @@
+<?php 
+    require_once './config.php';
+
+
+    $sql='SELECT * From timeoffrequest';
+    $prep=$con->prepare($sql);
+    $prep->execute();
+    $requestDatas= $prep->fetchAll();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +28,38 @@
         </h5>
         <button><a href="?page=newrequest">+Add Time Off/Leave Request</a></button>
     </div>
-    <div></div>
+    <div class="requestTableBody">
+        <table>
+            <thead>
+                <tr>
+                <th>Time Off/Leave Type</th>
+                <th>Reason</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Duration</th>
+                <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($requestDatas as $requestData): ?>
+                <tr>
+                    <td> <?=$requestData['leave_type']?></td>
+                    <td>
+                        <ul>
+                            <li> <?=$requestData['short_description']?></li>
+                            <li><?=$requestData['reason']?></li>
+                        </ul>
+                    </td>
+                    <td><?=$requestData['from']?></td>
+                    <td><?=$requestData['to']?></td>
+                    <td><?=$requestData['duration']?> Days</td>
+                    <td><button><?=$requestData['status']?></button></td>
+                    <td>info</td>
+                </tr>
+             <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
 </div>
 </html>
