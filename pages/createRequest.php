@@ -7,8 +7,8 @@ require_once './config.php';
 if(isset($_POST['submit'])){
 
 
-    $User_ID = 17;
-    $Head_ID =21;
+    $User_ID = $_POST['user_id'];
+    $Head_ID = $_POST['head_id'];
     $leave_type = $_POST['LeaveType'];
     $from = $_POST['from'];
     $to = $_POST['to'];

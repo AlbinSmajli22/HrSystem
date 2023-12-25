@@ -8,7 +8,8 @@ include_once 'createRequest.php';
 
 
     <form action="" method="POST">
-
+    <input type="hidden" value="<?=$_SESSION['user_id']?>" name="user_id">
+    <input type="hidden" value="<?=$_SESSION['report_to']?>"name="head_id">
     <select name="LeaveType" id="LeaveType">
         <option value="annual_leave">Annual Leave</option>
         <option value="Child Born">Child Born</option>
