@@ -2,7 +2,7 @@
     require_once './config.php';
 
 
-    $sql='SELECT * From timeoffrequest';
+    $sql='SELECT * From timeoffrequests';
     $prep=$con->prepare($sql);
     $prep->execute();
     $requestDatas= $prep->fetchAll();

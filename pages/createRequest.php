@@ -1,6 +1,6 @@
 <?php
 
-require_once './config.php';
+include_once './config.php';
 
 
 
@@ -15,10 +15,10 @@ if(isset($_POST['submit'])){
     $duration = $_POST['duration'];
     $short_description = $_POST['shortDescription'];
     $reason = $_POST['reason'];
-    $status = 'Submited';
+    $status = $_POST['status'];
    
     
-    $sql = "INSERT INTO users (User_ID, Head_ID, leave_type, from, to, duration, short_description, reason, status) VALUES (:User_ID, :Head_ID, :leave_type, :from,:to,:duration,:short_description, :reason, :status, :status)";
+    $sql = "INSERT INTO timeoffrequests (User_ID, Head_ID, leave_type, from, to, duration, short_description, reason, status) VALUES (:User_ID, :Head_ID, :leave_type, :from,:to,:duration,:short_description, :reason, :status, :status)";
     
     $prep = $con->prepare($sql);
 

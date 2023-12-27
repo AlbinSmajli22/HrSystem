@@ -1,6 +1,5 @@
 <?php
-
-include_once 'createRequest.php';
+include_once 'timeOffRequest.php';
 
 ?>
 <body>
@@ -8,8 +7,8 @@ include_once 'createRequest.php';
 
 
     <form action="" method="POST">
-    <input type="hidden" value="<?=$_SESSION['user_id']?>" name="user_id">
-    <input type="hidden" value="<?=$_SESSION['report_to']?>"name="head_id">
+    <input type="number" value="<?=$_SESSION['user_id']?>" name="user_id">
+    <input type="number" value="<?=$_SESSION['report_to']?>"name="head_id">
     <select name="LeaveType" id="LeaveType">
         <option value="annual_leave">Annual Leave</option>
         <option value="Child Born">Child Born</option>
@@ -22,10 +21,11 @@ include_once 'createRequest.php';
     <input type="date" name="to" id="to">
     <input type="number" name="duration" id="duration">
     <input type="text" name="shortDescription" id="shortDescription">
-    <textarea name="reason" id="reason" cols="30" rows="10"></textarea>
+    <input type="text" name="reason" id="reason">
+    <input type="text" name="status" id="status" value="Submited">
 
 
-    <button name="submit" type="submit">Submit</button>
+    <button name="enter" type="submit">Submit</button>
     </form>
 </body>
 </html> 
