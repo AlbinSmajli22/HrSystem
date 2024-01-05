@@ -5,15 +5,15 @@ include_once './config.php';
 
 if (isset($_POST['enter'])) {
 
-    $User_ID=17;
-    $Head_ID=21;
-    $leave_type = 'annual leave';
-    $from=date(2023-12-27);
-    $to = date(2023-12-29);
-    $duration=2;
-    $short_description='asdasdas';
-    $reason='sadasdsa';
-    $status='submited';
+    $User_ID=$_SESSION['user_id'];
+    $Head_ID=$_SESSION['report_to'];
+    $leave_type = $_POST['LeaveType'];
+    $from=$_POST['from'];
+    $to = $_POST['to'];
+    $duration=$_POST['duration'];
+    $short_description=$_POST['shortDescription'];
+    $reason=$_POST['reason'];
+    $status=$_POST['status'];
     
     $sql="INSERT into timeoffrequests values ( null,:User_Id, :Head_Id, :leave_type, :from, :to, :duration, :short_description, :reason, :status) ";
 
@@ -30,7 +30,7 @@ if (isset($_POST['enter'])) {
 
     $prep->execute();
 
-
+    
 }
 
 ?>

@@ -36,9 +36,9 @@ session_start();
                 <i class="fa-regular fa-calendar-days"></i>
                 <a href="?page=calendar">Calendar</a>
             </li>
-            <li class="dropdown">
+            <li class="dropdown"Style="cursor: pointer;">
                 <i class="fa fa-plane"></i>
-                <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
+                <a onclick="myFunction()" class="dropbtn" >Time Off & Leave</a>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="?page=request"><i class="fa-solid fa-suitcase"></i> Request</a>
                     <a href="?page=approve"> <i class="fa fa-calendar-check-o"></i> Approve</a>

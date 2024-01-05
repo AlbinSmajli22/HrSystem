@@ -26,7 +26,7 @@
             <img src="./images/absence.png" alt="" width="25px" height="25px">
             My Time Off/Leave Requests
         </h5>
-        <button><a href="?page=newrequest">+Add Time Off/Leave Request</a></button>
+        <button><a href="?page=newrequest"><i class="fa fa-plus"></i> Add Time Off/Leave Request</a></button>
     </div>
     <div class="requestTableBody">
         <table>
