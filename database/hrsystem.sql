@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2023 at 11:46 PM
+-- Generation Time: Jan 08, 2024 at 12:55 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -96,28 +96,31 @@ INSERT INTO `timeoff` (`timeoff_id`, `annual_leave`, `child_born`, `death_of_fam
 -- --------------------------------------------------------
 
 --
--- Table structure for table `timeoffrequest`
+-- Table structure for table `timeoffrequests`
 --
 
-CREATE TABLE `timeoffrequest` (
+CREATE TABLE `timeoffrequests` (
   `request_id` int(11) NOT NULL,
   `User_ID` int(11) NOT NULL,
   `Head_ID` int(11) NOT NULL,
-  `leave_type` varchar(50) NOT NULL,
+  `leave_type` varchar(500) NOT NULL,
   `from` date NOT NULL,
   `to` date NOT NULL,
-  `duration` double NOT NULL,
-  `short_description` varchar(200) NOT NULL,
+  `duration` int(11) NOT NULL,
+  `short_description` varchar(500) NOT NULL,
   `reason` varchar(500) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `timeoffrequest`
+-- Dumping data for table `timeoffrequests`
 --
 
-INSERT INTO `timeoffrequest` (`request_id`, `User_ID`, `Head_ID`, `leave_type`, `from`, `to`, `duration`, `short_description`, `reason`, `status`) VALUES
-(1, 4, 5, 'Annual Leave', '2023-12-11', '2023-12-13', 1, 'Rregullim i disa dokumentave personale', 'Rregullim i disa dokumentave personale', 'Approved');
+INSERT INTO `timeoffrequests` (`request_id`, `User_ID`, `Head_ID`, `leave_type`, `from`, `to`, `duration`, `short_description`, `reason`, `status`) VALUES
+(6, 17, 21, 'Child Born', '2023-12-29', '2024-01-01', 4, '.', '.', 'Submited'),
+(8, 17, 21, 'Wedding Day', '2023-12-29', '2023-12-30', 2, '.', '.', 'Approved'),
+(14, 17, 21, 'Child Born', '2024-01-03', '2024-01-12', 9, '.', '.', 'Approved'),
+(15, 17, 21, 'Wedding Day', '2024-01-07', '2024-01-07', 1, '.', '.', 'Declined');
 
 -- --------------------------------------------------------
 
@@ -186,9 +189,9 @@ ALTER TABLE `timeoff`
   ADD KEY `User_ID` (`User_ID`);
 
 --
--- Indexes for table `timeoffrequest`
+-- Indexes for table `timeoffrequests`
 --
-ALTER TABLE `timeoffrequest`
+ALTER TABLE `timeoffrequests`
   ADD PRIMARY KEY (`request_id`);
 
 --
@@ -221,10 +224,10 @@ ALTER TABLE `timeoff`
   MODIFY `timeoff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `timeoffrequest`
+-- AUTO_INCREMENT for table `timeoffrequests`
 --
-ALTER TABLE `timeoffrequest`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `timeoffrequests`
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
