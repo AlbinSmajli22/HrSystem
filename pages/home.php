@@ -55,6 +55,11 @@ $data= $prep->fetch();
     $leaderName = $leaderData["name"];
     $leaderSurname = $leaderData["surname"];
     $leaderPosition = $leaderData["position_name"];
+
+    $sql='SELECT * FROM timeoffrequests LIMIT 0, 5;';
+    $prep=$con->prepare($sql);
+    $prep->execute();
+    $requestDatas= $prep->fetchAll();
 ?>
 
 <head>
@@ -243,36 +248,34 @@ $data= $prep->fetch();
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($requestDatas as $requestData): ?>
                                     <tr>
-                                        <td>Lorem ipsum</td>
-                                        <td>13/09/2023</td>
-                                        <td>13/09/2023</td>
-                                        <td>Approved</td>
+                                        <td> 
+                                            <?= $requestData['short_description'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $requestData['from'] ?>
+                                        </td>
+                                        <td>
+                                            <?= $requestData['to'] ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($requestData['status'] == 'Submited') { ?>
+                                                <span class='submited'>
+                                                    <?= $requestData['status'] ?>
+                                                </span>
+                                            <?php } elseif ($requestData['status'] == 'Approved') { ?>
+                                                <span class='approved'>
+                                                    <?= $requestData['status'] ?>
+                                                </span>
+                                            <?php } elseif ($requestData['status'] == 'Declined') { ?>
+                                                <span class='decline'>
+                                                    <?= $requestData['status'] ?>
+                                                </span>
+                                            <?php } ?>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>Lorem ipsum</td>
-                                        <td>13/09/2023</td>
-                                        <td>13/09/2023</td>
-                                        <td>Approved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lorem ipsum</td>
-                                        <td>13/09/2023</td>
-                                        <td>13/09/2023</td>
-                                        <td>Approved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lorem ipsum</td>
-                                        <td>13/09/2023</td>
-                                        <td>13/09/2023</td>
-                                        <td>Approved</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lorem ipsum</td>
-                                        <td>13/09/2023</td>
-                                        <td>13/09/2023</td>
-                                        <td>Approved</td>
-                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

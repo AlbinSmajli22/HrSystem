@@ -29,7 +29,7 @@
         <button><a href="?page=newrequest"><i class="fa fa-plus"></i> Add Time Off/Leave Request</a></button>
     </div>
     <div class="requestTableBody">
-        <table>
+        <table class="recentLeave">
             <thead>
                 <tr>
                 <th>Time Off/Leave Type</th>
@@ -38,6 +38,8 @@
                 <th>End Date</th>
                 <th>Duration</th>
                 <th>Status</th>
+                
+                
                 </tr>
             </thead>
             <tbody>
@@ -53,8 +55,19 @@
                     <td><?=$requestData['from']?></td>
                     <td><?=$requestData['to']?></td>
                     <td><?=$requestData['duration']?> Days</td>
-                    <td><button><?=$requestData['status']?></button></td>
-                    <td>info</td>
+                    <td><?php if($requestData['status']=='Submited'){ ?>
+                        <span class='submited'><?=$requestData['status']?></span>
+                        <?php } 
+                        elseif($requestData['status']=='Approved'){?>
+                        <span class='approved'><?=$requestData['status']?></span>
+                        <?php }elseif($requestData['status']=='Declined'){?>
+                            <span class='decline'><?=$requestData['status']?></span>
+                            <?php } ?>
+                    </td>
+                    <td><a class="info" href=""><i class="fa-solid fa-magnifying-glass" ></i> info</a></td>
+                    <?php if($requestData['status']=='Submited'):?>
+                        <td><a class="delete" href=""><i class="fa-solid fa-trash-can"></i> Delete request</a></td>
+                        <?php endif; ?>
                 </tr>
              <?php endforeach; ?>
             </tbody>

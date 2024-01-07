@@ -2,10 +2,11 @@
 .requestBody{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .requestHead{
-    width: 100%;
-    margin-bottom: 20px;
+    width: 100%;    
     text-align: start;
 }
 .requestHead h2{
@@ -23,9 +24,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: auto;
+    height: 60px;
+    width: 95%;
+    margin-left: 10px;
     margin-top: 20px;
-    margin-bottom: 20px;
     text-align: start;
     padding-left: 20px;
     padding-right: 20px;
@@ -57,12 +59,133 @@
     font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 12px;
 }
-
-table, td, th {
-    border: 1px solid;
-  }
-  
-  table {
-    width: 100%;
+.requestTableBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    width: 98%;
+    border: 1px solid #e7eaec;
+}
+.recentLeave{
+    width: 95%;
     border-collapse: collapse;
-  }
+    margin: 20px 10px;
+    font-size: 13px;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.recentLeave head tr{
+    text-align: left;
+    font-weight: 600;
+    color: #676a6c;
+    font-size: 13px;
+}
+.recentLeave thead tr th {
+    text-align: left;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    font-weight: 700;
+    color: #676A6C;
+}
+.recentLeave tbody tr{
+    text-align: left;
+    font-weight: 400;
+    color: #676A6C;
+    border-top:  1px #e7eaec solid;
+}
+.recentLeave tbody tr td{
+    padding-bottom: 11px;
+    font-size: 13px;
+    font-weight: 400;
+
+}
+.recentLeave tbody tr td .approved{
+    background-color: #4caf50;
+    color: #fff;
+    border: #4caf50;
+    border-radius: 2px;
+    font-size: 10px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    padding: 3px 8px;
+    text-align: center;
+
+
+}
+.recentLeave tbody tr td .submited{
+    background-color: #337ab7;
+    color: #fff;
+    border: #337ab7;
+    border-radius: 2px;
+    font-size: 10px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    padding: 3px 8px;
+    text-align: center;
+
+}
+.recentLeave tbody tr td .decline{
+    background-color: #e53935;
+    color: #fff;
+    border: #e53935;
+    border-radius: 2px;
+    font-size: 10px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    padding: 3px 8px;
+    text-align: center;
+
+}
+.recentLeave tbody tr td .info{
+    width: 50px;
+    height: 25px;
+    color: #26c6da;
+    border:1px solid #26c6da;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    padding:1px 5px ;
+    text-align: center;
+    text-decoration: none;
+
+}
+.recentLeave tbody tr td .info:hover{
+    background-color: #26c6da;
+    color: #fff;
+}
+.recentLeave tbody tr td .delete{
+    width: 50px;
+    height: 25px;
+    color: #e53935;
+    border:1px solid #e53935;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    padding:1px 5px ;
+    text-align: center;
+    text-decoration: none;
+
+}
+.recentLeave tbody tr td .delete:hover{
+    background-color: #e53935;
+    color: #fff;
+}
+.recentLeave tbody tr td ul{
+    list-style: none;
+    font-size:11px ;
+}
+.recentLeave tbody tr td ul li:nth-child(odd){
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.recentLeave tbody tr:nth-child(odd){
+    background-color: #f9f9f9;
+}
+.recentLeave tbody tr:hover{
+    background-color: #2f4050;
+}
+
