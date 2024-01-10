@@ -109,19 +109,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="deleteRequestModal<?php echo $requestData['request_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade modal-fullscreen-lg-down modal-lg" id="deleteRequestModal<?php echo $requestData['request_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog mx-auto">
                                 <div class="modal-content">
-                                    
-                                    <div class="modal-body">
-                                    <i class="fa-solid fa-circle-exclamation fa-2xl" style="color: #e53935"></i>
+                                <div class="d-flex justify-content-center p-5">
+                                <i class="fa-solid fa-circle-exclamation " style="color: #e53935; font-size:200px;"></i>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
+                                    <div class="modal-body d-flex flex-column d-flex align-items-center ">
+                                    
+                                    <h1 class="fs-1">Delete leave request - Are you sure?</h1>
+                                    <p>Are you sure you want to delete this time off/leave request:'<?= $requestData['short_description'] ?>'?</p>
+                                    </div>
+                                    <div class=" d-flex justify-content-center p-5">
+                                        <button type="button" class="btn btn-secondary btn-lg me-2"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-danger btn-lg ms-2">
                                             <a href="pages/deleteRequest.php?request_id=<?= $requestData['request_id']; ?>"
-                                    class="delete"><i class="fa-solid fa-trash-can"></i> Delete request</a>
+                                            class="link-offset-2 link-underline link-underline-opacity-0 text-light"> Yes, Delete it!</a>
+                                            </button>
                                     </div>
                                 </div>
                             </div>
