@@ -45,7 +45,7 @@ if (isset($_POST['edit'])) {
     
     $prep->execute();
 
-    header("Location: ../main.php?page=directory");
+
 
 }
 ?>
