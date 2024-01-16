@@ -56,7 +56,9 @@ $data= $prep->fetch();
     $leaderSurname = $leaderData["surname"];
     $leaderPosition = $leaderData["position_name"];
 
-    $sql='SELECT * FROM timeoffrequests LIMIT 0, 5;';
+    $sql='SELECT * FROM timeoffrequests
+        ORDER BY timeoffrequests.request_id DESC
+        LIMIT 0, 5 ;';
     $prep=$con->prepare($sql);
     $prep->execute();
     $requestDatas= $prep->fetchAll();

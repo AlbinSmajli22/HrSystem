@@ -41,8 +41,8 @@ session_start();
                 <a onclick="myFunction()" class="dropbtn" >Time Off & Leave</a>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="?page=request"><i class="fa-solid fa-suitcase"></i> Request</a>
-                    <a href="?page=approve"> <i class="fa fa-calendar-check-o"></i> Approve</a>
-                    <a href="?page=history"><i class="fa fa-list"></i> History</a>
+                    <a href="?page=approverequest"> <i class="fa fa-calendar-check-o"></i> Approve</a>
+                    <a href="?page=requesthistory"><i class="fa fa-list"></i> History</a>
                 </div>
             </li>
             <li>
@@ -137,10 +137,10 @@ session_start();
                 include 'pages/newrequest.php';
                 break;                
             case 'approve':
-                include 'pages/approve.php';
+                include 'pages/approverequest.php';
                 break;                
             case 'history':
-                include 'pages/history.php';
+                include 'pages/requesthistory.php';
                 break;                
             default:
                 include 'pages/notfound.php';

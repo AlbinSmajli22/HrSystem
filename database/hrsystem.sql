@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 12:55 AM
+-- Generation Time: Jan 16, 2024 at 01:57 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -109,18 +109,24 @@ CREATE TABLE `timeoffrequests` (
   `duration` int(11) NOT NULL,
   `short_description` varchar(500) NOT NULL,
   `reason` varchar(500) NOT NULL,
-  `status` varchar(100) NOT NULL
+  `status` varchar(100) NOT NULL,
+  `checkedby` int(11) DEFAULT NULL,
+  `checkDate` date DEFAULT NULL,
+  `created` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `timeoffrequests`
 --
 
-INSERT INTO `timeoffrequests` (`request_id`, `User_ID`, `Head_ID`, `leave_type`, `from`, `to`, `duration`, `short_description`, `reason`, `status`) VALUES
-(6, 17, 21, 'Child Born', '2023-12-29', '2024-01-01', 4, '.', '.', 'Submited'),
-(8, 17, 21, 'Wedding Day', '2023-12-29', '2023-12-30', 2, '.', '.', 'Approved'),
-(14, 17, 21, 'Child Born', '2024-01-03', '2024-01-12', 9, '.', '.', 'Approved'),
-(15, 17, 21, 'Wedding Day', '2024-01-07', '2024-01-07', 1, '.', '.', 'Declined');
+INSERT INTO `timeoffrequests` (`request_id`, `User_ID`, `Head_ID`, `leave_type`, `from`, `to`, `duration`, `short_description`, `reason`, `status`, `checkedby`, `checkDate`, `created`) VALUES
+(8, 17, 21, 'Wedding Day', '2023-12-29', '2023-12-30', 2, '.', '.', 'Submited', 21, '2023-12-27', '2023-12-26'),
+(14, 17, 21, 'Child Born', '2024-01-03', '2024-01-12', 9, '.', '.', 'Approved', 21, '2024-01-02', '2024-01-01'),
+(15, 17, 21, 'Wedding Day', '2024-01-07', '2024-01-07', 1, '.', '.', 'Declined', 21, '2024-01-04', '2024-01-03'),
+(19, 17, 21, 'annual_leave', '2024-01-17', '2024-01-30', 13, 'Leave', '.', 'Approved', 21, '2024-01-14', '2024-01-13'),
+(20, 17, 21, 'annual_leave', '2024-01-10', '2024-01-19', 9, 'Leave', '.', 'Approved', 21, '2024-01-09', '2024-01-08'),
+(21, 17, 21, 'Wedding Day', '2024-01-13', '2024-01-15', 2, 'Darsma', '.', 'Submited', 21, '2024-01-10', '2024-01-09'),
+(22, 17, 21, 'Moving Day', '2024-01-16', '2024-01-17', 1, 'Zhvendosje ', 'Zhvendosje nga vendbanimi aktual', 'Submited', NULL, NULL, '2024-01-14');
 
 -- --------------------------------------------------------
 
@@ -162,7 +168,7 @@ INSERT INTO `users` (`user_id`, `name`, `surname`, `email`, `password`, `Positio
 (17, 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$yIkR0ZKjZPbik1BDXS9/JOsE6C7PT0hJ4nDX0BNDez8X.vpECUUOO', 5, 7, 1, 'Main Office', 'Full Time', 21, 'Male', '2002-11-27', '2023-03-01'),
 (19, 'Arian', 'Mehmeti', 'arian@metdaan.com', '$2y$10$25BKuMIaT9R9UTN32iwLzOJPsDacreCFxYDW8Mn6o/icaDxP/Tu0u', 6, 1, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL),
 (21, 'Arbenita', 'Krasniqi', 'arbenita@metdaan.com', '$2y$10$yIkR0ZKjZPbik1BDXS9/JOsE6C7PT0hJ4nDX0BNDez8X.vpECUUOO', 1, 5, 0, 'Production', 'Full Time', 8, 'Fmale', NULL, NULL),
-(23, 'Besart', 'Maxhuni', 'Besart@metdaan.com', '$2y$10$9/W0YaTzfgvg1n5VcJxCgeykBKPtN//W.TLPU6cZjEyHF8Mia0Pda', 9, 2, 0, 'Main Office', 'Full Time', 1, 'Male', '1985-06-19', '2017-05-17');
+(23, 'Besart', 'Maxhuni', 'besart@metdaan.com', '$2y$10$YmZiQFud7dd6IMpmEZ3MKO2peF2EOUcwpIWkvHXBVm78YmKfXL9wK', 1, 1, 1, 'Main Office', 'Full Time', 1, 'Male', '1985-06-19', '2017-05-17');
 
 --
 -- Indexes for dumped tables
@@ -227,7 +233,7 @@ ALTER TABLE `timeoff`
 -- AUTO_INCREMENT for table `timeoffrequests`
 --
 ALTER TABLE `timeoffrequests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
