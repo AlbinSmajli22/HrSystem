@@ -94,12 +94,18 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Leave Request Info</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ...
+                                    <p><?= $requestData['from'] ?> to <?= $requestData['to'] ?> (<?= $requestData['duration'] ?> Days)</p>
+                                    <hr>
+
+                                    <div><i class="fa-solid fa-pencil" style="color: #ffffff; background-color: blue; border-radius:50%;"></i></div>
+                                    <div><i class="fa fa-fw2 fa-code-fork"></i></div>
+                                    <div><i class="fa fa-fw2 fa-send bg-success"></i></div>
+                                    <div><i class="fa fa-fw2 fa-check bg-success"></i></div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
