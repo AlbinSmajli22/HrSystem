@@ -102,10 +102,11 @@
                                     <p><?= $requestData['from'] ?> to <?= $requestData['to'] ?> (<?= $requestData['duration'] ?> Days)</p>
                                     <hr>
 
-                                    <div><i class="fa-solid fa-pencil" style="color: #ffffff; background-color: blue; border-radius:50%;"></i></div>
-                                    <div><i class="fa fa-fw2 fa-code-fork"></i></div>
-                                    <div><i class="fa fa-fw2 fa-send bg-success"></i></div>
-                                    <div><i class="fa fa-fw2 fa-check bg-success"></i></div>
+                                    <div class="requestInfoIcones"><i class="fa-solid fa-pencil" style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i> <p>Created 26 days ago</p></div>
+                                    <div class="requestInfoIcones"><i class="fa fa-fw2 fa-code-fork" style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i><p>Approval Rule All staff</p></div>
+                                    <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send " style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i><p>Sent to "Head" and "HR"</p></div>
+                                    <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check " style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i><p>Approved by "Head" 26 days ago</p></div>
+                                                                  
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
