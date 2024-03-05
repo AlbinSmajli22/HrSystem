@@ -102,7 +102,7 @@
                                     <p><?= $requestData['from'] ?> to <?= $requestData['to'] ?> (<?= $requestData['duration'] ?> Days)</p>
                                     <hr>
 
-                                    <div><i class="fa-solid fa-pencil" style="color: #ffffff; background-color: blue; border-radius:50%;"></i></div>
+                                    <div><i class="fa-solid fa-pencil" style="background-color:#26c6da; border-color:#26c6da ;color: #ffffff; border-radius:50%; width:32px; padding:6px; text-items:center;"></i></div>
                                     <div><i class="fa fa-fw2 fa-code-fork"></i></div>
                                     <div><i class="fa fa-fw2 fa-send bg-success"></i></div>
                                     <div><i class="fa fa-fw2 fa-check bg-success"></i></div>
