@@ -430,7 +430,7 @@ $data= $prep->fetch();
 
                                             $worksFor = date_diff($startedDate , $currentDate );
 
-                                             echo '<th>'. $worksFor->m .' months '.$worksFor->d.' days'.'</th>';
+                                             echo '<th>'. $worksFor->y .' years '.$worksFor->m .' months '.$worksFor->d.' days'.'</th>';
                                              ?>
                                     </tr>
                                 </tbody>        

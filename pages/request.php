@@ -1,22 +1,27 @@
-<?php 
-    require_once './config.php';
-    
+<?php
+require_once './config.php';
 
 
-    $sql='SELECT * From timeoffrequests ORDER BY timeoffrequests.request_id DESC';
-    $prep=$con->prepare($sql);
-    $prep->execute();
-    $requestDatas= $prep->fetchAll();
+
+$sql = 'SELECT * From timeoffrequests ORDER BY timeoffrequests.request_id DESC';
+$prep = $con->prepare($sql);
+$prep->execute();
+$requestDatas = $prep->fetchAll();
 
 ?>
+
+
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/request.css">
     <script type="text/javascript" src="js/index.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <title>HR Partner | Employee Portal</title>
 </head>
 <div class="requestHead">
@@ -34,14 +39,14 @@
         <table class="recentLeave">
             <thead>
                 <tr>
-                <th>Time Off/Leave Type</th>
-                <th>Reason</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Duration</th>
-                <th>Status</th>
-                
-                
+                    <th>Time Off/Leave Type</th>
+                    <th>Reason</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+
+
                 </tr>
             </thead>
             <tbody>
@@ -84,9 +89,13 @@
                                 </span>
                             <?php } ?>
                         </td>
-                        <td><a class="info" href=""data-bs-toggle="modal" data-bs-target="#requestInfoModal" data-bs-whatever="@mdo"><i class="fa-solid fa-magnifying-glass"></i> info</a></td>
+                        <td><a class="info" href="" data-bs-toggle="modal" data-bs-target="#requestInfoModal"
+                                data-bs-whatever="@mdo"><i class="fa-solid fa-magnifying-glass"></i> info</a></td>
                         <?php if ($requestData['status'] == 'Submited'): ?>
-                            <td><a href="" data-bs-toggle="modal" data-bs-target="#deleteRequestModal<?php echo $requestData['request_id']; ?>" data-bs-whatever="@mdo"class="delete"><i class="fa-solid fa-trash-can"></i> Delete request</a></td>
+                            <td><a href="" data-bs-toggle="modal"
+                                    data-bs-target="#deleteRequestModal<?php echo $requestData['request_id']; ?>"
+                                    data-bs-whatever="@mdo" class="delete"><i class="fa-solid fa-trash-can"></i> Delete
+                                    request</a></td>
                         <?php endif; ?>
                         <!-- Modal -->
                         <div class="modal fade" id="requestInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -99,42 +108,75 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                    <p><?= $requestData['from'] ?> to <?= $requestData['to'] ?> (<?= $requestData['duration'] ?> Days)</p>
-                                    <hr>
+                                        <p>
+                                            <?= $requestData['from'] ?> to
+                                            <?= $requestData['to'] ?> (
+                                            <?= $requestData['duration'] ?> Days)
+                                        </p>
+                                        <hr>
 
-                                    <div class="requestInfoIcones"><i class="fa-solid fa-pencil" style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i> <p>Created 26 days ago</p></div>
-                                    <div class="requestInfoIcones"><i class="fa fa-fw2 fa-code-fork" style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i><p>Approval Rule All staff</p></div>
-                                    <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send " style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i><p>Sent to "Head" and "HR"</p></div>
-                                    <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check " style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i><p>Approved by "Head" 26 days ago</p></div>
-                                                                  
+                                        <div class="requestInfoIcones"><i class="fa-solid fa-pencil"
+                                                style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i>
+                                            <?php
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate = date_create($currentDate);
+                                            $createdDate = $requestData['created'];
+                                            $createdDate = date_create($createdDate);
+
+                                            $createdFor = date_diff($createdDate, $currentDate);
+
+                                            echo '<p> ' . 'Created ' . $createdFor->format('%R%y years %m months') . '</p>';
+                                            ?>
+
+                                        </div>
+                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-code-fork"
+                                                style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i>
+                                            <p>Approval Rule All staff</p>
+                                        </div>
+                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
+                                                style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
+                                            <p>Sent to "Head" and "HR"</p>
+                                        </div>
+                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check "
+                                                style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i>
+                                            <p>Approved by
+                                                <?= $requestData['checkedby'] ?> 26 days ago
+                                            </p>
+                                        </div>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                            
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade modal-fullscreen-lg-down modal-lg" id="deleteRequestModal<?php echo $requestData['request_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade modal-fullscreen-lg-down modal-lg"
+                            id="deleteRequestModal<?php echo $requestData['request_id']; ?>" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog mx-auto">
                                 <div class="modal-content">
-                                <div class="d-flex justify-content-center p-5">
-                                <i class="fa-solid fa-circle-exclamation " style="color: #e53935; font-size:200px;"></i>
+                                    <div class="d-flex justify-content-center p-5">
+                                        <i class="fa-solid fa-circle-exclamation "
+                                            style="color: #e53935; font-size:200px;"></i>
                                     </div>
                                     <div class="modal-body d-flex flex-column d-flex align-items-center ">
-                                    
-                                    <h1 class="fs-1">Delete leave request - Are you sure?</h1>
-                                    <p>Are you sure you want to delete this time off/leave request:'<?= $requestData['short_description'] ?>'?</p>
+
+                                        <h1 class="fs-1">Delete leave request - Are you sure?</h1>
+                                        <p>Are you sure you want to delete this time off/leave request:'
+                                            <?= $requestData['short_description'] ?>'?
+                                        </p>
                                     </div>
                                     <div class=" d-flex justify-content-center p-5">
                                         <button type="button" class="btn btn-secondary btn-lg me-2"
                                             data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-danger btn-lg ms-2">
+                                        <button type="button" class="btn btn-danger btn-lg ms-2">
                                             <a href="pages/deleteRequest.php?request_id=<?= $requestData['request_id']; ?>"
-                                            class="link-offset-2 link-underline link-underline-opacity-0 text-light"> Yes, Delete it!</a>
-                                            </button>
+                                                class="link-offset-2 link-underline link-underline-opacity-0 text-light">
+                                                Yes, Delete it!</a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -149,4 +191,5 @@
 
     </div>
 </div>
+
 </html>
