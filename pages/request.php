@@ -127,7 +127,7 @@ $requestDatas = $prep->fetchAll();
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="requestInfoModal<?php echo $requestData['request_id']; ?>" tabindex="-1"
+                        <div class="modal fade requestInfoModal" id="requestInfoModal<?php echo $requestData['request_id']; ?>" tabindex="-1"
                             aria-labelledby="requestInfoModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
