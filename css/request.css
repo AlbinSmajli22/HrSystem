@@ -188,7 +188,7 @@
 .recentLeave tbody tr:hover{
     background-color: #f9f9f9;
 }
-#requestInfoModal .modal-body .requestInfoIcones{
+.recentLeave tbody tr #requestInfoModal .modal-body .requestInfoIcones{
     padding: 0px;
     display: flex;
     flex-direction: row;
@@ -197,14 +197,14 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-#requestInfoModal .modal-body .requestInfoIcones i {
+.recentLeave tbody tr #requestInfoModal .modal-body .requestInfoIcones i {
     width: 31px;
     padding: 6px;
     border-radius: 50%;
     font-size: 14px;
     text-align: center;
 }
-#requestInfoModal .modal-body .requestInfoIcones p{
+.recentLeave tbody tr #requestInfoModal .modal-body .requestInfoIcones p{
     padding: 0px;
     margin:0px 0px 0px 15px;
 }

@@ -89,8 +89,9 @@ $requestDatas = $prep->fetchAll();
                                 </span>
                             <?php } ?>
                         </td>
-                        <td><a class="info" href="" data-bs-toggle="modal" data-bs-target="#requestInfoModal"
-                                data-bs-whatever="@mdo"><i class="fa-solid fa-magnifying-glass"></i> info</a></td>
+                        <td><a href="" data-bs-toggle="modal"
+                                    data-bs-target="#requestInfoModal<?php echo $requestData['request_id']; ?>"
+                                    data-bs-whatever="@mdo" class="info"><i class="fa-solid fa-magnifying-glass"></i> info</a></td>
                         <?php if ($requestData['status'] == 'Submited'): ?>
                             <td><a href="" data-bs-toggle="modal"
                                     data-bs-target="#deleteRequestModal<?php echo $requestData['request_id']; ?>"
@@ -98,61 +99,6 @@ $requestDatas = $prep->fetchAll();
                                     request</a></td>
                         <?php endif; ?>
                         <!-- Modal -->
-                        <div class="modal fade" id="requestInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Leave Request Info</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            <?= $requestData['from'] ?> to
-                                            <?= $requestData['to'] ?> (
-                                            <?= $requestData['duration'] ?> Days)
-                                        </p>
-                                        <hr>
-
-                                        <div class="requestInfoIcones"><i class="fa-solid fa-pencil"
-                                                style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i>
-                                            <?php
-                                            $currentDate = gmdate('Y-m-d');
-                                            $currentDate = date_create($currentDate);
-                                            $createdDate = $requestData['created'];
-                                            $createdDate = date_create($createdDate);
-
-                                            $createdFor = date_diff($createdDate, $currentDate);
-
-                                            echo '<p> ' . 'Created ' . $createdFor->format('%R%y years %m months') . '</p>';
-                                            ?>
-
-                                        </div>
-                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-code-fork"
-                                                style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i>
-                                            <p>Approval Rule All staff</p>
-                                        </div>
-                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
-                                                style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
-                                            <p>Sent to "Head" and "HR"</p>
-                                        </div>
-                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check "
-                                                style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i>
-                                            <p>Approved by
-                                                <?= $requestData['checkedby'] ?> 26 days ago
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="modal fade modal-fullscreen-lg-down modal-lg"
                             id="deleteRequestModal<?php echo $requestData['request_id']; ?>" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -181,9 +127,64 @@ $requestDatas = $prep->fetchAll();
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="requestInfoModal<?php echo $requestData['request_id']; ?>" tabindex="-1"
+                            aria-labelledby="requestInfoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Leave Request Info</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <?= $requestData['from'] ?> to
+                                            <?= $requestData['to'] ?> (
+                                            <?= $requestData['duration'] ?> Days)
+                                        </p>
+                                        <hr>
+                                       
+                                        <div class="requestInfoIcones"><i class="fa-solid fa-pencil"
+                                                style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i>
+                                            <?php
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate = date_create($currentDate);
+                                            $createdDate = $requestData['created'];
+                                            $createdDate = date_create($createdDate);
 
+                                            $createdFor = date_diff($createdDate, $currentDate);
 
+                                            echo '<p> ' . 'Created ' . $createdFor->format('%R%a days') . '</p>';
+                                            ?>
+
+                                        </div>
+                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-code-fork"
+                                                style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i>
+                                            <p>Approval Rule All staff</p>
+                                        </div>
+                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
+                                                style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
+                                            <p>Sent to "Head" and "HR"</p>
+                                        </div>
+                                        <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check "
+                                                style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i>
+                                            <p>Approved by
+                                                <?= $requestData['checkedby'] ?> 26 days ago
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </tr>
+
                 <?php endforeach; ?>
 
             </tbody>
