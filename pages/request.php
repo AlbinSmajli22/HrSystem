@@ -128,7 +128,7 @@ $requestDatas = $prep->fetchAll();
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade requestInfoModal"
+                        <div class="modal fade-requestInfoModal"
                             id="requestInfoModal<?php echo $requestData['request_id']; ?>" tabindex="-1"
                             aria-labelledby="requestInfoModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -148,7 +148,7 @@ $requestDatas = $prep->fetchAll();
                                             </p>
                                             <hr>
 
-                                            <div class="requestInfoIcones"><i class="fa-solid fa-pencil"
+                                            <div class="requestInfoIcones .d-flex flex-column"><i class="fa-solid fa-pencil"
                                                     style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i>
                                                 <?php
                                                 $currentDate = gmdate('Y-m-d');
@@ -158,15 +158,15 @@ $requestDatas = $prep->fetchAll();
 
                                                 $createdFor = date_diff($createdDate, $currentDate);
 
-                                                echo '<p> ' . 'Created ' . $createdFor->format('%R%a days') . '</p>';
+                                                echo '<p class=".p-3"> ' . 'Created ' . $createdFor->format('%R%a days') . '</p>';
                                                 ?>
 
                                             </div>
-                                            <div class="requestInfoIcones"><i class="fa fa-fw2 fa-code-fork"
+                                            <div class="requestInfoIcones .d-flex flex-column"><i class="fa fa-fw2 fa-code-fork"
                                                     style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i>
                                                 <p>Approval Rule All staff</p>
                                             </div>
-                                            <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
+                                            <div class="requestInfoIcones .d-flex flex-column"><i class="fa fa-fw2 fa-send "
                                                     style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
                                                 <p>Sent to "Head" and "HR"</p>
                                             </div>

@@ -188,7 +188,13 @@
 .recentLeave tbody tr:hover{
     background-color: #f9f9f9;
 }
-.requestTableBody .recentLeave tbody tr .modal.fade.requestInfoModal .modal-body .requestInfoIcones{
+
+
+
+/*#requestInfoModal22 {
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+#requestInfoModal22 .modal-body .requestInfoIcones{
     padding: 0px;
     display: flex;
     flex-direction: row;
@@ -197,15 +203,17 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.requestTableBody .recentLeave tbody tr .modal.fade.requestInfoModal .modal-body .requestInfoIcones i {
+#requestInfoModal22  .modal-body .requestInfoIcones i {
     width: 31px;
     padding: 6px;
     border-radius: 50%;
     font-size: 14px;
     text-align: center;
 }
-.requestTableBody .recentLeave tbody tr .modal.fade.requestInfoModal .modal-body .requestInfoIcones p{
+#requestInfoModal22  .modal-body .requestInfoIcones p{
     padding: 0px;
     margin:0px 0px 0px 15px;
 }
-
+.modal .modal-dialog .modal-content  {
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}*/
