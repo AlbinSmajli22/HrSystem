@@ -189,12 +189,29 @@
     background-color: #f9f9f9;
 }
 
-
-
-/*#requestInfoModal22 {
-    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+.modal.fade-requestInfoModal .modal-dialog .modal-content{
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-#requestInfoModal22 .modal-body .requestInfoIcones{
+.modal.fade-requestInfoModal .modal-dialog .modal-content .modal-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+.modal.fade-requestInfoModal .modal-dialog .modal-content .modal-header :first-child{
+font-weight: 600;
+font-size: 26px;
+color: #676A6C;
+
+}
+.modal.fade-requestInfoModal .modal-dialog .modal-content .modal-header :last-child{
+    font-size: 7px;
+    font-weight: bold;
+    margin-left: 25%;
+}
+
+.modal.fade-requestInfoModal .modal-dialog .modal-content .modal-body .requestInfoIcones{
+    
     padding: 0px;
     display: flex;
     flex-direction: row;
@@ -202,18 +219,17 @@
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
+
 }
-#requestInfoModal22  .modal-body .requestInfoIcones i {
+.modal.fade-requestInfoModal .modal-dialog .modal-content .modal-body .requestInfoIcones i {
     width: 31px;
     padding: 6px;
     border-radius: 50%;
     font-size: 14px;
     text-align: center;
 }
-#requestInfoModal22  .modal-body .requestInfoIcones p{
+.modal.fade-requestInfoModal .modal-dialog .modal-content .modal-body .requestInfoIcones p{
     padding: 0px;
     margin:0px 0px 0px 15px;
 }
-.modal .modal-dialog .modal-content  {
-    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-}*/
+

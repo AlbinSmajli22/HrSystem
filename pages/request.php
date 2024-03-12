@@ -148,7 +148,7 @@ $requestDatas = $prep->fetchAll();
                                             </p>
                                             <hr>
 
-                                            <div class="requestInfoIcones .d-flex flex-column"><i class="fa-solid fa-pencil"
+                                            <div class="requestInfoIcones"><i class="fa-solid fa-pencil"
                                                     style="color: #fff; background-color: #26c6da; border-color:#26c6da;"></i>
                                                 <?php
                                                 $currentDate = gmdate('Y-m-d');
@@ -162,11 +162,11 @@ $requestDatas = $prep->fetchAll();
                                                 ?>
 
                                             </div>
-                                            <div class="requestInfoIcones .d-flex flex-column"><i class="fa fa-fw2 fa-code-fork"
+                                            <div class="requestInfoIcones "><i class="fa fa-fw2 fa-code-fork"
                                                     style="color: #808486; background-color: #fff; border:1px solid #e7eaec;"></i>
                                                 <p>Approval Rule All staff</p>
                                             </div>
-                                            <div class="requestInfoIcones .d-flex flex-column"><i class="fa fa-fw2 fa-send "
+                                            <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
                                                     style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
                                                 <p>Sent to "Head" and "HR"</p>
                                             </div>
@@ -237,8 +237,8 @@ $requestDatas = $prep->fetchAll();
                                                         style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
                                                     <p>Sent to "Head" and "HR"</p>
                                                 </div>
-                                                <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check "
-                                                        style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i>
+                                                <div class="requestInfoIcones"><i class="fa-solid fa-circle-xmark "
+                                                        style="color: #ff0000; border-color:#ff0000;"></i>
                                                     <p>Declined by
                                                     <?= $requestData['checkedby'] ?> 26 days ago
                                                     </p>
