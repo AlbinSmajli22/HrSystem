@@ -23,6 +23,11 @@ if (isset($_POST['submit'])) {
         echo "user does not exist";
     }
     elseif (password_verify($password, $data['password'])) {
+        $sql="SELECT * FROM users  WHERE role=1";
+        $prep= $con->prepare($sql);
+        $prep->execute();
+        $data2= $prep->fetch();
+
         $_SESSION['user_id']=$data['user_id'];
         $_SESSION['email']=$data['email'];
         $_SESSION['position']=$data['position_name'];
@@ -35,6 +40,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['gender']=$data['gender'];
         $_SESSION['born']=$data['born'];
         $_SESSION['started']=$data['started'];
+        $_SESSION['HR']=$data2['name']." ".$data2['surname'];
         
 
         header("Location: main.php");  

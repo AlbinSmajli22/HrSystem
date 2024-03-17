@@ -9,6 +9,7 @@ $calendar->setSundayFirst(false);
 $calendar->create();
 
 $userId=$_SESSION['user_id'];
+
 $annualLeave;
 $childBorn;
 $deathofFamilyMember;

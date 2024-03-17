@@ -1,13 +1,27 @@
 <?php
 require_once './config.php';
 
-
+$HR = $_SESSION['HR'];
 
 $sql = 'SELECT * From timeoffrequests ORDER BY timeoffrequests.request_id DESC';
 $prep = $con->prepare($sql);
 $prep->execute();
 $requestDatas = $prep->fetchAll();
+?>
 
+<?php
+$leaderID = $_SESSION['report_to'];
+
+
+
+$sql2 ="SELECT * from users WHERE User_ID = $leaderID";
+
+$prep= $con->prepare($sql2);
+$prep->execute();
+$teamLeader= $prep->fetch();
+
+$leaderName = $teamLeader["name"];
+$leaderSurname = $teamLeader["surname"];
 ?>
 
 
@@ -168,7 +182,7 @@ $requestDatas = $prep->fetchAll();
                                             </div>
                                             <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
                                                     style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
-                                                <p>Sent to "Head" and "HR"</p>
+                                                <p>Sent to <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> and <Strong><?= $HR ?></Strong></p>
                                             </div>
                                         <?php } else if ($requestData['status'] == 'Approved') { ?>
 
@@ -199,12 +213,12 @@ $requestDatas = $prep->fetchAll();
                                                 </div>
                                                 <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
                                                         style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
-                                                    <p>Sent to "Head" and "HR"</p>
+                                                    <p>Sent to <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> and <Strong><?= $HR ?></Strong></p>
                                                 </div>
                                                 <div class="requestInfoIcones"><i class="fa fa-fw2 fa-check "
                                                         style="color: #fff; background-color: #4caf50; border-color:#4caf50;"></i>
                                                     <p>Approved by
-                                                    <?= $requestData['checkedby'] ?> 26 days ago
+                                                    <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> 26 days ago
                                                     </p>
                                                 </div>
                                         <?php } else { ?>
@@ -235,12 +249,12 @@ $requestDatas = $prep->fetchAll();
                                                 </div>
                                                 <div class="requestInfoIcones"><i class="fa fa-fw2 fa-send "
                                                         style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
-                                                    <p>Sent to "Head" and "HR"</p>
+                                                    <p>Sent to <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> and <Strong><?= $HR ?></Strong></p>
                                                 </div>
                                                 <div class="requestInfoIcones"><i class="fa-solid fa-circle-xmark "
                                                         style="color: #ff0000; border-color:#ff0000;"></i>
                                                     <p>Declined by
-                                                    <?= $requestData['checkedby'] ?> 26 days ago
+                                                    <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> 26 days ago
                                                     </p>
                                             <?php } ?>
                                         </div>
