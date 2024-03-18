@@ -251,9 +251,8 @@ $leaderSurname = $teamLeader["surname"];
                                                         style="color: #fff; background-color: #2196f3; border-color:#2196f3;"></i>
                                                     <p>Sent to <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> and <Strong><?= $HR ?></Strong></p>
                                                 </div>
-                                                <div class="requestInfoIcones"><i class="fa-solid fa-circle-xmark "
-                                                        style="color: #ff0000; border-color:#ff0000;"></i>
-                                                    <p>Declined by
+                                                <div class="requestInfoIcones" >
+                                                    <p style="color: #ffff; background-color: #ff0000; border-color:#ff0000; padding:5px;">Declined by
                                                     <Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> 26 days ago
                                                     </p>
                                             <?php } ?>

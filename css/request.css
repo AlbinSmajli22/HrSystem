@@ -223,6 +223,7 @@ color: #676A6C;
 }
 .modal.fade-requestInfoModal .modal-dialog .modal-content .modal-body .requestInfoIcones i {
     width: 31px;
+    height: 31px;
     padding: 6px;
     border-radius: 50%;
     font-size: 14px;
