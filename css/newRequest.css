@@ -1,0 +1,34 @@
+#request-container{
+    display: flex;
+    flex-direction:column ;
+    justify-content: center;
+    align-items: center;
+    background-color: #F4F6FA;
+}
+#company-Name{
+    width: 100%;
+}
+#request-Content{
+    padding: 10px;
+    width: 840px;
+    height: 1030px;
+    background-color: white;
+    border: 1px solid #e7eaec;
+ 
+}
+#space-div{
+    height: 50px;
+    border-top: grey dashed 1px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+form .row{
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px;
+
+}
