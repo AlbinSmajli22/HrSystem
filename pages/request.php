@@ -1,7 +1,7 @@
 <?php
 require_once './config.php';
 
-$HR = $_SESSION['HR'];
+
 
 $sql = 'SELECT * From timeoffrequests ORDER BY timeoffrequests.request_id DESC';
 $prep = $con->prepare($sql);
@@ -10,18 +10,7 @@ $requestDatas = $prep->fetchAll();
 ?>
 
 <?php
-$leaderID = $_SESSION['report_to'];
-
-
-
-$sql2 ="SELECT * from users WHERE User_ID = $leaderID";
-
-$prep= $con->prepare($sql2);
-$prep->execute();
-$teamLeader= $prep->fetch();
-
-$leaderName = $teamLeader["name"];
-$leaderSurname = $teamLeader["surname"];
+include_once 'GetLeadAndHR.php';
 ?>
 
 

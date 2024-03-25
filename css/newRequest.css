@@ -1,24 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:wght@300&display=swap');
+
 #request-container{
     display: flex;
     flex-direction:column ;
     justify-content: center;
     align-items: center;
     background-color: #F4F6FA;
+    
+}
+*{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #company-Name{
     width: 100%;
+    padding-left: 50px;
+    
+}
+#company-Name h2{
+    font-weight: 100;
+    color: #676A6C;
+    font-size: 24px;
 }
 #request-Content{
-    padding: 10px;
-    width: 840px;
+    padding:15 20 20 20;
+    width: 990px;
     height: 1030px;
     background-color: white;
     border: 1px solid #e7eaec;
  
 }
+#request-Content h2{
+    font-weight: 100;
+    color: #676A6C;
+    font-size: 24px;
+}
+#request-Content h2 img{
+    vertical-align: middle;
+    margin-right: 20px;
+    margin-left: 10px;
+}
 #space-div{
     height: 50px;
-    border-top: grey dashed 1px;
+    border-top: #e7eaec dashed 1px;
+    
 }
 
 form{
@@ -27,8 +51,140 @@ form{
     justify-content: space-between;
 }
 form .row{
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    height: 50px;
     margin-bottom: 20px;
 
+}
+label{
+    font-weight: 700;
+    max-width: 100%;
+    display: inline-block;
+    font-size: 13px;
+    color: #676A6C;
+    margin-bottom: 5px;
+}
+form .rowShortDescription{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 20px;
+}
+form .rowReason{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 20px;
+}
+form #row{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+form .row #rowLH{
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+form .row #rowLH p{
+    width: 275px;
+    border: #e7eaec 1px solid;
+    padding: 10px;
+    margin: 0px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #676A6C;
+}
+form .row #rowLH p :first-child{
+    font-weight: 600;
+    color: #26c6da;
+}
+form .row #rowLH p :last-child{
+    font-weight: 600;
+    color: #2196f3;
+}
+form .row #rowLeaveType{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+form .row #rowLeaveType select{
+   background-color: #F4F6FA;
+   border: #e7eaec 1px solid;
+   color: #676A6C;
+   padding-left: 8px;
+   width: 295px;
+   height: 36px;
+   font-size: 13px;
+}
+
+form .row .row2{
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+form .row .row2 input{
+    width: 295px;
+    height: 36px;
+    padding: 6 12 6 12;
+    font-size: 13px;
+    background-color: #F4F6FA;
+    border: #e7eaec 1px solid;
+    color: #676A6C;
+ 
+}
+form .row .row2 p{
+    margin-top: 5;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #2196f3;
+}
+form .rowShortDescription #rowShortDescription2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+form .rowShortDescription #rowShortDescription2 input{
+    height: 36px;
+    padding: 6 12 6 12;
+    font-size: 13px;
+    background-color: #F4F6FA;
+    border: #e7eaec 1px solid;
+    color: #676A6C;
+}
+form .rowReason #rowReason2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+form .rowReason #rowReason2 input{
+    height: 114px;
+    padding: 6 12 6 12;
+    font-size: 13px;
+    background-color: #F4F6FA;
+    border: #e7eaec 1px solid;
+    color: #676A6C;
+}
+#space-div2{
+    height: 50px;
+    border-top: #e7eaec dashed 1px;
+}
+form #row {
+    height: 33px;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0 10 0 10; 
 }
