@@ -76,7 +76,7 @@ include_once 'GetLeadAndHR.php';
                     <input type="hidden" name="status" id="status" value="Submited">
                 </div>
             </div>
-            <div id="btm-row">
+            <div id="btn-row">
                 <button name="enter" type="submit">Submit</button>
                 <button name="cancel" type="submit">Cancel</button>
             </div>

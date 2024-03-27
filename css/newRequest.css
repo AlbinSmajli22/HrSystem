@@ -23,12 +23,13 @@
 }
 #request-Content{
     padding:15 20 20 20;
-    width: 990px;
-    height: 1030px;
+    width: 986px;
+    height: 783px;
     background-color: white;
     border: 1px solid #e7eaec;
- 
+    margin-bottom: 10px;
 }
+
 #request-Content h2{
     font-weight: 100;
     color: #676A6C;
@@ -177,14 +178,53 @@ form .rowReason #rowReason2 input{
     border: #e7eaec 1px solid;
     color: #676A6C;
 }
+form #btn-row{
+    height: 33px;
+    width: 960px;
+    display: flex;
+    flex-direction:row;
+    justify-content: end;
+    padding-left: 15px;
+}
+
+
+form #btn-row button{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+form #btn-row :first-child{
+
+    background-color: #4CAF50;
+    color: #fff;
+    border-color: #4CAF50;
+    border-radius: 3px;
+
+}
+form #btn-row :last-child{
+
+    background-color: transparent;
+    color: #337ab7;
+    border:none;
+    border-radius: 3px;
+    margin-right: 5px;
+}
 #space-div2{
     height: 50px;
     border-top: #e7eaec dashed 1px;
-}
-form #row {
-    height: 33px;
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 0 10 0 10; 
 }
