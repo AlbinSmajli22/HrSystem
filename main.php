@@ -138,12 +138,13 @@ session_start();
                 break;                
             case 'approve':
                 include 'pages/approverequest.php';
-                break;                
+                break;                             
             case 'history':
                 include 'pages/requesthistory.php';
                 break;                
+           /*              
             default:
-                include 'pages/notfound.php';
+                include 'pages/notfound.php';*/
         }
         ?>
         <?php include_once 'template/footer.php' ?>
@@ -151,4 +152,3 @@ session_start();
 
 </body>
 
-</html>

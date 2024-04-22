@@ -148,6 +148,9 @@ form .row .row2 p{
     font-size: 13px;
     color: #2196f3;
 }
+form .row .row2 #errorMSG{
+    display: none;
+}
 form .rowShortDescription #rowShortDescription2{
     width: 100%;
     display: flex;
@@ -227,4 +230,91 @@ form #btn-row :last-child{
 #space-div2{
     height: 50px;
     border-top: #e7eaec dashed 1px;
+}
+
+#balance-calendar{
+    width: 1030px;
+    background-color: #F4F6FA;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.timeOff{
+    width: 498px;
+    height: 528;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e7eaec;
+}
+.timeOffHead{
+    height: 25px;
+    padding: 15 15 7 15;
+    background-color: #E3F2FD;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    border-bottom: 1px solid #e7eaec;
+}
+.timeOffHead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-family:"open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 600;
+    color: #676A6C;
+}
+
+.timeOffBody{
+    font-size: 13px;
+    padding: 10px;
+    height: 450px;
+    background-color: white;
+    overflow-x: scroll;
+}
+.leavs{
+    width: 600px;
+    border-collapse: collapse;
+    margin: 10px 10px;
+    font-size: 13px;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    min-width: 500px;
+}
+.leavs thead tr{    
+    color: #676a6c;
+    font-size: 13px;
+}
+.leavs thead tr td {    
+    align-items: flex-start;
+    padding: 8px;
+    width: fit-content;
+  
+    box-sizing: border-box;
+}
+
+.leavs thead tr td strong{
+    font-weight: 700;
+}
+.leavs tbody tr{
+    text-align: left;
+    font-weight: 400;
+    color: #676A6C;
+    border-top:  1px #e7eaec solid;
+}
+.leavs tbody tr td{
+    width: auto;
+    height: 49px;
+    padding: 8;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+.leavs tbody tr .leavType{
+    width: 150;
+    font-size: 13px;
+    font-weight: 400;
+
+}
+.leavs tbody tr:nth-child(odd){
+    background-color: #f9f9f9;
 }

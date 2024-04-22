@@ -97,6 +97,7 @@
     padding-bottom: 11px;
     font-size: 13px;
     font-weight: 400;
+    min-width: 120px;
 
 }
 .recentLeave tbody tr td .approved{

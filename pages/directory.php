@@ -71,6 +71,8 @@ $currentTime = date('h:i A');
 
 
   <?php if ($_SESSION['role'] == 1) { ?>
+
+    
     <div id="main">
       <div class="name">
         <h2>MetDaan</h2>

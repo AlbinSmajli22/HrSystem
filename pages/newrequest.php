@@ -38,7 +38,7 @@ include_once 'GetLeadAndHR.php';
                 <div id="rowLeaveType">
                     <label for="LeaveType">Leave Type *</label>
                     <select name="LeaveType" id="LeaveType">
-                        <option value="annual_leave">Annual Leave</option>
+                        <option value="Annual Leave">Annual Leave</option>
                         <option value="Child Born">Child Born</option>
                         <option value="Death of Family Member">Death of Family Member</option>
                         <option value="Moving Day">Moving Day</option>
@@ -51,7 +51,7 @@ include_once 'GetLeadAndHR.php';
                 <div class="row2">
                     <label for="from">from *</label>
                     <input type="date" name="from" id="from" onchange="cal()">
-                    <p>You will have an estimated <Strong>5 hours 19 minutes</Strong> of <em>Annual Leave</em> on this date.</p>
+                    <!-- <p id="daysMessange">You will have an estimated <Strong>5 hours 19 minutes</Strong> of <em>Annual Leave</em> on this date.</p> -->
                 </div>
                 <div class="row2">
                     <label for="to">Until *</label>
@@ -60,6 +60,7 @@ include_once 'GetLeadAndHR.php';
                 <div class="row2">
                     <label for="duration">Duration(Days) *</label>
                     <input type="number" name="duration" id="duration" onclick="durationFunction()">
+                    <!-- <p id="errorMSG" Style=" color:#CC5965; font-weight:700;" >Sorry, you do not have enough leave - your balance is currently 2 days 2 hours 39 minutes</p> -->
                     <p Style="color:#737373;">Enter days (or partial days as a decimal, or click the calculator icon to specify)</p>
                 </div>
             </div>
@@ -83,9 +84,87 @@ include_once 'GetLeadAndHR.php';
         </form>
         <div id="space-div2"></div>
     </div>
+    <div id="balance-calendar">
+    <div class="timeOff">
+                    <div class="timeOffHead">
+                        <h5>
+                            <img src="./images/balance.png" alt="" height="24px" width="24px">
+                            Time Off/Leave Balances
+                        </h5>
+                    </div>
+                    <div class="timeOffBody">
+                        <table class="leavs">
+                            <thead>
+                                <tr>
+                                    <td><Strong>Time Off/Leave Type</Strong></td>
+                                    <td><Strong>Allowance</Strong> <br><small> (Annual)</small></td>
+                                    <td><Strong>Balance</Strong> <br> <small> (Accrued)</small></td>
+                                    <td><Strong>Planned</Strong> <br><small> (In the future)</small></td>
+                                    <td><Strong>Available </Strong><br><small> (To take) </small></td>
+                                    <td><Strong>Units</Strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td class="leavType">Annual Leave</td>
+                                        <td>20.00</td>
+                                        <td><?=$annualLeave?></td>
+                                        <td>0.00</td>
+                                        <td><?=$annualLeave?></td>
+                                        <td>Days</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leavType">Child born</td>
+                                        <td>3.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td><?= $childBorn?></td>
+                                        <td>Days</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leavType">Death of Family Member</td>
+                                        <td>5.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td><?= $deathOfFamilyMember?></td>
+                                        <td>Days</td>
+                                       
+                                    
+                                    </tr>
+                                    <tr>
+                                        <td class="leavType">Moving Day</td>
+                                        <td>1.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td><?= $movingDay?></td>
+                                        <td>Days</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leavType">Wedding Day</td>
+                                        <td>5.00</td>
+                                        <td>0.00</td>
+                                        <td>0.00</td>
+                                        <td><?= $weddingDay?></td>
+                                        <td>Days</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="leavType">Sick Leave</td>
+                                        <td>20.00</td>
+                                        <td><?= $sickLeave?></td>
+                                        <td>0.00</td>
+                                        <td><?= $sickLeave?></td>
+                                        <td>Days</td>
+                                    </tr>
+                                </tbody>
+                        </table> 
+                    </div>
+                </div>
+        <div id="calendar" >
+
+        </div>
+    </div>
 </div>
 
-</html>
 <script type="text/javascript">
 
     function GetDays() {
@@ -99,5 +178,6 @@ include_once 'GetLeadAndHR.php';
             document.getElementById("duration").value = GetDays();
         }
     }
+
 
 </script>

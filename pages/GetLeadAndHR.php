@@ -1,5 +1,6 @@
 <?php
 $leaderID = $_SESSION['report_to'];
+$userId=$_SESSION['user_id'];
 
 
 
