@@ -1,6 +1,8 @@
 <?php
-require_once './config.php';
+require_once '../config.php';
 require 'Calendar.php';
+session_start();
+$userId=$_SESSION['user_id'];
 
 $calendar = new Calendar(new CurrentDate(), new CalendarDate() );
 
@@ -8,7 +10,7 @@ $calendar->setSundayFirst(false);
 
 $calendar->create();
 
-$userId=$_SESSION['user_id'];
+
 
 $annualLeave;
 $childBorn;
@@ -41,7 +43,7 @@ $data= $prep->fetch();
     $data2= $prep->fetch();
 
 
-    $leaderID = $_SESSION['report_to'];
+    $leaderID =$_SESSION['report_to'];
 
     $sql= "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
@@ -57,9 +59,9 @@ $data= $prep->fetch();
     $leaderSurname = $leaderData["surname"];
     $leaderPosition = $leaderData["position_name"];
 
-    $sql='SELECT * FROM timeoffrequests
-        ORDER BY timeoffrequests.request_id DESC
-        LIMIT 0, 5 ;';
+    $sql="SELECT * From timeoffrequests
+    WHERE User_ID =$userId
+    ORDER BY timeoffrequests.request_id DESC LIMIT 0, 5";
     $prep=$con->prepare($sql);
     $prep->execute();
     $requestDatas= $prep->fetchAll();
@@ -78,11 +80,16 @@ $data= $prep->fetch();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="../css/home.css">
 </head>
 
 <body>
+    <div>
+    <?php include '../template/sidebar.php' ?>
+
+    </div>
     <div id="main">
+    <?php include '../template/navbar.php' ?>
         <div class="name">
             <h2>MetDaan</h2>
         </div>
@@ -100,42 +107,42 @@ $data= $prep->fetch();
             </div>
             <div class="shortcutsBody">
                 <div class="shortcutsBodyElements">
-                    <img src="./images/request_leave5.png" alt="" width="48px" height="48px">
-                    <h3>Request Time-Off</h3>
+                    <img src="../images/request_leave5.png" alt="" width="48px" height="48px">
+                    <h3><a href="newrequest.php">Request Time-Off</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
-                    <img src="./images/company_directory.png" alt="" width="48px" height="48px">
-                    <h3>Company Directory</h3>
+                    <img src="../images/company_directory.png" alt="" width="48px" height="48px">
+                    <h3><a href="directory.php">Company Directory</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
-                    <img src="./images/employee_profile.png" alt="" width="48px" height="48px">
-                    <h3>My Profile</h3>
+                    <img src="../images/employee_profile.png" alt="" width="48px" height="48px">
+                    <h3><a href="myprofile.php">My Profile</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
-                    <img src="./images/fill_checklist.png" alt="" width="48px" height="48px">
-                    <h3>Complete Checklist</h3>
+                    <img src="../images/fill_checklist.png" alt="" width="48px" height="48px">
+                    <h3><a href="checklist.php">Complete Checklist</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
-                    <img src="./images/company_org_chart.png" alt="" width="48px" height="48px">
-                    <h3>Company Org. Chart</h3>
+                    <img src="../images/company_org_chart.png" alt="" width="48px" height="48px">
+                    <h3><a href="orgchart.php">Company Org. Chart</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
-                    <img src="./images/read_news_female.png" alt="" width="48px" height="48px">
-                    <h3>News</h3>
+                    <img src="../images/read_news_female.png" alt="" width="48px" height="48px">
+                    <h3><a href="news.php">News</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
-                    <img src="./images/expense_claim3.png" alt="" width="48px" height="48px">
-                    <h3>File an Expens Claim</h3>
+                    <img src="../images/expense_claim3.png" alt="" width="48px" height="48px">
+                    <h3><a href="expenses.php">File an Expens Claim</a></h3>
                 </div>
             </div>
 
         </div>
         <div class="thirdContainer">
-            <div class="leftDiv">
+        <div class="leftDiv">
                 <div class="Activechecklists">
                     <div class="ActivechecklistsHead">
                         <h5>
-                            <img src="./images/checklist.png" alt="" height="24px" width="24px">
+                            <img src="../images/checklist.png" alt="" height="24px" width="24px">
                             Active Checklists
                         </h5>
                     </div>
@@ -162,7 +169,7 @@ $data= $prep->fetch();
                 <div class="timeOff">
                     <div class="timeOffHead">
                         <h5>
-                            <img src="./images/balance.png" alt="" height="24px" width="24px">
+                            <img src="../images/balance.png" alt="" height="24px" width="24px">
                             Time Off/Leave Balances
                         </h5>
                     </div>
@@ -236,7 +243,7 @@ $data= $prep->fetch();
                 <div class="recentLeaveRequests">
                     <div class="recentLeaveRequestsHead">
                         <h5>
-                            <img src="./images/plan.png" alt="" height="24px" width="24px">
+                            <img src="../images/plan.png" alt="" height="24px" width="24px">
                             Recent Leave Requests
                         </h5>
                     </div>
@@ -286,7 +293,7 @@ $data= $prep->fetch();
             <div class="Calendar">
                 <div class="calendarHead">
                     <h5>
-                        <img src="./images/calendar.png" alt="" height="24px" width="24px">
+                        <img src="../images/calendar.png" alt="" height="24px" width="24px">
                         Calendar
                     </h5>
                 </div>
@@ -367,7 +374,7 @@ $data= $prep->fetch();
             <div class="MyInfo">
                     <div class="MyInfoHead">
                         <h5>
-                            <img src="./images/information.png" alt="" height="24px" width="24px">
+                            <img src="../images/information.png" alt="" height="24px" width="24px">
                             My Information
                         </h5>
                     </div>
@@ -443,19 +450,19 @@ $data= $prep->fetch();
                 <div class="ReportsTo">
                     <div class="ReportsToHead">
                         <h5>
-                            <img src="./images/orgchart.png" alt="" height="24px" width="24px">
+                            <img src="../images/orgchart.png" alt="" height="24px" width="24px">
                             You Report To
                         </h5>
                     </div>
                     <div class="ReportsToBody">
-                        <img src="./images/albin-smajli.png" alt="">
+                        <img src="../images/albin-smajli.png" alt="">
                         <p><Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> , <?=  $leaderPosition ?></p>
                     </div>
                 </div>
                 <div class="RecentReviews">
                     <div class="RecentReviewsHead">
                         <h5>
-                            <img src="./images/review.png" alt="" height="24px" width="24px">
+                            <img src="../images/review.png" alt="" height="24px" width="24px">
                             Recent Reviews
                         </h5>
                     </div>
@@ -468,7 +475,7 @@ $data= $prep->fetch();
                 <div class="RecentTraining">
                     <div class="RecentTrainingHead">
                         <h5>
-                            <img src="./images/training.png" alt="" height="24px" width="24px">
+                            <img src="../images/training.png" alt="" height="24px" width="24px">
                             Recent Training
                         </h5>
                     </div>
@@ -481,7 +488,7 @@ $data= $prep->fetch();
                 <div class="RenewableDocuments">
                     <div class="RenewableDocumentsHead">
                         <h5>
-                            <img src="./images/renewable.png" alt="" height="24px" width="24px">
+                            <img src="../images/renewable.png" alt="" height="24px" width="24px">
                             Renewable Documents
                         </h5>
                     </div>
@@ -494,7 +501,7 @@ $data= $prep->fetch();
                 <div class="SalaryHistory">
                     <div class="SalaryHistoryHead">
                         <h5>
-                            <img src="./images/position.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/position.png" alt="" height="24px" width="24px">                           
                             Your Position/Salary History
                         </h5>
                     </div>
@@ -507,7 +514,7 @@ $data= $prep->fetch();
                 <div class="AssetsInYourCare">
                     <div class="AssetsInYourCareHead">
                         <h5>
-                            <img src="./images/asset.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/asset.png" alt="" height="24px" width="24px">                           
                             Assets In Your Care
                         </h5>
                     </div>
@@ -520,7 +527,7 @@ $data= $prep->fetch();
                 <div class="YourDependents">
                     <div class="YourDependentsHead">
                         <h5>
-                            <img src="./images/dependent.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/dependent.png" alt="" height="24px" width="24px">                           
                             Your Dependents
                         </h5>
                     </div>
@@ -535,7 +542,7 @@ $data= $prep->fetch();
             <div class="JobPortal">
                     <div class="JobPortalHead">
                         <h5>
-                            <img src="./images/jobs.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/jobs.png" alt="" height="24px" width="24px">                           
                             Job Portal
                         </h5>
                     </div>
@@ -553,6 +560,7 @@ $data= $prep->fetch();
             </div>
 
         </div>
+        <?php include '../template/footer.php'; ?>
     </div>
 </body>
 

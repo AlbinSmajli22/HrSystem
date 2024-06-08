@@ -29,6 +29,7 @@ if (isset($_POST['submit'])) {
         $data2= $prep->fetch();
 
         $_SESSION['user_id']=$data['user_id'];
+        $_SESSION['password']=$data['password'];
         $_SESSION['email']=$data['email'];
         $_SESSION['position']=$data['position_name'];
         $_SESSION['departament']=$data['departament_name'];
@@ -43,7 +44,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['HR']=$data2['name']." ".$data2['surname'];
         
 
-        header("Location: main.php");  
+        header("Location: pages/home.php");  
     }
     elseif(!password_verify($password, $data['password'])){
         echo 'Password is Wrong.';

@@ -1,7 +1,7 @@
 <Style>
     .footer{
         height: 40px;
-        width: 100%;
+        width: 1310.8px;
         padding-left: 20px;
         padding-right: 10px;
         background-color: #FFFFFF;
@@ -9,6 +9,9 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        bottom: 0;
+        position: absolute;
+        
     }
      .footer1 p{
         padding: 0;
