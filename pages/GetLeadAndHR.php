@@ -1,4 +1,5 @@
 <?php
+session_abort();
 $leaderID = $_SESSION['report_to'];
 $userId=$_SESSION['user_id'];
 

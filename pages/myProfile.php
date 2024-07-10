@@ -11,6 +11,9 @@ $prep->execute();
 $userImages = $prep->fetchAll();
 
 include 'imgLogic.php';
+include 'addAddresLogic.php';
+
+
 
 ?>
 
@@ -165,8 +168,8 @@ include 'imgLogic.php';
                     <div class="modal fade" id="add_new_address_modal" tabindex="-1"
                         aria-labelledby="add_new_address_modal" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content animated slideInTop" style="width: 580px;>
-                                <form action="" method=" POST">
+                            <div class="modal-content animated slideInTop" style="width: 580px;">
+                                <form action="" method="post">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="add_new_address_modal">Add Address</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -176,7 +179,7 @@ include 'imgLogic.php';
 
                                     <div class="form-group">
                                         <label>Address Type</label>
-                                        <select class="addresstypelist_chosen">
+                                        <select class="addresstypelist_chosen" name="address_type">
                                             <option value="Home">Home</option>
                                             <option value="Postal">Postal</option>
                                             <option value="Work">Work</option>
@@ -188,27 +191,27 @@ include 'imgLogic.php';
                                     </div>
                                     <div class="form-group">
                                         <label>Address Line 1</label>
-                                        <input type="text" name="" id="" class="form-control">
+                                        <input type="text" id="address_line_1" name="address_line_1" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Address Line 2 (Optional)</label>
-                                        <input type="text" name="" id="" class="form-control">
+                                        <input type="text" name="address_line_2" id="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Suburb/Town/City</label>
-                                        <input type="text" name="" id="" class="form-control">
+                                        <input type="text" name="city" id="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>State/County</label>
-                                        <input type="text" name="" id="" class="form-control">
+                                        <input type="text" name="state" id="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Postal/Zip Code</label>
-                                        <input type="number" name="" id="" class="form-control">
+                                        <input type="number" name="zip_code" id="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Countruy</label>
-                                        <select class="countrylist_chosen">
+                                        <select class="countrylist_chosen" name="country">
                                             <option value="Albania">Albania</option>
                                             <option value="Kosovo">Kosovo</option>
 
@@ -218,7 +221,7 @@ include 'imgLogic.php';
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="cancel" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" name="saveContact" class="save">Save</button>
+                                    <button type="submit" name="addAdress" class="save">Save</button>
                                 </div>
                                 </form>
                             </div>
