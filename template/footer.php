@@ -1,7 +1,7 @@
 <Style>
     .footer{
         height: 40px;
-        width: 1310.8px;
+        width: 1300px;
         padding-left: 20px;
         padding-right: 10px;
         background-color: #FFFFFF;

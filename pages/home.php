@@ -95,8 +95,13 @@ $data= $prep->fetch();
         </div>
         <div style="height:20px;"></div>
         <div class="homeHead">
+            <div class="image">
+            <img src="../userIMG/<?= $data2['image'] ?>" alt="" width="120px" height="120px">
+            </div>
+            <div class="peronal">
             <?php echo '<h2>' . $_SESSION['name'] . '</h2>'; ?>
             <?php echo '<h4>' . $_SESSION['position'] . '</h4>'; ?>
+            </div>
         </div>
         <div class="shortcuts">
             <div class="shortcutsHead">
