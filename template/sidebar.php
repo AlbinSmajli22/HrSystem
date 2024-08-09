@@ -50,32 +50,28 @@ $userImages = $prep->fetchAll();
             </div>
         </li>
         <li>
-            <i class="fa fa-check-square-o"></i>
-            <a href="pages/checklist.php">Checklist</a>
-        </li>
-        <li>
             <i class="fa-solid fa-money-bill-1-wave"></i>
             <a href="pages/expenses.php">Expenses</a>
         </li>
         <li>
             <i class="fa-solid fa-bullseye"></i>
-            <a href="pages/goals.php">Goals</a>
-        </li>
-        <li>
-            <i class="fa-solid fa-square-pen"></i>
-            <a href="pages/forms.php">Forms</a>
+            <a href="goals.php">Goals</a>
         </li>
         <li>
             <i class="fa-solid fa-book"></i>
-            <a href="pages/library.php">Library</a>
+            <a href="library.php">Library</a>
         </li>
         <li>
             <i class="fa-solid fa-newspaper"></i>
-            <a href="'pages/news.php">News</a>
+            <?php if($_SESSION['role']==0){ ?>
+            <a href="empNews.php">News</a>
+            <?php }else{?>
+                <a href="news.php">News</a>
+            <?php }?>
         </li>
         <li>
             <i class="fa-solid fa-thumbtack"></i>
-            <a href="pages/pinboard.php">Pinboard</a>
+            <a href="pinboard.php">Pinboard</a>
         </li>
     </ul>
 
