@@ -8,7 +8,7 @@ $userId = $_SESSION['user_id'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/empNews.css">
+    <link rel="stylesheet" href="../css/theNew.css">
     <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -34,20 +34,29 @@ $userId = $_SESSION['user_id'];
         </div>
 
         <div class="newsBody">
-            <div id="row">
-                <div class="inbox">
-                    <div class="inbox-content">
-                        <a href="theNew.php">
-                            <h2>Title</h2>
-                        </a>
-                        <div class="author">
-                            <strong>Albin Smajli</strong>
-                            <span><i class="fa fa-clock-o" style="font-size: 10px;"></i> 08 Aug 2024</span>
-                        </div>
-                        <p>Summary</p>
-                        <div class="category">
-                            <span>Ctegory</span>
-                        </div>
+            <div id="theNewContent">
+                <div id="category">
+                    <span>Important</span>
+                </div>
+                <div id="title">
+                    <span><i class="fa fa-clock-o"></i> 05 Aug 2024</span>
+                    <h1>Title</h1>
+                </div>
+                <div id="well">
+                    <p>Summery</p>
+                </div>
+                <p id="content">content</p>
+                <hr>
+                <div id="goBack">
+                    <a href="empNews.php">
+                        <i class="fa fa-chevron-left"></i>
+                         Back To Company News</a>
+                </div>
+                <div class="comments">
+                    <h1>Comments:</h1>
+                    <textarea name="" id="" placeholder="Enter your comment..."></textarea>
+                    <div>
+                        <button type="submit" name="postComment">Post Comment</button>
                     </div>
                 </div>
             </div>
