@@ -30,7 +30,7 @@ $userId = $_SESSION['user_id'];
     <div class="content">
         <?php include '../template/navbar.php' ?>
         <div class="newsHead">
-            <h2>MetDaan</h2>
+            <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
 
         <div class="newsBody">

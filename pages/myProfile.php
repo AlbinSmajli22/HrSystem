@@ -56,7 +56,7 @@ include 'imgLogic.php';
     <div id="main">
         <?php include '../template/navbar.php' ?>
         <div class="name">
-            <h2>MetDaan</h2>
+            <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
         <div class="row">
             <h3 id="well_1">Your Profile Data</h3>

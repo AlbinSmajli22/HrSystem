@@ -25,12 +25,12 @@ $userId = $_SESSION['user_id'];
 
 <body style="background-color: #F4F6FA;">
     <div>
-    <?php include '../template/sidebar.php'?>
+        <?php include '../template/sidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
         <div class="newArticleHead">
-            <h2>MetDaan</h2>
+            <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
 
         <div class="newArticleBody">

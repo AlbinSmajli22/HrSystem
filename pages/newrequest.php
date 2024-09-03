@@ -29,7 +29,7 @@ include_once 'GetLeadAndHR.php';
 <div id="request-container">
 <?php include '../template/navbar.php' ?>
     <div id="company-Name">
-        <h2>MetDaan</h2>
+    <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
     </div>
     <div id="request-Content">
         <h2>

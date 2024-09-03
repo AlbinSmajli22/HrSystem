@@ -1,33 +1,38 @@
 <?php
-  require_once '../config.php';
-  session_start();
-  $userId = $_SESSION['user_id'];
-  include 'editDirectoryLogic.php';
+require_once '../config.php';
+session_start();
+$userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
+include 'editDirectoryLogic.php';
 
-$filterquery = "SELECT * from departament";
+$filterquery = "SELECT * from departament where company_id=$companyId";
 
 $prep = $con->prepare($filterquery);
 $prep->execute();
 $filterdatas = $prep->fetchAll();
 
-$filterquery2 = "SELECT * from position";
+
+
+$filterquery2 = "SELECT * from position LEFT JOIN departament on position.Departament_ID=departament.departament_id
+WHERE departament.company_id=$companyId";
 
 $prep = $con->prepare($filterquery2);
 $prep->execute();
 $filterdatas2 = $prep->fetchAll();
 if (isset($_GET['page'])) {
-  $page = $_GET['page'];  
-}else{
+  $page = $_GET['page'];
+} else {
   $page = 1;
 }
 $limit = 10;
-$start = ($page - 1)*$limit;
-$next =$page + 1;
+$start = ($page - 1) * $limit;
+$next = $page + 1;
 $previous = $page - 1;
 
 $sql = "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id 
+        WHERE company=$companyId
         order by name asc LIMIT $start , $limit";
 
 
@@ -38,7 +43,7 @@ if (isset($_POST['search'])) {
   $sql = "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id
-        WHERE name LIKE '{$searchRequest}%' 
+        WHERE name LIKE '{$searchRequest}%' AND company=$companyId 
         order by name asc";
 }
 if (isset($_POST['applayFilter'])) {
@@ -50,7 +55,7 @@ if (isset($_POST['applayFilter'])) {
   $sql = "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id
-        WHERE departament.departament_name LIKE '{$showDepartament}%' && location LIKE '{$showLocation}%' && position.position_name LIKE '{$showPosition}%' && status LIKE '{$showEmploymentStatus}%'
+        WHERE company=$companyId AND departament.departament_name LIKE '{$showDepartament}%' && location LIKE '{$showLocation}%' && position.position_name LIKE '{$showPosition}%' && status LIKE '{$showEmploymentStatus}%'
         order by name asc ";
 
 }
@@ -61,19 +66,21 @@ $datas = $prep->fetchAll();
 
 $sql_count = "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
-        LEFT JOIN departament ON users.Departament_ID = departament.departament_id";
-        $prep = $con->prepare($sql_count);
-        $prep->execute();
-        $total_datas = $prep->rowCount();
+        LEFT JOIN departament ON users.Departament_ID = departament.departament_id
+        WHERE company=$companyId";
+$prep = $con->prepare($sql_count);
+$prep->execute();
+$total_datas = $prep->rowCount();
 
-        $total_page = ceil($total_datas/$limit);
+$total_page = ceil($total_datas / $limit);
 $currentTime = date('h:i A');
 
 ?>
 
 <html lang="en">
+
 <head>
-<script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
@@ -89,16 +96,16 @@ $currentTime = date('h:i A');
 </head>
 
 <body>
-<div>
-<?php include '../template/sidebar.php' ?>
-</div>
-<?php if($_SESSION['role']==1) {?>
-<div class="content">
-<?php include '../template/navbar.php' ?>
-    <div class="name">
-      <h2>MetDaan</h2>
-    </div>
-    <div class="clocks">
+  <div>
+    <?php include '../template/sidebar.php' ?>
+  </div>
+  <?php if ($_SESSION['role'] == 1) { ?>
+    <div class="content">
+      <?php include '../template/navbar.php' ?>
+      <div class="name">
+        <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
+      </div>
+      <div class="clocks">
         <div class="clock1">
           <div class="clock1-1">
 
@@ -119,11 +126,11 @@ $currentTime = date('h:i A');
             <?php echo '<h2>' . $currentTime . '</h2>' ?>
           </div>
         </div>
-    </div>
-    <div class="usersData">
-    
-      <div class="filters">
-        <h5>Employee Directory</h5>
+      </div>
+      <div class="usersData">
+
+        <div class="filters">
+          <h5>Employee Directory</h5>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Add Employee
           </button>
@@ -192,12 +199,12 @@ $currentTime = date('h:i A');
               </div>
             </div>
           </div>
-      </div>
-      <form class="serachBar" method="POST">
+        </div>
+        <form class="serachBar" method="POST">
           <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
           <button type="submit" name='search'>Search</button>
-      </form>
-      <table class="userTable">
+        </form>
+        <table class="userTable">
           <thead>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
               aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -466,31 +473,36 @@ $currentTime = date('h:i A');
           </tbody>
         </table>
         <div class="pagination">
-        <ul >
-              <li><a href="directory.php?page=1"><<</a></li>
-              <li><a href="directory.php?page=<?php echo $previous == 0 ? 1 : $previous ?>"><</a></li>
-            <?php for ($i=1; $i <= $total_page; $i++) { 
-                $current_page= $page;
-                $previous_2 = $current_page -2; 
-                $next_2 = $current_page +2;
-                if($i>=$previous_2 && $i <=$next_2 ){
-              ?>
-              <li><a href="directory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-            <?php } }?>
+          <ul>
+            <li><a href="directory.php?page=1">
+                << </a>
+            </li>
+            <li><a href="directory.php?page=<?php echo $previous == 0 ? 1 : $previous ?>">
+                < </a>
+            </li>
+            <?php for ($i = 1; $i <= $total_page; $i++) {
+              $current_page = $page;
+              $previous_2 = $current_page - 2;
+              $next_2 = $current_page + 2;
+              if ($i >= $previous_2 && $i <= $next_2) {
+                ?>
+                <li><a href="directory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+              <?php }
+            } ?>
             <li><a href="directory.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a></li>
-            <li><a href="directory.php?page=<?php echo $total_page?>">>></a></li>
+            <li><a href="directory.php?page=<?php echo $total_page ?>">>></a></li>
           </ul>
         </div>
+      </div>
+      <?php include '../template/footer.php'; ?>
     </div>
-    <?php include '../template/footer.php'; ?>
-</div>
-<?php } else{?>
-  <div class="content">
-  <?php include '../template/navbar.php' ?>
-    <div class="name">
-      <h2>MetDaan</h2>
-    </div>
-    <div class="clocks">
+  <?php } else { ?>
+    <div class="content">
+      <?php include '../template/navbar.php' ?>
+      <div class="name">
+        <h2>MetDaan</h2>
+      </div>
+      <div class="clocks">
         <div class="clock1">
           <div class="clock1-1">
 
@@ -511,12 +523,12 @@ $currentTime = date('h:i A');
             <?php echo '<h2>' . $currentTime . '</h2>' ?>
           </div>
         </div>
-    </div>
-    <div class="usersData">
-    
-      <div class="filters">
-        <h5>Employee Directory</h5>
-        
+      </div>
+      <div class="usersData">
+
+        <div class="filters">
+          <h5>Employee Directory</h5>
+
           <button type="button" class="addFilter" data-bs-toggle="modal" data-bs-target="#filtersModal"
             data-bs-whatever="@mdo">
             <i class="fa-solid fa-filter " style="color: #888;"></i>
@@ -582,12 +594,12 @@ $currentTime = date('h:i A');
               </div>
             </div>
           </div>
-      </div>
-      <form class="serachBar" method="POST">
+        </div>
+        <form class="serachBar" method="POST">
           <input type="text" name="search-box" class="search-box" placeholder="Search directory...">
           <button type="submit" name='search'>Search</button>
-      </form>
-      <table class="userTable">
+        </form>
+        <table class="userTable">
           <thead>
             <tr>
               <th>Name</th>
@@ -621,29 +633,35 @@ $currentTime = date('h:i A');
           </tbody>
         </table>
         <div class="pagination">
-        <ul >
-              <li><a href="directory.php?page=1"><<</a></li>
-              <li><a href="directory.php?page=<?php echo $previous == 0 ? 1 : $previous ?>"><</a></li>
-            <?php for ($i=1; $i <= $total_page; $i++) { 
-                $current_page= $page;
-                $previous_2 = $current_page -2; 
-                $next_2 = $current_page +2;
-                if($i>=$previous_2 && $i <=$next_2 ){
-              ?>
-              <li><a href="directory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-            <?php } }?>
+          <ul>
+            <li><a href="directory.php?page=1">
+                << </a>
+            </li>
+            <li><a href="directory.php?page=<?php echo $previous == 0 ? 1 : $previous ?>">
+                < </a>
+            </li>
+            <?php for ($i = 1; $i <= $total_page; $i++) {
+              $current_page = $page;
+              $previous_2 = $current_page - 2;
+              $next_2 = $current_page + 2;
+              if ($i >= $previous_2 && $i <= $next_2) {
+                ?>
+                <li><a href="directory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+              <?php }
+            } ?>
             <li><a href="directory.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a></li>
-            <li><a href="directory.php?page=<?php echo $total_page?>">>></a></li>
+            <li><a href="directory.php?page=<?php echo $total_page ?>">>></a></li>
           </ul>
         </div>
+      </div>
+      <?php include '../template/footer.php'; ?>
     </div>
-    <?php include '../template/footer.php'; ?>
-</div>
-<?php } ?>
+  <?php } ?>
 </body>
+
 </html>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script>
 <script>
   $(document).click(function () {
     $('#edit').click(function (e) {

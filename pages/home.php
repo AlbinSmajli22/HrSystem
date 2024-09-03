@@ -2,9 +2,10 @@
 require_once '../config.php';
 require 'Calendar.php';
 session_start();
-$userId=$_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
 
-$calendar = new Calendar(new CurrentDate(), new CalendarDate() );
+$calendar = new Calendar(new CurrentDate(), new CalendarDate());
 
 $calendar->setSundayFirst(false);
 
@@ -21,50 +22,50 @@ $sickLeave;
 
 $currentTime = date('h:i A');
 
-$sql="  SELECT * FROM timeoff WHERE User_ID = $userId";
-$prep= $con->prepare($sql);
+$sql = "  SELECT * FROM timeoff WHERE User_ID = $userId";
+$prep = $con->prepare($sql);
 
 $prep->execute();
-$data= $prep->fetch();
+$data = $prep->fetch();
 
-    $annualLeave = $data['annual_leave'];
-    $childBorn = $data['child_born'];
-    $deathofFamilyMember = $data['death_of_family_member'];
-    $movingDay = $data['moving_day'];
-    $weddingDay = $data['wedding_day'];
-    $sickLeave = $data['sick_leave'];
-
-
-
-    $sql="  SELECT * FROM users WHERE User_ID = $userId";
-    $prep= $con->prepare($sql);
-    
-    $prep->execute();
-    $data2= $prep->fetch();
+$annualLeave = $data['annual_leave'];
+$childBorn = $data['child_born'];
+$deathofFamilyMember = $data['death_of_family_member'];
+$movingDay = $data['moving_day'];
+$weddingDay = $data['wedding_day'];
+$sickLeave = $data['sick_leave'];
 
 
-    $leaderID =$_SESSION['report_to'];
 
-    $sql= "SELECT * from users
+$sql = "  SELECT * FROM users WHERE User_ID = $userId";
+$prep = $con->prepare($sql);
+
+$prep->execute();
+$data2 = $prep->fetch();
+
+
+$leaderID = $_SESSION['report_to'];
+
+$sql = "SELECT * from users
         LEFT JOIN position ON users.Position_ID = position.position_id
         LEFT JOIN departament ON users.Departament_ID = departament.departament_id
         WHERE User_ID = $leaderID";
 
-    $prep= $con->prepare($sql);
-    
-    $prep->execute();
-    $leaderData= $prep->fetch();
+$prep = $con->prepare($sql);
 
-    $leaderName = $leaderData["name"];
-    $leaderSurname = $leaderData["surname"];
-    $leaderPosition = $leaderData["position_name"];
+$prep->execute();
+$leaderData = $prep->fetch();
 
-    $sql="SELECT * From timeoffrequests
+$leaderName = $leaderData["name"];
+$leaderSurname = $leaderData["surname"];
+$leaderPosition = $leaderData["position_name"];
+
+$sql = "SELECT * From timeoffrequests
     WHERE User_ID =$userId
     ORDER BY timeoffrequests.request_id DESC LIMIT 0, 5";
-    $prep=$con->prepare($sql);
-    $prep->execute();
-    $requestDatas= $prep->fetchAll();
+$prep = $con->prepare($sql);
+$prep->execute();
+$requestDatas = $prep->fetchAll();
 ?>
 
 <head>
@@ -85,22 +86,22 @@ $data= $prep->fetch();
 
 <body>
     <div>
-    <?php include '../template/sidebar.php' ?>
+        <?php include '../template/sidebar.php' ?>
 
     </div>
     <div id="main">
-    <?php include '../template/navbar.php' ?>
+        <?php include '../template/navbar.php' ?>
         <div class="name">
-            <h2>MetDaan</h2>
+            <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
         <div style="height:20px;"></div>
         <div class="homeHead">
             <div class="image">
-            <img src="../userIMG/<?= $data2['image'] ?>" alt="" width="120px" height="120px">
+                <img src="../userIMG/<?= $data2['image'] ?>" alt="" width="120px" height="120px">
             </div>
             <div class="peronal">
-            <?php echo '<h2>' . $_SESSION['name'] . '</h2>'; ?>
-            <?php echo '<h4>' . $_SESSION['position'] . '</h4>'; ?>
+                <?php echo '<h2>' . $_SESSION['name'] . '</h2>'; ?>
+                <?php echo '<h4>' . $_SESSION['position'] . '</h4>'; ?>
             </div>
         </div>
         <div class="shortcuts">
@@ -143,7 +144,7 @@ $data= $prep->fetch();
 
         </div>
         <div class="thirdContainer">
-        <div class="leftDiv">
+            <div class="leftDiv">
                 <div class="Activechecklists">
                     <div class="ActivechecklistsHead">
                         <h5>
@@ -191,58 +192,58 @@ $data= $prep->fetch();
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>
-                                        <td class="leavType">Annual Leave</td>
-                                        <td>20.00</td>
-                                        <td><?=$annualLeave?></td>
-                                        <td>0.00</td>
-                                        <td><?=$annualLeave?></td>
-                                        <td>Days</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leavType">Child born</td>
-                                        <td>3.00</td>
-                                        <td>0.00</td>
-                                        <td>0.00</td>
-                                        <td><?= $childBorn?></td>
-                                        <td>Days</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leavType">Death of Family Member</td>
-                                        <td>5.00</td>
-                                        <td>0.00</td>
-                                        <td>0.00</td>
-                                        <td><?= $deathofFamilyMember?></td>
-                                        <td>Days</td>
-                                       
-                                    
-                                    </tr>
-                                    <tr>
-                                        <td class="leavType">Moving Day</td>
-                                        <td>1.00</td>
-                                        <td>0.00</td>
-                                        <td>0.00</td>
-                                        <td><?= $movingDay?></td>
-                                        <td>Days</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leavType">Wedding Day</td>
-                                        <td>5.00</td>
-                                        <td>0.00</td>
-                                        <td>0.00</td>
-                                        <td><?= $weddingDay?></td>
-                                        <td>Days</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="leavType">Sick Leave</td>
-                                        <td>20.00</td>
-                                        <td><?= $sickLeave?></td>
-                                        <td>0.00</td>
-                                        <td><?= $sickLeave?></td>
-                                        <td>Days</td>
-                                    </tr>
-                                </tbody>
-                        </table> 
+                                <tr>
+                                    <td class="leavType">Annual Leave</td>
+                                    <td>20.00</td>
+                                    <td><?= $annualLeave ?></td>
+                                    <td>0.00</td>
+                                    <td><?= $annualLeave ?></td>
+                                    <td>Days</td>
+                                </tr>
+                                <tr>
+                                    <td class="leavType">Child born</td>
+                                    <td>3.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td><?= $childBorn ?></td>
+                                    <td>Days</td>
+                                </tr>
+                                <tr>
+                                    <td class="leavType">Death of Family Member</td>
+                                    <td>5.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td><?= $deathofFamilyMember ?></td>
+                                    <td>Days</td>
+
+
+                                </tr>
+                                <tr>
+                                    <td class="leavType">Moving Day</td>
+                                    <td>1.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td><?= $movingDay ?></td>
+                                    <td>Days</td>
+                                </tr>
+                                <tr>
+                                    <td class="leavType">Wedding Day</td>
+                                    <td>5.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td><?= $weddingDay ?></td>
+                                    <td>Days</td>
+                                </tr>
+                                <tr>
+                                    <td class="leavType">Sick Leave</td>
+                                    <td>20.00</td>
+                                    <td><?= $sickLeave ?></td>
+                                    <td>0.00</td>
+                                    <td><?= $sickLeave ?></td>
+                                    <td>Days</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="recentLeaveRequests">
@@ -265,7 +266,7 @@ $data= $prep->fetch();
                             <tbody>
                                 <?php foreach ($requestDatas as $requestData): ?>
                                     <tr>
-                                        <td> 
+                                        <td>
                                             <?= $requestData['short_description'] ?>
                                         </td>
                                         <td>
@@ -295,88 +296,99 @@ $data= $prep->fetch();
                         </table>
                     </div>
                 </div>
-            <div class="Calendar">
-                <div class="calendarHead">
-                    <h5>
-                        <img src="../images/calendar.png" alt="" height="24px" width="24px">
-                        Calendar
-                    </h5>
-                </div>
-                <div class="calendarBody">
-                    <div class="currentDate">
-                    <h5> October 2023</h5>
-                    <div>
-                        <button style="font-size:12px; height:28px; margin-right: 5px; width:60px;">today</button>
-                        <button><</button>
-                        <button>></button>
-                    </div>  
+                <div class="Calendar">
+                    <div class="calendarHead">
+                        <h5>
+                            <img src="../images/calendar.png" alt="" height="24px" width="24px">
+                            Calendar
+                        </h5>
                     </div>
-                    <div class="calendarTableDiv">
-                    <table class="calendarTable">
-                        <thead>
-                            <?php foreach ($calendar->getDayLabels() as $dayLabel):?>
-                            <th>
-                                <?php echo $dayLabel ?>
-                            </th>    
-                            <?php endforeach; ?>
-                        </thead>
-                        <tbody>
+                    <div class="calendarBody">
+                        <div class="currentDate">
+                            <h5> October 2023</h5>
                             <div>
+                                <button
+                                    style="font-size:12px; height:28px; margin-right: 5px; width:60px;">today</button>
+                                <button>
+                                    << /button>
+                                        <button>></button>
                             </div>
-                            <?php foreach ($calendar->getWeeks() as $week):?>
-                                <tr>
-                                    <?php foreach ($week as $day):?>
-                                        <td <?php if(!$day['currentMonth']): ?> style="color:#e7eaec;" <?php endif; ?>>
-                                            <span <?php if($calendar->isCurrentDate($day['dayNumber'])):?> style=" background-color:fcf8e3;" <?php endif; ?>>
-                                            <?php echo $day['dayNumber']; ?>
-                                            </span>
-                                         </td>
+                        </div>
+                        <div class="calendarTableDiv">
+                            <table class="calendarTable">
+                                <thead>
+                                    <?php foreach ($calendar->getDayLabels() as $dayLabel): ?>
+                                        <th>
+                                            <?php echo $dayLabel ?>
+                                        </th>
                                     <?php endforeach; ?>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    <div>
+                                    </div>
+                                    <?php foreach ($calendar->getWeeks() as $week): ?>
+                                        <tr>
+                                            <?php foreach ($week as $day): ?>
+                                                <td <?php if (!$day['currentMonth']): ?> style="color:#e7eaec;" <?php endif; ?>>
+                                                    <span <?php if ($calendar->isCurrentDate($day['dayNumber'])): ?>
+                                                            style=" background-color:fcf8e3;" <?php endif; ?>>
+                                                        <?php echo $day['dayNumber']; ?>
+                                                    </span>
+                                                </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="legendGuide">
+                            <p>Legend:</p>
+                            <div class="legendColor">
+                                <div class="legend" style="background-color:#B8B790;"></div>
+                                <p>Annual Leave</p>
+                                <div class="legend" style="background-color:#C0A8A5;"></div>
+                                <p>Child born</p>
+                                <div class="legend" style="background-color:#87CFE3;"></div>
+                                <p>Death of Family Member</p>
+                                <div class="legend" style="background-color:#8BD2AC;"></div>
+                                <p>Maternity Leave</p>
+                                <div class="legend" style="background-color:#D3AB9D;"></div>
+                                <p>Moving Day</p>
+                                <div class="legend" style="background-color:#F3B188;"></div>
+                                <p>Sick Leave</p>
+                                <div class="legend" style="background-color:#CACDAF;"></div>
+                                <p>Wedding Day</p>
+                                <div class="legend" style="background-color:#AAE6A0;"></div>
+                                <p>Work from Home</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="legendGuide">
-                        <p>Legend:</p>
-                        <div class="legendColor">
-                            <div class="legend" style="background-color:#B8B790;"></div><p>Annual Leave</p>
-                            <div class="legend" style="background-color:#C0A8A5;"></div><p>Child born</p>
-                            <div class="legend" style="background-color:#87CFE3;"></div><p>Death of Family Member</p>
-                            <div class="legend" style="background-color:#8BD2AC;"></div><p>Maternity Leave</p>
-                            <div class="legend" style="background-color:#D3AB9D;"></div><p>Moving Day</p>
-                            <div class="legend" style="background-color:#F3B188;"></div><p>Sick Leave</p>
-                            <div class="legend" style="background-color:#CACDAF;"></div><p>Wedding Day</p>
-                            <div class="legend" style="background-color:#AAE6A0;"></div><p>Work from Home</p>
+                </div>
+                <div>
+                </div>
+                <div class="clocks">
+                    <div class="clock1">
+                        <div class="clock1-1">
+                            <a href="">Main Office</a>
+                        </div>
+                        <div class="clock1-2">
+                            <i class="fa-regular fa-clock  fa-2xl" style="color: #3772d7;"></i>
+                            <?php echo '<h2>' . $currentTime . '</h2>' ?>
+                        </div>
+                    </div>
+                    <div class="clock2">
+                        <div class="clock2-1">
+                            <a href="">Production Office</a>
+                        </div>
+                        <div class="clock2-2">
+                            <i class="fa-regular fa-clock fa-2xl" style="color: #3772d7;"></i>
+                            <?php echo '<h2>' . $currentTime . '</h2>' ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
-            </div>
-            <div class="clocks">
-                <div class="clock1">
-                    <div class="clock1-1">
-                        <a href="">Main Office</a>
-                    </div>
-                    <div class="clock1-2">
-                        <i class="fa-regular fa-clock  fa-2xl" style="color: #3772d7;"></i>
-                        <?php echo '<h2>' . $currentTime . '</h2>' ?>
-                    </div>
-                </div>
-                <div class="clock2">
-                    <div class="clock2-1">
-                        <a href="">Production Office</a>
-                    </div>
-                    <div class="clock2-2">
-                        <i class="fa-regular fa-clock fa-2xl" style="color: #3772d7;"></i>
-                        <?php echo '<h2>' . $currentTime . '</h2>' ?>
-                    </div>
-                </div>
-            </div>
-            </div>
             <div class="midDiv">
-            <div class="MyInfo">
+                <div class="MyInfo">
                     <div class="MyInfoHead">
                         <h5>
                             <img src="../images/information.png" alt="" height="24px" width="24px">
@@ -387,7 +399,7 @@ $data= $prep->fetch();
                         <div class="MyInfoContent">
                             <table class="personalInfo">
                                 <tbody>
-                                     <tr>
+                                    <tr>
                                         <td>Code</td>
                                         <?php echo '<th>' . $_SESSION['user_id'] . '</th>'; ?>
                                     </tr>
@@ -405,48 +417,48 @@ $data= $prep->fetch();
                                     </tr>
                                     <tr>
                                         <td>Gender</td>
-                                        <?php if ($_SESSION['gender'] == null ){
+                                        <?php if ($_SESSION['gender'] == null) {
 
-                                            echo '<th>  N/A  </th>'; 
-                                    
+                                            echo '<th>  N/A  </th>';
+
                                         } else {
-                                            echo '<th>' . $_SESSION['gender'] . '</th>'; 
-                                            }?>
+                                            echo '<th>' . $_SESSION['gender'] . '</th>';
+                                        } ?>
                                     </tr>
                                     <tr>
                                         <td>Born</td>
-                                        <?php echo '<th>' . $_SESSION['born'] . '</th>'; ?>   
+                                        <?php echo '<th>' . $_SESSION['born'] . '</th>'; ?>
                                     </tr>
                                     <tr>
                                         <td>Age</td>
                                         <?php
-                                         if (!$_SESSION['born'] == null ){
+                                        if (!$_SESSION['born'] == null) {
                                             $currentDate = gmdate('Y-m-d');
-                                            $currentDate =date_create($currentDate);
+                                            $currentDate = date_create($currentDate);
                                             $birthDay = $data2['born'];
                                             $birthDay = date_create($birthDay);
 
-                                            $mosha = date_diff($birthDay , $currentDate );
+                                            $mosha = date_diff($birthDay, $currentDate);
 
-                                             echo '<th>'. $mosha->y .'</th>';
-                                            } else {
+                                            echo '<th>' . $mosha->y . '</th>';
+                                        } else {
                                             echo '<th>  N/A  </th>';
-                                            }?>
+                                        } ?>
                                     </tr>
                                     <tr>
                                         <td>Employed For</td>
                                         <?php
-                                            $currentDate = gmdate('Y-m-d');
-                                            $currentDate =date_create($currentDate);
-                                            $startedDate = $data2['started'];
-                                            $startedDate = date_create($startedDate);
+                                        $currentDate = gmdate('Y-m-d');
+                                        $currentDate = date_create($currentDate);
+                                        $startedDate = $data2['started'];
+                                        $startedDate = date_create($startedDate);
 
-                                            $worksFor = date_diff($startedDate , $currentDate );
+                                        $worksFor = date_diff($startedDate, $currentDate);
 
-                                             echo '<th>'. $worksFor->y .' years '.$worksFor->m .' months '.$worksFor->d.' days'.'</th>';
-                                             ?>
+                                        echo '<th>' . $worksFor->y . ' years ' . $worksFor->m . ' months ' . $worksFor->d . ' days' . '</th>';
+                                        ?>
                                     </tr>
-                                </tbody>        
+                                </tbody>
 
                             </table>
                         </div>
@@ -461,7 +473,7 @@ $data= $prep->fetch();
                     </div>
                     <div class="ReportsToBody">
                         <img src="../images/albin-smajli.png" alt="">
-                        <p><Strong><?=  $leaderName ?> <?=  $leaderSurname ?> </Strong> , <?=  $leaderPosition ?></p>
+                        <p><Strong><?= $leaderName ?> <?= $leaderSurname ?> </Strong> , <?= $leaderPosition ?></p>
                     </div>
                 </div>
                 <div class="RecentReviews">
@@ -473,7 +485,8 @@ $data= $prep->fetch();
                     </div>
                     <div class="RecentReviewsBody">
                         <p>
-                            You have no performance reviews on file at the moment. As you undertake them, the most recent reviews will be shown here.
+                            You have no performance reviews on file at the moment. As you undertake them, the most
+                            recent reviews will be shown here.
                         </p>
                     </div>
                 </div>
@@ -486,7 +499,8 @@ $data= $prep->fetch();
                     </div>
                     <div class="RecentTrainingBody">
                         <p>
-                        There are no recent courses in your file at the moment. As you complete internal training courses, they will be displayed here.
+                            There are no recent courses in your file at the moment. As you complete internal training
+                            courses, they will be displayed here.
                         </p>
                     </div>
                 </div>
@@ -499,14 +513,15 @@ $data= $prep->fetch();
                     </div>
                     <div class="RenewableDocumentsBody">
                         <p>
-                        There are no renewable documents in your file at the moment. These are documents pertaining to your work, such as a certificates or licences that must be renewed periodically.
+                            There are no renewable documents in your file at the moment. These are documents pertaining
+                            to your work, such as a certificates or licences that must be renewed periodically.
                         </p>
                     </div>
                 </div>
                 <div class="SalaryHistory">
                     <div class="SalaryHistoryHead">
                         <h5>
-                            <img src="../images/position.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/position.png" alt="" height="24px" width="24px">
                             Your Position/Salary History
                         </h5>
                     </div>
@@ -519,45 +534,46 @@ $data= $prep->fetch();
                 <div class="AssetsInYourCare">
                     <div class="AssetsInYourCareHead">
                         <h5>
-                            <img src="../images/asset.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/asset.png" alt="" height="24px" width="24px">
                             Assets In Your Care
                         </h5>
                     </div>
                     <div class="AssetsInYourCareBody">
                         <p>
-                        There are no company assets currently marked as being out on loan to you. If you are loaned a company asset such as a phone, laptop or keycard etc., then they will show in here.
+                            There are no company assets currently marked as being out on loan to you. If you are loaned
+                            a company asset such as a phone, laptop or keycard etc., then they will show in here.
                         </p>
                     </div>
                 </div>
                 <div class="YourDependents">
                     <div class="YourDependentsHead">
                         <h5>
-                            <img src="../images/dependent.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/dependent.png" alt="" height="24px" width="24px">
                             Your Dependents
                         </h5>
                     </div>
                     <div class="YourDependentsBody">
                         <p>
-                        There are no dependents recorded on your file at the moment.
+                            There are no dependents recorded on your file at the moment.
                         </p>
                     </div>
                 </div>
             </div>
             <div class="rightDiv">
-            <div class="JobPortal">
+                <div class="JobPortal">
                     <div class="JobPortalHead">
                         <h5>
-                            <img src="../images/jobs.png" alt="" height="24px" width="24px">                           
+                            <img src="../images/jobs.png" alt="" height="24px" width="24px">
                             Job Portal
                         </h5>
                     </div>
                     <div class="JobPortalBody">
                         <p>
-                        Your company jobs portal is at:
+                            Your company jobs portal is at:
                         </p>
                         <a href="https://metdaan.hrpartner.io/jobs">https://metdaan.hrpartner.io/jobs</a>
                         <p>
-                        <small style=" color: #888;">(There are no jobs currently listed)</small>
+                            <small style=" color: #888;">(There are no jobs currently listed)</small>
                         </p>
                     </div>
                 </div>

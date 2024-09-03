@@ -9,7 +9,7 @@ if (isset($_GET['page'])) {
     $page = 1;
 }
 
-$limit = 10;
+$limit = 30;
 $start = ($page - 1) * $limit;
 $next = $page + 1;
 $previous = $page - 1;
@@ -67,7 +67,7 @@ include_once 'GetLeadAndHR.php';
     <div class="content">
         <?php include '../template/navbar.php' ?>
         <div class="requestHead">
-            <h2>MetDaan</h2>
+            <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
         <div class="requestBody">
             <div class="requestTableHead">
@@ -116,11 +116,11 @@ include_once 'GetLeadAndHR.php';
                 </table>
                 <div class="paginationn">
                     <ul>
-                        <li><a href="request.php?page=1">
-                                <<< /a>
+                        <li><a href="requesthistory.php?page=1">
+                                << </a>
                         </li>
-                        <li><a href="request.php?page=<?php echo $previous == 0 ? 1 : $previous ?>">
-                                << /a>
+                        <li><a href="requesthistory.php?page=<?php echo $previous == 0 ? 1 : $previous ?>">
+                                < </a>
                         </li>
                         <?php for ($i = 1; $i <= $total_page; $i++) {
                             $current_page = $page;
@@ -128,12 +128,12 @@ include_once 'GetLeadAndHR.php';
                             $next_2 = $current_page + 2;
                             if ($i >= $previous_2 && $i <= $next_2) {
                                 ?>
-                                <li><a href="request.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                                <li><a href="requesthistory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
                             <?php }
                         } ?>
-                        <li><a href="request.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a>
+                        <li><a href="requesthistory.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a>
                         </li>
-                        <li><a href="request.php?page=<?php echo $total_page ?>">>></a></li>
+                        <li><a href="requesthistory.php?page=<?php echo $total_page ?>">>></a></li>
                     </ul>
                 </div>
                 <div>

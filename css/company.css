@@ -1,0 +1,20 @@
+body{
+    background-color: #F4F6FA;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    color: #676A6C;
+}
+#content{
+    display: flex;
+    flex-direction: column;
+}
+#content #registration{
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+}
+#content #footer{
+    color: #676A6C;
+}
