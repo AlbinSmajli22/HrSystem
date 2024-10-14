@@ -306,6 +306,13 @@ $currentTime = date('h:i A');
                         <label for="started" class="col-form-label">Started Date:</label>
                         <input type="date" name="started" id="started">
                       </div>
+                      <div class="mb-3">
+                        <label for="started" class="col-form-label">Address:</label>
+                        <input type="text" name="address" id="address">
+                      </div>
+                      <div class="mb-3">
+                        <input type="hidden" name="company" id="company" value="<?php $_SESSION['company'] ?>">
+                      </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" name="submit" class="btn btn-success">Registre Employee</button>
