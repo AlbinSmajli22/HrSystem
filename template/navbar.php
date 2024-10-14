@@ -6,7 +6,7 @@
     flex-direction:row;
     justify-content: space-between;
     align-items:center;
-    height: 70px;
+    height: 60px;
     background-color: white;
     width:100%;
 }
@@ -56,8 +56,11 @@
 <div id="logout">
     <div id="logout1">
         <i class="fa-solid fa-right-from-bracket"></i><br>
-        <small><a href="logout.php">Log out</a></small>
+        <small><a href="../logout.php">Log out</a></small>
     </div>
-<img src="./images/hrpartner-header.png" alt="" height= "40px" width="120px">
+<img src="../images/hrpartner-header.png" alt="" height= "40px" width="120px">
 </div>
 </div>
+<script>
+    
+</script>

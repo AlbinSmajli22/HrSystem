@@ -9,7 +9,7 @@ require_once '../config.php';
     $prep->execute();
     if($prep->execute()){
         echo'user was delited';
-        header("Location: ../main.php?page=directory");
+        header("Location: directory.php");
     }
     else {
         echo'user was not delited';

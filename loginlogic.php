@@ -10,7 +10,8 @@ if (isset($_POST['submit'])) {
 
     $sql="SELECT * FROM users
           LEFT JOIN position ON users.Position_ID = position.position_id
-          LEFT JOIN departament ON users.Departament_ID = departament.departament_id 
+          LEFT JOIN departament ON users.Departament_ID = departament.departament_id
+          LEFT JOIN company ON users.company=company.company_id
           WHERE email=:email";
 
     $prep= $con->prepare($sql);
@@ -23,7 +24,15 @@ if (isset($_POST['submit'])) {
         echo "user does not exist";
     }
     elseif (password_verify($password, $data['password'])) {
+        $sql="SELECT * FROM users";
+        $prep= $con->prepare($sql);
+        $prep->execute();
+        $data2= $prep->fetch();
+
+        $_SESSION['company']=$data['company'];
+        $_SESSION['company_name']=$data['company_name'];
         $_SESSION['user_id']=$data['user_id'];
+        $_SESSION['password']=$data['password'];
         $_SESSION['email']=$data['email'];
         $_SESSION['position']=$data['position_name'];
         $_SESSION['departament']=$data['departament_name'];
@@ -35,9 +44,10 @@ if (isset($_POST['submit'])) {
         $_SESSION['gender']=$data['gender'];
         $_SESSION['born']=$data['born'];
         $_SESSION['started']=$data['started'];
+        $_SESSION['HR']=$data2['name']." ".$data2['surname'];
         
 
-        header("Location: main.php");  
+        header("Location: pages/home.php");  
     }
     elseif(!password_verify($password, $data['password'])){
         echo 'Password is Wrong.';

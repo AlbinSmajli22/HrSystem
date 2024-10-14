@@ -10,6 +10,6 @@ $con= new PDO("mysql:host=$host; dbname=$db;", $user, $password);
 
 }
 catch(Exception $e){
-    echo "error ".$e;
+    echo "eshte paraqitur errori ".$e;
 }
 ?>

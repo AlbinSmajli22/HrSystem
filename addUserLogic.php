@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
    
     $prep->execute();
     
-    Header("Location:main.php");
+    Header("Location:pages/directory.php");
 }
 
 ?>
