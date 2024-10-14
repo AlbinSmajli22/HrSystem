@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:wght@300&display=swap');
+body{
+    background-color: #F4F6FA;
+ 
+    
+    color: #676A6C;
+}
+#content{
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 20px 20px;
+}
+#logo{
+    
+    text-align: center;
+    margin-bottom: 20px;
+}
+#logo img{
+    width:250px;
+    height:125px;
+}
+#content #info{
+    width: 100%;
+    background-color: #fff;
+    margin: 0px 0px 20px 10px;
+    padding: 15px;
+    border:solid 1px #26c6da;
+    border-radius: 4px;
+}
+#content #info img{
+    float: left;
+    margin-right: 20px;
+}
+#content #info h3{
+    font-weight: 600;
+    margin: 5px 0 10px 0;
+    font-size: 16px;
+}
+#content #info p{
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+#content #registration{
+    display: flex;
+    flex-direction: row;
+}
+#content #registration #data{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 15px 20px 20px 20px;
+}
+#content #registration #data form{
+    margin-top: 15px;
+    width: 100%;
+    font-size: 13px;
+    color: #676a6c;
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+#content #registration #data form h4{
+    color: #2196f3;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+#content #registration #data form .datarow{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#content #registration #data form .datarow .inputdata{
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid #e5e6e7;
+}
+#content #registration #data form .datarow button{
+    width: 100%;
+    background-color: #4caf50;
+    border:solid #4caf50 1px;
+    border-radius: 4px;
+    color: #fff;
+    padding: 6px 12px;
+    margin: 10px 0px 15px 0px;
+    font-size: 14px;
+    font-weight: 400;
+
+}
+#data #fullname{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+#data #fullname .nameinput{
+  width: 49%;
+  padding: 6px 12px;
+  border: 1px solid #e5e6e7;
+}
+#content #impressions{
+ padding: 0px 5px 0px 5px;
+}
+#content #impressions img{
+    height: 400px;
+    width: 100%;
+}
+#content #footer{
+    color: #676A6C;
+    text-align: center;
+    margin: 30px 0px 10px 0px;
+    font-size: 12px;
+}
