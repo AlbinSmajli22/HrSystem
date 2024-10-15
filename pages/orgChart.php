@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>Org. Chart</h3>
+    <h1>Pershendetje Albin</h1>
     <!--
         <table class="leavs">
                                 <thead>
