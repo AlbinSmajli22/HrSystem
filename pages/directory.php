@@ -74,6 +74,7 @@ $total_datas = $prep->rowCount();
 
 $total_page = ceil($total_datas / $limit);
 $currentTime = date('h:i A');
+$company=$_SESSION['company'];
 
 ?>
 
@@ -307,11 +308,7 @@ $currentTime = date('h:i A');
                         <input type="date" name="started" id="started">
                       </div>
                       <div class="mb-3">
-                        <label for="started" class="col-form-label">Address:</label>
-                        <input type="text" name="address" id="address">
-                      </div>
-                      <div class="mb-3">
-                        <input type="hidden" name="company" id="company" value="<?php $_SESSION['company'] ?>">
+                        <input type="hidden" name="company" id="company" value="<?= $company ?>" placeholder="<?= $company ?>">
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -19,13 +19,12 @@ if (isset($_POST['submit'])) {
     $gender= $_POST['gender'];
     $born= $_POST['born'];
     $started = $_POST['started'];
-    $born= $_POST['adress'];
-    $started = $_POST['company'];
+    $company = $_POST['company'];
 
 
 
-    $sql = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started, adress, company) 
-    VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status, :report_to, :gender, :born, :started, :adress, :company)";
+    $sql = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started,company) 
+    VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status, :report_to, :gender, :born, :started, :company)";
 
     $prep = $con->prepare($sql);
 
@@ -42,7 +41,6 @@ if (isset($_POST['submit'])) {
     $prep->bindParam(':gender', $gender);
     $prep->bindParam(':born', $born);
     $prep->bindParam(':started', $started);
-    $prep->bindParam(':adress', $adress);
     $prep->bindParam(':company', $company);
    
     $prep->execute();
