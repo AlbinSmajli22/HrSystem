@@ -21,8 +21,6 @@ if (isset($_POST['registre'])) {
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
     $emp_num = $_POST['emp_num'];
-    $Position_ID=null;
-    $Departament_ID=null;
     $role=1;
     $location=null;
     $status=null;
@@ -30,7 +28,8 @@ if (isset($_POST['registre'])) {
     $gender=null;
     $born=null;
     $started=date("y-m-d");
-    $adress=null;
+
+
 
     $query = "SELECT * FROM company WHERE company_name like '$company_name'";
 
@@ -54,6 +53,7 @@ if (isset($_POST['registre'])) {
 
         $last_id = $con->lastInsertId();
         
+        //create new departament
 
         $departament_name = 'Human Resources';
         $company_id=$last_id;
@@ -67,12 +67,30 @@ if (isset($_POST['registre'])) {
         $prep->bindParam(':company_id', $company_id);
 
         $prep->execute();
+        $Departament_ID = $con->lastInsertId();
 
-        $company=$last_id;
+        //Create new position
+
+        $position_name ="Human Resource Manager";
+
+        $positionQuery = "INSERT INTO position (position_name, Departament_ID ) 
+        VALUES (:position_name,  :Departament_ID)";
+
+        $prep = $con->prepare($positionQuery);
+
+        $prep->bindParam(':position_name', $position_name);
+        $prep->bindParam(':Departament_ID', $Departament_ID);
+
+        $prep->execute();
+        $Position_ID = $con->lastInsertId();
+
+
+
         
-                
-                $userQuery = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started, adress, company) 
-                VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status, :report_to, :gender, :born, :started, :adress, :company)";
+        
+               
+                $userQuery = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started, company) 
+                VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status, :report_to, :gender, :born, :started,  :company)";
 
                 $prep = $con->prepare($userQuery);
             
@@ -89,8 +107,7 @@ if (isset($_POST['registre'])) {
                 $prep->bindParam(':gender', $gender);
                 $prep->bindParam(':born', $born);
                 $prep->bindParam(':started', $started);
-                $prep->bindParam(':adress', $adress);
-                $prep->bindParam(':company', $company);
+                $prep->bindParam(':company', $company_id);
                
                 $prep->execute();
 
@@ -131,6 +148,8 @@ if (isset($_POST['registre'])) {
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
+
+            //var_dump($last_id, $Departament_ID, $Position_ID );
             header("Location: index.php");
 
 
