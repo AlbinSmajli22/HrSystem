@@ -7,5 +7,14 @@
 </head>
 <body>
     <h1>Pershendetje Erjon</h1>
+
+    <table>
+        <thead>
+            <td>nr</td>
+        </thead>
+        <tbody>
+            <td>25</td>
+        </tbody>
+    </table>
 </body>
 </html>
