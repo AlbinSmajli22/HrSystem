@@ -21,13 +21,12 @@ if (isset($_POST['registre'])) {
     $temPass = $_POST['password'];
     $password = password_hash($temPass, PASSWORD_DEFAULT);
     $emp_num = $_POST['emp_num'];
-    $role=1;
-    $location=null;
-    $status=null;
-    $report_to=null;
-    $gender=null;
-    $born=null;
-    $started=date("y-m-d");
+    $role = 1;
+    $location = null;
+    $status = null;
+    $gender = null;
+    $born = null;
+    $started = date("y-m-d");
 
 
 
@@ -52,11 +51,13 @@ if (isset($_POST['registre'])) {
         $prep->execute();
 
         $last_id = $con->lastInsertId();
-        
+
+
+
         //create new departament
 
         $departament_name = 'Human Resources';
-        $company_id=$last_id;
+        $company_id = $last_id;
 
         $departamentQuery = "INSERT INTO departament (departament_name, company_id ) 
         VALUES (:departament_name,  :company_id)";
@@ -71,7 +72,7 @@ if (isset($_POST['registre'])) {
 
         //Create new position
 
-        $position_name ="Human Resource Manager";
+        $position_name = "Human Resource Manager";
 
         $positionQuery = "INSERT INTO position (position_name, Departament_ID ) 
         VALUES (:position_name,  :Departament_ID)";
@@ -84,32 +85,49 @@ if (isset($_POST['registre'])) {
         $prep->execute();
         $Position_ID = $con->lastInsertId();
 
+        //crate default leaves
 
+        $Annual_leave = "Annual Leave";
+        $Sick_leave = "Sick Leave";
 
+        $leavesQuery = "INSERT INTO timeofftype (time_off, company_id) VALUES (:Annual_leave, :company_id),(:Sick_leave, :company_id)";
         
-        
-               
-                $userQuery = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started, company) 
+        $prep = $con->prepare($leavesQuery);
+
+        $prep->bindValue(':Annual_leave','Annual Leave');
+        $prep->bindParam(':company_id', $company_id);
+        $prep->bindValue(':Sick_leave', 'Sick Leave');
+        $prep->execute();
+    
+        //get next id to implemet in users table
+
+        $nextUser = " SHOW TABLE STATUS LIKE 'users'  ";
+
+        $result = $con->query($nextUser);
+        $row = $result->fetch();
+        $report_to = $row['Auto_increment'];
+
+        $userQuery = "INSERT INTO users (name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started, company) 
                 VALUES (:name, :surname, :email, :password,:Position_ID,:Departament_ID,:role, :location, :status, :report_to, :gender, :born, :started,  :company)";
 
-                $prep = $con->prepare($userQuery);
-            
-                $prep->bindParam(':name', $name);
-                $prep->bindParam(':surname', $surname);
-                $prep->bindParam(':email', $email);
-                $prep->bindParam(':password', $password);
-                $prep->bindParam(':Position_ID', $Position_ID);
-                $prep->bindParam(':Departament_ID', $Departament_ID);
-                $prep->bindParam(':role', $role);
-                $prep->bindParam(':location', $location);
-                $prep->bindParam(':status', $status);
-                $prep->bindParam(':report_to', $report_to);
-                $prep->bindParam(':gender', $gender);
-                $prep->bindParam(':born', $born);
-                $prep->bindParam(':started', $started);
-                $prep->bindParam(':company', $company_id);
-               
-                $prep->execute();
+        $prep = $con->prepare($userQuery);
+
+        $prep->bindParam(':name', $name);
+        $prep->bindParam(':surname', $surname);
+        $prep->bindParam(':email', $email);
+        $prep->bindParam(':password', $password);
+        $prep->bindParam(':Position_ID', $Position_ID);
+        $prep->bindParam(':Departament_ID', $Departament_ID);
+        $prep->bindParam(':role', $role);
+        $prep->bindParam(':location', $location);
+        $prep->bindParam(':status', $status);
+        $prep->bindParam(':report_to', $report_to);
+        $prep->bindParam(':gender', $gender);
+        $prep->bindParam(':born', $born);
+        $prep->bindParam(':started', $started);
+        $prep->bindParam(':company', $company_id);
+
+        $prep->execute();
 
         //Create an instance; passing `true` enables exceptions
         $mail = new PHPMailer(true);
