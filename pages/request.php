@@ -15,7 +15,7 @@ $start = ($page - 1) * $limit;
 $next = $page + 1;
 $previous = $page - 1;
 
-if ($_SESSION['role'] == 0) {
+ 
     $sql = "SELECT * From timeoffrequests
  WHERE User_ID =$userId
  ORDER BY timeoffrequests.request_id DESC LIMIT $start , $limit ";
@@ -31,21 +31,7 @@ if ($_SESSION['role'] == 0) {
     $total_datas = $prep->rowCount();
 
     $total_page = ceil($total_datas / $limit);
-} else if ($_SESSION['role'] == 1) {
-    $sql = "SELECT * From timeoffrequests
- ORDER BY timeoffrequests.request_id DESC LIMIT $start , $limit ";
-    $prep = $con->prepare($sql);
-    $prep->execute();
-    $requestDatas = $prep->fetchAll();
 
-    $sql_count = "SELECT * From timeoffrequests
-    ORDER BY timeoffrequests.request_id";
-    $prep = $con->prepare($sql_count);
-    $prep->execute();
-    $total_datas = $prep->rowCount();
-
-    $total_page = ceil($total_datas / $limit);
-}
 
 
 ?>

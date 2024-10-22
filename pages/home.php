@@ -12,29 +12,15 @@ $calendar->setSundayFirst(false);
 $calendar->create();
 
 
-
-$annualLeave;
-$childBorn;
-$deathofFamilyMember;
-$movingDay;
-$weddingDay;
-$sickLeave;
-
 $currentTime = date('h:i A');
 
-$sql = "  SELECT * FROM timeoff WHERE User_ID = $userId";
-$prep = $con->prepare($sql);
+$timeoffQuery = "SELECT * FROM timeofftype LEFT JOIN amountoftimeoff ON timeofftype.id = amountoftimeoff.time_off_type
+    where company_id=$companyId and user_id=$userId
+    ORDER BY timeofftype.time_off ASC";
 
+$prep = $con->prepare($timeoffQuery);
 $prep->execute();
-$data = $prep->fetch();
-
-$annualLeave = $data['annual_leave'];
-$childBorn = $data['child_born'];
-$deathofFamilyMember = $data['death_of_family_member'];
-$movingDay = $data['moving_day'];
-$weddingDay = $data['wedding_day'];
-$sickLeave = $data['sick_leave'];
-
+$timeoffs = $prep->fetchAll();
 
 
 $sql = "  SELECT * FROM users WHERE User_ID = $userId";
@@ -192,56 +178,17 @@ $requestDatas = $prep->fetchAll();
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="leavType">Annual Leave</td>
-                                    <td>20.00</td>
-                                    <td><?= $annualLeave ?></td>
-                                    <td>0.00</td>
-                                    <td><?= $annualLeave ?></td>
-                                    <td>Days</td>
-                                </tr>
-                                <tr>
-                                    <td class="leavType">Child born</td>
-                                    <td>3.00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td><?= $childBorn ?></td>
-                                    <td>Days</td>
-                                </tr>
-                                <tr>
-                                    <td class="leavType">Death of Family Member</td>
-                                    <td>5.00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td><?= $deathofFamilyMember ?></td>
-                                    <td>Days</td>
+                                <?php foreach ($timeoffs as $timeoff): ?>
+                                    <tr>
+                                        <td class="leavType"><?= $timeoff['time_off'] ?> </td>
+                                        <td><?= $timeoff['allowance'] ?></td>
+                                        <td><?= $timeoff['balance'] ?></td>
+                                        <td><?= $timeoff['planned'] ?></td>
+                                        <td><?= $timeoff['available'] ?></td>
+                                        <td>Days</td>
+                                    </tr>
+                                <?php endforeach; ?>
 
-
-                                </tr>
-                                <tr>
-                                    <td class="leavType">Moving Day</td>
-                                    <td>1.00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td><?= $movingDay ?></td>
-                                    <td>Days</td>
-                                </tr>
-                                <tr>
-                                    <td class="leavType">Wedding Day</td>
-                                    <td>5.00</td>
-                                    <td>0.00</td>
-                                    <td>0.00</td>
-                                    <td><?= $weddingDay ?></td>
-                                    <td>Days</td>
-                                </tr>
-                                <tr>
-                                    <td class="leavType">Sick Leave</td>
-                                    <td>20.00</td>
-                                    <td><?= $sickLeave ?></td>
-                                    <td>0.00</td>
-                                    <td><?= $sickLeave ?></td>
-                                    <td>Days</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -307,11 +254,15 @@ $requestDatas = $prep->fetchAll();
                         <div class="currentDate">
                             <h5> October 2023</h5>
                             <div>
-                                <button
-                                    style="font-size:12px; height:28px; margin-right: 5px; width:60px;">today</button>
+                                <button style="font-size:12px; height:28px; margin-right: 5px; width:60px;">
+                                    today
+                                </button>
                                 <button>
-                                    << /button>
-                                        <button>></button>
+                                    <
+                                </button>
+                                <button>
+                                    >
+                                </button>
                             </div>
                         </div>
                         <div class="calendarTableDiv">

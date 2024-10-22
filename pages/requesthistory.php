@@ -15,15 +15,16 @@ $next = $page + 1;
 $previous = $page - 1;
 
 
+
 $sql = "SELECT * From timeoffrequests
-    WHERE User_ID =$userId and status LIKE 'Declined' or status LIKE 'Approved' 
+    WHERE User_ID =$userId and `status` LIKE 'Approved' or `status` LIKE 'Declined'
     ORDER BY timeoffrequests.request_id DESC";
 $prep = $con->prepare($sql);
 $prep->execute();
 $requestDatas = $prep->fetchAll();
 
 $sql_count = "SELECT * From timeoffrequests
-    WHERE User_ID =$userId and status LIKE 'Declined' or status LIKE 'Approved' 
+    WHERE User_ID =$userId and `status` LIKE 'Approved' or `status` LIKE 'Declined'
     ORDER BY timeoffrequests.request_id DESC";
 $prep = $con->prepare($sql_count);
 $prep->execute();

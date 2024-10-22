@@ -84,3 +84,8 @@ form{
     align-items: center;
     justify-content: center;
 }
+form .error{
+    color: #8a6d3b;
+    width: 272.8px;
+   
+   }

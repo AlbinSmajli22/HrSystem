@@ -2,6 +2,7 @@
 require_once 'config.php';
 session_start();
 
+$errors = array('userNotExist' => '', 'wrongPass' => '');
 if (isset($_POST['submit'])) {
     
 
@@ -21,7 +22,8 @@ if (isset($_POST['submit'])) {
     $data= $prep->fetch();
 
     if ($data == false) {
-        echo "user does not exist";
+        $errors['userNotExist'] = 'Sorry, we cannot find that account here. Please check your username is correct or contact an admin user for assistance.';
+
     }
     elseif (password_verify($password, $data['password'])) {
         $sql="SELECT * FROM users";
@@ -29,31 +31,30 @@ if (isset($_POST['submit'])) {
         $prep->execute();
         $data2= $prep->fetch();
 
-        $_SESSION['company']=$data['company'];
-        $_SESSION['company_name']=$data['company_name'];
-        $_SESSION['user_id']=$data['user_id'];
-        $_SESSION['password']=$data['password'];
-        $_SESSION['email']=$data['email'];
-        $_SESSION['position']=$data['position_name'];
-        $_SESSION['departament']=$data['departament_name'];
-        $_SESSION['role']=$data['role'];
-        $_SESSION['name']=$data['name']." ".$data['surname'];
-        $_SESSION['location']=$data['location'];
-        $_SESSION['report_to']=$data['report_to'];
-        $_SESSION['status']=$data['status'];
-        $_SESSION['gender']=$data['gender'];
-        $_SESSION['born']=$data['born'];
-        $_SESSION['started']=$data['started'];
-        $_SESSION['HR']=$data2['name']." ".$data2['surname'];
+        $_SESSION['company'] = $data['company'];
+        $_SESSION['company_name'] = $data['company_name'];
+        $_SESSION['user_id'] = $data['user_id'];
+        $_SESSION['password'] = $data['password'];
+        $_SESSION['email'] = $data['email'];
+        $_SESSION['position'] = $data['position_name'];
+        $_SESSION['departament'] = $data['departament_name'];
+        $_SESSION['role'] = $data['role'];
+        $_SESSION['name'] = $data['name'] . " " . $data['surname'];
+        $_SESSION['location'] = $data['location'];
+        $_SESSION['report_to'] = $data['report_to'];
+        $_SESSION['status'] = $data['status'];
+        $_SESSION['gender'] = $data['gender'];
+        $_SESSION['born'] = $data['born'];
+        $_SESSION['started'] = $data['started'];
+        $_SESSION['HR'] = $data2['name'] . " " . $data2['surname'];
         
+        header("Location: pages/home.php");
+    } elseif (!password_verify($password, $data['password'])) {
+        $errors['wrongPass'] = 'Sorry, your username and/or password is incorrect. Please try again.';
 
-        header("Location: pages/home.php");  
-    }
-    elseif(!password_verify($password, $data['password'])){
-        echo 'Password is Wrong.';
-    }else
-    {
-        echo"user does not exist";
+    } else {
+        $errors['userNotExist'] = 'Sorry, we cannot find that account here. Please check your username is correct or contact an admin user for assistance.';
+  
     }
 
 

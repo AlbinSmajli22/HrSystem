@@ -22,7 +22,8 @@ include_once 'loginlogic.php';
             <h3>Employee Portal</h3>
             <p>Welcome. Please login login below.</p>
         </div>
-        <form action="loginlogic.php" method="POST">
+        <form action="" method="POST">
+        <p class="error"><?php echo $errors['wrongPass'] ?> <?php echo $errors['userNotExist'] ?></p>
             <input type="email" name="email" id="email" placeholder="Username">
             <input type="password" name="password" id="password"placeholder="Password">
             <button type="submit" name="submit">Login</button>

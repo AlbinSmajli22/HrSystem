@@ -320,6 +320,7 @@ $company=$_SESSION['company'];
               </div>
             </div>
             <tr>
+              <th></th>
               <th>Name</th>
               <th>Contact</th>
               <th>Position</th>
@@ -331,6 +332,9 @@ $company=$_SESSION['company'];
           <tbody>
             <?php foreach ($datas as $data): ?>
               <tr>
+                <td>
+                  <img src="../userIMG/<?= $data['image'] ?>" alt="" width="50px" height="50px">
+                </td>
                 <td>
                   <?= $data['name'] ?>
                   <?= $data['surname'] ?>

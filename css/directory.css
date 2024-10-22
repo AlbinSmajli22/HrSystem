@@ -203,6 +203,9 @@ body{
     font-weight: 400;
     
 }
+.userTable tbody tr img{
+    border-radius: 50%;
+}
 .userTable tbody tr td:nth-child(3){
     font-style: italic;
 }
