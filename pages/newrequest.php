@@ -82,7 +82,7 @@ $timeoffs = $prep->fetchAll();
                     <div class="row2">
                         <label for="from">from *</label>
                         <input type="date" name="from" id="from" onchange="cal()">
-                        <!-- <p id="daysMessange">You will have an estimated <Strong>5 hours 19 minutes</Strong> of <em>Annual Leave</em> on this date.</p> -->
+                        <p><?php echo $errors['NoLeaves']; ?></p>
                     </div>
                     <div class="row2">
                         <label for="to">Until *</label>
@@ -90,7 +90,7 @@ $timeoffs = $prep->fetchAll();
                     </div>
                     <div class="row2">
                         <label for="duration">Duration(Days) *</label>
-                        <input type="number" name="duration" id="duration" onclick="durationFunction()">
+                        <input type="number" name="duration" step="0.01" min="0" id="duration" onclick="durationFunction()">
                         <!-- <p id="errorMSG" Style=" color:#CC5965; font-weight:700;" >Sorry, you do not have enough leave - your balance is currently 2 days 2 hours 39 minutes</p> -->
                         <p Style="color:#737373;">Enter days (or partial days as a decimal, or click the calculator icon
                             to specify)</p>
@@ -160,7 +160,7 @@ $timeoffs = $prep->fetchAll();
     function GetDays() {
         var to = new Date(document.getElementById("to").value);
         var from = new Date(document.getElementById("from").value);
-        return parseInt((to - from) / (24 * 3600 * 1000));
+        return parseInt((to - from) / (24 * 3600 * 1000)+(1));
     }
 
     function cal() {

@@ -2,8 +2,7 @@
 
 include_once '../config.php';
 
-$userId = $_SESSION['user_id'];
-
+$errors = array('NoLeaves' => '');
 
 if (isset($_POST['enter'])) {
 
@@ -18,22 +17,27 @@ if (isset($_POST['enter'])) {
     $status = $_POST['status'];
     $created = date('y/m/d');
 
-
+    //var_dump( $User_ID, $leave_type, $duration);
     $requestQuery = "SELECT * FROM amountoftimeoff RIGHT JOIN timeofftype 
-                    ON amountoftimeoff.time_off_type= timeofftype.id 
-                WHERE user_id = $userId and timeofftype.time_off =  $leave_type";
+                                                        ON amountoftimeoff.time_off_type= timeofftype.id 
+                    WHERE user_id =  :user_id and timeofftype.time_off LIKE :leave_type";
+
 
     $prep = $con->prepare($requestQuery);
+    $prep->bindParam(':user_id', $User_ID, PDO::PARAM_INT);
+    $prep->bindParam(':leave_type', $leave_type, PDO::PARAM_STR);
+
     $prep->execute();
     $timeoffs = $prep->fetch();
 
 
     if ($duration > $timeoffs['balance']) {
-        echo "nuk keni dit te mjaftueshme pushimi";
-    
+        $errors['NoLeaves'] = "You don't have enough Leave days";
+        
+
     } else {
 
-
+       
 
         $sql = "INSERT into timeoffrequests values ( null,:User_Id, :Head_Id, :leave_type, :from, :to, :duration, :short_description, :reason, :status, null, null, :created) ";
 
