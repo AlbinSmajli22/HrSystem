@@ -40,15 +40,33 @@ $userImages = $prep->fetchAll();
             <i class="fa-regular fa-calendar-days"></i>
             <a href="calendar.php">Calendar</a>
         </li>
-        <li class="dropdown" Style="cursor: pointer;">
-            <i class="fa fa-plane"></i>
-            <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="request.php"><i class="fa-solid fa-suitcase"></i> Request</a>
-                <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Approve</a>
-                <a href="requesthistory.php"><i class="fa fa-list"></i> History</a>
-            </div>
-        </li>
+        <?php if ($_SESSION['role'] == 0) { ?>
+            <li class="dropdown" Style="cursor: pointer;">
+                <i class="fa fa-plane"></i>
+                <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="request.php"><i class="fa-solid fa-suitcase"></i> Request</a>
+                    <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Approve</a>
+                    <a href="requesthistory.php"><i class="fa fa-list"></i> History</a>
+                </div>
+            </li>
+        <?php } else { ?>
+            <li class="dropdown" Style="cursor: pointer;">
+                <i class="fa fa-plane"></i>
+                <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="request.php"><i class="fa-solid fa-suitcase"></i> Planer</a>
+                    <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Requests</a>
+                    <a href="requesthistory.php"><i class="fa fa-list"></i> Availability</a>
+                    <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa fa-list"></i> Bulk Update</a>
+                    <div id="leaveConfigure" class="leave-dropdown-content">
+                        <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Balances</a>
+                        <a href="requesthistory.php"><i class="fa fa-list"></i> Allowances</a>
+                    </div>
+
+                </div>
+
+            <?php } ?>
         <li>
             <i class="fa-solid fa-money-bill-1-wave"></i>
             <a href="pages/expenses.php">Expenses</a>
@@ -63,11 +81,11 @@ $userImages = $prep->fetchAll();
         </li>
         <li>
             <i class="fa-solid fa-newspaper"></i>
-            <?php if($_SESSION['role']==0){ ?>
-            <a href="empNews.php">News</a>
-            <?php }else{?>
+            <?php if ($_SESSION['role'] == 0) { ?>
+                <a href="empNews.php">News</a>
+            <?php } else { ?>
                 <a href="news.php">News</a>
-            <?php }?>
+            <?php } ?>
         </li>
         <li>
             <i class="fa-solid fa-thumbtack"></i>

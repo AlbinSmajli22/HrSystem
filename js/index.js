@@ -15,5 +15,22 @@ window.onclick = function(event) {
     }
   }
 }
+function myFunctionTwo() {
+  document.getElementById("leaveConfigure").classList.toggle("showTwo");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.Leavebtn')) {
+    var dropdowns = document.getElementsByClassName("leave-dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('showTwo')) {
+        openDropdown.classList.remove('showTwo');
+      }
+    }
+  }
+}
 
 

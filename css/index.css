@@ -55,7 +55,7 @@
     display: none;
     position: absolute;
     background-color: #0277bd;
-    height: 100px;
+    height: 130px;
     width: 100%;
     margin-top: 130px;
     margin-left: 200px;
@@ -70,6 +70,31 @@
     margin-bottom: 10px;
 }
 .show {
+    display: flex;
+flex-direction:column;
+}
+#sidebar .Leavebtn:hover{
+    cursor: pointer;
+   }
+   .leave-dropdown-content{
+       display: none;
+       position: absolute;
+       background-color: #0277bd;
+       height: 70px;
+       width: 100%;
+       margin-top: 120px;
+       margin-left: 110px;
+       padding: 10px;
+       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+       z-index: 1;
+       border-radius: 5px;
+       
+   }
+   .leave-dropdown-content a{
+       width: 100%;
+       margin-bottom: 10px;
+   }
+.showTwo {
     display: flex;
 flex-direction:column;
 }
