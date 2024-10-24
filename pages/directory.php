@@ -81,18 +81,23 @@ $company=$_SESSION['company'];
 <html lang="en">
 
 <head>
-  <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-    crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../css/directory.css">
 </head>
 
@@ -352,14 +357,19 @@ $company=$_SESSION['company'];
                   <?= $data['location'] ?>
                 </td>
                 <td>
-                  <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#editModal<?php echo $data['user_id']; ?>" data-bs-whatever="@mdo">
-                    Edit
-                  </button> |
-                  <button type="button" class="btn btn-danger">
-                    <a Style="color:white;" href="deleteDirectory.php?user_id=<?= $data['user_id']; ?>">Delete </a>
+                  <button type="button" id="edit" class="btn btn-xs btn-outline-info rounded-circle m-l-sm me-2"  data-bs-toggle="modal"
+                  data-bs-target="#editModal<?php echo $data['user_id']; ?>" data-bs-whatever="@mdo"><i class="fa fa-edit"></i>
+                    
+                    
+                  </button> 
+                  <button type="button" class="btn btn-xs btn-outline-danger rounded-circle m-l-sm"> <i class="fa fa-trash"></i>
+                    <a  href="deleteDirectory.php?user_id=<?= $data['user_id']; ?>"> </a>
                   </button>
+                  
                 </td>
+                <td>
+                
+  
 
               </tr>
 
