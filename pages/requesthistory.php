@@ -14,19 +14,26 @@ $start = ($page - 1) * $limit;
 $next = $page + 1;
 $previous = $page - 1;
 
-
+$Approved="Approved";
+$Declined="Declined";
 
 $sql = "SELECT * From timeoffrequests
-    WHERE User_ID =$userId and `status` LIKE 'Approved' or `status` LIKE 'Declined'
+    WHERE User_ID = :user_id and (`status` LIKE :Approved OR `status` LIKE :Declined)
     ORDER BY timeoffrequests.request_id DESC";
 $prep = $con->prepare($sql);
+$prep->bindParam(':user_id', $userId, PDO::PARAM_INT);
+$prep->bindParam(':Approved', $Approved, PDO::PARAM_STR);
+$prep->bindParam(':Declined', $Declined, PDO::PARAM_STR);
 $prep->execute();
 $requestDatas = $prep->fetchAll();
 
 $sql_count = "SELECT * From timeoffrequests
-    WHERE User_ID =$userId and `status` LIKE 'Approved' or `status` LIKE 'Declined'
+    WHERE User_ID =:user_id and (`status` LIKE :Approved OR `status` LIKE :Declined)
     ORDER BY timeoffrequests.request_id DESC";
 $prep = $con->prepare($sql_count);
+$prep->bindParam(':user_id', $userId, PDO::PARAM_INT);
+$prep->bindParam(':Approved', $Approved, PDO::PARAM_STR);
+$prep->bindParam(':Declined', $Declined, PDO::PARAM_STR);
 $prep->execute();
 $total_datas = $prep->rowCount();
 
