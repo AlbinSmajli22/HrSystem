@@ -53,15 +53,16 @@ $userImages = $prep->fetchAll();
         <?php } else { ?>
             <li class="dropdown" Style="cursor: pointer;">
                 <i class="fa fa-plane"></i>
-                <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
+                <a onclick="myFunction()" class="dropbtn">Time Off & Leave <i class="fa-solid fa-caret-right"></i></a>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="request.php"><i class="fa-solid fa-suitcase"></i> Planer</a>
-                    <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Requests</a>
-                    <a href="requesthistory.php"><i class="fa fa-list"></i> Availability</a>
-                    <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa fa-list"></i> Bulk Update</a>
+                    <a href="request.php"><i class="fa-regular fa-calendar-days"></i> Planer</a>
+                    <a href="approverequest.php"> <i class="fa fa-plane"></i> Requests</a>
+                    <a href="requesthistory.php"><i class="fa-solid fa-rectangle-list"></i> Availability</a>
+                    <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa-solid fa-pencil"></i> Bulk Update <i class="fa-solid fa-caret-right"></i></a> 
+                    <a href="requesthistory.php"><i class="fa-solid fa-gear"></i> Configure</a>
                     <div id="leaveConfigure" class="leave-dropdown-content">
-                        <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Balances</a>
-                        <a href="requesthistory.php"><i class="fa fa-list"></i> Allowances</a>
+                        <a href="balances.php"> <i class="fa-solid fa-calculator"></i> Balances</a>
+                        <a href="requesthistory.php"><i class="fa-solid fa-hourglass-half"></i> Allowances</a>
                     </div>
 
                 </div>
