@@ -136,7 +136,9 @@ include_once 'GetLeadAndHR.php';
                                 <?php foreach ($leaveTypes as $leaveType){ 
                                     $leaveName = $leaveType['time_off'] . " (Days)";
                                     ?>
-                                <td> <?= $result[$leaveName] ?? 0 ?> </td>
+                                <td>
+                                <input type="number" name="" id="" value="<?= $result[$leaveName] ?? 0 ?>">
+                                </td>
                                 <?php } ?>
                                 
                             </tr>
