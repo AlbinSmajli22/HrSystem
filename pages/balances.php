@@ -2,6 +2,79 @@
 require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
+
+$leaveTypeQuery = "SELECT id, time_off
+        FROM timeofftype
+        WHERE company_id = :companyId
+    ";
+    $stmt = $con->prepare($leaveTypeQuery);
+    $stmt->bindParam(':companyId', $companyId, PDO::PARAM_INT);
+    $stmt->execute();
+    $leaveTypes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$columns = [];
+    foreach ($leaveTypes as $leaveType) {
+        $leaveName = $leaveType['time_off'];
+        $leaveTypeId = $leaveType['id'];
+        $columns[] = "MAX(CASE WHEN a.time_off_type = $leaveTypeId THEN a.balance END) AS `" . htmlspecialchars($leaveName) . " (Days)`";
+    }
+
+    $columnsSql = implode(", ", $columns);
+
+    $balanceQuery = "SELECT 
+            u.name AS Employee,
+            u.surname AS LastName ,
+            u.user_id AS Code,
+            $columnsSql
+        FROM 
+            users u
+        JOIN 
+            amountoftimeoff a ON u.user_id = a.user_id
+        WHERE 
+            u.company = :companyId
+        GROUP BY 
+            u.name, u.user_id
+        ORDER BY 
+            u.user_id;
+    ";
+
+    $stmt = $con->prepare($balanceQuery);
+    $stmt->bindParam(':companyId', $companyId, PDO::PARAM_INT);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+/*
+$sql="SELECT 
+    u.name AS Employee,
+    u.surname AS LastName,
+    u.user_id AS Code,
+    MAX(CASE WHEN t.time_off = 'Annual Leave' THEN a.balance END) AS 'Annual Leave (Days)',
+    MAX(CASE WHEN t.time_off = 'Sick Leave' THEN a.balance END) AS 'Sick Leave (Days)',
+    MAX(CASE WHEN t.time_off = 'Wedding Day ' THEN a.balance END) AS 'Wedding Day (Days)',
+    MAX(CASE WHEN t.time_off = 'Moving Day' THEN a.balance END) AS 'Moving Day (Days)',
+    MAX(CASE WHEN t.time_off = 'Child Born' THEN a.balance END) AS 'Child Born (Days)',
+     MAX(CASE WHEN t.time_off = 'Death Of Family Member' THEN a.balance END) AS 'Death Of Family Member (Days)'
+    -- Add more leave types as needed
+FROM 
+    hrsystem.users u
+JOIN 
+    hrsystem.amountoftimeoff a ON u.user_id = a.user_id
+JOIN 
+    hrsystem.timeofftype t ON a.time_off_type = t.id
+WHERE 
+    u.company = 1 -- Replace <YourCompanyID> with the specific company ID if filtering by a particular company
+GROUP BY 
+    u.name, u.user_id
+ORDER BY 
+    u.name";
+$prep = $con->prepare($sql);
+$prep->execute();
+$amounts = $prep->fetchAll();
+*/
 
 include_once 'GetLeadAndHR.php';
 ?>
@@ -48,34 +121,24 @@ include_once 'GetLeadAndHR.php';
                         <tr>
                             <td>Employee</td>
                             <td>Code</td>
-                            <td>Start Date</td>
-                            <td>End Date</td>
-                            <td>Duration</td>
-                            <td>Status</td>
+                            <?php foreach ($leaveTypes as $leaveType): ?>
+                                <td><?= $leaveType['time_off'] ?></td>
+                            <?php endforeach; ?>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($requestDatas as $requestData): ?>
+                        <?php foreach ($results as $result): ?>
                             <tr>
-                                <td>
-                                    <?= $requestData['leave_type'] ?>
-                                </td>
-                                <td>
-                                    <?= $requestData['short_description'] ?>
-                                </td>
-                                <td>
-                                    <?= $requestData['from'] ?>
-                                </td>
-                                <td>
-                                    <?= $requestData['to'] ?>
-                                </td>
-                                <td>
-                                    <?= $requestData['duration'] ?>
-                                </td>
-                                <td>
-                                    <?= $requestData['status'] ?>
-                                </td>
+                                <td> <?= $result['Employee'] ?> <?= $result['LastName'] ?> </td>
+                                <td>EMP<?= $result['Code'] ?> </td>
 
+                                <?php foreach ($leaveTypes as $leaveType){ 
+                                    $leaveName = $leaveType['time_off'] . " (Days)";
+                                    ?>
+                                <td> <?= $result[$leaveName] ?? 0 ?> </td>
+                                <?php } ?>
+                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -97,7 +160,8 @@ include_once 'GetLeadAndHR.php';
                                 <li><a href="requesthistory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
                             <?php }
                         } ?>
-                        <li><a href="requesthistory.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a>
+                        <li><a
+                                href="requesthistory.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a>
                         </li>
                         <li><a href="requesthistory.php?page=<?php echo $total_page ?>">>></a></li>
                     </ul>

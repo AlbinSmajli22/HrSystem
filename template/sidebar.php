@@ -43,7 +43,7 @@ $userImages = $prep->fetchAll();
         <?php if ($_SESSION['role'] == 0) { ?>
             <li class="dropdown" Style="cursor: pointer;">
                 <i class="fa fa-plane"></i>
-                <a onclick="myFunction()" class="dropbtn">Time Off & Leave</a>
+                <a onclick="myFunction()" class="dropbtn">Time Off & Leave <i class="fa-solid fa-caret-right"></i></a>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="request.php"><i class="fa-solid fa-suitcase"></i> Request</a>
                     <a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Approve</a>
