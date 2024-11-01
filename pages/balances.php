@@ -4,6 +4,44 @@ session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
+
+ // Step 1: Handle form submission to update balances
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    foreach ($_POST['balances'] as $userId => $leaveBalances) {
+        foreach ($leaveBalances as $leaveTypeId => $balanceData) {
+            $balance = $balanceData['balance'];
+            $balanceId = $balanceData['balance_id'];
+
+            if ($balanceId && is_numeric($balance)) {
+                // Update the balance in the database
+                $updateQuery = "
+                    UPDATE amountoftimeoff
+                    SET balance = :balance
+                    WHERE id = :balanceId
+                ";
+                $updateStmt = $con->prepare($updateQuery);
+                $updateStmt->execute([
+                    ':balance' => $balance,
+                    ':balanceId' => $balanceId,
+                ]);
+            } elseif (is_numeric($balance)) {
+                // Insert new balance if it doesn't exist
+                $insertQuery = "
+                    INSERT INTO amountoftimeoff (user_id, time_off_type, balance)
+                    VALUES (:userId, :leaveTypeId, :balance)
+                ";
+                $insertStmt = $con->prepare($insertQuery);
+                $insertStmt->execute([
+                    ':userId' => $userId,
+                    ':leaveTypeId' => $leaveTypeId,
+                    ':balance' => $balance,
+                ]);
+            }
+        }
+    }
+}
+
+   // Step 2: Fetch all leave types for the specified company
 $leaveTypeQuery = "SELECT id, time_off
         FROM timeofftype
         WHERE company_id = :companyId
@@ -18,31 +56,33 @@ $columns = [];
         $leaveName = $leaveType['time_off'];
         $leaveTypeId = $leaveType['id'];
         $columns[] = "MAX(CASE WHEN a.time_off_type = $leaveTypeId THEN a.balance END) AS `" . htmlspecialchars($leaveName) . " (Days)`";
+        $columns[] = "MAX(CASE WHEN a.time_off_type = $leaveTypeId THEN a.id END) AS `" . htmlspecialchars($leaveName) . " (Balance ID)`";
     }
 
     $columnsSql = implode(", ", $columns);
-
-    $balanceQuery = "SELECT 
+ 
+    $balanceQuery = " SELECT 
+            u.user_id AS Code,
             u.name AS Employee,
             u.surname AS LastName ,
-            u.user_id AS Code,
             $columnsSql
         FROM 
             users u
-        JOIN 
+        LEFT JOIN 
             amountoftimeoff a ON u.user_id = a.user_id
         WHERE 
             u.company = :companyId
         GROUP BY 
-            u.name, u.user_id
+            u.user_id, u.name
         ORDER BY 
-            u.user_id;
+            u.name;
     ";
 
     $stmt = $con->prepare($balanceQuery);
     $stmt->bindParam(':companyId', $companyId, PDO::PARAM_INT);
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 
 
@@ -116,6 +156,7 @@ include_once 'GetLeadAndHR.php';
                 </h5>
             </div>
             <div class="requestTableBody">
+            <form action="" method="post">
                 <table class="recentLeave">
                     <thead>
                         <tr>
@@ -124,27 +165,35 @@ include_once 'GetLeadAndHR.php';
                             <?php foreach ($leaveTypes as $leaveType): ?>
                                 <td><?= $leaveType['time_off'] ?></td>
                             <?php endforeach; ?>
-
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($results as $result): ?>
                             <tr>
+                                
                                 <td> <?= $result['Employee'] ?> <?= $result['LastName'] ?> </td>
                                 <td>EMP<?= $result['Code'] ?> </td>
 
                                 <?php foreach ($leaveTypes as $leaveType){ 
-                                    $leaveName = $leaveType['time_off'] . " (Days)";
+                                    $leaveName = htmlspecialchars($leaveType['time_off']);
+                                    $balanceField = "{$leaveName} (Days)";
+                                    $balanceIdField = "{$leaveName} (Balance ID)";
+                                    $balance = $result[$balanceField] ?? '0';
+                                    $balanceId = $result[$balanceIdField] ?? 'N/A';
                                     ?>
+                                    
                                 <td>
-                                <input type="number" name="" id="" value="<?= $result[$leaveName] ?? 0 ?>">
+                                <input type="hidden" name="balances[<?= $result['Code'] ?>][<?= $leaveType['id'] ?>][balance_id]" id="" value="<?= $balanceId  ?>">
+                                <input type="number" step='0.1' name="balances[<?= $result['Code'] ?>][<?= $leaveType['id'] ?>][balance]" id="" value="<?= $balance ?>">
                                 </td>
                                 <?php } ?>
-                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <button type="submit" name="saveLeaves">Save</button>
+                </form>
                 <div class="paginationn">
                     <ul>
                         <li><a href="requesthistory.php?page=1">

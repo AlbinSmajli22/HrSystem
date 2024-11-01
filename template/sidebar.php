@@ -62,7 +62,7 @@ $userImages = $prep->fetchAll();
                     <a href="requesthistory.php"><i class="fa-solid fa-gear"></i> Configure</a>
                     <div id="leaveConfigure" class="leave-dropdown-content">
                         <a href="balances.php"> <i class="fa-solid fa-calculator"></i> Balances</a>
-                        <a href="requesthistory.php"><i class="fa-solid fa-hourglass-half"></i> Allowances</a>
+                        <a href="allowance.php"><i class="fa-solid fa-hourglass-half"></i> Allowances</a>
                     </div>
 
                 </div>
