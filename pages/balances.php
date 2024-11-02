@@ -4,6 +4,16 @@ session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+  } else {
+    $page = 1;
+  }
+  $limit = 10;
+  $start = ($page - 1) * $limit;
+  $next = $page + 1;
+  $previous = $page - 1;
+
 
  // Step 1: Handle form submission to update balances
  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -75,7 +85,8 @@ $columns = [];
         GROUP BY 
             u.user_id, u.name
         ORDER BY 
-            u.name;
+            u.name
+            LIMIT $start , $limit;
     ";
 
     $stmt = $con->prepare($balanceQuery);
@@ -85,8 +96,28 @@ $columns = [];
 
 
 
+    $balance_count = "SELECT 
+            u.user_id AS Code,
+            u.name AS Employee,
+            u.surname AS LastName ,
+            $columnsSql
+        FROM 
+            users u
+        LEFT JOIN 
+            amountoftimeoff a ON u.user_id = a.user_id
+        WHERE 
+            u.company = :companyId
+        GROUP BY 
+            u.user_id, u.name
+        ORDER BY 
+            u.name;";
 
+$prep = $con->prepare($balance_count);
+$prep->bindParam(':companyId', $companyId, PDO::PARAM_INT);
+$prep->execute();
+$total_datas = $prep->rowCount();
 
+$total_page = ceil($total_datas / $limit);
 /*
 $sql="SELECT 
     u.name AS Employee,
@@ -151,8 +182,7 @@ include_once 'GetLeadAndHR.php';
         <div class="requestBody">
             <div class="requestTableHead">
                 <h5>
-                    <img src="../images/absence.png" alt="" width="25px" height="25px">
-                    Approve Time Off/Leave Requests
+                    Employee Current Leave Balances
                 </h5>
             </div>
             <div class="requestTableBody">
@@ -196,10 +226,10 @@ include_once 'GetLeadAndHR.php';
                 </form>
                 <div class="paginationn">
                     <ul>
-                        <li><a href="requesthistory.php?page=1">
+                        <li><a href="balances.php?page=1">
                                 << </a>
                         </li>
-                        <li><a href="requesthistory.php?page=<?php echo $previous == 0 ? 1 : $previous ?>">
+                        <li><a href="balances.php?page=<?php echo $previous == 0 ? 1 : $previous ?>">
                                 < </a>
                         </li>
                         <?php for ($i = 1; $i <= $total_page; $i++) {
@@ -208,13 +238,13 @@ include_once 'GetLeadAndHR.php';
                             $next_2 = $current_page + 2;
                             if ($i >= $previous_2 && $i <= $next_2) {
                                 ?>
-                                <li><a href="requesthistory.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                                <li><a href="balances.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
                             <?php }
                         } ?>
                         <li><a
-                                href="requesthistory.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a>
+                                href="balances.php?page=<?php echo $next > $total_page ? $total_page : $next ?>">></a>
                         </li>
-                        <li><a href="requesthistory.php?page=<?php echo $total_page ?>">>></a></li>
+                        <li><a href="balances.php?page=<?php echo $total_page ?>">>></a></li>
                     </ul>
                 </div>
                 <div>
