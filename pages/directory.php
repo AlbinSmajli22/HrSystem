@@ -359,8 +359,6 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
                 <td>
                   <button type="button" id="edit" class="btn btn-xs btn-outline-info rounded-circle m-l-sm me-2"  data-bs-toggle="modal"
                   data-bs-target="#editModal<?php echo $data['user_id']; ?>" data-bs-whatever="@mdo"><i class="fa fa-edit"></i>
-                    
-                    
                   </button> 
                   <button type="button" class="btn btn-xs btn-outline-danger rounded-circle m-l-sm"> <i class="fa fa-trash"></i>
                     <a  href="deleteDirectory.php?user_id=<?= $data['user_id']; ?>"> </a>

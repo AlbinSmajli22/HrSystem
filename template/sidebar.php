@@ -59,7 +59,7 @@ $userImages = $prep->fetchAll();
                     <a href="approverequest.php"> <i class="fa fa-plane"></i> Requests</a>
                     <a href="requesthistory.php"><i class="fa-solid fa-rectangle-list"></i> Availability</a>
                     <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa-solid fa-pencil"></i> Bulk Update <i class="fa-solid fa-caret-right"></i></a> 
-                    <a href="requesthistory.php"><i class="fa-solid fa-gear"></i> Configure</a>
+                    <a href="configureLeaves.php"><i class="fa-solid fa-gear"></i> Configure</a>
                     <div id="leaveConfigure" class="leave-dropdown-content">
                         <a href="balances.php"> <i class="fa-solid fa-calculator"></i> Balances</a>
                         <a href="allowance.php"><i class="fa-solid fa-hourglass-half"></i> Allowances</a>
