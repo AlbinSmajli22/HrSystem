@@ -55,9 +55,9 @@ $userImages = $prep->fetchAll();
                 <i class="fa fa-plane"></i>
                 <a onclick="myFunction()" class="dropbtn">Time Off & Leave <i class="fa-solid fa-caret-right"></i></a>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="request.php"><i class="fa-regular fa-calendar-days"></i> Planer</a>
+                    <a href="planer.php"><i class="fa-regular fa-calendar-days"></i> Planer</a>
                     <a href="approverequest.php"> <i class="fa fa-plane"></i> Requests</a>
-                    <a href="requesthistory.php"><i class="fa-solid fa-rectangle-list"></i> Availability</a>
+                    <a href="availability.php"><i class="fa-solid fa-rectangle-list"></i> Availability</a>
                     <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa-solid fa-pencil"></i> Bulk Update <i class="fa-solid fa-caret-right"></i></a> 
                     <a href="configureLeaves.php"><i class="fa-solid fa-gear"></i> Configure</a>
                     <div id="leaveConfigure" class="leave-dropdown-content">

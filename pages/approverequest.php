@@ -25,9 +25,10 @@ if ($_SESSION['role'] == 0) {
 
     $sql_count = "SELECT * FROM timeoffrequests
     right join users on users.user_id = timeoffrequests.User_ID
-    WHERE timeoffrequests.Head_ID =$userId and timeoffrequests.status LIKE 'Submited'
+    WHERE timeoffrequests.Head_ID =:userId and timeoffrequests.status LIKE 'Submited'
     ORDER BY timeoffrequests.request_id ";
     $prep = $con->prepare($sql_count);
+    $prep->bindParam(':userId', $userId, PDO::PARAM_INT);
     $prep->execute();
     $total_datas = $prep->rowCount();
 
