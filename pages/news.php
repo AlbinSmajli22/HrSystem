@@ -2,6 +2,15 @@
 require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
+
+
+$NewQuery="SELECT * FROM news WHERE company_id=:company_id";
+$prep = $con->prepare($NewQuery);
+$prep->bindParam(':company_id', $companyId);
+$prep->execute();
+$News= $prep->fetchAll();
+
 
 ?>
 
@@ -56,33 +65,33 @@ $userId = $_SESSION['user_id'];
                         </tr>
                     </thead>
                     <tbody>
-
+                        <?php foreach($News as $New): ?>
                         <tr>
                             <td>
                                 <i class="fa fa-newspaper-o fa-2x text-navy" style="color:#4caf50;"></i>
                                 
                             </td>
                             <td>
-                                News Title
+                                <?=$New['title']?>
                             </td>
                             <td>
-                                News Category
+                            <?=$New['category']?>
                             </td>
                             <td>
-                                Albin Smajli
+                            <?=$New['author']?>
                             </td>
                             <td>
-                                05.08.2024
+                            <?=$New['publish_on']?>
                             </td>
                             <td>
-                                09.08.2024
+                            <?=$New['until']?>
                             </td>
                             <td>
                                 <a href="" class="btn btn-xs btn-circle btn-outline btn-info m-l-sm"> <i class="fa fa-edit"></i> </a>
                                <button class="btn btn-xs btn-circle btn-outline btn-danger m-l-sm"> <i class="fa fa-trash"></i> </button>
                             </td>
                         </tr>
-
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
 

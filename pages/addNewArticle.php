@@ -2,6 +2,42 @@
 require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
+$company_Id = $_SESSION['company'];
+
+
+if (isset($_POST['addNews'])) {
+    
+    $title=$_POST['title'];
+    $category=$_POST['category'];
+    $summary=$_POST['summary'];
+    $content=$_POST['content'];
+    $created=date('y-m-d');
+    $publish_on=$_POST['publish_on'];
+    $until=$_POST['until'];
+
+    $newsQuery="INSERT INTO news VALUES (null, :title, :category, :summary, :content, :publish_on, :until, :author, :created, :company_id)";
+    $prep=$con->prepare($newsQuery);
+    $prep->bindParam(':author', $userId);
+    $prep->bindParam(':company_id', $company_Id);
+    $prep->bindParam(':title', $title);
+    $prep->bindParam(':category', $category);
+    $prep->bindParam(':summary', $summary);
+    $prep->bindParam(':content', $content);
+    $prep->bindParam(':publish_on', $publish_on);
+    $prep->bindParam(':until', $until);
+    $prep->bindParam(':created', $created);
+
+    $prep->execute();
+    header("Location: /HrSystem/pages/news.php");
+   
+
+
+    
+}
+
+
+
+
 
 ?>
 
@@ -41,7 +77,7 @@ $userId = $_SESSION['user_id'];
                 </h4>
             </div>
             <div class="ArticleBody">
-                <form action="">
+                <form action="" method="post">
                     <div class="form-group">
                         <label for="title">Title</label><br>
                         <input type="text" name="title" id="title">
@@ -51,7 +87,7 @@ $userId = $_SESSION['user_id'];
                     <div class="form-group">
                         <label for="category">Category</label><br>
                         <select name="category" id="category">
-                            <option value="">Breaking</option>
+                            <option value="Breaking">Breaking</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -67,7 +103,7 @@ $userId = $_SESSION['user_id'];
                     <div class="row">
                         <div class="col">
                             <label for="pulish">Publish On</label><br>
-                            <input type="date" name="pulish" id="pulish">
+                            <input type="date" name="publish_on" id="pulish">
                         </div>
                         <div class="col">
                             <label for="until">Until</label><br>
@@ -75,7 +111,7 @@ $userId = $_SESSION['user_id'];
                         </div>
                     </div>
                     <div class="ArticleFooter">
-                        <button type="submit" name="save">Save</button>
+                        <button type="submit" name="addNews">Save</button>
                         <a href="home.php" class="cancel">Cancel</a>
                     </div>
                 </form>
