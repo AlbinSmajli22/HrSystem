@@ -2,6 +2,22 @@
 require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
+
+$NewQuery="SELECT * FROM news RIGHT JOIN users ON news.author=users.user_id 
+WHERE company_id=:company_id";
+$prep = $con->prepare($NewQuery);
+$prep->bindParam(':company_id', $companyId);
+$prep->execute();
+$News= $prep->fetchAll();
+
+
+$today = date('Y-m-d');
+
+$deleteNews="DELETE FROM news WHERE until = :today";
+$prep = $con->prepare($deleteNews);
+$prep->bindParam(':today', $today);
+$prep->execute();
 
 ?>
 
@@ -35,21 +51,23 @@ $userId = $_SESSION['user_id'];
 
         <div class="newsBody">
             <div id="row">
+            <?php foreach($News as $New): ?>
                 <div class="inbox">
                     <div class="inbox-content">
-                        <a href="theNew.php">
-                            <h2>Title</h2>
+                        <a href="theNew.php?new_id=<?= $New['new_id']; ?>">
+                            <h2> <?=$New['title']?></h2>
                         </a>
                         <div class="author">
-                            <strong>Albin Smajli</strong>
+                            <strong><?=$New['name']?> <?=$New['surname']?></strong>
                             <span><i class="fa fa-clock-o" style="font-size: 10px;"></i> 08 Aug 2024</span>
                         </div>
-                        <p>Summary</p>
+                        <p><?=$New['summary']?></p>
                         <div class="category">
-                            <span>Ctegory</span>
+                            <span><?=$New['category']?></span>
                         </div>
                     </div>
                 </div>
+                <?php endforeach; ?>
             </div>
         </div>
         <?php include '../template/footer.php'; ?>

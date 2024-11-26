@@ -70,7 +70,7 @@ $userImages = $prep->fetchAll();
             <?php } ?>
         <li>
             <i class="fa-solid fa-money-bill-1-wave"></i>
-            <a href="pages/expenses.php">Expenses</a>
+            <a href="expenses.php">Expenses</a>
         </li>
         <li>
             <i class="fa-solid fa-bullseye"></i>

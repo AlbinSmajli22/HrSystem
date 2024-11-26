@@ -2,7 +2,14 @@
 require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
+$new_id=$_GET['new_id'];
 
+$NewQuery="SELECT * FROM news RIGHT JOIN users ON news.author=users.user_id 
+WHERE new_id=:new_id";
+$prep = $con->prepare($NewQuery);
+$prep->bindParam(':new_id', $new_id);
+$prep->execute();
+$News= $prep->fetch();
 ?>
 
 <head>
@@ -36,16 +43,16 @@ $userId = $_SESSION['user_id'];
         <div class="newsBody">
             <div id="theNewContent">
                 <div id="category">
-                    <span>Important</span>
+                    <span><?=$News['category']?></span>
                 </div>
                 <div id="title">
-                    <span><i class="fa fa-clock-o"></i> 05 Aug 2024</span>
-                    <h1>Title</h1>
+                    <span><i class="fa fa-clock-o"></i> <?=$News['publish_on']?></span>
+                    <h1><?=$News['summary']?></h1>
                 </div>
                 <div id="well">
-                    <p>Summery</p>
+                    <p><?=$News['summary']?></p>
                 </div>
-                <p id="content">content</p>
+                <p id="content"><?=$News['content']?></p>
                 <hr>
                 <div id="goBack">
                     <a href="empNews.php">

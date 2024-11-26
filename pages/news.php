@@ -5,12 +5,53 @@ $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
 
-$NewQuery="SELECT * FROM news WHERE company_id=:company_id";
+$NewQuery = "SELECT * FROM news RIGHT JOIN users ON news.author=users.user_id 
+WHERE company_id=:company_id";
 $prep = $con->prepare($NewQuery);
 $prep->bindParam(':company_id', $companyId);
 $prep->execute();
-$News= $prep->fetchAll();
+$News = $prep->fetchAll();
 
+
+
+if (isset($_POST['editNews'])) {
+
+    $new_id=$_POST['new_id'];
+    $company_id=$_POST['company_id'];
+    $title=$_POST['title'];
+    $category=$_POST['category'];
+    $summary=$_POST['summary'];
+    $content=$_POST['content'];
+    $created=date('y-m-d');
+    $publish_on=$_POST['publish_on'];
+    $until=$_POST['until'];
+
+
+	$editNewsQuery = "UPDATE news SET title=:title, category=:category, summary=:summary, content=:content, publish_on=:publish_on, until=:until, author=:author,  created=:created, company_id=:company_id
+        WHERE new_id =:new_id ";
+
+
+
+    $prep = $con->prepare($editNewsQuery);
+
+    $prep=$con->prepare($editNewsQuery);
+    $prep->bindParam(':new_id', $new_id);
+    $prep->bindParam(':author', $userId);
+    $prep->bindParam(':company_id', $company_id);
+    $prep->bindParam(':title', $title);
+    $prep->bindParam(':category', $category);
+    $prep->bindParam(':summary', $summary);
+    $prep->bindParam(':content', $content);
+    $prep->bindParam(':publish_on', $publish_on);
+    $prep->bindParam(':until', $until);
+    $prep->bindParam(':created', $created);
+    
+    $prep->execute();
+    header("Location: /HrSystem/pages/news.php");
+
+
+
+}
 
 ?>
 
@@ -65,32 +106,77 @@ $News= $prep->fetchAll();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($News as $New): ?>
-                        <tr>
-                            <td>
-                                <i class="fa fa-newspaper-o fa-2x text-navy" style="color:#4caf50;"></i>
-                                
-                            </td>
-                            <td>
-                                <?=$New['title']?>
-                            </td>
-                            <td>
-                            <?=$New['category']?>
-                            </td>
-                            <td>
-                            <?=$New['author']?>
-                            </td>
-                            <td>
-                            <?=$New['publish_on']?>
-                            </td>
-                            <td>
-                            <?=$New['until']?>
-                            </td>
-                            <td>
-                                <a href="" class="btn btn-xs btn-circle btn-outline btn-info m-l-sm"> <i class="fa fa-edit"></i> </a>
-                               <button class="btn btn-xs btn-circle btn-outline btn-danger m-l-sm"> <i class="fa fa-trash"></i> </button>
-                            </td>
-                        </tr>
+                        <?php foreach ($News as $New): ?>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-newspaper-o fa-2x text-navy" style="color:#4caf50;"></i>
+
+                                </td>
+                                <td>
+                                    <?= $New['title'] ?>
+                                </td>
+                                <td>
+                                    <?= $New['category'] ?>
+                                </td>
+                                <td>
+                                    <?= $New['name'] ?>     <?= $New['surname'] ?>
+                                </td>
+                                <td>
+                                    <?= $New['publish_on'] ?>
+                                </td>
+                                <td>
+                                    <?= $New['until'] ?>
+                                </td>
+                                <td>
+                                    <button class=" btn btn-xs btn-circle btn-outline btn-info m-l-sm"
+                                        data-bs-toggle="modal" data-bs-target="#newsEditModal<?php echo $New['new_id']; ?>"
+                                        data-bs-whatever="@mdo"> <i class=" fa fa-edit"></i> </button>
+                                    <a href="deleteNew.php?new_id=<?= $New['new_id']; ?>"
+                                        class="btn btn-xs btn-circle btn-outline btn-danger m-l-sm"> <i
+                                            class="fa fa-trash"></i> </a>
+                                </td>
+                                <div class="modal fade-newsEditModal" id="newsEditModal<?php echo $New['new_id']; ?>"
+                                    tabindex="-1" aria-labelledby="newsEditModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="" method="post">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit News</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                    <input type="hidden" name="new_id" id="new_id" value="<?= $New['new_id'] ?>">
+                                                    <input type="hidden" name="company_id" id="company_id" value="<?= $_SESSION['company'] ?>">
+                                                    <label for="title">Title</label>
+                                                    <input type="text" name="title" id="title" value="<?= $New['title'] ?>">
+                                                    <label for="summary">Summary</label>
+                                                    <input type="text" name="summary" id="summary" value="<?= $New['summary'] ?>">
+                                                    <label for="content">Content</label>
+                                                    <input type="text" name="content" id="content" value="<?= $New['content'] ?>">
+                                                    <label for="category">Category</label>
+                                                    <select name="category" id="category">
+                                                        <option value="<?= $New['category'] ?>"><?= $New['category'] ?></option>
+                                                        <option value="Breaking">Breaking</option>
+                                                    </select>
+                                                    <label for="publish_on">Publish</label>
+                                                    <input type="date" name="publish_on" id="publish_on" value="<?= $New['publish_on'] ?>">
+                                                    <label for="">Until</label>
+                                                    <input type="date" name="until" id="until" value="<?= $New['until'] ?>">
+                                                
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="submit" name="editNews" class="btn btn-success">Edit</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
