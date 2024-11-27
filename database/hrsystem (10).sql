@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2024 at 09:57 AM
+-- Generation Time: Nov 27, 2024 at 10:08 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -257,7 +257,8 @@ CREATE TABLE `expenses` (
   `details` varchar(200) NOT NULL,
   `amount` double NOT NULL,
   `tax` double NOT NULL,
-  `receipts` varchar(500) NOT NULL
+  `receipts` varchar(500) NOT NULL,
+  `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
