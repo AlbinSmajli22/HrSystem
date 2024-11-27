@@ -32,5 +32,22 @@ window.onclick = function(event) {
     }
   }
 }
+function myFunctionThree() {
+  document.getElementById("expensesConfigure").classList.toggle("showThree");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.excbtn')) {
+    var dropdowns = document.getElementsByClassName("leave-dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('showThree')) {
+        openDropdown.classList.remove('showThree');
+      }
+    }
+  }
+}
 
 

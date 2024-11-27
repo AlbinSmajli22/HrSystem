@@ -58,7 +58,8 @@ $userImages = $prep->fetchAll();
                     <a href="planer.php"><i class="fa-regular fa-calendar-days"></i> Planer</a>
                     <a href="approverequest.php"> <i class="fa fa-plane"></i> Requests</a>
                     <a href="availability.php"><i class="fa-solid fa-rectangle-list"></i> Availability</a>
-                    <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa-solid fa-pencil"></i> Bulk Update <i class="fa-solid fa-caret-right"></i></a> 
+                    <a onclick="myFunctionTwo()" class="Leavebtn"><i class="fa-solid fa-pencil"></i> Bulk Update <i
+                            class="fa-solid fa-caret-right"></i></a>
                     <a href="configureLeaves.php"><i class="fa-solid fa-gear"></i> Configure</a>
                     <div id="leaveConfigure" class="leave-dropdown-content">
                         <a href="balances.php"> <i class="fa-solid fa-calculator"></i> Balances</a>
@@ -66,12 +67,23 @@ $userImages = $prep->fetchAll();
                     </div>
 
                 </div>
-
-            <?php } ?>
-        <li>
-            <i class="fa-solid fa-money-bill-1-wave"></i>
-            <a href="expenses.php">Expenses</a>
-        </li>
+            </li>
+        <?php } ?>
+        <?php if ($_SESSION['role'] == 0) { ?>
+            <li class="dropdown" Style="cursor: pointer;">
+                <i class="fa-solid fa-money-bill-1-wave"></i>
+                <a href="expenses.php">Expenses</a>
+            </li>
+        <?php } else { ?>
+            <li class="dropdown" Style="cursor: pointer;">
+                <i class="fa-solid fa-money-bill-1-wave"></i>
+                <a onclick="myFunctionThree()" class="excbtn">Expenses<i class="fa-solid fa-caret-right"></i></a>
+                <div id="expensesConfigure" class="exceptions-dropdown-content">
+                    <a href="empExpenses.php"><i class="fa-regular fa-square-check"></i> Expenses</a>
+                    <a href="configureExpenses.php"> <i class="fa-solid fa-gear"></i>  Configure</a>
+                </div>
+            </li>
+        <?php } ?>
         <li>
             <i class="fa-solid fa-bullseye"></i>
             <a href="goals.php">Goals</a>

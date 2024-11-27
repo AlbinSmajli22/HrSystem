@@ -32,9 +32,8 @@ if (isset($_POST['editNews'])) {
 
 
 
-    $prep = $con->prepare($editNewsQuery);
-
     $prep=$con->prepare($editNewsQuery);
+
     $prep->bindParam(':new_id', $new_id);
     $prep->bindParam(':author', $userId);
     $prep->bindParam(':company_id', $company_id);
