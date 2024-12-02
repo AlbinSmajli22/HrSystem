@@ -45,11 +45,11 @@ $prep->execute();
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
-        <div class="newsHead">
+        <div class="expensesHead">
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
 
-        <div class="newsBody">
+        <div class="expensesBody">
             <div id="row">
             <?php foreach($News as $New): ?>
                 <div class="inbox">

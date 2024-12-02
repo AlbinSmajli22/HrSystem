@@ -10,14 +10,14 @@ WHERE company_id=:company_id";
 $prep = $con->prepare($exceptionsQuery);
 $prep->bindParam(':company_id', $companyId);
 $prep->execute();
-$exceptions = $prep->fetchAll();
+$expenses = $prep->fetchAll();
 
 
 
 if (isset($_POST['addExpense'])) {
 
     $name = $_POST['name'];
-    
+
     $addExpensesQuery = "INSERT INTO  expensescategory  (name, company_id) VALUES (:name, :company_id )";
 
     $prep = $con->prepare($addExpensesQuery);
@@ -32,7 +32,7 @@ if (isset($_POST['editExpense'])) {
     $id = $_POST['new_id'];
     $company_id = $_POST['company_id'];
     $name = $_POST['name'];
-    
+
     $editExpensesQuery = "UPDATE expensescategory SET name=:name,  company_id=:company_id WHERE expensescategory.id =:id ";
 
     $prep = $con->prepare($editExpensesQuery);
@@ -79,40 +79,39 @@ if (isset($_POST['editExpense'])) {
                 <h5>
                     Expenses
                 </h5>
-                <button id="addExpenseCategory" data-bs-toggle="modal" data-bs-target="#addExpensesModal" data-bs-whatever="@mdo">
+                <button id="addExpenseCategory" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
+                    data-bs-whatever="@mdo">
                     <a>
                         <i class="fa fa-plus"></i>
                         Add Expense Category
                     </a>
                 </button>
-                <div class="modal fade-addExpensesModal"
-                                    id="addExpensesModal" tabindex="-1"
-                                    aria-labelledby="addExpensesModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="" method="post">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Exception</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-
-                                                <div class="modal-body">
-                                                    <label for="name">Expense Category Name</label>
-                                                    <input type="text" name="name" id="name">
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="submit" name="addExpense"
-                                                        class="btn btn-success">Edit</button>
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                <div class="modal fade-addExpensesModal" id="addExpensesModal" tabindex="-1"
+                    aria-labelledby="addExpensesModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="" method="post">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Exception</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
-                
+
+                                <div class="modal-body">
+                                    <label for="name">Expense Category Name</label>
+                                    <input type="text" name="name" id="name">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="submit" name="addExpense" class="btn btn-success">Edit</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="expensesTableBody">
                 <table class="recentExpenses">
@@ -125,7 +124,7 @@ if (isset($_POST['editExpense'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($exceptions as $exception): ?>
+                        <?php foreach ($expenses as $expense): ?>
                             <tr>
                                 <td>
                                     <?= $exception['name'] ?>

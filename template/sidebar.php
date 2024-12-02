@@ -72,7 +72,7 @@ $userImages = $prep->fetchAll();
         <?php if ($_SESSION['role'] == 0) { ?>
             <li class="dropdown" Style="cursor: pointer;">
                 <i class="fa-solid fa-money-bill-1-wave"></i>
-                <a href="expenses.php">Expenses</a>
+                <a href="empexpenses.php">Expenses</a>
             </li>
         <?php } else { ?>
             <li class="dropdown" Style="cursor: pointer;">
