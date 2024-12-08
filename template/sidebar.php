@@ -79,7 +79,7 @@ $userImages = $prep->fetchAll();
                 <i class="fa-solid fa-money-bill-1-wave"></i>
                 <a onclick="myFunctionThree()" class="excbtn">Expenses<i class="fa-solid fa-caret-right"></i></a>
                 <div id="expensesConfigure" class="exceptions-dropdown-content">
-                    <a href="empExpenses.php"><i class="fa-regular fa-square-check"></i> Expenses</a>
+                    <a href="expenses.php"><i class="fa-regular fa-square-check"></i> Expenses</a>
                     <a href="configureExpenses.php"> <i class="fa-solid fa-gear"></i>  Configure</a>
                 </div>
             </li>

@@ -118,11 +118,11 @@ include 'addExpensseLogic.php';
                 <table class="recentExpenses">
                     <thead>
                         <tr>
-                            <th>Description</th>
-                            <th>Comments</th>
                             <th>Expense Claim Date</th>
+                            <th>Description</th>
                             <th>Amount</th>
-                            <th>Currency Unit</th>
+                            <th>Tax Amount</th>
+                            <th>Status</th>
                             <th>Actions</th>
 
 
@@ -132,19 +132,22 @@ include 'addExpensseLogic.php';
                         <?php foreach ($expenses as $expense): ?>
                             <tr>
                                 <td>
-                                    <?= $expense['description'] ?>
-                                </td>
-                                <td>
-                                    <?= $expense['comments'] ?>
-                                </td>
-                                <td>
                                     <?= $expense['claim_date'] ?>
                                 </td>
                                 <td>
+                                    <p> <?= $expense['description'] ?></p><br>
+                                    <small><?= $expense['comments'] ?></small>
+                                </td>
+                                <td>
+                                    <?= $expense['currency'] ?>
                                     <?= $expense['amount'] ?>
                                 </td>
                                 <td>
                                     <?= $expense['currency'] ?>
+                                    <?= $expense['tax'] ?>
+                                </td>
+                                <td>
+                                    <?= $expense['status'] ?>
                                 </td>
                                 <td>
                                     <button class=" btn btn-xs btn-circle btn-outline btn-info m-l-sm"

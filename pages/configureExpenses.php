@@ -5,9 +5,9 @@ $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
 
-$exceptionsQuery = "SELECT * FROM expensescategory
+$expensesQuery = "SELECT * FROM expensescategory
 WHERE company_id=:company_id";
-$prep = $con->prepare($exceptionsQuery);
+$prep = $con->prepare($expensesQuery);
 $prep->bindParam(':company_id', $companyId);
 $prep->execute();
 $expenses = $prep->fetchAll();
@@ -92,7 +92,7 @@ if (isset($_POST['editExpense'])) {
                         <div class="modal-content">
                             <form action="" method="post">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Exception</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Expense</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -103,7 +103,7 @@ if (isset($_POST['editExpense'])) {
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="submit" name="addExpense" class="btn btn-success">Edit</button>
+                                    <button type="submit" name="addExpense" class="btn btn-success">Add</button>
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                 </div>
@@ -127,37 +127,37 @@ if (isset($_POST['editExpense'])) {
                         <?php foreach ($expenses as $expense): ?>
                             <tr>
                                 <td>
-                                    <?= $exception['name'] ?>
+                                    <?= $expense['name'] ?>
                                 </td>
                                 <td>
                                     <button class=" btn btn-xs btn-circle btn-outline btn-info m-l-sm"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#exceptionEditModal<?php echo $exception['id']; ?>"
+                                        data-bs-target="#expenseEditModal<?php echo $expense['id']; ?>"
                                         data-bs-whatever="@mdo"> <i class=" fa fa-edit"></i> </button>
-                                    <a href="deleteExpenseCategory.php?expense_id=<?= $exception['id']; ?>"
+                                    <a href="deleteExpenseCategory.php?expense_id=<?= $expense['id']; ?>"
                                         class="btn btn-xs btn-circle btn-outline btn-danger m-l-sm"> <i
                                             class="fa fa-trash"></i> </a>
                                 </td>
-                                <div class="modal fade-exceptionEditModal"
-                                    id="exceptionEditModal<?php echo $exception['id']; ?>" tabindex="-1"
-                                    aria-labelledby="exceptionEditModalLabel" aria-hidden="true">
+                                <div class="modal fade-expenseEditModal"
+                                    id="expenseEditModal<?php echo $expense['id']; ?>" tabindex="-1"
+                                    aria-labelledby="expenseEditModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <form action="" method="post">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Exception</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Expense</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
 
                                                 <div class="modal-body">
                                                     <input type="hidden" name="new_id" id="new_id"
-                                                        value="<?= $exception['id'] ?>">
+                                                        value="<?= $expense['id'] ?>">
                                                     <input type="hidden" name="company_id" id="company_id"
                                                         value="<?= $_SESSION['company'] ?>">
                                                     <label for="name">Category Name</label>
                                                     <input type="text" name="name" id="name"
-                                                        value="<?= $exception['name'] ?>">
+                                                        value="<?= $expense['name'] ?>">
                                                 </div>
 
                                                 <div class="modal-footer">

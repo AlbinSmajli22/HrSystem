@@ -18,6 +18,7 @@ if (isset($_POST['addExpense'])) {
         $amount=$_POST['amount'];
         $tax=$_POST['tax'];
         $status='Submited';
+        $created=date('Y-m-d');
         $image_file = $_FILES["image"]["name"];
         $type = $_FILES["image"]["type"];
         $size = $_FILES["image"]["size"];
@@ -51,8 +52,8 @@ if (isset($_POST['addExpense'])) {
             header("Location: empexpenses.php");
         }
         if (!isset($errorMsg)) {
-            $addExpensesQuery = "INSERT INTO  expenses (id, send_to, user_id, claim_date, currency, description, comments, category, details, amount, tax, receipts,  status) 
-            VALUES (null, :send_to, :user_id, :claim_date, :currency, :description, :comments, :category, :details, :amount, :tax, :receipts,  :status )";
+            $addExpensesQuery = "INSERT INTO  expenses (id, send_to, user_id, claim_date, currency, description, comments, category, details, amount, tax, receipts,  status, created) 
+            VALUES (null, :send_to, :user_id, :claim_date, :currency, :description, :comments, :category, :details, :amount, :tax, :receipts,  :status, :created)";
 
             $prep = $con->prepare($addExpensesQuery);            
             $prep->bindParam(':send_to', $send_to);
@@ -67,6 +68,7 @@ if (isset($_POST['addExpense'])) {
             $prep->bindParam(':tax', $tax);
             $prep->bindParam(':receipts', $image_file);
             $prep->bindParam(':status', $status);
+            $prep->bindParam(':created', $created);
 
             $prep->execute();
             header("Location: /HrSystem/pages/empexpenses.php");
@@ -225,4 +227,13 @@ $prep = $con->prepare($exceptionsQuery);
 $prep->bindParam(':user_id', $userId);
 $prep->execute();
 $expenses = $prep->fetchAll();
+
+$approveQuery = "SELECT e.id, e.send_to, e.user_id, e.claim_date, e.currency, 
+e.description, e.comments, e.category, e.details,e.amount, e.tax,
+e.receipts, e.status, e.created, u.user_id, u.image, u.name, u.surname FROM expenses e RIGHT JOIN users u on u.user_id=e.user_id
+WHERE e.send_to = :user_id";
+$prep = $con->prepare($approveQuery);
+$prep->bindParam(':user_id', $userId);
+$prep->execute();
+$approves = $prep->fetchAll();
 ?>

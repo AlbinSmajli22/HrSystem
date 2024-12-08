@@ -14,7 +14,7 @@ $News= $prep->fetchAll();
 
 $today = date('Y-m-d');
 
-$deleteNews="DELETE FROM news WHERE until = :today";
+$deleteNews="DELETE FROM news WHERE until < :today";
 $prep = $con->prepare($deleteNews);
 $prep->bindParam(':today', $today);
 $prep->execute();
