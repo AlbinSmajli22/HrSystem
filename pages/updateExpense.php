@@ -39,7 +39,7 @@ $Expense = $prep->fetch();
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
-        <div class="expenseHead">
+        <div id="companyName">
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
 
@@ -142,14 +142,24 @@ $Expense = $prep->fetch();
                     </div>
                 </div>
                 <div id="butons">
-                    <button>Approved</button>
-                    <button>Rejected</button>
-                    <button>Cancel</button>
+                    <div id="firstbtn">
+                        <button type="submit" name="approve" id="approve">Approved</button>
+                        <button type="submit" name="" id="reject">Rejected</button>
+                    </div>
+                    <div id="firstbtn">
+                        <a href="expenses.php" id="cancel">Cancel</a>
+                    </div>
                 </div>
             </div>
             <div id="theExpenseDates">
-                <p>created <?= $Expense['created'] ?></p>
-                <p>created by <?= $Expense['name'] ?> <?= $Expense['surname'] ?></p>
+                <div id="createdAt">
+                    <i class="fa-solid fa-pencil"></i>
+                    <p>Created <?= $Expense['created'] ?></p>
+                </div>
+                <div id="sentTo">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <p>Sent To <strong> <?= $Expense['name'] ?> <?= $Expense['surname'] ?></strong></p>
+                </div>
             </div>
         </div>
 

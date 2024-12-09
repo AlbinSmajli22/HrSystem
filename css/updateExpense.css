@@ -18,16 +18,32 @@ body {
   background-color: #f4f6fa;
   height: fit-content;
 }
+#companyName{
+  padding-top: 30px;
+  width: 100%;
+  text-align: start;
+  padding-left: 35;
+}
+#companyName h2{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  color: #676a6c;
+  font-size: 24px;
+  align-items: center;
+}
+
 #expenseBody{
   display: flex;
   flex-direction:row;
   width: 100%;
-  padding: 20px;
+  padding: 35px;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #676A6A;
 }
 #theExpenseContent{
-  width: 80%;
+  width: 75%;
  display: flex;
  flex-direction: column;
  margin-right: 20px;
@@ -229,15 +245,105 @@ width: 100%;
   width: 100%;
   height: 40%;
   background-color: #f9f9f9;
+  border-top: 1px solid #e7eaec;
 }
 #card a{
   font-size: 12px;
  
 }
-
-#theExpenseDates{
-  width: 20%;
+#reimbursementAmount{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+#reimbursementAmount input{
+  text-align: right;
+  width: 300px;
+  margin-top: 5px;
+  padding: 6px 12px;
+  border: 1px solid #e7eaec;
+  color: #676A6A;
+  font-size: 14px;
+}
+#butons{
+  width:100%;
+  margin-bottom: 80px;
+  margin-top:20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#butons button{
+  padding: 6 12;
+  border-radius: 3px;
+  font-size: 14px;
+  border: solid 1px;
+  
+}
+#approve{
+  color: #fff;
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+#reject{
+  color: #fff;
+  background-color: #e53935;
+  border-color:#e53935;
+}
+#cancel{
+  text-decoration: none;
+  color: #676A6A;
   background-color: #fff;
-  height: 100px;
-  padding: 10px;
+  border-color: solid #e7eaec 1px;
+  padding: 6 12;
+  border-radius: 3px;
+  font-size: 14px;
+}
+#theExpenseDates{
+  border: solid #e7eaec 1px;
+  width: 25%;
+  background-color: #fff;
+  height: 120px;
+  padding: 25px;
+  font-size: 12px;
+  color: #676A6A;
+  
+}
+#theExpenseDates p{
+  padding: 0;
+  margin: 0;
+  
+}
+#createdAt{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+  
+}
+#createdAt i{
+  color: #fff;
+  background-color:#26c6da ;
+  font-size: 13px;
+  padding: 6px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+#sentTo{
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  
+}
+#sentTo i{
+  color: #fff;
+  background-color:blue ;
+  font-size: 13px;
+  padding: 6px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
