@@ -150,12 +150,14 @@ include 'addExpensseLogic.php';
                                     <?= $expense['status'] ?>
                                 </td>
                                 <td>
+                                    <?php if($expense['status'] =='Submited') {?>
                                     <button class=" btn btn-xs btn-circle btn-outline btn-info m-l-sm"
                                         data-bs-toggle="modal" data-bs-target="#expenseEditModal<?=$expense['id']?>"
                                         data-bs-whatever="@mdo"> <i class=" fa fa-edit"></i> </button>
                                     <a href="deleteExpensse.php?expensse_id=<?=$expense['id']?>"
                                         class="btn btn-xs btn-circle btn-outline btn-danger m-l-sm"> <i
                                             class="fa fa-trash"></i> </a>
+                                            <?php } ?>
                                 </td>
                                 <div class="modal fade-expenseEditModal" id="expenseEditModal<?=$expense['id']?>" tabindex="-1"
                     aria-labelledby="expenseEditModalLabel" aria-hidden="true">

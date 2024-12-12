@@ -120,11 +120,11 @@ $requestDatas = $prep->fetchAll();
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/read_news_female.png" alt="" width="48px" height="48px">
-                    <h3><a href="news.php">News</a></h3>
+                    <h3><a href="empNews.php">News</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/expense_claim3.png" alt="" width="48px" height="48px">
-                    <h3><a href="expenses.php">File an Expens Claim</a></h3>
+                    <h3><a href="empexpenses.php">File an Expens Claim</a></h3>
                 </div>
             </div>
 

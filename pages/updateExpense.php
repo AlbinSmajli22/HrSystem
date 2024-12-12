@@ -3,6 +3,9 @@ require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
 $expense_id = $_GET['expense_id'];
+$approved_date=date('Y-m-d');
+$approved='Approved';
+$declined='Declined';
 
 $expenseQuery = " SELECT e.id, e.send_to, e.user_id, e.claim_date, e.currency, e.approved,
 e.description, e.comments, e.category, e.details,e.amount, e.tax,
@@ -13,6 +16,29 @@ $prep = $con->prepare($expenseQuery);
 $prep->bindParam(':expense_id', $expense_id);
 $prep->execute();
 $Expense = $prep->fetch();
+
+if (isset($_POST['approve'])) {
+
+    
+
+    $editExpensesQuery = "UPDATE  expenses SET status=:status , approved=:approved where id=:id";
+    $prep = $con->prepare($editExpensesQuery);
+    $prep->bindParam(':id', $expense_id);
+    $prep->bindParam(':status', $approved);
+    $prep->bindParam(':approved', $approved_date);
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/empexpenses.php");
+}elseif (isset($_POST['reject'])) {
+
+    $editExpensesQuery = "UPDATE  expenses SET status=:status , approved=:approved where id=:id";
+    $prep = $con->prepare($editExpensesQuery);
+    $prep->bindParam(':id', $expense_id);
+    $prep->bindParam(':status', $declined);
+    $prep->bindParam(':approved', $approved_date);
+    $prep->execute();
+    header("Location: /HrSystem/pages/empexpenses.php");
+}
 ?>
 
 <head>
@@ -41,6 +67,7 @@ $Expense = $prep->fetch();
         <?php include '../template/navbar.php' ?>
         <div id="companyName">
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
+            <?php var_dump($expense_id) ?>
         </div>
 
         <div id="expenseBody">
@@ -143,8 +170,10 @@ $Expense = $prep->fetch();
                 </div>
                 <div id="butons">
                     <div id="firstbtn">
-                        <button type="submit" name="approve" id="approve">Approved</button>
-                        <button type="submit" name="" id="reject">Rejected</button>
+                        <form action="" method="post">
+                            <button type="submit" name="approve" id="approve">Approved</button>
+                            <button type="submit" name="reject" id="reject">Rejected</button>
+                        </form>
                     </div>
                     <div id="firstbtn">
                         <a href="expenses.php" id="cancel">Cancel</a>

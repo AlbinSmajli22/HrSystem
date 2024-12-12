@@ -1,6 +1,7 @@
 <?php
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
+$Submited="Submited";
 
 $errors = array('file_size' => '', 'file_exist' => '', 'file_format' => '' );
 
@@ -231,9 +232,10 @@ $expenses = $prep->fetchAll();
 $approveQuery = "SELECT e.id, e.send_to, e.user_id, e.claim_date, e.currency, 
 e.description, e.comments, e.category, e.details,e.amount, e.tax,
 e.receipts, e.status, e.created, u.user_id, u.image, u.name, u.surname FROM expenses e RIGHT JOIN users u on u.user_id=e.user_id
-WHERE e.send_to = :user_id";
+WHERE e.send_to = :user_id AND e.status LIKE :status";
 $prep = $con->prepare($approveQuery);
 $prep->bindParam(':user_id', $userId);
+$prep->bindParam(':status', $Submited);
 $prep->execute();
 $approves = $prep->fetchAll();
 ?>
