@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:wght@300&display=swap");
+
+body {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  background-color: #f4f6fa;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f4f6fa;
+  height: fit-content;
+}
+
+.companyName {
+  padding-top: 30px;
+  width: 100%;
+  text-align: start;
+  padding-left: 35;
+}
+.companyName h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  color: #676a6c;
+  font-size: 24px;
+  align-items: center;
+}
+#goalsStats {
+  width: 100%;
+  padding: 5px 35px 5px 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.stats {
+  width: 30%;
+  padding: 10px 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #676a6c;
+}
+#goalsBody {
+  width: 100%;
+  padding: 10px 35px 5px 35px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #676a6c;
+}
+#goalsTableHead {
+  width: 100%;
+  padding: 15px 15px 7px 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3f3fd;
+  border: 1px solid #e7eaec ;
+}
+#goalsTableHead h5 {
+  font-size: 14px;
+  margin: 0 0 7px;
+  padding: 0;
+  text-overflow: ellipsis;
+  float: left;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+#goalsTableHead a {
+  background-color: #4caf50;
+  border-color: #4caf50;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 12px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+
+#goalsTableBody{
+  width: 100%;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #676a6c;
+  background-color:#ffffff;
+  padding: 15px 20px 20px 20px;
+  border: 1px solid #e7eaec ;
+}

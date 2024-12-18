@@ -77,17 +77,29 @@ $userImages = $prep->fetchAll();
         <?php } else { ?>
             <li class="dropdown" Style="cursor: pointer;">
                 <i class="fa-solid fa-money-bill-1-wave"></i>
-                <a onclick="myFunctionThree()" class="excbtn">Expenses<i class="fa-solid fa-caret-right"></i></a>
+                <a onclick="myFunctionThree()" class="excbtn">Expenses <i class="fa-solid fa-caret-right"></i></a>
                 <div id="expensesConfigure" class="exceptions-dropdown-content">
                     <a href="expenses.php"><i class="fa-regular fa-square-check"></i> Expenses</a>
-                    <a href="configureExpenses.php"> <i class="fa-solid fa-gear"></i>  Configure</a>
+                    <a href="configureExpenses.php"> <i class="fa-solid fa-gear"></i> Configure</a>
                 </div>
             </li>
         <?php } ?>
-        <li>
-            <i class="fa-solid fa-bullseye"></i>
-            <a href="goals.php">Goals</a>
-        </li>
+        <?php if ($_SESSION['role'] == 0) { ?>
+            <li>
+                <i class="fa-solid fa-bullseye"></i>
+                <a href="goals.php">Goals</a>
+            </li>
+        <?php } else { ?>
+            <li class="dropdown" Style="cursor: pointer;">
+                <i class="fa-solid fa-bullseye"></i>
+                <a onclick="myFunctionFour()" class="goalbtn">Goals <i class="fa-solid fa-caret-right"></i></a>
+                <div id="goalsConfigure" class="goals-dropdown-content">
+                    <a href="assignesGoals.php"><i class="fa-regular fa-square-check"></i> Assigned</a>
+                    <a href="configureExpenses.php"> <i class="fa-solid fa-gear"></i> Configure</a>
+                </div>
+            </li>
+
+        <?php } ?>
         <li>
             <i class="fa-solid fa-book"></i>
             <a href="library.php">Library</a>
