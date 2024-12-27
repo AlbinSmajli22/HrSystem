@@ -95,7 +95,12 @@ $userImages = $prep->fetchAll();
                 <a onclick="myFunctionFour()" class="goalbtn">Goals <i class="fa-solid fa-caret-right"></i></a>
                 <div id="goalsConfigure" class="goals-dropdown-content">
                     <a href="assignesGoals.php"><i class="fa-regular fa-square-check"></i> Assigned</a>
-                    <a href="configureExpenses.php"> <i class="fa-solid fa-gear"></i> Configure</a>
+                    <a  onclick="myFunctionFive()" class="templatebtn"> <i class="fa-solid fa-gear"></i> Configure <i
+                    class="fa-solid fa-caret-right"></i></a>
+                    <div id="TemplateConfigure" class="template-dropdown-content">
+                        <a href="templates.php"> <i class="fa-solid fa-file-code-o"></i> Templates</a>
+                        <a href="goalItem.php"><i class="fa-solid fa-list"></i> Goal Items</a>
+                    </div>
                 </div>
             </li>
 

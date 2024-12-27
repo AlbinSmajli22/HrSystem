@@ -57,8 +57,8 @@
     background-color: #0277bd;
     height: 155px;
     width: 100%;
-    margin-top: 130px;
-    margin-left: 200px;
+    margin-top: 160px;
+    margin-left: 290px;
     padding: 10px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -82,8 +82,8 @@ flex-direction:column;
        background-color: #0277bd;
        height: 70px;
        width: 100%;
-       margin-top: 120px;
-       margin-left: 110px;
+       margin-top: 100px;
+       margin-left: 115px;
        padding: 10px;
        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
        z-index: 1;
@@ -108,8 +108,8 @@ flex-direction:column;
        background-color: #0277bd;
        height: 70px;
        width: 100%;
-       margin-top: 120px;
-       margin-left: 110px;
+       margin-top: 70px;
+       margin-left: 190px;
        padding: 10px;
        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
        z-index: 1;
@@ -133,8 +133,8 @@ flex-direction:column;
        background-color: #0277bd;
        height: 70px;
        width: 100%;
-       margin-top: 120px;
-       margin-left: 110px;
+       margin-top: 70px;
+       margin-left: 140px;
        padding: 10px;
        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
        z-index: 1;
@@ -146,6 +146,31 @@ flex-direction:column;
        margin-bottom: 10px;
    }
 .showFour {
+    display: flex;
+flex-direction:column;
+}
+#sidebar .templatebtn:hover{
+    cursor: pointer;
+   }
+   .template-dropdown-content{
+       display: none;
+       position: absolute;
+       background-color: #0277bd;
+       height: 70px;
+       width: 100%;
+       margin-top: 40px;
+       margin-left: 100px;
+       padding: 10px;
+       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+       z-index: 1;
+       border-radius: 5px;
+       
+   }
+   .template-dropdown-content a{
+       width: 100%;
+       margin-bottom: 10px;
+   }
+.showFive {
     display: flex;
 flex-direction:column;
 }
