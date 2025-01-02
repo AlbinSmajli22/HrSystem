@@ -9,7 +9,7 @@ include 'addNewGoal.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/expenses.css">
+    <link rel="stylesheet" href="../css/goals.css">
     <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -39,58 +39,63 @@ include 'addNewGoal.php';
                 <h5>
                     Expenses
                 </h5>
-                <button id="addExpenseCategory" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
-                    data-bs-whatever="@mdo">
-                    <a>
+                <button id="addExpenseCategory">
+                    <a href="addGoal.php">
                         <i class="fa fa-plus"></i>
                         Add Expense
                     </a>
                 </button>
-                <div class="modal fade-addExpensesModal" id="addExpensesModal" tabindex="-1"
-                    aria-labelledby="addExpensesModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Claim</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
 
-                                <div class="modal-body">
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" name="addGoal" class="btn btn-success">Submit
-                                        Claim</button>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="expensesTableBody">
 
 
 
                 <?php foreach ($goals as $goal): ?>
-                    <div>
-                        <h5>
-                            <?= $goal['description'] ?>
-                        </h5>
-                        <small>Last Updated:   Due on: <?= $goal['due_date'] ?></small>
+                    <div id="theGoal">
+                        <div id="Goal2">
+                            <div id="description">
+                                <div>
+                                <h5>
+                                    <?= $goal['description'] ?>
+                                </h5>
+                                <i class="fa-solid fa-ellipsis"></i>
+                                </div>
+                                <small>Last Updated: Due on: <?= $goal['due_date'] ?></small>
+                            </div>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                            <!--<button id="addExpenseCategory" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
+                                data-bs-whatever="@mdo">Edit</button>-->
+                        </div>
+                        <div class="modal fade-addExpensesModal" id="addExpensesModal" tabindex="-1"
+                            aria-labelledby="addExpensesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Claim</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" name="addGoal" class="btn btn-success">Submit
+                                                Claim</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Comments">
+                            <?= $goal['comments'] ?>
+                        </div>
                     </div>
-
-
                 <?php endforeach; ?>
-
-
-
-                <div>
-
-                </div>
             </div>
         </div>
         <?php include '../template/footer.php'; ?>
