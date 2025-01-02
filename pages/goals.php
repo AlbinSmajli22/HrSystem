@@ -42,7 +42,7 @@ include 'addNewGoal.php';
                 <button id="addExpenseCategory">
                     <a href="addGoal.php">
                         <i class="fa fa-plus"></i>
-                        Add Expense
+                        Add Goal
                     </a>
                 </button>
 
@@ -55,7 +55,7 @@ include 'addNewGoal.php';
                     <div id="theGoal">
                         <div id="Goal2">
                             <div id="description">
-                                <div>
+                                <div id="description2">
                                 <h5>
                                     <?= $goal['description'] ?>
                                 </h5>
