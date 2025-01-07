@@ -109,3 +109,28 @@ body {
   display: flex;
   flex-direction: row;
 }
+#Goal2 .editbtn:hover{
+  cursor: pointer;
+ }
+ .edit-dropdown-content{
+     display: none;
+     position: absolute;
+     background-color: #0277bd;
+     height: 70px;
+     width: 100%;
+     margin-top: 0px;
+     margin-left: 0px;
+     padding: 10px;
+     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+     z-index: 1;
+     border-radius: 5px;
+     
+ }
+ .edit-dropdown-content a{
+     width: 100%;
+     margin-bottom: 10px;
+ }
+.showEdit {
+  display: flex;
+flex-direction:column;
+}

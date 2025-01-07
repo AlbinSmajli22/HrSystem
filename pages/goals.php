@@ -56,16 +56,31 @@ include 'addNewGoal.php';
                         <div id="Goal2">
                             <div id="description">
                                 <div id="description2">
-                                <h5>
-                                    <?= $goal['description'] ?>
-                                </h5>
-                                <i class="fa-solid fa-ellipsis"></i>
+                                    <h5>
+                                        <?= $goal['description'] ?>
+                                    </h5>
+                                    <i class="fa-solid fa-ellipsis"></i>
                                 </div>
-                                <small>Last Updated: Due on: <?= $goal['due_date'] ?></small>
+
+                                <?php
+                                $currentDate = gmdate('Y-m-d');
+                                $currentDate = date_create($currentDate);
+                                $dueDate = $goal['due_date'];
+                                $dueDate = date_create($dueDate);
+                                $updateDate = $goal['updated'];
+                                $updateDate = date_create($updateDate);
+
+                                $dueDateOn = date_diff($dueDate, $currentDate);
+                                $updatedOn = date_diff($updateDate, $currentDate);
+                                ?>
+                                <small>Last Updated: <?= $updatedOn->d ?> days ago Due on: <strong>
+                                        <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</small>
                             </div>
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                            <!--<button id="addExpenseCategory" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
-                                data-bs-whatever="@mdo">Edit</button>-->
+                            <i class="fa-solid fa-ellipsis-vertical" id="editbtn"></i>
+                            <div class="edit-dropdown-content">
+                                <a href="">edit</a>
+                                <a href="">delete</a>
+                            </div>
                         </div>
                         <div class="modal fade-addExpensesModal" id="addExpensesModal" tabindex="-1"
                             aria-labelledby="addExpensesModalLabel" aria-hidden="true">
@@ -100,7 +115,25 @@ include 'addNewGoal.php';
         </div>
         <?php include '../template/footer.php'; ?>
     </div>
+    <Script>
+        function myFunctionFour() {
+            document.getElementById("goalsConfigure").classList.toggle("showEdit");
+        }
 
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('#editbtn')) {
+                var dropdowns = document.getElementsByClassName("edit-dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('showEdit')) {
+                        openDropdown.classList.remove('showEdit');
+                    }
+                }
+            }
+        }
+    </Script>
 </body>
 
 </html>
