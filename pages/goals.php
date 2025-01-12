@@ -59,7 +59,7 @@ include 'addNewGoal.php';
                                     <h5>
                                         <?= $goal['description'] ?>
                                     </h5>
-                                    <i class="fa-solid fa-ellipsis"></i>
+
                                 </div>
 
                                 <?php
@@ -76,14 +76,16 @@ include 'addNewGoal.php';
                                 <small>Last Updated: <?= $updatedOn->d ?> days ago Due on: <strong>
                                         <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</small>
                             </div>
-                            <i class="fa-solid fa-ellipsis-vertical" id="editbtn"></i>
-                            <div class="edit-dropdown-content">
-                                <a href="">edit</a>
-                                <a href="">delete</a>
+                            <div class='dots-menu'>
+                                <span class='dots'>⋮</span>
+                                <div class='menu'>
+                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $goal['id'] ?>" data-bs-whatever="@mdo">Edit</a>
+                                    <a href='deleteGoal.php?goal_id=<?= $goal['id'] ?>'>Delete</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="modal fade-addExpensesModal" id="addExpensesModal" tabindex="-1"
-                            aria-labelledby="addExpensesModalLabel" aria-hidden="true">
+                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $goal['id'] ?>" tabindex="-1"
+                            aria-labelledby="editGoalModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <form action="" method="post" enctype="multipart/form-data">
@@ -94,11 +96,17 @@ include 'addNewGoal.php';
                                         </div>
 
                                         <div class="modal-body">
+                                            <input type="hidden" value="<?= $goal['id'] ?>" name="goal_id">
+                                            <textarea name="notes" id="" value="<?= $goal['target_value'] ?>"></textarea>
+
+                                            <input type="text" value="<?= $goal['value'] ?>" name="value">
+
+                                            <input type="date" value="<?= $goal['due_date'] ?>">
+                                           <input type="text" value="<?= $goal['target_value'] ?>">
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" name="addGoal" class="btn btn-success">Submit
-                                                Claim</button>
+                                            <button type="submit" name="editGoal" class="btn btn-success">Edit</button>
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
                                         </div>
@@ -106,8 +114,11 @@ include 'addNewGoal.php';
                                 </div>
                             </div>
                         </div>
-                        <div id="Comments">
-                            <?= $goal['comments'] ?>
+                        <div class="more-comments">
+                            <span class="more">⋮</span>
+                            <div class="comments">
+                                <?= $goal['comments'] ?>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -116,23 +127,33 @@ include 'addNewGoal.php';
         <?php include '../template/footer.php'; ?>
     </div>
     <Script>
-        function myFunctionFour() {
-            document.getElementById("goalsConfigure").classList.toggle("showEdit");
-        }
+        document.querySelectorAll('.dots').forEach(dots => {
+            dots.addEventListener('click', function () {
+                const menu = this.nextElementSibling;
+                const allMenus = document.querySelectorAll('.menu');
+                allMenus.forEach(m => m !== menu && (m.style.display = 'none'));
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            });
+        });
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function (event) {
-            if (!event.target.matches('#editbtn')) {
-                var dropdowns = document.getElementsByClassName("edit-dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('showEdit')) {
-                        openDropdown.classList.remove('showEdit');
-                    }
-                }
+        // Close menu if clicked outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.dots-menu')) {
+                document.querySelectorAll('.menu').forEach(menu => menu.style.display = 'none');
             }
-        }
+        });
+
+
+        document.querySelectorAll('.more').forEach(more => {
+            more.addEventListener('click', function () {
+                const comments = this.nextElementSibling;
+                const allComments = document.querySelectorAll('.comments');
+                allComments.forEach(c => c !== comments && (c.style.display = 'none'));
+                comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+
     </Script>
 </body>
 
