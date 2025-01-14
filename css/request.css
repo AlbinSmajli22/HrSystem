@@ -152,9 +152,9 @@ body{
 
 }
 .recentLeave tbody tr td .decline{
-    background-color: #e53935;
+    background-color: #ff4fa9;
     color: #fff;
-    border: #e53935;
+    border: #ff4fa9;
     border-radius: 2px;
     font-size: 10px;
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
