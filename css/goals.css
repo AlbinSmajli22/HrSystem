@@ -57,7 +57,6 @@ body {
 }
 .expensesTableHead h5 {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   color: #676a6c;
   font-size: 14px;
@@ -65,7 +64,11 @@ body {
   width: 240px;
   height: 25px;
 }
-
+.expensesTableHead h5 img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
 .expensesTableHead #addExpenseCategory {
   background-color: #4caf50;
   color: white;
@@ -89,28 +92,37 @@ body {
   margin-left: 10px;
   width: 95%;
   border: 1px solid #e7eaec;
+  padding: 20px;
 }
-#theGoal{
+#theGoal {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  border-bottom: 2px solid #e7eaec;
+  padding: 10px 0px;
 }
-#Goal2{
+#Goal2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-#description{
+#description {
   display: flex;
   flex-direction: column;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#description2{
+#description2 {
   display: flex;
   flex-direction: row;
 }
-#description2 .more{
-  cursor: pointer;
+#description2 h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0d6efd;
+}
+#description small {
+  font-size: 12px;
+  color: #676a6c;
 }
 .dots-menu {
   position: relative;
@@ -119,41 +131,75 @@ body {
 .dots {
   cursor: pointer;
   font-size: 18px;
+  font-weight: 700;
+  color: #676a6c;
 }
 .menu {
+  width: 150px;
   display: none;
   position: absolute;
   top: 20px;
   right: 0;
+  font-size: 12px;
   background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  color: #676a6c;
   border-radius: 4px;
+  border: 1px solid #e7eaec;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 .menu a {
   display: block;
   padding: 8px 16px;
   text-decoration: none;
   color: #333;
-  border-bottom: 1px solid #ddd;
+}
+.menu a i {
+  margin-right: 10px;
 }
 .menu a:last-child {
-  border-bottom: none;
+  color: #e53935;
 }
 .menu a:hover {
   background-color: #f0f0f0;
 }
 
-.comments{
+.comments {
+  border-radius: 4px;
+  font-size: 12px;
   display: none;
   width: 100%;
   background-color: #f4f6fa;
   padding: 10px;
-  
+  color: #676a6c;
+  border: solid #e7eaec 1px;
+  margin-bottom: 20px;
 }
-.more-comments .more{
+.more-comments .more {
   display: flex;
   width: 20px;
   rotate: 90deg;
   cursor: pointer;
+  font-weight: 700;
+  color: #676a6c;
+}
+.empty_space {
+  height: 10px;
+  width: 100%;
+  border-radius: 4px;
+  width: 100%;
+  background-color: #f4f6fa;
+  padding: 10px;
+  color: #676a6c;
+  margin-bottom: 40px;
+}
+#theGoal hr{
+  color: #e7eaec;
+  margin-top: 40px;
+}
+
+.modal-dialog{
+  min-width: 600px;
+}
+.modal-content{
+  border-radius: none;
 }

@@ -37,7 +37,8 @@ include 'addNewGoal.php';
         <div class="expensesBody">
             <div class="expensesTableHead">
                 <h5>
-                    Expenses
+                    <img src="../images/goal.png" alt="" >
+                    My Goals and Objectives
                 </h5>
                 <button id="addExpenseCategory">
                     <a href="addGoal.php">
@@ -73,14 +74,15 @@ include 'addNewGoal.php';
                                 $dueDateOn = date_diff($dueDate, $currentDate);
                                 $updatedOn = date_diff($updateDate, $currentDate);
                                 ?>
-                                <small>Last Updated: <?= $updatedOn->d ?> days ago Due on: <strong>
-                                        <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</small>
+                                <small> <em> Last Updated: <?= $updatedOn->d ?> days ago Due on: <strong>
+                                        <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</em></small>
                             </div>
                             <div class='dots-menu'>
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
-                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $goal['id'] ?>" data-bs-whatever="@mdo">Edit</a>
-                                    <a href='deleteGoal.php?goal_id=<?= $goal['id'] ?>'>Delete</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $goal['id'] ?>"
+                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i>  Edit</a>
+                                    <a href='deleteGoal.php?goal_id=<?= $goal['id'] ?>'><i class="fa-solid fa-trash-can"></i> Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +104,7 @@ include 'addNewGoal.php';
                                             <input type="text" value="<?= $goal['value'] ?>" name="value">
 
                                             <input type="date" value="<?= $goal['due_date'] ?>">
-                                           <input type="text" value="<?= $goal['target_value'] ?>">
+                                            <input type="text" value="<?= $goal['target_value'] ?>">
 
                                         </div>
                                         <div class="modal-footer">
@@ -120,6 +122,11 @@ include 'addNewGoal.php';
                                 <?= $goal['comments'] ?>
                             </div>
                         </div>
+
+                        <div class="empty_space">
+
+                        </div>
+                   
                     </div>
                 <?php endforeach; ?>
             </div>
