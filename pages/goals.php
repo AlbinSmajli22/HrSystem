@@ -37,7 +37,7 @@ include 'addNewGoal.php';
         <div class="expensesBody">
             <div class="expensesTableHead">
                 <h5>
-                    <img src="../images/goal.png" alt="" >
+                    <img src="../images/goal.png" alt="">
                     My Goals and Objectives
                 </h5>
                 <button id="addExpenseCategory">
@@ -75,37 +75,52 @@ include 'addNewGoal.php';
                                 $updatedOn = date_diff($updateDate, $currentDate);
                                 ?>
                                 <small> <em> Last Updated: <?= $updatedOn->d ?> days ago Due on: <strong>
-                                        <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</em></small>
+                                            <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</em></small>
                             </div>
                             <div class='dots-menu'>
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
                                     <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $goal['id'] ?>"
-                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i>  Edit</a>
-                                    <a href='deleteGoal.php?goal_id=<?= $goal['id'] ?>'><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                    <a href='deleteGoal.php?goal_id=<?= $goal['id'] ?>'><i
+                                            class="fa-solid fa-trash-can"></i> Delete</a>
                                 </div>
                             </div>
                         </div>
                         <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $goal['id'] ?>" tabindex="-1"
                             aria-labelledby="editGoalModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content animated slideInTop">
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Claim</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close">×</button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Update Goal</h4>
+                                            
                                         </div>
 
                                         <div class="modal-body">
-                                            <input type="hidden" value="<?= $goal['id'] ?>" name="goal_id">
-                                            <textarea name="notes" id="" value="<?= $goal['target_value'] ?>"></textarea>
+                                            <div class="beginning-part">
+                                                <input type="hidden" value="<?= $goal['id'] ?>" name="goal_id">
+                                                <img src="../userIMG/<?= $goal['image'] ?>" alt="User Image">
+                                                <h5><?= $goal['name'] ?> <?= $goal['surname'] ?></h5>
+                                                <p><?= $goal['description'] ?></p>
+                                                <small><?= $goal['comments'] ?></small>
+                                            </div>
+                                            
+                                            <div class="mid-part">
+                                                <label for="notes">Notes</label>
+                                                <textarea name="notes" class="notes"
+                                                    value="<?= $goal['target_value'] ?>"></textarea>
 
-                                            <input type="text" value="<?= $goal['value'] ?>" name="value">
-
-                                            <input type="date" value="<?= $goal['due_date'] ?>">
-                                            <input type="text" value="<?= $goal['target_value'] ?>">
-
+                                                <label for="value"></label>
+                                                <input type="text" value="<?= $goal['value'] ?>" name="value" class="value">
+                                            </div>
+                                            
+                                            <div class="last-part">
+                                                <input type="date" value="<?= $goal['due_date'] ?>">
+                                                <input type="text" value="<?= $goal['target_value'] ?>">
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" name="editGoal" class="btn btn-success">Edit</button>
@@ -126,7 +141,7 @@ include 'addNewGoal.php';
                         <div class="empty_space">
 
                         </div>
-                   
+
                     </div>
                 <?php endforeach; ?>
             </div>

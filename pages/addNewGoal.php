@@ -54,12 +54,14 @@ if (isset($_POST['editGoal'])) {
 
 
 
-$goalsQuery = "SELECT * FROM goals
-WHERE user_id=:user_id";
+$goalsQuery = "SELECT * FROM goals Right Join users on goals.user_id=users.user_id
+WHERE goals.user_id=:user_id";
 $prep = $con->prepare($goalsQuery);
 $prep->bindParam(':user_id', $userId);
 $prep->execute();
 $goals = $prep->fetchAll();
+
+
 
 
 ?>
