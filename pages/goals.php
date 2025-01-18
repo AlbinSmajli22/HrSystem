@@ -93,39 +93,50 @@ include 'addNewGoal.php';
                                 <div class="modal-content animated slideInTop">
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
-                                        <button type="button" class="close" data-bs-dismiss="modal"
-                                        aria-label="Close">×</button>
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">×</button>
                                             <h4 class="modal-title" id="exampleModalLabel">Update Goal</h4>
-                                            
+
                                         </div>
 
                                         <div class="modal-body">
                                             <div class="beginning-part">
                                                 <input type="hidden" value="<?= $goal['id'] ?>" name="goal_id">
                                                 <img src="../userIMG/<?= $goal['image'] ?>" alt="User Image">
-                                                <h5><?= $goal['name'] ?> <?= $goal['surname'] ?></h5>
+                                                <h5><?= $goal['name'] ?>     <?= $goal['surname'] ?></h5>
                                                 <p><?= $goal['description'] ?></p>
                                                 <small><?= $goal['comments'] ?></small>
                                             </div>
-                                            
-                                            <div class="mid-part">
-                                                <label for="notes">Notes</label>
-                                                <textarea name="notes" class="notes"
-                                                    value="<?= $goal['target_value'] ?>"></textarea>
 
-                                                <label for="value"></label>
-                                                <input type="text" value="<?= $goal['value'] ?>" name="value" class="value">
+                                            <div class="mid-part">
+                                                <div class="mid-part-col1">
+                                                    <label for="notes">Notes</label><br>
+                                                    <textarea name="notes" class="notes" rows="3"
+                                                        value="<?= $goal['target_value'] ?>"></textarea>
+                                                </div>
+                                                <div class="mid-part-col2">
+                                                    <label for="value">Update Value</label><br>
+                                                    <input type="text" value="<?= $goal['value'] ?>" name="value"
+                                                        class="value">
+                                                </div>
                                             </div>
-                                            
+
                                             <div class="last-part">
-                                                <input type="date" value="<?= $goal['due_date'] ?>">
-                                                <input type="text" value="<?= $goal['target_value'] ?>">
+                                                <div class="last-part-row1">
+                                                    <label for="due_date">Due Date</label><br>
+                                                    <input type="date" name="due_date" class="due_date" value="<?= $goal['due_date'] ?>">
+                                                </div>
+                                                <div class="last-part-row2">
+                                                    <label for="target_value">Target Value</label><br>
+                                                    <input type="text" name="target_value" class="target_value" value="<?= $goal['target_value'] ?>">
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" name="editGoal" class="btn btn-success">Edit</button>
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" name="editGoal" class="btn-save">Save</button>
+                                            
                                         </div>
                                     </form>
                                 </div>
