@@ -88,10 +88,45 @@ $thisweekoverdue = $prep->fetch();
         <div id="goalsBody">
             <div id="goalsTableHead">
                 <h5>Goal Items (Aggregate)</h5>
-                <a href="">
+                <a data-bs-toggle="modal" data-bs-target="#assigneGoalModal"
+                data-bs-whatever="@mdo">
                     <i class="fa fa-bullseye m-r-xs"></i>
                     Assign Goal To Employee(s)
                 </a>
+                <div class="modal fade-assigne-GoalModal" id="assigneGoalModal" tabindex="-1"
+                            aria-labelledby="assigneGoalModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated slideInTop">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">×</button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Assigne Goal</h4>
+
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="beginning-part">
+                                                
+                                            
+                                            </div>
+
+                                            
+
+                                            <div class="last-part">
+                                              
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" name="editGoal" class="btn-save">Save</button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
             </div>
             <div id="goalsTableBody">
                 <div>

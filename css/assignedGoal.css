@@ -103,3 +103,114 @@ body {
   padding: 15px 20px 20px 20px;
   border: 1px solid #e7eaec ;
 }
+.modal-dialog {
+  min-width: 600px;
+}
+.modal .modal-dialog .modal-content {
+  border-radius: 0px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #676a6c;
+}
+.modal .modal-dialog .modal-content .modal-header {
+  padding: 30px 15px;
+  text-align: center;
+  display: block;
+}
+.modal .modal-dialog .modal-content .modal-header h4 {
+  font-size: 26px;
+  font-weight: 600;
+}
+.modal .modal-dialog .modal-content .modal-header .close {
+  margin-top: -2px;
+  border: none;
+  background-color: transparent;
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity = 20);
+  opacity: 0.2;
+}
+.modal .modal-dialog .modal-content .modal-body {
+  padding: 20px;
+  background-color: #f4f6fa;
+}
+.modal .modal-dialog .modal-content .modal-body label{
+  text-align: start;
+  font-weight: 700;
+  font-size: 14px;
+  color: #676a6c;
+  margin-bottom: 5px;
+}
+
+.modal .modal-dialog .modal-content .modal-body .beginning-part {
+  display: block;
+  text-align: center;
+  border-bottom: 2px solid #e7eaec;
+  margin-bottom: 20px;
+  padding: 0 20px 20px 20px;
+}
+.beginning-part img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.beginning-part h5 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #0d6efd;
+}
+.beginning-part p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.beginning-part small {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+
+.modal .modal-dialog .modal-content .modal-body .last-part{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.last-part .last-part-row1{
+  display: block;
+  text-align: start;
+  width: 47%;
+}
+.last-part .last-part-row2{
+  display: block;
+  text-align: start;
+  width: 47%;
+}
+.last-part input{
+  width: 100%;
+  color: #676a6c;
+  border: 1px solid #e7eaec;
+  padding: 6px 12px;
+}
+.modal .modal-dialog .modal-content .modal-footer .btn-exit{
+  color: #676a6c;
+  background-color: #fff;
+  border: 1px solid #e7eaec;
+  padding: 6 12;
+  border-radius: 3px;
+  font-size: 14px;
+}
+.modal .modal-dialog .modal-content .modal-footer .btn-save{
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+  padding: 6 12;
+  border-radius: 3px;
+  font-size: 14px;
+}

@@ -8,7 +8,7 @@ include 'addNewGoal.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/addGoal.css">
+    <link rel="stylesheet" href="../css/goalItem.css">
     <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -89,7 +89,7 @@ include 'addNewGoal.php';
                             date)</p>
                     </div>
                     <hr>
-                    <div class="form-group">
+                    <div class="form-group" id="targetValueContainer">
                         <label for="target">Target Value</label><br>
                         <input type="number" name="target" id="target">
                         <p>Default target value to set for this goal (can be adjusted later)</p>
@@ -104,7 +104,7 @@ include 'addNewGoal.php';
         <?php include '../template/footer.php'; ?>
     </div>
     <script>
-    function toggleTargetValueField() {
+        function toggleTargetValueField() {
             const goalType = document.getElementById("type").value;
             const targetValueContainer = document.getElementById("targetValueContainer");
 

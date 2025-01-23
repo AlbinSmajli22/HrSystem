@@ -98,7 +98,7 @@ $userImages = $prep->fetchAll();
                     <a  onclick="myFunctionFive()" class="templatebtn"> <i class="fa-solid fa-gear"></i> Configure <i
                     class="fa-solid fa-caret-right"></i></a>
                     <div id="TemplateConfigure" class="template-dropdown-content">
-                        <a href="templates.php"> <i class="fa-solid fa-file-code-o"></i> Templates</a>
+                        <a href="template.php"> <i class="fa-regular fa-file-code"></i> Templates</a>
                         <a href="goalItem.php"><i class="fa-solid fa-list"></i> Goal Items</a>
                     </div>
                 </div>
