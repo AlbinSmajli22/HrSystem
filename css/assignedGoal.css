@@ -214,3 +214,84 @@ body {
   border-radius: 3px;
   font-size: 14px;
 }
+
+.comapanyGoals{
+  padding: 25px 25px 15px 25px;
+  border-bottom: 1px solid #e7eaec;
+  font-size: 12px;
+}
+.description span{
+  font-size: 1.15em;
+  font-weight: 600;
+}
+.description .more{
+    width: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #676a6c;
+    text-decoration: none;
+    margin:5px 0px 0px 20px;
+  
+}
+.description .comments{
+  margin-top: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  background-color: #f4f6fa;
+  padding: 10px 20px;
+  color: #676a6c;
+  border: solid #e7eaec 1px;
+  margin-bottom: 20px;
+}
+.cmpNotCmp{
+  width: 100%;
+}
+.pull-right{
+  float: right  ;
+}
+.cmpNotCmp .row{
+  width: 100%;
+}
+.cmpNotCmp .row .col{
+  max-width: 25%;
+  
+}
+.cmpNotCmp .row .col .completedNr{
+  padding: 3px 8px;
+  background-color: #2196f3;
+  color: #fff;
+  font-size: 1.25em;
+  margin-right: 20px;
+  border-radius: .25em;
+  font-weight: 600;
+  
+}
+.cmpNotCmp .row .col .notCompletedNr{
+  padding: 3px 8px;
+  background-color: #d1dade;
+  color: #5e5e5e;
+  font-size: 1.25em;
+  margin-right: 20px;
+  border-radius: .25em;
+  font-weight: 600;
+  
+}
+
+.cmpNotCmp .pull-right button{
+
+  height: 22px;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 1px 5px;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #e7eaec;
+  vertical-align: middle;
+}
+.cmpNotCmp .pull-right button:hover{
+
+  background: #e6e6e6;
+
+}

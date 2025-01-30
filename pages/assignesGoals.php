@@ -3,8 +3,18 @@ require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
-
 $today = date('y-m-d');
+
+
+
+$companyGoalsQ = "SELECT * FROM companygoals WHERE JSON_CONTAINS(users, :userId)";
+$prep = $con->prepare($companyGoalsQ);
+
+$prep->bindValue(':userId', json_encode((string) $userId), PDO::PARAM_STR);
+$prep->execute();
+$comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 $usergoalQ = "SELECT COUNT(*) FROM `goals` WHERE user_id = :user_id";
 $prep = $con->prepare($usergoalQ);
@@ -88,61 +98,80 @@ $thisweekoverdue = $prep->fetch();
         <div id="goalsBody">
             <div id="goalsTableHead">
                 <h5>Goal Items (Aggregate)</h5>
-                <a data-bs-toggle="modal" data-bs-target="#assigneGoalModal"
-                data-bs-whatever="@mdo">
+                <a data-bs-toggle="modal" data-bs-target="#assigneGoalModal" data-bs-whatever="@mdo">
                     <i class="fa fa-bullseye m-r-xs"></i>
                     Assign Goal To Employee(s)
                 </a>
                 <div class="modal fade-assigne-GoalModal" id="assigneGoalModal" tabindex="-1"
-                            aria-labelledby="assigneGoalModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content animated slideInTop">
-                                    <form action="" method="post" enctype="multipart/form-data">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Assigne Goal</h4>
+                    aria-labelledby="assigneGoalModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated slideInTop">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close">×</button>
+                                    <h4 class="modal-title" id="exampleModalLabel">Assigne Goal</h4>
 
-                                        </div>
+                                </div>
 
-                                        <div class="modal-body">
-                                            <div class="beginning-part">
-                                                
-                                            
-                                            </div>
+                                <div class="modal-body">
+                                    <div class="beginning-part">
 
-                                            
 
-                                            <div class="last-part">
-                                              
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="editGoal" class="btn-save">Save</button>
-                                            
-                                        </div>
-                                    </form>
+                                    </div>
+
+
+
+                                    <div class="last-part">
+
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" name="editGoal" class="btn-save">Save</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="goalsTableBody">
+                <?php foreach ($comapnygoals as $comapnygoal): ?>
+                    <div class="comapanyGoals">
+                        <div class="description">
+                            <span><?= $comapnygoal['description'] ?></span>
+                            <a class="more">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </a>
+                            <br>
+                            <div class="comments">
+                                <p>
+                                    <?= $comapnygoal['comments'] ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="cmpNotCmp">
+                            <div class="pull-right">
+                                <button><i class="fa fa-caret-down"></i></button>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <img src="../images/check_on.png" width="24px" alt="">
+                                    <span>Completed:</span>
+                                    <span class="completedNr">0</span>
+                                </div>
+                                <div class="col">
+                                    <img src="../images/check_off.png" width="24px" alt="">
+                                    <span>Not Completed:</span>
+                                    <span class="notCompletedNr">4</span>
                                 </div>
                             </div>
                         </div>
-            </div>
-            <div id="goalsTableBody">
-                <div>
-                    <span>First Goal</span>
-                    <div>
-                    <div>
-                        <span>current goal value</span>
-                        <span>10.0</span>
                     </div>
-                    <span>></span>
-                    </div>
-                    <hr>
-
-                </div>
+                <?php endforeach ?>
             </div>
-
         </div>
 
 
