@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2024 at 10:08 AM
+-- Generation Time: Mar 12, 2025 at 04:52 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -177,6 +177,48 @@ INSERT INTO `company` (`company_id`, `company_name`, `emp_num`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `companygoals`
+--
+
+CREATE TABLE `companygoals` (
+  `id` int(11) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `comments` varchar(500) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `due_date` date NOT NULL,
+  `created` date NOT NULL,
+  `target_value` varchar(100) NOT NULL,
+  `value` int(11) DEFAULT NULL,
+  `company_id` int(11) NOT NULL,
+  `users` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `companygoals`
+--
+
+INSERT INTO `companygoals` (`id`, `description`, `comments`, `type`, `due_date`, `created`, `target_value`, `value`, `company_id`, `users`) VALUES
+(1, 'Multiple id-s', 'Make it able to insert multiple id in a single row cell ', 'Objective', '2025-01-31', '2025-01-21', '', NULL, 1, '[\"17\",\"12\",\"22\"] '),
+(2, 'Finish Goals CRUD', 'Finish goal selection and user selection and after this fix adding those data into database. ', 'Objective', '2025-03-27', '2025-03-11', '100', NULL, 1, '[\"17\",\"21\"]'),
+(3, 'Flexible sidebar', 'Make the sidebar flexible like when user shrink the page side bar names should be gone and only the icons will remine ', 'Objective', '2025-04-01', '2025-03-11', '100', NULL, 1, '[\"17\",\"21\"]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companygoalsvalue`
+--
+
+CREATE TABLE `companygoalsvalue` (
+  `id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `comapny_goal` int(11) NOT NULL,
+  `value` int(11) DEFAULT NULL,
+  `compleated` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contact`
 --
 
@@ -242,6 +284,28 @@ INSERT INTO `departament` (`departament_id`, `departament_name`, `company_id`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `expenseapprovers`
+--
+
+CREATE TABLE `expenseapprovers` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `expenseapprovers`
+--
+
+INSERT INTO `expenseapprovers` (`id`, `user_id`, `company_id`) VALUES
+(1, 17, 1),
+(2, 1, 1),
+(3, 46, 42),
+(4, 10, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `expenses`
 --
 
@@ -250,7 +314,7 @@ CREATE TABLE `expenses` (
   `send_to` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `claim_date` date NOT NULL,
-  `Currency` varchar(10) NOT NULL,
+  `currency` varchar(10) NOT NULL,
   `description` varchar(500) NOT NULL,
   `comments` varchar(500) NOT NULL,
   `category` varchar(100) NOT NULL,
@@ -258,8 +322,18 @@ CREATE TABLE `expenses` (
   `amount` double NOT NULL,
   `tax` double NOT NULL,
   `receipts` varchar(500) NOT NULL,
-  `status` varchar(100) NOT NULL
+  `status` varchar(100) NOT NULL,
+  `created` date NOT NULL,
+  `approved` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`id`, `send_to`, `user_id`, `claim_date`, `currency`, `description`, `comments`, `category`, `details`, `amount`, `tax`, `receipts`, `status`, `created`, `approved`) VALUES
+(9, 17, 12, '2024-12-02', '€', 'Udhetim Jasht Vendit', 'Bilet ekstra ', 'Traveling', 'Details', 3000, 3100, 'c54a6adf-004f-4613-ab41-b0a236730a9e.jpg', 'Approved', '2024-12-04', '2024-12-11'),
+(10, 17, 12, '2024-12-11', 'L', 'description', 'Expense Comments', 'Electricity', 'https://www.linkedin.com/in/fatlind-rashica-4a42912a1/', 50, 70, 'bluza.PNG', 'Declined', '2024-12-11', '2024-12-11');
 
 -- --------------------------------------------------------
 
@@ -279,7 +353,86 @@ CREATE TABLE `expensescategory` (
 
 INSERT INTO `expensescategory` (`id`, `name`, `company_id`) VALUES
 (1, 'Fule/Gas', 1),
-(3, 'Traveling', 1);
+(3, 'Traveling', 1),
+(4, 'Electricity', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fruits`
+--
+
+CREATE TABLE `fruits` (
+  `id` int(11) NOT NULL,
+  `fruit` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `fruits`
+--
+
+INSERT INTO `fruits` (`id`, `fruit`) VALUES
+(1, 'Banana'),
+(2, 'Apple'),
+(3, 'Kivi'),
+(4, 'Pear'),
+(5, 'Wattermelon'),
+(6, 'Strawberry');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `goalitems`
+--
+
+CREATE TABLE `goalitems` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `details` varchar(500) NOT NULL,
+  `type` varchar(200) NOT NULL,
+  `due_deadline` date NOT NULL,
+  `target` int(11) NOT NULL,
+  `created` date NOT NULL,
+  `updated` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `goalitems`
+--
+
+INSERT INTO `goalitems` (`id`, `name`, `details`, `type`, `due_deadline`, `target`, `created`, `updated`) VALUES
+(1, 'Goal 1', 'Detailsss', 'Number', '2025-01-08', 200, '2024-12-25', '0000-00-00'),
+(2, 'Goal 2', 'Detailsss', 'Number', '2025-01-11', 100, '2024-12-30', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `goals`
+--
+
+CREATE TABLE `goals` (
+  `id` int(11) NOT NULL,
+  `description` varchar(600) NOT NULL,
+  `comments` varchar(600) NOT NULL,
+  `type` varchar(200) NOT NULL,
+  `due_date` date NOT NULL,
+  `target_value` int(11) NOT NULL,
+  `value` varchar(200) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `compleated` tinyint(1) NOT NULL,
+  `created` date NOT NULL,
+  `updated` date DEFAULT NULL,
+  `notes` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `goals`
+--
+
+INSERT INTO `goals` (`id`, `description`, `comments`, `type`, `due_date`, `target_value`, `value`, `user_id`, `compleated`, `created`, `updated`, `notes`) VALUES
+(7, 'pershkrimi', 'komentit', 'number', '0000-00-00', 100, '0', 17, 0, '0000-00-00', NULL, NULL),
+(8, 'test description', 'test comments', 'number', '2025-01-21', 1000, '990', 12, 0, '2025-01-11', NULL, 'task done'),
+(9, 'Goals CRUD', 'Ka met edhe pjesa e adminit me u kry se gati osht', 'percentage', '2025-01-31', 100, NULL, 12, 0, '2025-01-12', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -299,14 +452,6 @@ CREATE TABLE `news` (
   `created` date NOT NULL,
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `news`
---
-
-INSERT INTO `news` (`new_id`, `title`, `category`, `summary`, `content`, `publish_on`, `until`, `author`, `created`, `company_id`) VALUES
-(4, 'New Company Rules', 'Breaking', 'New Company Rules Document Relased', 'New Company Rules Document Relased with seven new rules about .....', '2024-11-23', '2024-11-27', 17, '2024-11-23', 1),
-(6, 'Date Test News ', 'Breaking', 'Date Test News', 'this is a test to check if the news is gonna delete when the date will come', '2024-11-25', '2024-11-26', 17, '2024-11-26', 1);
 
 -- --------------------------------------------------------
 
@@ -404,8 +549,8 @@ INSERT INTO `timeoffrequests` (`request_id`, `User_ID`, `Head_ID`, `leave_type`,
 (94, 17, 21, 'Annual Leave', '2024-10-23', '2024-10-23', 1, 'sdasd', 'asdasd', 'Approved', 17, '2024-10-24', '2024-10-23'),
 (95, 17, 21, 'Annual Leave', '2024-10-23', '2024-10-23', 1, 'half day', 'half day', 'Approved', 17, '2024-10-24', '2024-10-23'),
 (96, 17, 21, 'Annual Leave', '2024-10-24', '2024-10-25', 2, 'sdasd', 'asdas', 'Submited', NULL, NULL, '2024-10-24'),
-(97, 12, 17, 'Annual Leave', '2024-11-05', '2024-11-15', 11, '.', '.', 'Submited', NULL, NULL, '2024-11-05'),
-(98, 12, 19, 'Sick Leave', '2024-11-06', '2024-11-08', 3, 'sick', 'sick', 'Submited', NULL, NULL, '2024-11-05');
+(97, 12, 17, 'Annual Leave', '2024-11-05', '2024-11-15', 11, '.', '.', 'Declined', 17, '2025-01-14', '2024-11-05'),
+(98, 12, 19, 'Sick Leave', '2024-11-06', '2024-11-08', 3, 'sick', 'sick', 'Declined', 17, '2025-01-14', '2024-11-05');
 
 -- --------------------------------------------------------
 
@@ -470,7 +615,7 @@ INSERT INTO `users` (`user_id`, `image`, `name`, `surname`, `email`, `password`,
 (8, NULL, 'Arben', 'Berisha', 'arben@metdaan.com', '$2y$10$aX4t7/Rb.8TNYHQO1hCLnu8qA1JKp6RvBuQdid4nMjrbmrC74bH.C', 2, 5, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
 (9, NULL, 'Meriton', 'Feka', 'meriton@metdaan.com', '$2y$10$t4RQUE7iXMbHSSYPj2iEm.bSMICn1us06nZ.DuBHz.YJKcAEvcTWm', 6, 1, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
 (10, NULL, 'Gazmend', 'Berisha', 'gazmend@metdaan.com', '$2y$10$3tEdolNwZUIdoPpZ8xReC.bt.f6dDyQQodDXNgG6Pt3gBvkV837QO', 9, 2, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
-(12, NULL, 'Valmir', 'Leci', 'valmir@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0, 'Main Office', 'Full Time', 21, 'Male', NULL, NULL, 1),
+(12, 'bluza2.PNG', 'Valmir', 'Leci', 'valmir@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0, 'Main Office', 'Full Time', 17, 'Male', NULL, NULL, 1),
 (15, NULL, 'Rinor', 'Berisha', 'rinor@metdaan.com', '$2y$10$PB6FHjvF3PbIsu/Lz9k1huXmA1Go2Dr/thStoa6ht9G0U1dLMWWbm', 1, 5, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
 (17, 'profil.jpg', 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$bV9bJI.VRbsO98/wnSGvkOiTk3XCqFBN1PEwzqBvTI0Bb.ubZa49C', 5, 7, 1, 'Main Office', 'Full Time', 21, 'Male', '2002-11-27', '2023-03-01', 1),
 (19, NULL, 'Arian', 'Mehmeti', 'arian@metdaan.com', '$2y$10$25BKuMIaT9R9UTN32iwLzOJPsDacreCFxYDW8Mn6o/icaDxP/Tu0u', 6, 1, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
@@ -508,6 +653,21 @@ ALTER TABLE `company`
   ADD PRIMARY KEY (`company_id`);
 
 --
+-- Indexes for table `companygoals`
+--
+ALTER TABLE `companygoals`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `companygoal-company` (`company_id`);
+
+--
+-- Indexes for table `companygoalsvalue`
+--
+ALTER TABLE `companygoalsvalue`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `companygoal-value` (`comapny_goal`),
+  ADD KEY `value-user` (`user`);
+
+--
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
@@ -520,6 +680,14 @@ ALTER TABLE `contact`
 ALTER TABLE `departament`
   ADD PRIMARY KEY (`departament_id`),
   ADD KEY `company_id` (`company_id`);
+
+--
+-- Indexes for table `expenseapprovers`
+--
+ALTER TABLE `expenseapprovers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `expenseApprove` (`user_id`),
+  ADD KEY `expenseApproveCompany` (`company_id`);
 
 --
 -- Indexes for table `expenses`
@@ -535,6 +703,25 @@ ALTER TABLE `expenses`
 ALTER TABLE `expensescategory`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Company_exceptions` (`company_id`);
+
+--
+-- Indexes for table `fruits`
+--
+ALTER TABLE `fruits`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `goalitems`
+--
+ALTER TABLE `goalitems`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `goals`
+--
+ALTER TABLE `goals`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_goal` (`user_id`);
 
 --
 -- Indexes for table `news`
@@ -598,6 +785,18 @@ ALTER TABLE `company`
   MODIFY `company_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
+-- AUTO_INCREMENT for table `companygoals`
+--
+ALTER TABLE `companygoals`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `companygoalsvalue`
+--
+ALTER TABLE `companygoalsvalue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
@@ -610,22 +809,46 @@ ALTER TABLE `departament`
   MODIFY `departament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
+-- AUTO_INCREMENT for table `expenseapprovers`
+--
+ALTER TABLE `expenseapprovers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `expensescategory`
 --
 ALTER TABLE `expensescategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `fruits`
+--
+ALTER TABLE `fruits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `goalitems`
+--
+ALTER TABLE `goalitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `goals`
+--
+ALTER TABLE `goals`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `new_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `new_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `position`
@@ -663,6 +886,19 @@ ALTER TABLE `amountoftimeoff`
   ADD CONSTRAINT `user_relation` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `companygoals`
+--
+ALTER TABLE `companygoals`
+  ADD CONSTRAINT `companygoal-company` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `companygoalsvalue`
+--
+ALTER TABLE `companygoalsvalue`
+  ADD CONSTRAINT `companygoal-value` FOREIGN KEY (`comapny_goal`) REFERENCES `companygoals` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `value-user` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `contact`
 --
 ALTER TABLE `contact`
@@ -673,6 +909,13 @@ ALTER TABLE `contact`
 --
 ALTER TABLE `departament`
   ADD CONSTRAINT `company_id` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `expenseapprovers`
+--
+ALTER TABLE `expenseapprovers`
+  ADD CONSTRAINT `expenseApprove` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `expenseApproveCompany` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `expenses`
@@ -686,6 +929,12 @@ ALTER TABLE `expenses`
 --
 ALTER TABLE `expensescategory`
   ADD CONSTRAINT `Company_exceptions` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `goals`
+--
+ALTER TABLE `goals`
+  ADD CONSTRAINT `user_goal` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `news`

@@ -5,7 +5,17 @@ $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 $today = date('y-m-d');
 
+$allCompanyGoals = "SELECT * FROM companygoals WHERE company_id = :company";
+$prep = $con->prepare($allCompanyGoals);
+$prep->bindParam(':company', $companyId);
+$prep->execute();
+$goals = $prep->fetchAll();
 
+$usersQuery = "SELECT * FROM `users` WHERE company = :company";
+$prep = $con->prepare($usersQuery);
+$prep->bindParam(':company', $companyId);
+$prep->execute();
+$users = $prep->fetchAll();
 
 $companyGoalsQ = "SELECT * FROM companygoals WHERE JSON_CONTAINS(users, :userId)";
 $prep = $con->prepare($companyGoalsQ);
@@ -111,17 +121,50 @@ $thisweekoverdue = $prep->fetch();
                                     <button type="button" class="close" data-bs-dismiss="modal"
                                         aria-label="Close">×</button>
                                     <h4 class="modal-title" id="exampleModalLabel">Assigne Goal</h4>
-
                                 </div>
-
                                 <div class="modal-body">
                                     <div class="beginning-part">
+                                        <div class="row">
+                                            <div class="sub_row">
+                                                <label for="selected_option">Assign To</label>
+                                                <select name="selected_option" id="selectInput"
+                                                    onchange="addItem(this)">
+                                                    <option value="" disabled selected>Select</option>
+                                                    <?php foreach ($users as $user): ?>
+                                                        <option value="<?= $user['user_id'] ?>">
+                                                            <?= htmlspecialchars($user['name']) ?>
+                                                            <?= htmlspecialchars($user['surname']) ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="selected-items" id="selectedItems"></div>
+                                            <!-- Hidden input to store selected values as JSON -->
+                                            <input type="hidden" name="selected_values" id="selectedValues">
+                                        </div>
+                                        <div class="row">
+                                            <label for="company_goals">Goal</label>
+                                            <select name="company_goals" id="goalSelect">
+                                                <option value="" disabled selected>Select an option</option>
+                                                <?php foreach ($goals as $goal): ?>
+                                                    <option value="<?= $goal['id'] ?>"
+                                                        data-details="<?= htmlspecialchars($goal['comments']) ?>"
+                                                        data-date="<?= $goal['due_date'] ?>">
+                                                        <?= htmlspecialchars($goal['description']) ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
 
 
+                                            <div id="goalDetails">
+                                                <label for="details">Details:</label>
+                                                <textarea id="details" rows="3" readonly></textarea>
+
+                                                <label for="dueDate">Due Date:</label>
+                                                <input type="text" id="dueDate" readonly>
+                                            </div>
+                                        </div>
                                     </div>
-
-
-
                                     <div class="last-part">
 
 
@@ -179,5 +222,64 @@ $thisweekoverdue = $prep->fetch();
     </div>
 
 </body>
+<script>
+    let selectedValuesArray = [];
+    let select = document.getElementById("selectInput");
+    let selectedItemsContainer = document.getElementById("selectedItems");
+    let hiddenInput = document.getElementById("selectedValues");
+
+
+    function addItem(selectElement) {
+        if (selectElement.value) {
+            let selectedOption = selectElement.options[selectElement.selectedIndex];
+            let text = selectedOption.text;
+            let value = selectedOption.value;
+
+            addSelectedItem(text, value);
+            selectedValuesArray.push(value);
+            updateArrayOutput();
+
+            selectElement.remove(selectElement.selectedIndex); // Remove from dropdown
+            selectElement.selectedIndex = 0;
+        }
+    }
+
+    function addSelectedItem(text, value) {
+        let item = document.createElement("div");
+        item.classList.add("item");
+        item.innerHTML = `${text} <span class="remove-btn" onclick="removeItem(this, '${text}', '${value}')">✖</span>`;
+        selectedItemsContainer.appendChild(item);
+    }
+
+    function removeItem(element, text, value) {
+        element.parentElement.remove();
+        selectedValuesArray = selectedValuesArray.filter(item => item !== value);
+        updateArrayOutput();
+
+        // Restore option back to select
+        let option = document.createElement("option");
+        option.value = value;
+        option.textContent = text;
+        select.appendChild(option);
+    }
+
+    function updateArrayOutput() {
+
+        hiddenInput.value = JSON.stringify(selectedValuesArray); // Store in hidden input for PHP
+    }
+
+
+    document.getElementById("goalSelect").addEventListener("change", function () {
+        let selectedOption = this.options[this.selectedIndex];
+
+        if (selectedOption.value) {
+            document.getElementById("details").value = selectedOption.getAttribute("data-details");
+            document.getElementById("dueDate").value = selectedOption.getAttribute("data-date");
+            document.getElementById("goalDetails").style.display = "block"; // Show details
+        } else {
+            document.getElementById("goalDetails").style.display = "none"; // Hide details
+        }
+    });
+</script>
 
 </html>

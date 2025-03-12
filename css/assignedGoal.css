@@ -143,31 +143,68 @@ body {
   font-size: 14px;
   color: #676a6c;
   margin-bottom: 5px;
+  margin-right: 10px;
+  padding: 0;
 }
 
 .modal .modal-dialog .modal-content .modal-body .beginning-part {
+  font-size: 13px;
   display: block;
   text-align: center;
   border-bottom: 2px solid #e7eaec;
   margin-bottom: 20px;
   padding: 0 20px 20px 20px;
 }
-.beginning-part img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-bottom: 10px;
+
+.beginning-part .row {
+ display: flex;
+ flex-direction: column;
 }
-.beginning-part h5 {
-  font-size: 16px;
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: #0d6efd;
+.beginning-part .row .sub_row {
+ width: 100%;
+ display: flex;
+ justify-content: start;
+ padding: 0;
+ margin-bottom: 10px;
 }
-.beginning-part p {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 10px;
+.beginning-part .row .sub_row #selectInput{
+  border: 1px solid #676a6c ;
+  background-color: #e7eaec;
+  width: 60px;
+  border-radius: 3px;
+}
+.beginning-part .row #selectedItems {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 50px;
+  padding: 5px;
+  border: 1px solid #e7eaec;
+  background-color:#ffffff ;
+}
+.beginning-part .row #selectedItems div{
+  border: 1px solid #676a6c;
+  margin:2px 5px 2px 2px;
+  padding: 2px;
+  border-radius: 3px;
+  background-color: #e7eaec;
+  max-height: 22px;
+}
+.beginning-part .row #selectedItems div span{
+  cursor: pointer;
+  font-weight: 700;
+  margin-right: 2px;
+  margin-left: 2px;
+  font-size: 10px;
+}
+.beginning-part .row #goalDetails { 
+  display: none; 
+  padding: 10px; 
+  border: 1px solid #ddd; 
+  border-radius: 5px; 
+  background-color: #f9f9f9; 
+  margin-top: 10px;
 }
 .beginning-part small {
   font-size: 13px;
