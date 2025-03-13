@@ -5,11 +5,11 @@ $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 $today = date('y-m-d');
 
-$allCompanyGoals = "SELECT * FROM companygoals WHERE company_id = :company";
+$allCompanyGoals = "SELECT * FROM goalitems WHERE company_id = :company";
 $prep = $con->prepare($allCompanyGoals);
 $prep->bindParam(':company', $companyId);
 $prep->execute();
-$goals = $prep->fetchAll();
+$goalitems = $prep->fetchAll();
 
 $usersQuery = "SELECT * FROM `users` WHERE company = :company";
 $prep = $con->prepare($usersQuery);
@@ -20,6 +20,8 @@ $users = $prep->fetchAll();
 $companyGoalsQ = "SELECT * FROM companygoals WHERE JSON_CONTAINS(users, :userId)";
 $prep = $con->prepare($companyGoalsQ);
 
+
+//company goals for users 
 $prep->bindValue(':userId', json_encode((string) $userId), PDO::PARAM_STR);
 $prep->execute();
 $comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
@@ -146,11 +148,11 @@ $thisweekoverdue = $prep->fetch();
                                             <label for="company_goals">Goal</label>
                                             <select name="company_goals" id="goalSelect">
                                                 <option value="" disabled selected>Select an option</option>
-                                                <?php foreach ($goals as $goal): ?>
+                                                <?php foreach ($goalitems as $goalitem): ?>
                                                     <option value="<?= $goal['id'] ?>"
-                                                        data-details="<?= htmlspecialchars($goal['comments']) ?>"
-                                                        data-date="<?= $goal['due_date'] ?>">
-                                                        <?= htmlspecialchars($goal['description']) ?>
+                                                        data-details="<?= htmlspecialchars($goalitem['details']) ?>"
+                                                        data-date="<?= $goalitem['due_deadline'] ?>">
+                                                        <?= htmlspecialchars($goalitem['name']) ?>
                                                     </option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -158,7 +160,7 @@ $thisweekoverdue = $prep->fetch();
 
                                             <div id="goalDetails">
                                                 <label for="details">Details:</label>
-                                                <textarea id="details" rows="3" readonly></textarea>
+                                                <textarea id="details" rows="6" readonly></textarea>
 
                                                 <label for="dueDate">Due Date:</label>
                                                 <input type="text" id="dueDate" readonly>
@@ -184,14 +186,14 @@ $thisweekoverdue = $prep->fetch();
                 <?php foreach ($comapnygoals as $comapnygoal): ?>
                     <div class="comapanyGoals">
                         <div class="description">
-                            <span><?= $comapnygoal['description'] ?></span>
+                            <span><?= $comapnygoal['name'] ?></span>
                             <a class="more">
                                 <i class="fa-solid fa-ellipsis"></i>
                             </a>
                             <br>
                             <div class="comments">
                                 <p>
-                                    <?= $comapnygoal['comments'] ?>
+                                    <?= $comapnygoal['description'] ?>
                                 </p>
                             </div>
                         </div>
@@ -223,6 +225,23 @@ $thisweekoverdue = $prep->fetch();
 
 </body>
 <script>
+
+document.querySelectorAll('.more').forEach(more => {
+    more.addEventListener('click', function () {
+        const parent = this.closest('.comapanyGoals'); // Find the closest parent
+        const comments = parent.querySelector('.comments'); // Find comments inside this parent
+        
+        /* Hide all other comments
+        document.querySelectorAll('.comments').forEach(c => {
+            if (c !== comments) c.style.display = 'none';
+        });*/
+
+        // Toggle current comments visibility
+        comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+
     let selectedValuesArray = [];
     let select = document.getElementById("selectInput");
     let selectedItemsContainer = document.getElementById("selectedItems");
@@ -275,7 +294,7 @@ $thisweekoverdue = $prep->fetch();
         if (selectedOption.value) {
             document.getElementById("details").value = selectedOption.getAttribute("data-details");
             document.getElementById("dueDate").value = selectedOption.getAttribute("data-date");
-            document.getElementById("goalDetails").style.display = "block"; // Show details
+            document.getElementById("goalDetails").style.display = "flex"; // Show details
         } else {
             document.getElementById("goalDetails").style.display = "none"; // Hide details
         }
