@@ -19,14 +19,9 @@ $users = $prep->fetchAll();
 
 $companyGoalsQ = "SELECT * FROM companygoals WHERE JSON_CONTAINS(users, :userId)";
 $prep = $con->prepare($companyGoalsQ);
-
-
-//company goals for users 
 $prep->bindValue(':userId', json_encode((string) $userId), PDO::PARAM_STR);
 $prep->execute();
 $comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
-
-
 
 $usergoalQ = "SELECT COUNT(*) FROM `goals` WHERE user_id = :user_id";
 $prep = $con->prepare($usergoalQ);
@@ -118,7 +113,7 @@ $thisweekoverdue = $prep->fetch();
                     aria-labelledby="assigneGoalModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content animated slideInTop">
-                            <form action="" method="post" enctype="multipart/form-data">
+                            <form action="assignGoalLogic.php" method="post" enctype="multipart/form-data">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-bs-dismiss="modal"
                                         aria-label="Close">×</button>
@@ -151,7 +146,11 @@ $thisweekoverdue = $prep->fetch();
                                                 <?php foreach ($goalitems as $goalitem): ?>
                                                     <option value="<?= $goal['id'] ?>"
                                                         data-details="<?= htmlspecialchars($goalitem['details']) ?>"
-                                                        data-date="<?= $goalitem['due_deadline'] ?>">
+                                                        data-date="<?= $goalitem['due_deadline'] ?>"
+                                                        data-type="<?= $goalitem['type'] ?>"
+                                                        data-target="<?= $goalitem['target'] ?>"
+                                                        data-name="<?= $goalitem['name'] ?>">
+
                                                         <?= htmlspecialchars($goalitem['name']) ?>
                                                     </option>
                                                 <?php endforeach; ?>
@@ -160,10 +159,13 @@ $thisweekoverdue = $prep->fetch();
 
                                             <div id="goalDetails">
                                                 <label for="details">Details:</label>
-                                                <textarea id="details" rows="6" readonly></textarea>
+                                                <textarea id="details" rows="6" name="details" readonly></textarea>
 
                                                 <label for="dueDate">Due Date:</label>
-                                                <input type="text" id="dueDate" readonly>
+                                                <input type="text" id="dueDate" readonly name="dueDate">
+                                                <input type="hidden" id="type" readonly name="type">
+                                                <input type="hidden" id="target" readonly name="target">
+                                                <input type="hidden" id="name" readonly name="name">
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +176,7 @@ $thisweekoverdue = $prep->fetch();
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" name="editGoal" class="btn-save">Save</button>
+                                    <button type="submit" name="assignGoal" class="btn-save">Save</button>
 
                                 </div>
                             </form>
@@ -210,8 +212,42 @@ $thisweekoverdue = $prep->fetch();
                                 <div class="col">
                                     <img src="../images/check_off.png" width="24px" alt="">
                                     <span>Not Completed:</span>
-                                    <span class="notCompletedNr">4</span>
+                                    <?php
+                                    $NotComparray = json_decode($comapnygoal['users'], true); // Decode JSON into array
+                                
+                                    if (!is_array($NotComparray)) {
+                                        $NotComparray = []; // Ensure it's an array
+                                    }
+
+                                    ?>
+                                    <span class="notCompletedNr"><?= count($NotComparray); ?></span>
                                 </div>
+                            </div>
+                            <div>
+                                <?php
+                                if (!empty($NotComparray)) {
+                                    // Create placeholders dynamically
+                                    $placeholders = implode(',', array_fill(0, count($NotComparray), '?'));
+
+                                    // Prepare the SQL query
+                                    $tempquery = "SELECT name, surname FROM users WHERE user_id IN ($placeholders)";
+                                    $prep = $con->prepare($tempquery);
+
+                                    // Execute query with array values
+                                    $prep->execute($NotComparray);
+
+                                    // Fetch results
+                                    $usersGoals = $prep->fetchAll(PDO::FETCH_ASSOC);
+                                } else {
+                                    $usersGoals = [];
+                                }
+
+                                ?>
+                                <?php foreach ($usersGoals as $usersGoal): ?>
+                                    <p><?= htmlspecialchars($usersGoal['name']) ?>
+                                        <?= htmlspecialchars($usersGoal['surname']) ?></p>
+                                <?php endforeach; ?>
+
                             </div>
                         </div>
                     </div>
@@ -226,20 +262,20 @@ $thisweekoverdue = $prep->fetch();
 </body>
 <script>
 
-document.querySelectorAll('.more').forEach(more => {
-    more.addEventListener('click', function () {
-        const parent = this.closest('.comapanyGoals'); // Find the closest parent
-        const comments = parent.querySelector('.comments'); // Find comments inside this parent
-        
-        /* Hide all other comments
-        document.querySelectorAll('.comments').forEach(c => {
-            if (c !== comments) c.style.display = 'none';
-        });*/
+    document.querySelectorAll('.more').forEach(more => {
+        more.addEventListener('click', function () {
+            const parent = this.closest('.comapanyGoals'); // Find the closest parent
+            const comments = parent.querySelector('.comments'); // Find comments inside this parent
 
-        // Toggle current comments visibility
-        comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+            /* Hide all other comments
+            document.querySelectorAll('.comments').forEach(c => {
+                if (c !== comments) c.style.display = 'none';
+            });*/
+
+            // Toggle current comments visibility
+            comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+        });
     });
-});
 
 
     let selectedValuesArray = [];
@@ -294,6 +330,9 @@ document.querySelectorAll('.more').forEach(more => {
         if (selectedOption.value) {
             document.getElementById("details").value = selectedOption.getAttribute("data-details");
             document.getElementById("dueDate").value = selectedOption.getAttribute("data-date");
+            document.getElementById("type").value = selectedOption.getAttribute("data-type");
+            document.getElementById("target").value = selectedOption.getAttribute("data-target");
+            document.getElementById("name").value = selectedOption.getAttribute("data-name");
             document.getElementById("goalDetails").style.display = "flex"; // Show details
         } else {
             document.getElementById("goalDetails").style.display = "none"; // Hide details
