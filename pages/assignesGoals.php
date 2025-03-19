@@ -23,9 +23,8 @@ $prep->bindValue(':userId', json_encode((string) $userId), PDO::PARAM_STR);
 $prep->execute();
 $comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
 
-$usergoalQ = "SELECT COUNT(*) FROM `goals` WHERE user_id = :user_id";
+$usergoalQ = "SELECT COUNT(*) FROM `goals`";
 $prep = $con->prepare($usergoalQ);
-$prep->bindParam(':user_id', $userId);
 $prep->execute();
 $userGoals = $prep->fetch();
 
@@ -35,19 +34,26 @@ $prep->execute();
 $incompleteUserGoals = $prep->fetch();
 
 
-$overdueQ = "SELECT COUNT(*) FROM `goals` WHERE due_date < :today";
+$overdueQ = "SELECT COUNT(*) FROM `companygoals` WHERE due_date < :today AND (completed IS NULL OR completed = 0)";
 $prep = $con->prepare($overdueQ);
 $prep->bindParam(':today', $today);
 $prep->execute();
 $overdue = $prep->fetch();
 
 $weekoverdueQ = "SELECT COUNT(*)
-FROM goals
-WHERE WEEK(due_date, 1) = WEEK(CURDATE(), 1)
-AND YEAR(due_date) = YEAR(CURDATE())";
+FROM companygoals
+WHERE YEARWEEK(due_date, 1) = YEARWEEK(CURDATE(), 1)";
 $prep = $con->prepare($weekoverdueQ);
 $prep->execute();
 $thisweekoverdue = $prep->fetch();
+
+
+$ActiveCompGoal = "SELECT COUNT(*)
+FROM companygoals
+WHERE (completed IS NULL OR completed = 0)";
+$prep = $con->prepare($ActiveCompGoal);
+$prep->execute();
+$ActiveCompGoalNumber = $prep->fetch();
 
 
 ?>
@@ -89,7 +95,7 @@ $thisweekoverdue = $prep->fetch();
             </div>
             <div class="stats">
                 <div>
-                    <h3>0</h3>
+                    <h3><?= $ActiveCompGoalNumber['COUNT(*)']?></h3>
                     <p>Company Goals</p>
                 </div>
                 <small>0 Goals Templates</small>
@@ -201,55 +207,71 @@ $thisweekoverdue = $prep->fetch();
                         </div>
                         <div class="cmpNotCmp">
                             <div class="pull-right">
-                                <button><i class="fa fa-caret-down"></i></button>
+                                <button class="showUseres"><i class="fa fa-caret-down"></i></button>
                             </div>
                             <div class="row">
                                 <div class="col">
+                                    <?php
+                                    $GoalId = $comapnygoal['id'];
+
+                                    // Fetch completed users along with their goal result (value)
+                                    $compQuery = "SELECT u.name, u.surname, c.value, c.completed FROM `companygoalsvalue` c
+                              INNER JOIN users u ON c.user = u.user_id
+                              WHERE c.company_goal = :company_goal";
+                                    $prep = $con->prepare($compQuery);
+                                    $prep->bindParam(':company_goal', $GoalId);
+                                    $prep->execute();
+                                    $completedUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+                                    // Count completed goals
+                                    $compNum = count($completedUsers);
+                                    ?>
                                     <img src="../images/check_on.png" width="24px" alt="">
                                     <span>Completed:</span>
-                                    <span class="completedNr">0</span>
+                                    <span class="completedNr"><?= $compNum ?></span>
                                 </div>
                                 <div class="col">
                                     <img src="../images/check_off.png" width="24px" alt="">
                                     <span>Not Completed:</span>
                                     <?php
-                                    $NotComparray = json_decode($comapnygoal['users'], true); // Decode JSON into array
-                                
+                                    $NotComparray = json_decode($comapnygoal['users'], true);
                                     if (!is_array($NotComparray)) {
-                                        $NotComparray = []; // Ensure it's an array
+                                        $NotComparray = [];
                                     }
-
+                                    $notCompleted = count($NotComparray) - $compNum;
                                     ?>
-                                    <span class="notCompletedNr"><?= count($NotComparray); ?></span>
+                                    <span class="notCompletedNr"><?= max(0, $notCompleted) ?></span>
                                 </div>
                             </div>
-                            <div>
-                                <?php
-                                if (!empty($NotComparray)) {
-                                    // Create placeholders dynamically
-                                    $placeholders = implode(',', array_fill(0, count($NotComparray), '?'));
-
-                                    // Prepare the SQL query
-                                    $tempquery = "SELECT name, surname FROM users WHERE user_id IN ($placeholders)";
-                                    $prep = $con->prepare($tempquery);
-
-                                    // Execute query with array values
-                                    $prep->execute($NotComparray);
-
-                                    // Fetch results
-                                    $usersGoals = $prep->fetchAll(PDO::FETCH_ASSOC);
-                                } else {
-                                    $usersGoals = [];
-                                }
-
-                                ?>
-                                <?php foreach ($usersGoals as $usersGoal): ?>
-                                    <p><?= htmlspecialchars($usersGoal['name']) ?>
-                                        <?= htmlspecialchars($usersGoal['surname']) ?></p>
+                            <div class="users_values" >
+                                <?php foreach ($completedUsers as $user): ?>
+                                    <p>
+                                        <strong><?= htmlspecialchars($user['name']) ?>
+                                            <?= htmlspecialchars($user['surname']) ?></strong>
+                                        <?php if (isset($user['value']) && $user['value'] !== null): ?>
+                                            <?= htmlspecialchars($user['value']) ?>
+                                        <?php else: ?>
+                                            <?php
+                                            switch ($user['completed']) {
+                                                case 0:
+                                            ?>
+                                                   Not Completed
+                                            <?php
+                                                    break;
+                                                case 1:
+                                            ?>
+                                                   Completed
+                                            <?php
+                                                    break;
+                                            }
+                                            ?>
+                                        <?php endif; ?>
+                                    </p>
                                 <?php endforeach; ?>
-
                             </div>
+
                         </div>
+
                     </div>
                 <?php endforeach ?>
             </div>
@@ -271,6 +293,16 @@ $thisweekoverdue = $prep->fetch();
             document.querySelectorAll('.comments').forEach(c => {
                 if (c !== comments) c.style.display = 'none';
             });*/
+
+            // Toggle current comments visibility
+            comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+    document.querySelectorAll('.showUseres').forEach(more => {
+        more.addEventListener('click', function () {
+            const parent = this.closest('.cmpNotCmp'); // Find the closest parent
+            const comments = parent.querySelector('.users_values'); // Find comments inside this parent
+
 
             // Toggle current comments visibility
             comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
