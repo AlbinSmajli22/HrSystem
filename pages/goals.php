@@ -114,11 +114,21 @@ include 'addNewGoal.php';
                                                     <textarea name="notes" class="notes" rows="3"
                                                         value="<?= $goal['target_value'] ?>"></textarea>
                                                 </div>
+                                                <?php if($goal['type']=='Percentage' || $goal['type']=='Objective' ){ ?>
+                                                    <div class="mid-part-col2">
+                                                    <label for="value">Complete</label><br>
+                                                    <input type="checkbox" name="complete"
+                                                        class="complete" value="1">
+                                                        
+                                                </div>
+                                                <?php }else{ ?>
                                                 <div class="mid-part-col2">
                                                     <label for="value">Update Value</label><br>
-                                                    <input type="text" value="<?= $goal['value'] ?>" name="value"
+                                                    <input type="text" name="value"
                                                         class="value">
+                                                       
                                                 </div>
+                                                <?php } ?>
                                             </div>
 
                                             <div class="last-part">
@@ -146,6 +156,111 @@ include 'addNewGoal.php';
                             <span class="more">⋮</span>
                             <div class="comments">
                                 <?= $goal['comments'] ?>
+                            </div>
+                        </div>
+
+                        <div class="empty_space">
+
+                        </div>
+
+                    </div>
+                <?php endforeach; ?>
+                <?php foreach ($comapnygoals as $comapnygoal): ?>
+                    <div id="theGoal">
+                        <div id="Goal2">
+                            <div id="description">
+                                <div id="description2">
+                                    <h5>
+                                        <?= $comapnygoal['name'] ?>
+                                    </h5>
+
+                                </div>
+
+                                <?php
+                                $currentDate = gmdate('Y-m-d');
+                                $currentDate = date_create($currentDate);
+                                $dueDate = $comapnygoal['due_date'];
+                                $dueDate = date_create($dueDate);
+                          
+
+                                $dueDateOn = date_diff($dueDate, $currentDate);
+                                ?>
+                                <small> <em> Due on: <strong>
+                                            <?= $comapnygoal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</em></small>
+                            </div>
+                            <div class='dots-menu'>
+                                <span class='dots'>⋮</span>
+                                <div class='menu'>
+                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $comapnygoal['id'] ?>"
+                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $comapnygoal['id'] ?>" tabindex="-1"
+                            aria-labelledby="editGoalModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated slideInTop">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">×</button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Update Goal</h4>
+
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="beginning-part">
+                                                <input type="hidden" value="<?= $comapnygoal['id'] ?>" name="goal_id">
+                                            </div>
+
+                                            <div class="mid-part">
+                                            
+                                                <div class="mid-part-col1">
+                                                    <label for="notes">Comment</label><br>
+                                                    <textarea name="comment" class="notes" rows="3"></textarea>
+                                                </div>
+                                                <?php if($comapnygoal['type']=='Percentage' || $comapnygoal['type']=='Objective' ){ ?>
+                                                    <div class="mid-part-col2">
+                                                    <label for="value">Complete</label><br>
+                                                    <input type="checkbox" name="complete"
+                                                        class="complete" value="1">
+                                                        
+                                                </div>
+                                                <?php }else{ ?>
+                                                <div class="mid-part-col2">
+                                                    <label for="value">Update Value</label><br>
+                                                    <input type="text" name="value"
+                                                        class="value">
+                                                       
+                                                </div>
+                                                <?php } ?>
+                                            </div>
+
+                                            <div class="last-part">
+                                                <div class="last-part-row1">
+                                                    <label for="due_date">Due Date</label><br>
+                                                    <input type="date" name="due_date" class="due_date" value="<?= $comapnygoal['due_date'] ?>" readonly>
+                                                </div>
+                                                <div class="last-part-row2">
+                                                    <label for="target_value">Target Value</label><br>
+                                                    <input type="text" name="target_value" class="target_value" value="<?= $comapnygoal['target_value'] ?>" readonly>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" name="editCompanyGoal" class="btn-save">Save</button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-comments">
+                            <span class="more">⋮</span>
+                            <div class="comments">
+                                <?= $comapnygoal['description'] ?>
                             </div>
                         </div>
 

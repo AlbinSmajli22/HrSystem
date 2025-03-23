@@ -17,9 +17,9 @@ $prep->bindParam(':company', $companyId);
 $prep->execute();
 $users = $prep->fetchAll();
 
-$companyGoalsQ = "SELECT * FROM companygoals WHERE JSON_CONTAINS(users, :userId)";
+$companyGoalsQ = "SELECT * FROM companygoals WHERE company_id=:company_id AND completed IS null";
 $prep = $con->prepare($companyGoalsQ);
-$prep->bindValue(':userId', json_encode((string) $userId), PDO::PARAM_STR);
+$prep->bindValue(':company_id', $companyId);
 $prep->execute();
 $comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
 
@@ -28,7 +28,7 @@ $prep = $con->prepare($usergoalQ);
 $prep->execute();
 $userGoals = $prep->fetch();
 
-$usergoalincQ = "SELECT COUNT(*) FROM `goals` WHERE compleated = 0";
+$usergoalincQ = "SELECT COUNT(*) FROM `goals` WHERE completed = 0";
 $prep = $con->prepare($usergoalincQ);
 $prep->execute();
 $incompleteUserGoals = $prep->fetch();
