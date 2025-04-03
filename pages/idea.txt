@@ -1,0 +1,178 @@
+me rujt si json veq 1 id qe me mujt me e shfrytzu ni tabel veq per user goals edhe company goals 
+assignt to more than one employee.
+
+
+
+select goals qe te goal values value e kan ma t vogel se target value ose null ose completed e kan null 
+nese goal e ka kriju i user me kan ni kolon user goal true ose false.
+
+
+company goals me join m ecompany goals values :-
+
+SELECT * FROM companygoalsvalue v RIGHT JOIN companygoals c ON v.company_goal = c.id
+WHERE v.value < c.target_value OR v.value IS NULL
+
+SELECT * FROM companygoalsvalue v RIGHT JOIN companygoals c ON v.company_goal = c.id
+WHERE user = 12 AND (v.value < c.target_value OR v.value IS NULL);
+
+
+SELECT * FROM companygoalsvalue v RIGHT JOIN companygoals c ON v.company_goal = c.id
+WHERE JSON_CONTAINS (users, '"12"') AND ((v.value < c.target_value OR v.value IS NULL) OR (v.completed IS NULL) );
+---
+
+
+
+
+                <?php foreach ($goals as $goal): ?>
+                    <div id="theGoal">
+                        <div id="Goal2">
+                            <div id="description">
+                                <div id="description2">
+                                    <h5>
+                                        <?= $goal['description'] ?>
+                                    </h5>
+
+                                </div>
+
+                                <?php
+                                $currentDate = gmdate('Y-m-d');
+                                $currentDate = date_create($currentDate);
+                                $dueDate = $goal['due_date'];
+                                $dueDate = date_create($dueDate);
+                                $updateDate = $goal['updated'];
+                                $updateDate = date_create($updateDate);
+
+                                $dueDateOn = date_diff($dueDate, $currentDate);
+                                $updatedOn = date_diff($updateDate, $currentDate);
+                                ?>
+                                <small> <em> Last Updated: <?= $updatedOn->d ?> days ago Due on: <strong>
+                                            <?= $goal['due_date'] ?></strong> (in <?= $dueDateOn->d ?> days)</em></small>
+                            </div>
+                            <div class='dots-menu'>
+                                <span class='dots'>⋮</span>
+                                <div class='menu'>
+                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $goal['id'] ?>"
+                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $goal['id'] ?>" tabindex="-1"
+                            aria-labelledby="editGoalModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated slideInTop">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">×</button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Update Goal</h4>
+
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <div class="beginning-part">
+                                                <input type="hidden" value="<?= $goal['id'] ?>" name="goal_id">
+                                                <img src="../userIMG/<?= $goal['image'] ?>" alt="User Image">
+                                                <h5><?= $goal['name'] ?>     <?= $goal['surname'] ?></h5>
+                                                <p><?= $goal['description'] ?></p>
+                                                <small><?= $goal['comments'] ?></small>
+                                            </div>
+
+                                            <div class="mid-part">
+                                                <div class="mid-part-col1">
+                                                    <label for="notes">Notes</label><br>
+                                                    <textarea name="notes" class="notes" rows="3"
+                                                        value="<?= $goal['target_value'] ?>"></textarea>
+                                                </div>
+                                                <?php if( $goal['type']=='Objective' ){ ?>
+                                                    <div class="mid-part-col2">
+                                                    <label for="value">Complete</label><br>
+                                                    <input type="checkbox" name="complete"
+                                                        class="complete" value="1">
+                                                        
+                                                </div>
+                                                <?php }else{ ?>
+                                                <div class="mid-part-col2">
+                                                    <label for="value">Update Value</label><br>
+                                                    <input type="text" name="value" value="<?= $goal['value'] ?>"
+                                                        class="value">
+                                                       
+                                                </div>
+                                                <?php } ?>
+                                            </div>
+
+                                            <div class="last-part">
+                                                <div class="last-part-row1">
+                                                    <label for="due_date">Due Date</label><br>
+                                                    <input type="date" name="due_date" class="due_date" value="<?= $goal['due_date'] ?>">
+                                                </div>
+                                                <div class="last-part-row2">
+                                                    <label for="target_value">Target Value</label><br>
+                                                    <input type="text" name="target_value" class="target_value" value="<?= $goal['target_value'] ?>">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" name="editGoal" class="btn-save">Save</button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="more-comments">
+                            <span class="more">⋮</span>
+                            <div class="comments">
+                                <?= $goal['comments'] ?>
+                            </div>
+                        </div>
+                        <?php if($goal['type'] === 'Percentage' ){ 
+                            $goalTarget = $goal['target_value']; // Example: The target percentage is 100%
+                            $currentValue = $goal['value']; // Example: Current progress is 50%
+                            
+                            $percentage = ($currentValue / $goalTarget) * 100;
+                            ?>
+                        <div class="empty_space">
+                            <div class="goal-bar" style="width: <?= $percentage ?>%; 
+                                background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                            </div>
+                        </div>
+                        <?php }elseif ($goal['type'] === 'Number') { ?>
+                            <div class="empty_space">
+                            <div class="goal-bar" style="width: <?= $percentage ?>%; 
+                                background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                            </div>
+                        </div>
+                            
+                        <?php } ?>
+                    </div>
+                <?php endforeach; ?>
+
+
+/***
+ *  and (value IS NULL AND completed IS NULL) SELECT * FROM companygoals 
+WHERE JSON_CONTAINS(users, :userId) 
+AND NOT EXISTS (
+    SELECT 1 FROM companygoalsvalue 
+    WHERE company_goal = companygoals.id 
+    AND user = :userId
+)
+AND (completed IS NULL OR completed = 0); 
+
+
+SELECT * FROM companygoals 
+WHERE JSON_CONTAINS(users, :userId) 
+AND NOT EXISTS (
+    SELECT 1 FROM companygoalsvalue 
+    WHERE company_goal = companygoals.id 
+    AND user = :userIdRAW
+)
+AND (completed IS NULL OR completed = 0);   
+
+
+
+SELECT * FROM companygoalsvalue v RIGHT JOIN companygoals c ON v.company_goal = c.id 
+WHERE JSON_CONTAINS (users, ':userIdRAW') 
+*/

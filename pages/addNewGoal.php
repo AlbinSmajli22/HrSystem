@@ -4,9 +4,10 @@ $companyId = $_SESSION['company'];
 $Submited="Submited";
 $userIdJson = json_encode($userId);
 
+
 $errors = array('file_size' => '', 'file_exist' => '', 'file_format' => '' );
 
-
+/*
 if (isset($_POST['addGoal'])) {
       
     $description=$_POST['description'];
@@ -17,7 +18,7 @@ if (isset($_POST['addGoal'])) {
     $completed=0;
     $created=date('y-m-d');
 
-    $addgoalQuery="INSERT INTO `goals` (id, description, comments, type, due_date, target_value, value, user_id, compleated, created, updated, notes) 
+    $addgoalQuery="INSERT INTO `goals` (id, description, comments, type, due_date, target_value, value, user_id, completed, created, updated, notes) 
                     VALUES (null, :description, :comments, :type, :due_date, :target, null, :user_id, :completed ,:created, null, null)";
     $prep=$con->prepare($addgoalQuery);
    
@@ -32,11 +33,9 @@ if (isset($_POST['addGoal'])) {
     
     $prep->execute();
     header("Location: /HrSystem/pages/goals.php");
-   
-   
-    
-
 }
+
+
 if (isset($_POST['editGoal'])) {
     $value=!empty($_POST['value']) ? $_POST['value'] : null;
     $notes=$_POST['notes'];
@@ -56,6 +55,7 @@ if (isset($_POST['editGoal'])) {
 
     $prep->execute();
 }
+*/
 if (isset($_POST['editCompanyGoal'])) {
     $value=!empty($_POST['value']) ? $_POST['value'] : null;
     $goal_id=$_POST['goal_id'];
@@ -63,8 +63,8 @@ if (isset($_POST['editCompanyGoal'])) {
     $completed=isset($_POST['complete']) ? $_POST['complete'] : null;
 
 
-    $editgoalQuery="INSERT INTO companygoalsvalue (id, user, company_goal, value, completed, comment)
-    VALUES (null, :user, :company_goal, :value, :completed, :comment)";
+    $editgoalQuery="INSERT INTO companygoalsvalue (id, user, company_goal, value, completed, comment, done)
+    VALUES (null, :user, :company_goal, :value, :completed, :comment, null)";
 
     $prep=$con->prepare($editgoalQuery);
 
@@ -75,12 +75,13 @@ if (isset($_POST['editCompanyGoal'])) {
     $prep->bindParam(':completed', $completed);
 
     $prep->execute();
+    header("Location: /HrSystem/pages/goals.php");
 }
 
 
 
 $goalsQuery = "SELECT * FROM goals Right Join users on goals.user_id=users.user_id
-WHERE goals.user_id=:user_id and (value IS NULL AND completed IS NULL)";
+WHERE goals.user_id=:user_id";
 $prep = $con->prepare($goalsQuery);
 $prep->bindParam(':user_id', $userId);
 $prep->execute();
@@ -89,26 +90,23 @@ $goals = $prep->fetchAll();
 
 
 
-/**SELECT * FROM companygoals 
-WHERE JSON_CONTAINS(users, :userId) 
-AND NOT EXISTS (
-    SELECT 1 FROM companygoalsvalue 
-    WHERE company_goal = companygoals.id 
-    AND user = :userId
-)
-AND (completed IS NULL OR completed = 0); */
 
-$companyGoalsQ = "SELECT * FROM companygoals 
-WHERE JSON_CONTAINS(users, :userId) 
-AND NOT EXISTS (
-    SELECT 1 FROM companygoalsvalue 
-    WHERE company_goal = companygoals.id 
-    AND user = :userIdRAW
-)
-AND (completed IS NULL OR completed = 0);";
+
+$companyGoalsQ = "SELECT 
+    c.id, c.name, c.description, c.type, c.due_date, c.created, 
+    c.target_value, c.company_id, c.users,
+    v.value, v.completed, v.comment
+FROM companygoals c 
+LEFT JOIN companygoalsvalue v 
+    ON c.id = v.company_goal 
+    AND v.user = :userId -- Ensure we only get the logged-in user's goal value
+WHERE JSON_CONTAINS(c.users, :userIdJson) 
+AND (v.done IS NULL OR v.done = 0) -- Exclude completed goals (boolean check)
+ORDER BY c.id;
+";
 $prep = $con->prepare($companyGoalsQ);
-$prep->bindParam(':userId', $userIdJson, PDO::PARAM_STR);
-$prep->bindParam(':userIdRAW', $userId, PDO::PARAM_STR);
+$prep->bindParam(':userId', $userId, PDO::PARAM_STR);  // Normal user ID for goal values
+$prep->bindParam(':userIdJson', $userIdJson, PDO::PARAM_STR);  // JSON user ID for companygoals.users check
 $prep->execute();
 $comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
 

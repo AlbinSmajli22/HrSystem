@@ -1,14 +1,22 @@
 <?php
 require_once '../config.php';
 session_start();
-include 'addNewGoal.php';
+$userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
+
+$itemsQuery = "SELECT * FROM goalitems
+WHERE company_id=:company_id";
+$prep = $con->prepare($itemsQuery);
+$prep->bindParam(':company_id', $companyId);
+$prep->execute();
+$goalitems = $prep->fetchAll();
 
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/goalItem.css">
+    <link rel="stylesheet" href="../css/goalItems.css">
     <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -29,94 +37,70 @@ include 'addNewGoal.php';
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
-        <div class="newGoalHead">
+        <div class="goalItemHead">
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
 
-        <div class="newGoalBody">
-            <div class="GoalHead">
-                <h4>
-                    <i class="fa-solid fa-bullseye"></i>
-                    Goal Details
-                </h4>
+        <div class="goalItemsBody">
+            <div class="goalItemsTableHead">
+                <h5>
+                    <i class="fa fa-list m-r-sm"></i>
+                    Goal Items
+                </h5>
+                <button id="addExpenseCategory">
+                    <a href="addgoalItem.php">
+                        <i class="fa fa-plus"></i>
+                        Add New Goal
+                    </a>
+                </button>
+
             </div>
-            <div class="GoalBody">
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label for="description">Description</label><br>
-                        <input type="text" name="description">
-                        <p>Short description (heading) of this goal</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="comments">Comments</label><br>
-                        <textarea name="comments" id="comments" rows="3"></textarea>
-                        <p>Enter any additional comments or explanation about this goal</p>
-                    </div>
-                    <div class="form-group">
-                        <label for="type">Type</label><br>
-                        <select name="type" id="type" onchange="toggleTargetValueField()">
-                            <option value="number">number</option>
-                            <option value="currency">currency</option>
-                            <option value="counter">counter</option>
-                            <option value="percentage">percentage</option>
-                            <option value="objective">objective</option>
-                        </select>
-                        <p>This defines the way that progress against this goal is measured</p>
-                    </div>
-                    <div id="goal_types_ex">
-                        <div id="goal_types">
-                            <p>Explanation of goal types above:</p>
-                            <ul>
-                                <li> <strong>Number -</strong> You can enter a (round) number to track progress against
-                                    a goal. <em>(e.g. The number of orders you have processed this month)</em></li>
-                                <li><strong>Currency -</strong> You can enter in a currency value to track progress
-                                    against. <em>(e.g. Progress towards a sales target)</em></li>
-                                <li><strong>Counter -</strong> A stepped counter that can increment/decrement to track
-                                    how many times something is achieved. <em>(e.g. Number of times you have caught
-                                        public transport to work)</em> </li>
-                                <li><strong>Percentage -</strong> A simple progress bar from 0 to 100%. <em>(e.g. How
-                                        much of a course you have completed)</em></li>
-                                <li><strong>Objective -</strong> A simple checkbox that denotes if you have achieved a
-                                    goal or not. <em>(e.g. To mark completion of a particular project or meeting)</em>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="due_date">Due Date</label><br>
-                        <input type="date" name="due_date" id="due_date">
-                        <p>Please enter the date that the goal is due, or leave blank for a perpetual goal (no expiry
-                            date)</p>
-                    </div>
-                    <hr>
-                    <div class="form-group" id="targetValueContainer">
-                        <label for="target">Target Value</label><br>
-                        <input type="number" name="target" id="target">
-                        <p>Default target value to set for this goal (can be adjusted later)</p>
-                    </div>
-                    <div class="ArticleFooter">
-                        <button type="submit" name="addGoal">Create Goal</button>
-                        <a href="goals.php" class="cancel">Cancel</a>
-                    </div>
-                </form>
+            <div class="goalItemsTableBody">
+                <table class="goalItems">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th></th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($goalitems as $goalitem): ?>
+                            <tr>
+                                <td>
+                                    <?= $goalitem['name'] ?>
+                                </td>
+                                <td>
+                                    <span class="type"><?= $goalitem['type'] ?></span>
+                                </td>
+                                <td>
+                                    <?= $goalitem['status'] ?>
+                                </td>
+
+                                <td>
+                                    <a href="updateGoalItem.php?expense_id=<?= $goalitem['id'] ?>" class="editGoalItem">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+
+                                    <a href="deleteGoalItem.php?expense_id=<?= $goalitem['id'] ?>" class="deleteGoalItem">
+                                    <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+                <div>
+
+                </div>
             </div>
         </div>
         <?php include '../template/footer.php'; ?>
     </div>
-    <script>
-        function toggleTargetValueField() {
-            const goalType = document.getElementById("type").value;
-            const targetValueContainer = document.getElementById("targetValueContainer");
 
-            // Hide target value if percentage or objective is selected
-            if (goalType === "percentage" || goalType === "objective") {
-                targetValueContainer.style.display = "none";
-            } else {
-                targetValueContainer.style.display = "block";
-            }
-        }
-
-        // Run the function once at the start to set initial state
-        toggleTargetValueField();
-    </script>
 </body>

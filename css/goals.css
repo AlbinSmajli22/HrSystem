@@ -183,14 +183,20 @@ body {
   color: #676a6c;
 }
 .empty_space {
-  height: 10px;
+  height: 20px;
   width: 100%;
   border-radius: 4px;
   width: 100%;
   background-color: #f4f6fa;
-  padding: 10px;
   color: #676a6c;
   margin-bottom: 40px;
+}
+.empty_space .goal-bar {
+  border-radius: 4px;
+  height: 100%;
+  width: 0%; /* Default width */
+  background-color: #4caf50; /* Default Green */
+  transition: width 0.5s ease-in-out;
 }
 #theGoal hr {
   color: #e7eaec;

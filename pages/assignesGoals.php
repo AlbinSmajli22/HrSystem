@@ -17,7 +17,7 @@ $prep->bindParam(':company', $companyId);
 $prep->execute();
 $users = $prep->fetchAll();
 
-$companyGoalsQ = "SELECT * FROM companygoals WHERE company_id=:company_id AND completed IS null";
+$companyGoalsQ = "SELECT * FROM companygoals WHERE company_id=:company_id";
 $prep = $con->prepare($companyGoalsQ);
 $prep->bindValue(':company_id', $companyId);
 $prep->execute();
@@ -34,7 +34,7 @@ $prep->execute();
 $incompleteUserGoals = $prep->fetch();
 
 
-$overdueQ = "SELECT COUNT(*) FROM `companygoals` WHERE due_date < :today AND (completed IS NULL OR completed = 0)";
+$overdueQ = "SELECT COUNT(*) FROM `companygoals` WHERE due_date < :today ";
 $prep = $con->prepare($overdueQ);
 $prep->bindParam(':today', $today);
 $prep->execute();
@@ -49,8 +49,8 @@ $thisweekoverdue = $prep->fetch();
 
 
 $ActiveCompGoal = "SELECT COUNT(*)
-FROM companygoals
-WHERE (completed IS NULL OR completed = 0)";
+FROM companygoals"
+;
 $prep = $con->prepare($ActiveCompGoal);
 $prep->execute();
 $ActiveCompGoalNumber = $prep->fetch();
