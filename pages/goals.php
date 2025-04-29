@@ -80,11 +80,11 @@ include 'addNewGoal.php';
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
                                     <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $comapnygoal['id'] ?>"
-                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit <?= $comapnygoal['id'] ?></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $comapnygoal['id'] ?>" tabindex="-1"
+                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $comapnygoal['value_id'] ?>" tabindex="-1"
                             aria-labelledby="editGoalModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">

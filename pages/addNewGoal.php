@@ -63,7 +63,7 @@ if (isset($_POST['editCompanyGoal'])) {
     $completed=isset($_POST['complete']) ? $_POST['complete'] : null;
 
 
-    $editgoalQuery="INSERT INTO companygoalsvalue (id, user, company_goal, value, completed, comment, done)
+    $editgoalQuery="INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done)
     VALUES (null, :user, :company_goal, :value, :completed, :comment, null)";
 
     $prep=$con->prepare($editgoalQuery);
@@ -95,7 +95,7 @@ $goals = $prep->fetchAll();
 $companyGoalsQ = "SELECT 
     c.id, c.name, c.description, c.type, c.due_date, c.created, 
     c.target_value, c.company_id, c.users,
-    v.value, v.completed, v.comment
+    v.value, v.completed, v.comment, v.value_id
 FROM companygoals c 
 LEFT JOIN companygoalsvalue v 
     ON c.id = v.company_goal 
