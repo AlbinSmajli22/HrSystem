@@ -14,23 +14,60 @@ if (isset($_POST['assignGoal'])) {
     $target_value=$_POST['target'];
     $users=$_POST['selected_values'];
 
-    $asignGoalQuery="INSERT INTO companygoals (id, name, description, comments, type, due_date, created,
-    target_value, compleated, value, company_id, users) VALUES(null, :name, :description, null, :type, :due_date,
-    :created, :target_value, null, null, :company_id, :users)";
-    
-    $prep = $con->prepare($asignGoalQuery);
-    $prep->bindParam(':company_id', $companyId);
+    $usersQuery = "SELECT *  FROM companygoals
+    WHERE name LIKE  :name ";
+    $prep = $con->prepare($usersQuery);
     $prep->bindParam(':name', $name);
-    $prep->bindParam(':description', $description);
-    $prep->bindParam(':type', $type);
-    $prep->bindParam(':due_date', $due_date);
-    $prep->bindParam(':created', $created);
-    $prep->bindParam(':target_value', $target_value);
-    $prep->bindParam(':users', $users);
-
     $prep->execute();
+    $fetchedusers = $prep->fetch(PDO::FETCH_ASSOC);
     
-    header("Location: /HrSystem/pages/assignesGoals.php");
-}
+    if($fetchedusers <= 0 ){ 
+
+        $asignGoalQuery="INSERT INTO companygoals (id, name, description, type, due_date, created, target_value, company_id, users)
+                                         VALUES (null, :name, :description, :type, :due_date, :created, :target_value, :company_id, :users)";
+        
+        $prep = $con->prepare($asignGoalQuery);
+        $prep->bindParam(':company_id', $companyId);
+        $prep->bindParam(':name', $name);
+        $prep->bindParam(':description', $description);
+        $prep->bindParam(':type', $type);
+        $prep->bindParam(':due_date', $due_date);
+        $prep->bindParam(':created', $created);
+        $prep->bindParam(':target_value', $target_value);
+        $prep->bindParam(':users', $users);
+    
+        $prep->execute();
+        
+        header("Location: /HrSystem/pages/assignesGoals.php");
+    }
+    else{
+
+        $usersArray = json_decode($fetchedusers['users'], true);
+
+        $newUsersArray= json_decode($users, true);
+
+        $newUsersLength= count($newUsersArray);
+
+        for ($i=0; $i <$newUsersLength ; $i++) { 
+            
+            array_push($usersArray,  $newUsersArray[$i]);
+        }
+
+        $jsonUsersArray=json_encode( $usersArray);
+
+        $updateGoalQuery="UPDATE `companygoals` SET users=:users WHERE name LIKE  :name ";
+        
+        $prep = $con->prepare($updateGoalQuery);
+        $prep->bindParam(':name', $name);
+        $prep->bindParam(':users',  $jsonUsersArray);
+    
+        $prep->execute();
+        
+        header("Location: /HrSystem/pages/assignesGoals.php");
+
+    }
+    }
+
+    
 
 ?>

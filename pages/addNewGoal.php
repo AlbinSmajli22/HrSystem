@@ -7,6 +7,35 @@ $userIdJson = json_encode($userId);
 
 $errors = array('file_size' => '', 'file_exist' => '', 'file_format' => '' );
 
+
+
+if (isset($_POST['addGoalItem'])) {
+      
+    $description=$_POST['description'];
+    $comments=$_POST['comments'];
+    $type=$_POST['type'];
+    $due_date=$_POST['due_date'];
+    $target_value=$_POST['target'];
+    $created=date('y-m-d');
+
+    $additeamQuery="INSERT INTO `goalitems` (id, name, details, type, due_deadline, target, created, updated, company_id, status) 
+                    VALUES (null, :description, :comments, :type, :due_date, :target, :created, null, :company_id, null)";
+    $prep=$con->prepare($additeamQuery);
+   
+    $prep->bindParam(':description', $description);
+    $prep->bindParam(':comments', $comments);
+    $prep->bindParam(':type', $type);
+    $prep->bindParam(':due_date', $due_date);
+    $prep->bindParam(':target', $target_value);
+    $prep->bindParam(':created', $created);
+    $prep->bindParam(':company_id', $companyId);
+
+    
+    $prep->execute();
+    header("Location: /HrSystem/pages/goalItem.php");
+}
+
+
 /*
 if (isset($_POST['addGoal'])) {
       

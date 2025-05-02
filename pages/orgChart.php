@@ -12,6 +12,35 @@ $prep->bindParam(':user_id', $userId);
 $prep->execute();
 $goals = $prep->fetchAll();
 
+
+$usersQuery = "SELECT users  FROM companygoals
+WHERE id = 1";
+$prep = $con->prepare($usersQuery);
+$prep->execute();
+$useres = $prep->fetch(PDO::FETCH_ASSOC);
+
+$array = json_decode($useres['users'], true);
+
+$albinarray=['44', '66', '77'];
+
+$albinlength= count($albinarray);
+
+for ($i=0; $i < $albinlength; $i++) { 
+
+    array_push($array,$albinarray[$i]);
+}
+
+
+
+$jsonArray=json_encode($array);
+
+print_r($array);
+
+echo $jsonArray;
+
+
+
+
 ?>
 <style>
 .goal-progress {

@@ -95,7 +95,7 @@ include 'addNewGoal.php';
                         <p>Default target value to set for this goal (can be adjusted later)</p>
                     </div>
                     <div class="ArticleFooter">
-                        <button type="submit" name="addGoal">Create Goal</button>
+                        <button type="submit" name="addGoalItem">Create Goal</button>
                         <a href="goalItem.php" class="cancel">Cancel</a>
                     </div>
                 </form>
