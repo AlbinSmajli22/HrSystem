@@ -1,27 +1,27 @@
 <?php
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
-$Submited="Submited";
+$Submited = "Submited";
 $userIdJson = json_encode($userId);
 
 
-$errors = array('file_size' => '', 'file_exist' => '', 'file_format' => '' );
+$errors = array('file_size' => '', 'file_exist' => '', 'file_format' => '');
 
 
 
 if (isset($_POST['addGoalItem'])) {
-      
-    $description=$_POST['description'];
-    $comments=$_POST['comments'];
-    $type=$_POST['type'];
-    $due_date=$_POST['due_date'];
-    $target_value=$_POST['target'];
-    $created=date('y-m-d');
 
-    $additeamQuery="INSERT INTO `goalitems` (id, name, details, type, due_deadline, target, created, updated, company_id, status) 
+    $description = $_POST['description'];
+    $comments = $_POST['comments'];
+    $type = $_POST['type'];
+    $due_date = $_POST['due_date'];
+    $target_value = $_POST['target'];
+    $created = date('y-m-d');
+
+    $additeamQuery = "INSERT INTO `goalitems` (id, name, details, type, due_deadline, target, created, updated, company_id, status) 
                     VALUES (null, :description, :comments, :type, :due_date, :target, :created, null, :company_id, null)";
-    $prep=$con->prepare($additeamQuery);
-   
+    $prep = $con->prepare($additeamQuery);
+
     $prep->bindParam(':description', $description);
     $prep->bindParam(':comments', $comments);
     $prep->bindParam(':type', $type);
@@ -30,7 +30,7 @@ if (isset($_POST['addGoalItem'])) {
     $prep->bindParam(':created', $created);
     $prep->bindParam(':company_id', $companyId);
 
-    
+
     $prep->execute();
     header("Location: /HrSystem/pages/goalItem.php");
 }
@@ -86,25 +86,51 @@ if (isset($_POST['editGoal'])) {
 }
 */
 if (isset($_POST['editCompanyGoal'])) {
-    $value=!empty($_POST['value']) ? $_POST['value'] : null;
-    $goal_id=$_POST['goal_id'];
-    $comment=$_POST['comment'];
-    $completed=isset($_POST['complete']) ? $_POST['complete'] : null;
+
+    $value = !empty($_POST['value']) ? $_POST['value'] : null;
+    $goal_id = $_POST['goal_id'];
+    $value_id = $_POST['value_id'];
+    $comment = $_POST['comment'];
+    $completed = isset($_POST['complete']) ? $_POST['complete'] : null;
 
 
-    $editgoalQuery="INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done)
-    VALUES (null, :user, :company_goal, :value, :completed, :comment, null)";
-
-    $prep=$con->prepare($editgoalQuery);
-
-    $prep->bindParam(':user',$userId);
-    $prep->bindParam(':value', $value);
-    $prep->bindParam(':company_goal', $goal_id);
-    $prep->bindParam(':comment', $comment);
-    $prep->bindParam(':completed', $completed);
-
+    $userValueQuery = "SELECT * FROM companygoalsvalue WHERE value_id=:value_id";
+    $prep = $con->prepare($userValueQuery);
+    $prep->bindParam(':value_id', $value_id);
     $prep->execute();
-    header("Location: /HrSystem/pages/goals.php");
+    $userValue = $prep->fetch(PDO::FETCH_ASSOC);
+
+
+    if ($userValue <= 0) {
+
+        $editgoalQuery = "INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done)
+        VALUES (null, :user, :company_goal, :value, :completed, :comment, null)";
+
+        $prep = $con->prepare($editgoalQuery);
+
+        $prep->bindParam(':user', $userId);
+        $prep->bindParam(':value', $value);
+        $prep->bindParam(':company_goal', $goal_id);
+        $prep->bindParam(':comment', $comment);
+        $prep->bindParam(':completed', $completed);
+
+        $prep->execute();
+        header("Location: /HrSystem/pages/goals.php");
+
+    } else {
+        $editgoalQuery = "UPDATE `companygoalsvalue` SET value=:value, completed=:completed where value_id=:value_id";
+        $prep = $con->prepare($editgoalQuery);
+
+        $prep->bindParam(':value', $value);
+        $prep->bindParam(':value_id', $value_id);
+        $prep->bindParam(':completed', $completed);
+
+        $prep->execute();
+        header("Location: /HrSystem/pages/goals.php");
+    }
+
+
+
 }
 
 

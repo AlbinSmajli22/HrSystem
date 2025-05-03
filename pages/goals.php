@@ -79,12 +79,12 @@ include 'addNewGoal.php';
                             <div class='dots-menu'>
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
-                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $comapnygoal['id'] ?>"
-                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit <?= $comapnygoal['id'] ?></a>
+                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal"
+                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $comapnygoal['value_id'] ?>" tabindex="-1"
+                        <div class="modal fade-Edit-GoalModal" id="editGoalModal" tabindex="-1"
                             aria-labelledby="editGoalModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
@@ -99,6 +99,7 @@ include 'addNewGoal.php';
                                         <div class="modal-body">
                                             <div class="beginning-part">
                                                 <input type="hidden" value="<?= $comapnygoal['id'] ?>" name="goal_id">
+                                                <input type="hidden" value="<?= $comapnygoal['value_id'] ?>" name="value_id">
                                             </div>
 
                                             <div class="mid-part">
@@ -107,19 +108,12 @@ include 'addNewGoal.php';
                                                     <label for="notes">Comment</label><br>
                                                     <textarea name="comment" class="notes" rows="3"></textarea>
                                                 </div>
-                                                <?php if ($comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Objective') { ?>
-                                                    <div class="mid-part-col2">
-                                                        <label for="value">Complete</label><br>
-                                                        <input type="checkbox" name="complete" class="complete" value="1">
-
-                                                    </div>
-                                                <?php } else { ?>
                                                     <div class="mid-part-col2">
                                                         <label for="value">Update Value</label><br>
                                                         <input type="text" name="value" class="value">
 
                                                     </div>
-                                                <?php } ?>
+                                             
                                             </div>
 
                                             <div class="last-part">
