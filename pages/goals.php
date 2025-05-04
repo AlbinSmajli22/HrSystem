@@ -59,14 +59,15 @@ include 'addNewGoal.php';
                                 <?php if ($comapnygoal['type'] == 'Objective' || $comapnygoal['type'] == 'Counter') { ?>
                                     <div class="completed">
                                         <?php if ($comapnygoal['type'] == 'Objective' && $comapnygoal['completed'] == null) { ?>
-                                            <img src="../images/check_off.png"  alt="">
+                                            <img src="../images/check_off.png" alt="">
                                         <?php } elseif ($comapnygoal['type'] == 'Objective' && $comapnygoal['completed'] == 1) { ?>
-                                            <img src="../images/check_on.png"  alt="">
+                                            <img src="../images/check_on.png" alt="">
 
                                         <?php } elseif ($comapnygoal['type'] == 'Counter') {
                                             $countTarget = $comapnygoal['target_value'];
                                             $currentCountValue = $comapnygoal['value']; ?>
-                                            <span class="counterValue" style="background-color: <?= $countTarget <= $currentCountValue ? '#2196f3' : '#e3f2fd' ?>;">
+                                            <span class="counterValue"
+                                                style="background-color: <?= $countTarget <= $currentCountValue ? '#2196f3' : '#e3f2fd' ?>;">
                                                 <?= $comapnygoal['value'] ?>
                                             </span>
                                         <?php } ?>
@@ -121,20 +122,26 @@ include 'addNewGoal.php';
                                         <div class="modal-body">
                                             <div class="beginning-part">
                                                 <input type="hidden" value="<?= $comapnygoal['id'] ?>" name="goal_id">
-                                                <input type="hidden" value="<?= $comapnygoal['value_id'] ?>" name="value_id">
+                                                <input type="hidden" value="<?= $comapnygoal['value_id'] ?>"
+                                                    name="value_id">
                                             </div>
 
                                             <div class="mid-part">
-
                                                 <div class="mid-part-col1">
                                                     <label for="notes">Comment</label><br>
                                                     <textarea name="comment" class="notes" rows="3"></textarea>
                                                 </div>
+                                                <?php if ($comapnygoal['type'] == 'Objective') { ?>
+                                                    <div class="mid-part-col2">
+                                                        <label for="value">Complete</label><br>
+                                                        <input type="checkbox" name="complete" class="complete" value="1">
+                                                    </div>
+                                                <?php } elseif($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter'){?>
                                                 <div class="mid-part-col2">
                                                     <label for="value">Update Value</label><br>
                                                     <input type="text" name="value" class="value">
-
                                                 </div>
+                                                <?php } ?>
 
                                             </div>
 
