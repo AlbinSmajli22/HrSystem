@@ -1,10 +1,10 @@
 me rujt si json veq 1 id qe me mujt me e shfrytzu ni tabel veq per user goals edhe company goals 
-assignt to more than one employee.
+assignt to more than one employee. x
 
 
 
 select goals qe te goal values value e kan ma t vogel se target value ose null ose completed e kan null 
-nese goal e ka kriju i user me kan ni kolon user goal true ose false.
+nese goal e ka kriju i user me kan ni kolon user goal true ose false. x
 
 
 company goals me join m ecompany goals values :-
@@ -24,7 +24,7 @@ WHERE JSON_CONTAINS (users, '"12"') AND ((v.value < c.target_value OR v.value IS
 √ 1.kur bejm assign nje goal te nje punonjes ne vende se te krijohet nje row duplikat per te njejten goal
 le te editohet rreshit i qe ja json data me id-t e punonjesve dhe te shtohet nje id e re aty. 
 
-2.kur bejm assign nje goal le te krijohen edhe rows per vlersime per secilin punonjes ne comapnygoalsvalues.
+√ 2.kur bejm assign nje goal le te krijohen edhe rows per vlersime per secilin punonjes ne comapnygoalsvalues.
 per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
 ---
 

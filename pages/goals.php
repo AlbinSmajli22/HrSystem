@@ -53,39 +53,61 @@ include 'addNewGoal.php';
             </div>
             <div class="expensesTableBody">
                 <?php foreach ($comapnygoals as $comapnygoal): ?>
-                    <div id="theGoal">
-                        <div id="Goal2">
-                            <div id="description">
-                                <div id="description2">
-                                    <h5>
-                                        <?= $comapnygoal['name'] ?>
-                                    </h5>
+                    <div class="theGoal">
+                        <div class="Goal2">
+                            <div class="description">
+                                <?php if ($comapnygoal['type'] == 'Objective' || $comapnygoal['type'] == 'Counter') { ?>
+                                    <div class="completed">
+                                        <?php if ($comapnygoal['type'] == 'Objective' && $comapnygoal['completed'] == null) { ?>
+                                            <img src="../images/check_off.png"  alt="">
+                                        <?php } elseif ($comapnygoal['type'] == 'Objective' && $comapnygoal['completed'] == 1) { ?>
+                                            <img src="../images/check_on.png"  alt="">
 
+                                        <?php } elseif ($comapnygoal['type'] == 'Counter') {
+                                            $countTarget = $comapnygoal['target_value'];
+                                            $currentCountValue = $comapnygoal['value']; ?>
+                                            <span class="counterValue" style="background-color: <?= $countTarget <= $currentCountValue ? '#2196f3' : '#e3f2fd' ?>;">
+                                                <?= $comapnygoal['value'] ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+                                <?php } ?>
+                                <div class="description1">
+                                    <div class="description2">
+                                        <h5>
+                                            <?= $comapnygoal['name'] ?>
+                                        </h5>
+                                        <a class="more">
+                                            <i class="fa-solid fa-ellipsis"></i>
+                                        </a>
+                                    </div>
+
+                                    <?php
+                                    $currentDate = gmdate('Y-m-d');
+                                    $currentDate = date_create($currentDate);
+                                    $dueDate = $comapnygoal['due_date'];
+                                    $dueDate = date_create($dueDate);
+
+
+                                    $dueDateOn = date_diff($dueDate, $currentDate);
+                                    ?>
+                                    <small> <em> Due on: <strong>
+                                                <?= $comapnygoal['due_date'] ?></strong> (in <?= $dueDateOn->d ?>
+                                            days)</em></small>
                                 </div>
-
-                                <?php
-                                $currentDate = gmdate('Y-m-d');
-                                $currentDate = date_create($currentDate);
-                                $dueDate = $comapnygoal['due_date'];
-                                $dueDate = date_create($dueDate);
-
-
-                                $dueDateOn = date_diff($dueDate, $currentDate);
-                                ?>
-                                <small> <em> Due on: <strong>
-                                            <?= $comapnygoal['due_date'] ?></strong> (in <?= $dueDateOn->d ?>
-                                        days)</em></small>
                             </div>
                             <div class='dots-menu'>
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
-                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal"
-                                        data-bs-whatever="@mdo"><i class="fa-solid fa-pencil"></i> Edit </a>
+                                    <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $comapnygoal['id'] ?>"
+                                        data-bs-whatever="@mdo">
+                                        <i class="fa-solid fa-pencil"></i> Edit
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade-Edit-GoalModal" id="editGoalModal" tabindex="-1"
-                            aria-labelledby="editGoalModalLabel" aria-hidden="true">
+                        <div class="modal fade-Edit-GoalModal" id="editGoalModal<?= $comapnygoal['id'] ?>" tabindex="-1"
+                            aria-labelledby="editGoalModalLabel<?= $comapnygoal['id'] ?>" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
                                     <form action="" method="post" enctype="multipart/form-data">
@@ -108,12 +130,12 @@ include 'addNewGoal.php';
                                                     <label for="notes">Comment</label><br>
                                                     <textarea name="comment" class="notes" rows="3"></textarea>
                                                 </div>
-                                                    <div class="mid-part-col2">
-                                                        <label for="value">Update Value</label><br>
-                                                        <input type="text" name="value" class="value">
+                                                <div class="mid-part-col2">
+                                                    <label for="value">Update Value</label><br>
+                                                    <input type="text" name="value" class="value">
 
-                                                    </div>
-                                             
+                                                </div>
+
                                             </div>
 
                                             <div class="last-part">
@@ -139,18 +161,15 @@ include 'addNewGoal.php';
                                 </div>
                             </div>
                         </div>
-                        <div class="more-comments">
-                            <span class="more">⋮</span>
-                            <div class="comments">
-                                <?= $comapnygoal['description'] ?>
-                            </div>
+                        <div class="comments">
+                            <?= $comapnygoal['description'] ?>
                         </div>
                         <?php
                         if ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Currency') {
                             $goalTarget = $comapnygoal['target_value']; // Example: The target percentage is 100%
                             $currentValue = $comapnygoal['value']; // Example: Current progress is 50%
                     
-                           $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
+                            $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
 
                             ?>
                             <div class="empty_space">
@@ -158,10 +177,7 @@ include 'addNewGoal.php';
                                     background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
                                 </div>
                             </div>
-                        <?php } else { ?>
-
                         <?php } ?>
-
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -186,16 +202,21 @@ include 'addNewGoal.php';
         });
 
 
+
         document.querySelectorAll('.more').forEach(more => {
             more.addEventListener('click', function () {
-                const comments = this.nextElementSibling;
-                const allComments = document.querySelectorAll('.comments');
-                allComments.forEach(c => c !== comments && (c.style.display = 'none'));
+                const parent = this.closest('.theGoal'); // Find the closest parent
+                const comments = parent.querySelector('.comments'); // Find comments inside this parent
+
+                /* Hide all other comments
+                document.querySelectorAll('.comments').forEach(c => {
+                    if (c !== comments) c.style.display = 'none';
+                });*/
+
+                // Toggle current comments visibility
                 comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
             });
         });
-
-
     </Script>
 </body>
 
