@@ -55,11 +55,11 @@ include 'addNewGoal.php';
                     <div class="form-group">
                         <label for="type">Type</label><br>
                         <select name="type" id="type" onchange="toggleTargetValueField()">
-                            <option value="number">number</option>
-                            <option value="currency">currency</option>
-                            <option value="counter">counter</option>
-                            <option value="percentage">percentage</option>
-                            <option value="objective">objective</option>
+                            <option value="Nmber">Number</option>
+                            <option value="Currency">Currency</option>
+                            <option value="Counter">Counter</option>
+                            <option value="Percentage">Percentage</option>
+                            <option value="Objective">Objective</option>
                         </select>
                         <p>This defines the way that progress against this goal is measured</p>
                     </div>

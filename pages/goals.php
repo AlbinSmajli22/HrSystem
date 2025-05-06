@@ -136,7 +136,7 @@ include 'addNewGoal.php';
                                                         <label for="value">Complete</label><br>
                                                         <input type="checkbox" name="complete" class="complete" value="1">
                                                     </div>
-                                                <?php } elseif($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter'){?>
+                                                <?php } elseif($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter'|| $comapnygoal['type'] == 'Currency'){?>
                                                 <div class="mid-part-col2">
                                                     <label for="value">Update Value</label><br>
                                                     <input type="text" name="value" class="value">

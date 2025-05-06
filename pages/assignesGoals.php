@@ -95,7 +95,7 @@ $ActiveCompGoalNumber = $prep->fetch();
             </div>
             <div class="stats">
                 <div>
-                    <h3><?= $ActiveCompGoalNumber['COUNT(*)']?></h3>
+                    <h3><?= $ActiveCompGoalNumber['COUNT(*)'] ?></h3>
                     <p>Company Goals</p>
                 </div>
                 <small>0 Goals Templates</small>
@@ -209,65 +209,85 @@ $ActiveCompGoalNumber = $prep->fetch();
                             <div class="pull-right">
                                 <button class="showUseres"><i class="fa fa-caret-down"></i></button>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <?php
-                                    $GoalId = $comapnygoal['id'];
+                            <?php if ($comapnygoal['type'] == 'Objective') { ?>
+                                <div class="row">
+                                    <div class="col">
+                                        <?php
+                                        $GoalId = $comapnygoal['id'];
 
-                                    // Fetch completed users along with their goal result (value)
-                                    $compQuery = "SELECT u.name, u.surname, c.value, c.completed FROM `companygoalsvalue` c
+                                        // Fetch completed users along with their goal result (value)
+                                        $compQuery = "SELECT u.name, u.surname, c.value, c.completed FROM `companygoalsvalue` c
                               INNER JOIN users u ON c.user = u.user_id
                               WHERE c.company_goal = :company_goal";
-                                    $prep = $con->prepare($compQuery);
-                                    $prep->bindParam(':company_goal', $GoalId);
-                                    $prep->execute();
-                                    $completedUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
+                                        $prep = $con->prepare($compQuery);
+                                        $prep->bindParam(':company_goal', $GoalId);
+                                        $prep->execute();
+                                        $completedUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
 
-                                    // Count completed goals
-                                    $compNum = count($completedUsers);
-                                    ?>
-                                    <img src="../images/check_on.png" width="24px" alt="">
-                                    <span>Completed:</span>
-                                    <span class="completedNr"><?= $compNum ?></span>
+                                        // Count completed goals
+                                        $compNum = count($completedUsers);
+                                        ?>
+                                        <img src="../images/check_on.png" width="24px" alt="">
+                                        <span>Completed:</span>
+                                        <span class="completedNr"><?= $compNum ?></span>
+                                    </div>
+                                    <div class="col">
+                                        <img src="../images/check_off.png" width="24px" alt="">
+                                        <span>Not Completed:</span>
+                                        <?php
+                                        $NotComparray = json_decode($comapnygoal['users'], true);
+                                        if (!is_array($NotComparray)) {
+                                            $NotComparray = [];
+                                        }
+                                        $notCompleted = count($NotComparray) - $compNum;
+                                        ?>
+                                        <span class="notCompletedNr"><?= max(0, $notCompleted) ?></span>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <img src="../images/check_off.png" width="24px" alt="">
-                                    <span>Not Completed:</span>
+                            <?php } elseif ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter' || $comapnygoal['type'] == 'Currency') { ?>
+                                <div class="completedBar">
                                     <?php
-                                    $NotComparray = json_decode($comapnygoal['users'], true);
-                                    if (!is_array($NotComparray)) {
-                                        $NotComparray = [];
-                                    }
-                                    $notCompleted = count($NotComparray) - $compNum;
+                                    $goalTarget = 100;//$comapnygoal['target_value']; // Example: The target percentage is 100%
+                                    $currentValue = 100;//$comapnygoal['value']; // Example: Current progress is 50%
+                            
+                                    $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
                                     ?>
-                                    <span class="notCompletedNr"><?= max(0, $notCompleted) ?></span>
+                                    <div class="empty_space">
+                                        <div class="goal-bar" style="width: <?= $percentage ?>%; 
+                                            background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                                            &nbsp;
+                                        </div>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="users_values" >
-                                <?php foreach ($completedUsers as $user): ?>
-                                    <p>
-                                        <strong><?= htmlspecialchars($user['name']) ?>
-                                            <?= htmlspecialchars($user['surname']) ?></strong>
-                                        <?php if (isset($user['value']) && $user['value'] !== null): ?>
-                                            <?= htmlspecialchars($user['value']) ?>
-                                        <?php else: ?>
-                                            <?php
-                                            switch ($user['completed']) {
-                                                case 0:
-                                            ?>
-                                                   Not Completed
-                                            <?php
-                                                    break;
-                                                case 1:
-                                            ?>
-                                                   Completed
-                                            <?php
-                                                    break;
-                                            }
-                                            ?>
-                                        <?php endif; ?>
-                                    </p>
-                                <?php endforeach; ?>
+                            <?php } ?>
+                            <div class="users_values">
+                                <?php if ($comapnygoal['type'] == 'Objective') { ?>
+                                    <?php foreach ($completedUsers as $user): ?>
+                                        <p>
+                                            <strong><?= htmlspecialchars($user['name']) ?>
+                                                <?= htmlspecialchars($user['surname']) ?></strong>
+                                            <?php if (isset($user['value']) && $user['value'] !== null): ?>
+                                                <?= htmlspecialchars($user['value']) ?>
+                                            <?php else: ?>
+                                                <?php
+                                                switch ($user['completed']) {
+                                                    case 0:
+                                                        ?>
+                                                        Not Completed
+                                                        <?php
+                                                        break;
+                                                    case 1:
+                                                        ?>
+                                                        Completed
+                                                        <?php
+                                                        break;
+                                                }
+                                                ?>
+                                            <?php endif; ?>
+                                        </p>
+                                    <?php endforeach; ?>
+                                <?php } ?>
                             </div>
 
                         </div>

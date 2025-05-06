@@ -7,7 +7,7 @@ select goals qe te goal values value e kan ma t vogel se target value ose null o
 nese goal e ka kriju i user me kan ni kolon user goal true ose false. x
 
 
-company goals me join m ecompany goals values :-
+company goals me join me company goals values :-
 
 SELECT * FROM companygoalsvalue v RIGHT JOIN companygoals c ON v.company_goal = c.id
 WHERE v.value < c.target_value OR v.value IS NULL
@@ -26,6 +26,21 @@ le te editohet rreshit i qe ja json data me id-t e punonjesve dhe te shtohet nje
 
 √ 2.kur bejm assign nje goal le te krijohen edhe rows per vlersime per secilin punonjes ne comapnygoalsvalues.
 per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
+
+<div class="value">
+                                    <?php
+                                    $goalTarget = 100;//$comapnygoal['target_value']; // Example: The target percentage is 100%
+                                    $currentValue = 80;//$comapnygoal['value']; // Example: Current progress is 50%
+                            
+                                    $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
+                                    ?>
+
+                                    <div class="empty_space">
+                                        <div class="goal-bar" style="width: <?= $percentage ?>%; 
+                                    background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                                        </div>
+                                    </div>
+
 ---
 
 
