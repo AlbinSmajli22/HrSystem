@@ -26,23 +26,63 @@ le te editohet rreshit i qe ja json data me id-t e punonjesve dhe te shtohet nje
 
 √ 2.kur bejm assign nje goal le te krijohen edhe rows per vlersime per secilin punonjes ne comapnygoalsvalues.
 per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
-
-<div class="value">
-                                    <?php
-                                    $goalTarget = 100;//$comapnygoal['target_value']; // Example: The target percentage is 100%
-                                    $currentValue = 80;//$comapnygoal['value']; // Example: Current progress is 50%
-                            
-                                    $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
-                                    ?>
-
-                                    <div class="empty_space">
-                                        <div class="goal-bar" style="width: <?= $percentage ?>%; 
-                                    background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
-                                        </div>
-                                    </div>
+3. fix bar qe trgon sa % eshte goali  momentalisht.
+4. fetch value te users per qdo goal dhe shfaqi te goali perkates.  
 
 ---
 
+
+<?php foreach ($goals as $goal):
+
+    $goalTarget = $goal['target_value']; // Example: The target percentage is 100%
+    $currentValue = $goal['value']; // Example: Current progress is 50%
+
+    $percentage = ($currentValue / $goalTarget) * 100;
+
+    ?>
+    <div class="goal-progress">
+        <div class="goal-bar" style="width: <?= $percentage ?>%; 
+        background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+        </div>
+    </div>
+    <p><?= $percentage ?>% Completed</p>
+<?php endforeach; ?>
+
+<?php foreach ($companyGoals as $companyGoal):
+
+    $allUserValueQ = "SELECT SUM(value) as totali FROM `companygoalsvalue` WHERE company_goal = :company_goal ";
+    $prep = $con->prepare($allUserValueQ);
+    $prep->bindParam(':company_goal', $companyGoal['id']);
+    $prep->execute();
+    $totalicompleted = $prep->fetch(PDO::FETCH_ASSOC);
+
+    $employes = json_decode($companyGoal['users'], true);
+    $employesLength = count($employes);
+    $target = $employesLength * $companyGoal['target_value'];
+    $perqindja = $target > 0 ? ($totalicompleted['totali'] / $target) * 100 : 0;
+   
+
+    ?>
+    <div>
+        <h2>
+            <?= $companyGoal['name'] ?>
+        </h2>
+        <p> <?= $perqindja ?> %</p>
+
+        <?php
+        $userValueQ = "SELECT * FROM `users` u RIGHT JOIN companygoalsvalue c ON u.user_id=c.user WHERE c.company_goal= :company_goal ";
+        $prep = $con->prepare($userValueQ);
+        $prep->bindParam(':company_goal', $companyGoal['id']);
+        $prep->execute();
+        $companyGoalsValues = $prep->fetchAll();
+        ?>
+        <?php foreach ($companyGoalsValues as $companyGoalsValue): ?>
+            <p> <?= $companyGoalsValue['name'] ?>:<?= $companyGoalsValue['value'] ?> out of: <?= $companyGoal['target_value'] ?>
+            </p>
+        <?php endforeach; ?>
+    </div>
+    </table>
+<?php endforeach; ?>
 
 
 

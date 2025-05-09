@@ -1,110 +1,117 @@
 <?php
+require_once '../config.php';
 session_start();
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'hrsystem');
+$userId = $_SESSION['user_id'];
+$companyId = $_SESSION['company'];
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// 1. Fetch company goals
+$companyGoalsQ = "SELECT * FROM `companygoals` WHERE company_id = :companyId";
+$prep = $con->prepare($companyGoalsQ);
+$prep->bindParam(':companyId', $companyId);
+$prep->execute();
+$companyGoals = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+// 2. Fetch all goal values once
+$allValuesQ = "SELECT * FROM `companygoalsvalue`";
+$prep = $con->prepare($allValuesQ);
+$prep->execute();
+$allGoalValues = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+// 3. Fetch all users once
+$usersQ = "SELECT user_id, name FROM users";
+$prep = $con->prepare($usersQ);
+$prep->execute();
+$allUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
+$userMap = [];
+foreach ($allUsers as $user) {
+    $userMap[$user['user_id']] = $user['name'];
 }
 
-$sql = "SELECT user_id, name, surname FROM users";
-$result = $conn->query($sql);
+// 4. Group values by goal ID
+$valuesByGoal = [];
+foreach ($allGoalValues as $val) {
+    $valuesByGoal[$val['company_goal']][] = $val;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products Table</title>
+    <title>Company Goals</title>
     <style>
-        /* Style for the 3-dots menu */
-        .more-menu {
-            position: relative;
-            display: inline-block;
+        .goal-progress {
+            width: 100%;
+            background: #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            height: 24px;
         }
-        .more {
-            cursor: pointer;
-            font-size: 18px;
+
+        .goal-bar {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
         }
-        .comments {
-            display: none;
-            position: absolute;
-            top: 20px;
-            right: 0;
-            background: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            border-radius: 4px;
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
         }
-        .comments a {
-            display: block;
-            padding: 8px 16px;
-            text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid #ddd;
+
+        .goal-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
         }
-        .comments a:last-child {
-            border-bottom: none;
+
+        h2 {
+            margin-top: 0;
         }
-        .comments a:hover {
-            background-color: #f0f0f0;
+
+        p {
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
-    <table border="1" cellspacing="0" cellpadding="10">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td>{$row['user_id']}</td>
-                            <td>{$row['name']}</td>
-                            <td>{$row['surname']}</td>
-                            <td>
-                                <div class='more-menu'>
-                                    <span class='more'>⋮</span>
-                                    <div class='comments'>
-                                        <a href='edit_product.php?id={$row['user_id']}'>Edit</a>
-                                        <a href='delete_product.php?id={$row['user_id']}'>Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>No products found</td></tr>";
-            }
-            ?>
-        </tbody>
-    </table>
 
-    <script>
-        // JavaScript to toggle the 3-dots menu
-        document.querySelectorAll('.more').forEach(more => {
-            more.addEventListener('click', function () {
-                const comments = this.nextElementSibling;
-                const allComments = document.querySelectorAll('.comments');
-                allComments.forEach(c => c !== comments && (c.style.display = 'none'));
-                comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
-            });
-        });
+    <h1>Company Goals Overview</h1>
 
-        // Close menu if clicked outside
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.more-menu')) {
-                document.querySelectorAll('.comments').forEach(comments => comments.style.display = 'none');
-            }
-        });
-    </script>
+    <?php foreach ($companyGoals as $goal): 
+        $goalId = $goal['id'];
+        $goalName = $goal['name'];
+        $targetPerUser = $goal['target_value'];
+        
+        $users = json_decode($goal['users'], true);
+        $userCount = count($users);
+        $totalTarget = $userCount * $targetPerUser;
+
+        $values = $valuesByGoal[$goalId] ?? [];
+        $totalCompleted = array_sum(array_column($values, 'value'));
+        $percentComplete = $totalTarget > 0 ? round(($totalCompleted / $totalTarget) * 100) : 0;
+    ?>
+
+    <div class="goal-card">
+        <h2><?= htmlspecialchars($goalName) ?></h2>
+        <p><strong><?= $percentComplete ?>%</strong> completed</p>
+
+        <div class="goal-progress">
+            <div class="goal-bar" style="width: <?= $percentComplete ?>%; 
+                background-color: <?= $percentComplete == 100 ? '#2196f3' : '#4caf50' ?>;">
+            </div>
+        </div>
+
+        <?php foreach ($values as $val): 
+            $userId = $val['user'];
+            $userName = $userMap[$userId] ?? 'Unknown User';
+        ?>
+            <p><?= htmlspecialchars($userName) ?>: <?= $val['value'] ?> out of <?= $targetPerUser ?></p>
+        <?php endforeach; ?>
+    </div>
+
+    <?php endforeach; ?>
+
 </body>
 </html>
