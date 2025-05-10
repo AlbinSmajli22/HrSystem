@@ -22,6 +22,28 @@ $prep = $con->prepare($companyGoalsQ);
 $prep->bindValue(':company_id', $companyId);
 $prep->execute();
 $comapnygoals = $prep->fetchAll(PDO::FETCH_ASSOC);
+// 2. Fetch all goal values once
+$allValuesQ = "SELECT * FROM `companygoalsvalue`";
+$prep = $con->prepare($allValuesQ);
+$prep->execute();
+$allGoalValues = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+// 3. Fetch all users once
+$usersQ = "SELECT user_id, name FROM users";
+$prep = $con->prepare($usersQ);
+$prep->execute();
+$allUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
+$userMap = [];
+foreach ($allUsers as $user) {
+    $userMap[$user['user_id']] = $user['name'];
+}
+
+// 4. Group values by goal ID
+$valuesByGoal = [];
+foreach ($allGoalValues as $val) {
+    $valuesByGoal[$val['company_goal']][] = $val;
+}
+
 
 $usergoalQ = "SELECT COUNT(*) FROM `goals`";
 $prep = $con->prepare($usergoalQ);
@@ -247,17 +269,22 @@ $ActiveCompGoalNumber = $prep->fetch();
                             <?php } elseif ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter' || $comapnygoal['type'] == 'Currency') { ?>
                                 <div class="completedBar">
                                     <?php
-                                    $goalTarget = 100;//$comapnygoal['target_value']; // Example: The target percentage is 100%
-                                    $currentValue = 100;//$comapnygoal['value']; // Example: Current progress is 50%
-                            
-                                    $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
-                                    ?>
-                                    <div class="empty_space">
-                                        <div class="goal-bar" style="width: <?= $percentage ?>%; 
-                                            background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
-                                            &nbsp;
-                                        </div>
+                                    $goalId = $comapnygoal['id'];
+                                    $goalName = $comapnygoal['name'];
+                                    $targetPerUser = $comapnygoal['target_value'];
 
+                                    $users = json_decode($comapnygoal['users'], true);
+                                    $userCount = count($users);
+                                    $totalTarget = $userCount * $targetPerUser;
+
+                                    $values = $valuesByGoal[$goalId] ?? [];
+                                    $totalCompleted = array_sum(array_column($values, 'value'));
+                                    $percentComplete = $totalTarget > 0 ? round(($totalCompleted / $totalTarget) * 100) : 0;
+                                    ?>
+                                    <div class="goal-progress">
+                                        <div class="goal-bar" style="width: <?= $percentComplete ?>%; 
+                                        background-color: <?= $percentComplete == 100 ? '#2196f3' : '#4caf50' ?>;">
+                                        </div>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -286,6 +313,22 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                 ?>
                                             <?php endif; ?>
                                         </p>
+                                    <?php endforeach; ?>
+                                <?php } else { ?>
+                                    <?php foreach ($values as $val):
+                                        $userId = $val['user'];
+                                        $userName = $userMap[$userId] ?? 'Unknown User';
+                                        $userPercentage = ($targetPerUser > 0) ? ($val['value'] / $targetPerUser) * 100 : 0;
+                                        ?>
+                                        <div class="userAndValue">
+                                        <p><?= htmlspecialchars($userName) ?>: <?= $val['value'] ?> out of <?= $targetPerUser ?></p>
+                                        <div class="empty_space">
+                                            <div class="goal-bar" style="width: <?= $userPercentage ?>%; 
+                                                 background-color: <?= $userPercentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                                                 &nbsp;
+                                            </div>
+                                        </div>
+                                        </div>
                                     <?php endforeach; ?>
                                 <?php } ?>
                             </div>

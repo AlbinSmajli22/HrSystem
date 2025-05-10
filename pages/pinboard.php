@@ -48,6 +48,7 @@ foreach ($allGoalValues as $val) {
         }
 
         .goal-bar {
+            width: 100%;
             height: 100%;
             border-radius: 6px;
             transition: width 0.5s ease;
@@ -106,8 +107,15 @@ foreach ($allGoalValues as $val) {
         <?php foreach ($values as $val): 
             $userId = $val['user'];
             $userName = $userMap[$userId] ?? 'Unknown User';
+            $userPercentage =($targetPerUser > 0) ? ($val['value'] / $targetPerUser) * 100:0;
+
         ?>
             <p><?= htmlspecialchars($userName) ?>: <?= $val['value'] ?> out of <?= $targetPerUser ?></p>
+            <div class="goal-progress">
+            <div class="goal-bar" style="width: <?= $userPercentage ?>%; 
+                background-color: <?= $userPercentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+            </div>
+        </div>
         <?php endforeach; ?>
     </div>
 

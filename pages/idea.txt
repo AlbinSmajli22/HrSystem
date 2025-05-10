@@ -32,6 +32,16 @@ per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
 ---
 
 
+ $goalTarget = $comapnygoal['target_value']; // Example: The target percentage is 100%
+                                        $currentValue = 55; // Example: Current progress is 50%
+                    
+                            $percentage = ($goalTarget > 0) ? ($currentValue / $goalTarget) * 100 : 0;
+<div class="empty_space">
+                                            <div class="goal-bar" style="width: <?= $percentage ?>%; 
+                                                background-color: <?= $percentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                                                &nbsp;
+                                            </div>
+
 <?php foreach ($goals as $goal):
 
     $goalTarget = $goal['target_value']; // Example: The target percentage is 100%
