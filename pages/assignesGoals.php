@@ -29,13 +29,18 @@ $prep->execute();
 $allGoalValues = $prep->fetchAll(PDO::FETCH_ASSOC);
 
 // 3. Fetch all users once
-$usersQ = "SELECT user_id, name FROM users";
+$usersQ = "SELECT user_id, image , name, surname FROM users";
 $prep = $con->prepare($usersQ);
 $prep->execute();
 $allUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
 $userMap = [];
 foreach ($allUsers as $user) {
-    $userMap[$user['user_id']] = $user['name'];
+    $userMap[$user['user_id']] = [
+        'image' => $user['image'],
+        'name' => $user['name'],
+        'surname' => $user['surname']
+
+    ];
 }
 
 // 4. Group values by goal ID
@@ -235,35 +240,26 @@ $ActiveCompGoalNumber = $prep->fetch();
                                 <div class="row">
                                     <div class="col">
                                         <?php
-                                        $GoalId = $comapnygoal['id'];
+                                        $goalId = $comapnygoal['id'];
+                                        $goalName = $comapnygoal['name'];
 
-                                        // Fetch completed users along with their goal result (value)
-                                        $compQuery = "SELECT u.name, u.surname, c.value, c.completed FROM `companygoalsvalue` c
-                              INNER JOIN users u ON c.user = u.user_id
-                              WHERE c.company_goal = :company_goal";
-                                        $prep = $con->prepare($compQuery);
-                                        $prep->bindParam(':company_goal', $GoalId);
-                                        $prep->execute();
-                                        $completedUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
 
-                                        // Count completed goals
-                                        $compNum = count($completedUsers);
+                                        $users = json_decode($comapnygoal['users'], true);
+                                        $userCount = count($users);
+
+                                        $values = $valuesByGoal[$goalId] ?? [];
+
+                                        $totalCompleted = array_sum(array_column($values, 'completed'));
                                         ?>
                                         <img src="../images/check_on.png" width="24px" alt="">
                                         <span>Completed:</span>
-                                        <span class="completedNr"><?= $compNum ?></span>
+                                        <span class="completedNr"><?= htmlspecialchars($totalCompleted) ?></span>
                                     </div>
                                     <div class="col">
                                         <img src="../images/check_off.png" width="24px" alt="">
                                         <span>Not Completed:</span>
-                                        <?php
-                                        $NotComparray = json_decode($comapnygoal['users'], true);
-                                        if (!is_array($NotComparray)) {
-                                            $NotComparray = [];
-                                        }
-                                        $notCompleted = count($NotComparray) - $compNum;
-                                        ?>
-                                        <span class="notCompletedNr"><?= max(0, $notCompleted) ?></span>
+                                        <span
+                                            class="notCompletedNr"><?= htmlspecialchars($userCount - $totalCompleted) ?></span>
                                     </div>
                                 </div>
                             <?php } elseif ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter' || $comapnygoal['type'] == 'Currency') { ?>
@@ -290,44 +286,59 @@ $ActiveCompGoalNumber = $prep->fetch();
                             <?php } ?>
                             <div class="users_values">
                                 <?php if ($comapnygoal['type'] == 'Objective') { ?>
-                                    <?php foreach ($completedUsers as $user): ?>
-                                        <p>
-                                            <strong><?= htmlspecialchars($user['name']) ?>
-                                                <?= htmlspecialchars($user['surname']) ?></strong>
-                                            <?php if (isset($user['value']) && $user['value'] !== null): ?>
-                                                <?= htmlspecialchars($user['value']) ?>
-                                            <?php else: ?>
-                                                <?php
-                                                switch ($user['completed']) {
-                                                    case 0:
-                                                        ?>
-                                                        Not Completed
-                                                        <?php
-                                                        break;
-                                                    case 1:
-                                                        ?>
-                                                        Completed
-                                                        <?php
-                                                        break;
-                                                }
-                                                ?>
-                                            <?php endif; ?>
-                                        </p>
+                                    <?php foreach ($values as $val):
+                                        $userId = $val['user'];
+                                        $userInfo = $userMap[$userId] ?? null;
+
+                                        if ($userInfo) {
+                                            $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
+                                            $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
+                                        } else {
+                                            $fullName = 'Unknown User';
+                                            $profileImage = 'default.png'; // Or some fallback image
+                                        } ?>
+                                        <div class="userAndValue">
+                                            <p>
+                                                <img src="../userIMG/<?= $profileImage ?>" alt=""
+                                                    style="width:25px; height:25px; border-radius:50%; vertical-align:middle; margin-right: 20px;">
+                                                <strong><?= $fullName ?></strong>
+                                            </p>
+                                            <div class="compStatus">
+                                                <img src="<?= $val['completed'] == 1 ? '../images/check_on.png' : '../images/check_off.png' ?>"
+                                                    alt="" style="width:24px">
+                                            </div>
+                                            <small>due 7 days ago</small>
+                                        </div>
+
                                     <?php endforeach; ?>
                                 <?php } else { ?>
                                     <?php foreach ($values as $val):
                                         $userId = $val['user'];
-                                        $userName = $userMap[$userId] ?? 'Unknown User';
+                                        $userInfo = $userMap[$userId] ?? null;
+
+                                        if ($userInfo) {
+                                            $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
+                                            $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
+                                        } else {
+                                            $fullName = 'Unknown User';
+                                            $profileImage = 'default.png'; // Or some fallback image
+                                        }
                                         $userPercentage = ($targetPerUser > 0) ? ($val['value'] / $targetPerUser) * 100 : 0;
                                         ?>
                                         <div class="userAndValue">
-                                        <p><?= htmlspecialchars($userName) ?>: <?= $val['value'] ?> out of <?= $targetPerUser ?></p>
-                                        <div class="empty_space">
-                                            <div class="goal-bar" style="width: <?= $userPercentage ?>%; 
+                                            <p>
+                                                <img src="../userIMG/<?= $profileImage ?>" alt=""
+                                                    style="width:25px; height:25px; border-radius:50%; vertical-align:middle; margin-right: 20px;">
+                                                <strong><?= $fullName ?></strong>
+                                            </p>
+                                            <div class="empty_space">
+                                                <div class="goal-bar"
+                                                    style="width: <?= $userPercentage ?>%; 
                                                  background-color: <?= $userPercentage == 100 ? '#2196f3' : '#4caf50' ?>;">
-                                                 &nbsp;
+                                                    &nbsp;
+                                                </div>
                                             </div>
-                                        </div>
+                                            <small>due 7 days ago</small>
                                         </div>
                                     <?php endforeach; ?>
                                 <?php } ?>
@@ -368,7 +379,7 @@ $ActiveCompGoalNumber = $prep->fetch();
 
 
             // Toggle current comments visibility
-            comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+            comments.style.display = comments.style.display === 'block' ? 'none' : 'flex';
         });
     });
 

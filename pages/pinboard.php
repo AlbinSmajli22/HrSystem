@@ -18,24 +18,35 @@ $prep->execute();
 $allGoalValues = $prep->fetchAll(PDO::FETCH_ASSOC);
 
 // 3. Fetch all users once
-$usersQ = "SELECT user_id, name FROM users";
+$usersQ = "SELECT user_id, image , name, surname FROM users";
 $prep = $con->prepare($usersQ);
 $prep->execute();
 $allUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
 $userMap = [];
 foreach ($allUsers as $user) {
-    $userMap[$user['user_id']] = $user['name'];
+    $userMap[$user['user_id']] = [
+        'image' => $user['image'],
+        'name' => $user['name'],
+        'surname' => $user['surname']
+
+    ];
 }
+
 
 // 4. Group values by goal ID
 $valuesByGoal = [];
 foreach ($allGoalValues as $val) {
     $valuesByGoal[$val['company_goal']][] = $val;
 }
+$completedByGoal = [];
+foreach ($allGoalValues as $val) {
+    $completedByGoal[$val['company_goal']][] = $val;
+}
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Company Goals</title>
     <style>
@@ -76,50 +87,109 @@ foreach ($allGoalValues as $val) {
         }
     </style>
 </head>
+
 <body>
 
     <h1>Company Goals Overview</h1>
 
-    <?php foreach ($companyGoals as $goal): 
-        $goalId = $goal['id'];
-        $goalName = $goal['name'];
-        $targetPerUser = $goal['target_value'];
-        
-        $users = json_decode($goal['users'], true);
-        $userCount = count($users);
-        $totalTarget = $userCount * $targetPerUser;
+    <?php foreach ($companyGoals as $goal):
+        if ($goal['type'] != 'Objective') {
+            $goalId = $goal['id'];
+            $goalName = $goal['name'];
+            $targetPerUser = $goal['target_value'];
 
-        $values = $valuesByGoal[$goalId] ?? [];
-        $totalCompleted = array_sum(array_column($values, 'value'));
-        $percentComplete = $totalTarget > 0 ? round(($totalCompleted / $totalTarget) * 100) : 0;
-    ?>
+            $users = json_decode($goal['users'], true);
+            $userCount = count($users);
+            $totalTarget = $userCount * $targetPerUser;
 
-    <div class="goal-card">
-        <h2><?= htmlspecialchars($goalName) ?></h2>
-        <p><strong><?= $percentComplete ?>%</strong> completed</p>
+            $values = $valuesByGoal[$goalId] ?? [];
+            $totalCompleted = array_sum(array_column($values, 'value'));
+            $percentComplete = $totalTarget > 0 ? round(($totalCompleted / $totalTarget) * 100) : 0;
+            ?>
 
-        <div class="goal-progress">
-            <div class="goal-bar" style="width: <?= $percentComplete ?>%; 
+            <div class="goal-card">
+                <h2><?= htmlspecialchars($goalName) ?></h2>
+                <p><strong><?= $percentComplete ?>%</strong> completed </p>
+
+                <div class="goal-progress">
+                    <div class="goal-bar" style="width: <?= $percentComplete ?>%; 
                 background-color: <?= $percentComplete == 100 ? '#2196f3' : '#4caf50' ?>;">
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        <?php foreach ($values as $val): 
-            $userId = $val['user'];
-            $userName = $userMap[$userId] ?? 'Unknown User';
-            $userPercentage =($targetPerUser > 0) ? ($val['value'] / $targetPerUser) * 100:0;
+                <?php foreach ($values as $val):
+                    $userId = $val['user'];
+                    $userInfo = $userMap[$userId] ?? null;
 
-        ?>
-            <p><?= htmlspecialchars($userName) ?>: <?= $val['value'] ?> out of <?= $targetPerUser ?></p>
-            <div class="goal-progress">
-            <div class="goal-bar" style="width: <?= $userPercentage ?>%; 
+                    if ($userInfo) {
+                        $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
+                        $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
+                    } else {
+                        $fullName = 'Unknown User';
+                        $profileImage = 'default.png'; // Or some fallback image
+                    }
+                    $userPercentage = ($targetPerUser > 0) ? ($val['value'] / $targetPerUser) * 100 : 0;
+
+                    ?>
+                    <p>
+                        <img src="../userIMG/<?= $profileImage ?>" alt=""
+                            style="width:40px; height:40px; border-radius:50%; vertical-align:middle;">
+                        <strong><?= $fullName ?></strong>: <?= $val['value'] ?> out of <?= $targetPerUser ?>
+                    </p>
+
+                    <div class="goal-progress">
+                        <div class="goal-bar" style="width: <?= $userPercentage ?>%; 
                 background-color: <?= $userPercentage == 100 ? '#2196f3' : '#4caf50' ?>;">
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-        <?php endforeach; ?>
-    </div>
 
-    <?php endforeach; ?>
+        <?php } else {
+            $goalId = $goal['id'];
+            $goalName = $goal['name'];
+
+
+            $users = json_decode($goal['users'], true);
+            $userCount = count($users);
+
+            $values = $valuesByGoal[$goalId] ?? [];
+
+            $totalCompleted = array_sum(array_column($values, 'completed'));
+
+            ?>
+            <div class="goal-card">
+                <h2><?= htmlspecialchars($goalName) ?></h2>
+
+                <p>Completed <?= htmlspecialchars($totalCompleted) ?> Not Completed: <?= htmlspecialchars($userCount - $totalCompleted) ?></p>
+
+                <?php foreach ($values as $val):
+                    $userId = $val['user'];
+                    $userInfo = $userMap[$userId] ?? null;
+
+                    if ($userInfo) {
+                        $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
+                        $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
+                    } else {
+                        $fullName = 'Unknown User';
+                        $profileImage = 'default.png'; // Or some fallback image
+                    }
+
+
+                    ?>
+                    <p>
+                        <img src="../userIMG/<?= $profileImage ?>" alt=""
+                            style="width:40px; height:40px; border-radius:50%; vertical-align:middle;">
+                        <strong><?= $fullName ?></strong>: <?= $val['completed'] ?> 
+                    </p>
+
+                    
+                <?php endforeach; ?>
+            </div>
+
+        <?php }
+    endforeach; ?>
 
 </body>
+
 </html>

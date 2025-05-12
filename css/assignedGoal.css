@@ -235,24 +235,37 @@ body {
   flex-direction: row;
   width: 97%;
 }
-.userAndValue{
+.userAndValue {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   width: 100%;
 }
-.userAndValue p{
-  width: 20%;
+.userAndValue p {
+  width: 25%;
+  padding: 0px;
+  margin-bottom: 0px;
+  margin-right: 40px;
+  font-weight: 300;
+  color: #2196f3;
 }
 .empty_space {
   height: 10px;
-  width: 50%;
+  width: 40%;
   border-radius: 5px;
   background-color: #f4f6fa;
   color: #676a6c;
   margin-bottom: 20px;
   margin-top: 15px;
 }
- .empty_space .goal-bar {
+.compStatus {
+  height: 10px;
+  width: 40%;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+.empty_space .goal-bar {
   border-radius: 5px;
   height: 10px;
   width: 0%; /* Default width */
@@ -380,6 +393,9 @@ body {
 }
 .cmpNotCmp .users_values {
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .goal-progress {
