@@ -240,7 +240,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
+  width: 95%;
 }
 .userAndValue p {
   width: 25%;
@@ -264,6 +264,15 @@ body {
   width: 40%;
   margin-bottom: 20px;
   margin-top: 15px;
+}
+.compStatus .completedNr{
+    padding: 3px 8px;
+  background-color: #d1dade;
+  color: #5e5e5e;
+  font-size: 1.25em;
+  margin-right: 20px;
+  border-radius: 0.25em;
+  font-weight: 600;
 }
 .empty_space .goal-bar {
   border-radius: 5px;
@@ -362,7 +371,7 @@ body {
 .cmpNotCmp .row .col .completedNr {
   padding: 3px 8px;
   background-color: #2196f3;
-  color: #fff;
+  color: #ffffff;
   font-size: 1.25em;
   margin-right: 20px;
   border-radius: 0.25em;
@@ -396,6 +405,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .goal-progress {

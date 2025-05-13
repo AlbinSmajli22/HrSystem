@@ -262,7 +262,7 @@ $ActiveCompGoalNumber = $prep->fetch();
                                             class="notCompletedNr"><?= htmlspecialchars($userCount - $totalCompleted) ?></span>
                                     </div>
                                 </div>
-                            <?php } elseif ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter' || $comapnygoal['type'] == 'Currency') { ?>
+                            <?php } elseif ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Currency') { ?>
                                 <div class="completedBar">
                                     <?php
                                     $goalId = $comapnygoal['id'];
@@ -279,10 +279,35 @@ $ActiveCompGoalNumber = $prep->fetch();
                                     ?>
                                     <div class="goal-progress">
                                         <div class="goal-bar" style="width: <?= $percentComplete ?>%; 
-                                        background-color: <?= $percentComplete == 100 ? '#2196f3' : '#4caf50' ?>;">
+                                        background-color: <?= $percentComplete == 100 ? '#2196f3' : '#2196f3' ?>;">
                                         </div>
                                     </div>
                                 </div>
+                            <?php } else { ?>
+                                <div class="row">
+                                    <div class="col">
+                                        <?php
+                                        $goalId = $comapnygoal['id'];
+                                        $goalName = $comapnygoal['name'];
+                                        $targetPerUser = $comapnygoal['target_value'];
+
+                                        $users = json_decode($comapnygoal['users'], true);
+                                        $userCount = count($users);
+                                        $totalTarget = $userCount * $targetPerUser;
+
+
+
+                                        $values = $valuesByGoal[$goalId] ?? [];
+
+                                        $totalCompleted = array_sum(array_column($values, 'value'));
+                                        ?>
+                                        
+                                        <span>Total Count:</span>
+                                        <span class="completedNr"><?= htmlspecialchars($totalTarget) ?></span>
+                                    </div>
+
+                                </div>
+
                             <?php } ?>
                             <div class="users_values">
                                 <?php if ($comapnygoal['type'] == 'Objective') { ?>
@@ -311,6 +336,33 @@ $ActiveCompGoalNumber = $prep->fetch();
                                         </div>
 
                                     <?php endforeach; ?>
+                                <?php } elseif ($comapnygoal['type'] == 'Counter') { ?>
+                                    <?php foreach ($values as $val):
+                                        $userId = $val['user'];
+                                        $userInfo = $userMap[$userId] ?? null;
+
+                                        if ($userInfo) {
+                                            $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
+                                            $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
+                                        } else {
+                                            $fullName = 'Unknown User';
+                                            $profileImage = 'default.png'; // Or some fallback image
+                                        } ?>
+                                        <div class="userAndValue">
+                                            <p>
+                                                <img src="../userIMG/<?= $profileImage ?>" alt=""
+                                                    style="width:25px; height:25px; border-radius:50%; vertical-align:middle; margin-right: 20px;">
+                                                <strong><?= $fullName ?></strong>
+                                            </p>
+                                            <div class="compStatus">
+                                                <span class="completedNr" style=" background-color:<?= $val['value'] == $targetPerUser ? '#2196f3':'#d1dade' ?>; color:<?= $val['value'] == $targetPerUser ? '#ffffff':'#5e5e5e' ?>;"><?= htmlspecialchars($val['value']) ?></span>
+                                            </div>
+                                            <small>due 7 days ago</small>
+                                        </div>
+
+                                    <?php endforeach; ?>
+
+
                                 <?php } else { ?>
                                     <?php foreach ($values as $val):
                                         $userId = $val['user'];
@@ -372,16 +424,19 @@ $ActiveCompGoalNumber = $prep->fetch();
             comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
         });
     });
-    document.querySelectorAll('.showUseres').forEach(more => {
-        more.addEventListener('click', function () {
-            const parent = this.closest('.cmpNotCmp'); // Find the closest parent
-            const comments = parent.querySelector('.users_values'); // Find comments inside this parent
+   document.querySelectorAll('.showUseres').forEach(more => {
+    more.addEventListener('click', function () {
+        const parent = this.closest('.cmpNotCmp');
+        const comments = parent.querySelector('.users_values');
 
+        // Use getComputedStyle to check current display
+        const isVisible = window.getComputedStyle(comments).display !== 'none';
 
-            // Toggle current comments visibility
-            comments.style.display = comments.style.display === 'block' ? 'none' : 'flex';
-        });
+        // Toggle display
+        comments.style.display = isVisible ? 'none' : 'flex';
     });
+});
+
 
 
     let selectedValuesArray = [];
