@@ -301,7 +301,7 @@ $ActiveCompGoalNumber = $prep->fetch();
 
                                         $totalCompleted = array_sum(array_column($values, 'value'));
                                         ?>
-                                        
+
                                         <span>Total Count:</span>
                                         <span class="completedNr"><?= htmlspecialchars($totalTarget) ?></span>
                                     </div>
@@ -332,7 +332,28 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                 <img src="<?= $val['completed'] == 1 ? '../images/check_on.png' : '../images/check_off.png' ?>"
                                                     alt="" style="width:24px">
                                             </div>
-                                            <small>due 7 days ago</small>
+                                            <?php
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate = date_create($currentDate);
+                                            $createdDate = $val['edited'];
+                                            $createdDate = date_create($createdDate);
+                                            $createdFor = date_diff($createdDate, $currentDate);
+                                            $days = (int) $createdFor->format('%d');
+                                            $hours = (int) $createdFor->format('%h');
+
+                                            echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+
+                                            /* if ($days == 0) {
+                                                echo '<small > ' . 'due ' . $hours . ($hours == 1 ? ' hour ago' : ' hours ago') . '</small>';
+                                             }elseif ($hours==0) {
+                                                 echo '<small>'.'due ' . $createdFor->format('%i') . ((int)$createdFor->format('%i') == 1 ? ' minute ago' : ' minutes ago'). '</small>';
+
+                                             }elseif ((int)$createdFor->format('%i') == 0) {
+                                                 echo '<small > ' .'due ' . $createdFor->format('%s') . ' seconds ago'. '</small>';
+                                             } else {
+                                                 echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+                                             }*/
+                                            ?>
                                         </div>
 
                                     <?php endforeach; ?>
@@ -355,9 +376,31 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                 <strong><?= $fullName ?></strong>
                                             </p>
                                             <div class="compStatus">
-                                                <span class="completedNr" style=" background-color:<?= $val['value'] == $targetPerUser ? '#2196f3':'#d1dade' ?>; color:<?= $val['value'] == $targetPerUser ? '#ffffff':'#5e5e5e' ?>;"><?= htmlspecialchars($val['value']) ?></span>
+                                                <span class="completedNr"
+                                                    style=" background-color:<?= $val['value'] == $targetPerUser ? '#2196f3' : '#d1dade' ?>; color:<?= $val['value'] == $targetPerUser ? '#ffffff' : '#5e5e5e' ?>;"><?= htmlspecialchars($val['value']) ?></span>
                                             </div>
-                                            <small>due 7 days ago</small>
+                                            <?php
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate = date_create($currentDate);
+                                            $createdDate = $val['edited'];
+                                            $createdDate = date_create($createdDate);
+                                            $createdFor = date_diff($createdDate, $currentDate);
+                                            $days = (int) $createdFor->format('%d');
+                                            $hours = (int) $createdFor->format('%h');
+
+                                            echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+
+                                            /* if ($days == 0) {
+                                                echo '<small > ' . 'due ' . $hours . ($hours == 1 ? ' hour ago' : ' hours ago') . '</small>';
+                                             }elseif ($hours==0) {
+                                                 echo '<small>'.'due ' . $createdFor->format('%i') . ((int)$createdFor->format('%i') == 1 ? ' minute ago' : ' minutes ago'). '</small>';
+
+                                             }elseif ((int)$createdFor->format('%i') == 0) {
+                                                 echo '<small > ' .'due ' . $createdFor->format('%s') . ' seconds ago'. '</small>';
+                                             } else {
+                                                 echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+                                             }*/
+                                            ?>
                                         </div>
 
                                     <?php endforeach; ?>
@@ -390,7 +433,28 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                     &nbsp;
                                                 </div>
                                             </div>
-                                            <small>due 7 days ago</small>
+                                            <?php
+                                            $currentDate = gmdate('Y-m-d');
+                                            $currentDate = date_create($currentDate);
+                                            $createdDate = $val['edited'];
+                                            $createdDate = date_create($createdDate);
+                                            $createdFor = date_diff($createdDate, $currentDate);
+                                            $days = (int) $createdFor->format('%d');
+                                            $hours = (int) $createdFor->format('%h');
+
+                                            echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+
+                                            /* if ($days == 0) {
+                                                echo '<small > ' . 'due ' . $hours . ($hours == 1 ? ' hour ago' : ' hours ago') . '</small>';
+                                             }elseif ($hours==0) {
+                                                 echo '<small>'.'due ' . $createdFor->format('%i') . ((int)$createdFor->format('%i') == 1 ? ' minute ago' : ' minutes ago'). '</small>';
+
+                                             }elseif ((int)$createdFor->format('%i') == 0) {
+                                                 echo '<small > ' .'due ' . $createdFor->format('%s') . ' seconds ago'. '</small>';
+                                             } else {
+                                                 echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+                                             }*/
+                                            ?>
                                         </div>
                                     <?php endforeach; ?>
                                 <?php } ?>
@@ -424,18 +488,18 @@ $ActiveCompGoalNumber = $prep->fetch();
             comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
         });
     });
-   document.querySelectorAll('.showUseres').forEach(more => {
-    more.addEventListener('click', function () {
-        const parent = this.closest('.cmpNotCmp');
-        const comments = parent.querySelector('.users_values');
+    document.querySelectorAll('.showUseres').forEach(more => {
+        more.addEventListener('click', function () {
+            const parent = this.closest('.cmpNotCmp');
+            const comments = parent.querySelector('.users_values');
 
-        // Use getComputedStyle to check current display
-        const isVisible = window.getComputedStyle(comments).display !== 'none';
+            // Use getComputedStyle to check current display
+            const isVisible = window.getComputedStyle(comments).display !== 'none';
 
-        // Toggle display
-        comments.style.display = isVisible ? 'none' : 'flex';
+            // Toggle display
+            comments.style.display = isVisible ? 'none' : 'flex';
+        });
     });
-});
 
 
 
