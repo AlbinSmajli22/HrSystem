@@ -94,6 +94,7 @@ if (isset($_POST['editCompanyGoal'])) {
     $comment = $_POST['comment'];
     $completed = isset($_POST['complete']) ? $_POST['complete'] : null;
     $done = 1;
+    $edited=date('y-m-d h:i:s');
 
 
     $userValueQuery = "SELECT * FROM companygoalsvalue WHERE value_id=:value_id";
@@ -106,8 +107,8 @@ if (isset($_POST['editCompanyGoal'])) {
     if ($userValue <= 0) {
         if ($value == $target_value || $value >= $target_value || $completed == 1) {
 
-            $editgoalQuery = "INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done)
-        VALUES (null, :user, :company_goal, :value, :completed, :comment, :done)";
+            $editgoalQuery = "INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited)
+        VALUES (null, :user, :company_goal, :value, :completed, :comment, :done, :edited)";
 
             $prep = $con->prepare($editgoalQuery);
 
@@ -117,13 +118,14 @@ if (isset($_POST['editCompanyGoal'])) {
             $prep->bindParam(':comment', $comment);
             $prep->bindParam(':completed', $completed);
             $prep->bindParam(':done', $done);
+            $prep->bindParam(':edited', $edited);
 
             $prep->execute();
             header("Location: /HrSystem/pages/goals.php");
         } else {
 
-            $editgoalQuery = "INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done)
-        VALUES (null, :user, :company_goal, :value, :completed, :comment, null)";
+            $editgoalQuery = "INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited)
+        VALUES (null, :user, :company_goal, :value, :completed, :comment, null, :edited)";
 
             $prep = $con->prepare($editgoalQuery);
 
@@ -132,6 +134,7 @@ if (isset($_POST['editCompanyGoal'])) {
             $prep->bindParam(':company_goal', $goal_id);
             $prep->bindParam(':comment', $comment);
             $prep->bindParam(':completed', $completed);
+            $prep->bindParam(':edited', $edited);
 
             $prep->execute();
             header("Location: /HrSystem/pages/goals.php");
@@ -139,25 +142,27 @@ if (isset($_POST['editCompanyGoal'])) {
     } else {
         if ($value == $target_value || $value >= $target_value || $completed == 1) {
 
-            $editgoalQuery = "UPDATE `companygoalsvalue` SET value=:value, completed=:completed, done=:done where value_id=:value_id";
+            $editgoalQuery = "UPDATE `companygoalsvalue` SET value=:value, completed=:completed, done=:done, edited=:edited where value_id=:value_id";
             $prep = $con->prepare($editgoalQuery);
 
             $prep->bindParam(':value', $value);
             $prep->bindParam(':value_id', $value_id);
             $prep->bindParam(':completed', $completed);
             $prep->bindParam(':done', $done);
+            $prep->bindParam(':edited', $edited);
 
             $prep->execute();
             header("Location: /HrSystem/pages/goals.php");
 
 
         } else {
-            $editgoalQuery = "UPDATE `companygoalsvalue` SET value=:value, completed=:completed where value_id=:value_id";
+            $editgoalQuery = "UPDATE `companygoalsvalue` SET value=:value, completed=:completed, edited=:edited where value_id=:value_id";
             $prep = $con->prepare($editgoalQuery);
 
             $prep->bindParam(':value', $value);
             $prep->bindParam(':value_id', $value_id);
             $prep->bindParam(':completed', $completed);
+            $prep->bindParam(':edited', $edited);
 
             $prep->execute();
             header("Location: /HrSystem/pages/goals.php");

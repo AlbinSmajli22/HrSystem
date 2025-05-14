@@ -76,8 +76,7 @@ $thisweekoverdue = $prep->fetch();
 
 
 $ActiveCompGoal = "SELECT COUNT(*)
-FROM companygoals"
-;
+FROM companygoals";
 $prep = $con->prepare($ActiveCompGoal);
 $prep->execute();
 $ActiveCompGoalNumber = $prep->fetch();
@@ -333,26 +332,33 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                     alt="" style="width:24px">
                                             </div>
                                             <?php
-                                            $currentDate = gmdate('Y-m-d');
-                                            $currentDate = date_create($currentDate);
-                                            $createdDate = $val['edited'];
-                                            $createdDate = date_create($createdDate);
+                                            $currentDate = date_create(gmdate('Y-m-d H:i:s')); // get full UTC time
+                                            $createdDate = date_create($val['edited']); // must include time or default to 00:00:00
+                                
                                             $createdFor = date_diff($createdDate, $currentDate);
-                                            $days = (int) $createdFor->format('%d');
+
+                                            $years = (int) $createdFor->format('%y');
+                                            $months = (int) $createdFor->format('%m');
+                                            $days = (int) $createdFor->format('%a');
                                             $hours = (int) $createdFor->format('%h');
+                                            $minutes = (int) $createdFor->format('%i');
+                                            $seconds = (int) $createdFor->format('%s');
 
-                                            echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+                                            if ($years > 0) {
+                                                echo '<small>edited ' . $years . ($years === 1 ? ' year ago' : ' years ago') . '</small>';
+                                            } elseif ($months > 0) {
+                                                echo '<small>edited ' . $months . ($months === 1 ? ' month ago' : ' months ago') . '</small>';
+                                            } elseif ($days > 0) {
+                                                echo '<small>edited ' . $days . ($days === 1 ? ' day ago' : ' days ago') . '</small>';
+                                            } elseif ($hours > 0) {
+                                                echo '<small>edited ' . $hours . ($hours === 1 ? ' hour ago' : ' hours ago') . '</small>';
+                                            } elseif ($minutes > 0) {
+                                                echo '<small>edited ' . $minutes . ($minutes === 1 ? ' minute ago' : ' minutes ago') . '</small>';
+                                            } else {
+                                                echo '<small>edited ' . $seconds . ($seconds === 1 ? ' second ago' : ' seconds ago') . '</small>';
+                                            }
 
-                                            /* if ($days == 0) {
-                                                echo '<small > ' . 'due ' . $hours . ($hours == 1 ? ' hour ago' : ' hours ago') . '</small>';
-                                             }elseif ($hours==0) {
-                                                 echo '<small>'.'due ' . $createdFor->format('%i') . ((int)$createdFor->format('%i') == 1 ? ' minute ago' : ' minutes ago'). '</small>';
 
-                                             }elseif ((int)$createdFor->format('%i') == 0) {
-                                                 echo '<small > ' .'due ' . $createdFor->format('%s') . ' seconds ago'. '</small>';
-                                             } else {
-                                                 echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
-                                             }*/
                                             ?>
                                         </div>
 
@@ -380,26 +386,32 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                     style=" background-color:<?= $val['value'] == $targetPerUser ? '#2196f3' : '#d1dade' ?>; color:<?= $val['value'] == $targetPerUser ? '#ffffff' : '#5e5e5e' ?>;"><?= htmlspecialchars($val['value']) ?></span>
                                             </div>
                                             <?php
-                                            $currentDate = gmdate('Y-m-d');
-                                            $currentDate = date_create($currentDate);
-                                            $createdDate = $val['edited'];
-                                            $createdDate = date_create($createdDate);
+                                            $currentDate = date_create(gmdate('Y-m-d H:i:s')); // get full UTC time
+                                            $createdDate = date_create($val['edited']); // must include time or default to 00:00:00
+                                
                                             $createdFor = date_diff($createdDate, $currentDate);
-                                            $days = (int) $createdFor->format('%d');
+
+                                            $years = (int) $createdFor->format('%y');
+                                            $months = (int) $createdFor->format('%m');
+                                            $days = (int) $createdFor->format('%a');
                                             $hours = (int) $createdFor->format('%h');
+                                            $minutes = (int) $createdFor->format('%i');
+                                            $seconds = (int) $createdFor->format('%s');
 
-                                            echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+                                            if ($years > 0) {
+                                                echo '<small>edited ' . $years . ($years === 1 ? ' year ago' : ' years ago') . '</small>';
+                                            } elseif ($months > 0) {
+                                                echo '<small>edited ' . $months . ($months === 1 ? ' month ago' : ' months ago') . '</small>';
+                                            } elseif ($days > 0) {
+                                                echo '<small>edited ' . $days . ($days === 1 ? ' day ago' : ' days ago') . '</small>';
+                                            } elseif ($hours > 0) {
+                                                echo '<small>edited ' . $hours . ($hours === 1 ? ' hour ago' : ' hours ago') . '</small>';
+                                            } elseif ($minutes > 0) {
+                                                echo '<small>edited ' . $minutes . ($minutes === 1 ? ' minute ago' : ' minutes ago') . '</small>';
+                                            } else {
+                                                echo '<small>edited ' . $seconds . ($seconds === 1 ? ' second ago' : ' seconds ago') . '</small>';
+                                            }
 
-                                            /* if ($days == 0) {
-                                                echo '<small > ' . 'due ' . $hours . ($hours == 1 ? ' hour ago' : ' hours ago') . '</small>';
-                                             }elseif ($hours==0) {
-                                                 echo '<small>'.'due ' . $createdFor->format('%i') . ((int)$createdFor->format('%i') == 1 ? ' minute ago' : ' minutes ago'). '</small>';
-
-                                             }elseif ((int)$createdFor->format('%i') == 0) {
-                                                 echo '<small > ' .'due ' . $createdFor->format('%s') . ' seconds ago'. '</small>';
-                                             } else {
-                                                 echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
-                                             }*/
                                             ?>
                                         </div>
 
@@ -434,26 +446,32 @@ $ActiveCompGoalNumber = $prep->fetch();
                                                 </div>
                                             </div>
                                             <?php
-                                            $currentDate = gmdate('Y-m-d');
-                                            $currentDate = date_create($currentDate);
-                                            $createdDate = $val['edited'];
-                                            $createdDate = date_create($createdDate);
+                                            $currentDate = date_create(gmdate('Y-m-d H:i:s')); // get full UTC time
+                                            $createdDate = date_create($val['edited']); // must include time or default to 00:00:00
+                                
                                             $createdFor = date_diff($createdDate, $currentDate);
-                                            $days = (int) $createdFor->format('%d');
+
+                                            $years = (int) $createdFor->format('%y');
+                                            $months = (int) $createdFor->format('%m');
+                                            $days = (int) $createdFor->format('%a');
                                             $hours = (int) $createdFor->format('%h');
+                                            $minutes = (int) $createdFor->format('%i');
+                                            $seconds = (int) $createdFor->format('%s');
 
-                                            echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
+                                            if ($years > 0) {
+                                                echo '<small>edited ' . $years . ($years === 1 ? ' year ago' : ' years ago') . '</small>';
+                                            } elseif ($months > 0) {
+                                                echo '<small>edited ' . $months . ($months === 1 ? ' month ago' : ' months ago') . '</small>';
+                                            } elseif ($days > 0) {
+                                                echo '<small>edited ' . $days . ($days === 1 ? ' day ago' : ' days ago') . '</small>';
+                                            } elseif ($hours > 0) {
+                                                echo '<small>edited ' . $hours . ($hours === 1 ? ' hour ago' : ' hours ago') . '</small>';
+                                            } elseif ($minutes > 0) {
+                                                echo '<small>edited ' . $minutes . ($minutes === 1 ? ' minute ago' : ' minutes ago') . '</small>';
+                                            } else {
+                                                echo '<small>edited ' . $seconds . ($seconds === 1 ? ' second ago' : ' seconds ago') . '</small>';
+                                            }
 
-                                            /* if ($days == 0) {
-                                                echo '<small > ' . 'due ' . $hours . ($hours == 1 ? ' hour ago' : ' hours ago') . '</small>';
-                                             }elseif ($hours==0) {
-                                                 echo '<small>'.'due ' . $createdFor->format('%i') . ((int)$createdFor->format('%i') == 1 ? ' minute ago' : ' minutes ago'). '</small>';
-
-                                             }elseif ((int)$createdFor->format('%i') == 0) {
-                                                 echo '<small > ' .'due ' . $createdFor->format('%s') . ' seconds ago'. '</small>';
-                                             } else {
-                                                 echo '<small > ' . 'due ' . $days . ($days == 1 ? ' day ago' : ' days ago') . '</small>';
-                                             }*/
                                             ?>
                                         </div>
                                     <?php endforeach; ?>
