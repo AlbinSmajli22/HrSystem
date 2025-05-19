@@ -55,11 +55,11 @@ include 'addNewGoal.php';
                     <div class="form-group">
                         <label for="type">Type</label><br>
                         <select name="type" id="type" onchange="toggleTargetValueField()">
-                            <option value="number">number</option>
-                            <option value="currency">currency</option>
-                            <option value="counter">counter</option>
-                            <option value="percentage">percentage</option>
-                            <option value="objective">objective</option>
+                            <option value="Number">Number</option>
+                            <option value="Currency">Currency</option>
+                            <option value="Counter">Counter</option>
+                            <option value="Percentage">Percentage</option>
+                            <option value="Objective">Objective</option>
                         </select>
                         <p>This defines the way that progress against this goal is measured</p>
                     </div>
@@ -89,7 +89,7 @@ include 'addNewGoal.php';
                             date)</p>
                     </div>
                     <hr>
-                    <div class="form-group">
+                    <div class="form-group" id="targetValueContainer">
                         <label for="target">Target Value</label><br>
                         <input type="number" name="target" id="target">
                         <p>Default target value to set for this goal (can be adjusted later)</p>
@@ -103,13 +103,13 @@ include 'addNewGoal.php';
         </div>
         <?php include '../template/footer.php'; ?>
     </div>
-    <script>
-    function toggleTargetValueField() {
+    <script> 
+        function toggleTargetValueField() {
             const goalType = document.getElementById("type").value;
             const targetValueContainer = document.getElementById("targetValueContainer");
 
             // Hide target value if percentage or objective is selected
-            if (goalType === "percentage" || goalType === "objective") {
+            if (goalType === "Percentage" || goalType === "Objective") {
                 targetValueContainer.style.display = "none";
             } else {
                 targetValueContainer.style.display = "block";

@@ -81,6 +81,9 @@ include 'addNewGoal.php';
                                         <a class="more">
                                             <i class="fa-solid fa-ellipsis"></i>
                                         </a>
+                                        <?php if($comapnygoal['user_goal']==1): ?>
+                                            <span class="mygoal">My Goal</span>
+                                        <?php endif; ?>
                                     </div>
 
                                     <?php
@@ -98,6 +101,9 @@ include 'addNewGoal.php';
                                 </div>
                             </div>
                             <div class='dots-menu'>
+                                <?php if($comapnygoal['done']==1): ?>
+                                <span class="mygoal">Completed</span>
+                                <?php endif; ?>
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
                                     <a data-bs-toggle="modal" data-bs-target="#editGoalModal<?= $comapnygoal['id'] ?>"

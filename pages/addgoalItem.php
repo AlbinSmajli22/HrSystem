@@ -55,7 +55,7 @@ include 'addNewGoal.php';
                     <div class="form-group">
                         <label for="type">Type</label><br>
                         <select name="type" id="type" onchange="toggleTargetValueField()">
-                            <option value="Nmber">Number</option>
+                            <option value="Number">Number</option>
                             <option value="Currency">Currency</option>
                             <option value="Counter">Counter</option>
                             <option value="Percentage">Percentage</option>
@@ -109,7 +109,7 @@ include 'addNewGoal.php';
             const targetValueContainer = document.getElementById("targetValueContainer");
 
             // Hide target value if percentage or objective is selected
-            if (goalType === "percentage" || goalType === "objective") {
+            if (goalType === "Percentage" || goalType === "Objective") {
                 targetValueContainer.style.display = "none";
             } else {
                 targetValueContainer.style.display = "block";

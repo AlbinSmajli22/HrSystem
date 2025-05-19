@@ -36,7 +36,7 @@ if (isset($_POST['addGoalItem'])) {
 }
 
 
-/*
+
 if (isset($_POST['addGoal'])) {
       
     $description=$_POST['description'];
@@ -46,24 +46,27 @@ if (isset($_POST['addGoal'])) {
     $target_value=$_POST['target'];
     $completed=0;
     $created=date('y-m-d');
+    $user_goal=1;
+    
 
-    $addgoalQuery="INSERT INTO `goals` (id, description, comments, type, due_date, target_value, value, user_id, completed, created, updated, notes) 
-                    VALUES (null, :description, :comments, :type, :due_date, :target, null, :user_id, :completed ,:created, null, null)";
+    $addgoalQuery="INSERT INTO companygoals (id, name, description, type, due_date, created, target_value, company_id, users, user_goal)
+                                     VALUES (null, :name, :description, :type, :due_date, :created, :target_value, :company_id, :users, :user_goal)";
     $prep=$con->prepare($addgoalQuery);
    
-    $prep->bindParam(':description', $description);
-    $prep->bindParam(':comments', $comments);
+    $prep->bindParam(':name', $description);
+    $prep->bindParam(':description', $comments);
     $prep->bindParam(':type', $type);
     $prep->bindParam(':due_date', $due_date);
-    $prep->bindParam(':completed', $completed);
-    $prep->bindParam(':target', $target_value);
+    $prep->bindParam(':target_value', $target_value);
     $prep->bindParam(':created', $created);
-    $prep->bindParam(':user_id', $userId);
-    
+    $prep->bindParam(':users', $userIdJson);
+     $prep->bindParam(':user_goal', $user_goal);
+      $prep->bindParam(':company_id', $companyId);
+
     $prep->execute();
     header("Location: /HrSystem/pages/goals.php");
 }
-
+/*
 
 if (isset($_POST['editGoal'])) {
     $value=!empty($_POST['value']) ? $_POST['value'] : null;
@@ -189,8 +192,8 @@ $goals = $prep->fetchAll();
 
 $companyGoalsQ = "SELECT 
     c.id, c.name, c.description, c.type, c.due_date, c.created, 
-    c.target_value, c.company_id, c.users,
-    v.value, v.completed, v.comment, v.value_id
+    c.target_value, c.company_id, c.users,c.user_goal,
+    v.value, v.completed, v.comment, v.value_id, v.done
 FROM companygoals c 
 LEFT JOIN companygoalsvalue v 
     ON c.id = v.company_goal 
