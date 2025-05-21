@@ -17,7 +17,7 @@ $prep->bindParam(':company', $companyId);
 $prep->execute();
 $users = $prep->fetchAll();
 
-$companyGoalsQ = "SELECT * FROM companygoals WHERE company_id=:company_id";
+$companyGoalsQ = "SELECT * FROM companygoals WHERE company_id=:company_id and user_goal is null";
 $prep = $con->prepare($companyGoalsQ);
 $prep->bindValue(':company_id', $companyId);
 $prep->execute();
@@ -245,6 +245,7 @@ $ActiveCompGoalNumber = $prep->fetch();
 
                                         $users = json_decode($comapnygoal['users'], true);
                                         $userCount = count($users);
+                                        
 
                                         $values = $valuesByGoal[$goalId] ?? [];
 

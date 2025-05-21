@@ -1,6 +1,7 @@
 <?php
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
+$admin = $_SESSION['role'];
 $Submited = "Submited";
 $userIdJson = json_encode($userId);
 
@@ -178,12 +179,6 @@ if (isset($_POST['editCompanyGoal'])) {
 
 
 
-$goalsQuery = "SELECT * FROM goals Right Join users on goals.user_id=users.user_id
-WHERE goals.user_id=:user_id";
-$prep = $con->prepare($goalsQuery);
-$prep->bindParam(':user_id', $userId);
-$prep->execute();
-$goals = $prep->fetchAll();
 
 
 
@@ -199,9 +194,11 @@ LEFT JOIN companygoalsvalue v
     ON c.id = v.company_goal 
     AND v.user = :userId -- Ensure we only get the logged-in user's goal value
 WHERE JSON_CONTAINS(c.users, :userIdJson) 
-AND (v.done IS NULL OR v.done = 0) -- Exclude completed goals (boolean check)
+AND(v.done IS NULL OR v.done = 0) -- Exclude completed goals (boolean check)
 ORDER BY c.id;
 ";
+
+
 $prep = $con->prepare($companyGoalsQ);
 $prep->bindParam(':userId', $userId, PDO::PARAM_STR);  // Normal user ID for goal values
 $prep->bindParam(':userIdJson', $userIdJson, PDO::PARAM_STR);  // JSON user ID for companygoals.users check

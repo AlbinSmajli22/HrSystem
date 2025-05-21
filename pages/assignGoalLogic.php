@@ -37,6 +37,28 @@ if (isset($_POST['assignGoal'])) {
         $prep->bindParam(':users', $users);
     
         $prep->execute();
+
+        $companyGoal=$con->lastInsertId();
+        $edited=date("y-m-d h:i:s");
+        $usersArray=json_decode($users, true);
+        $usersArrayCount=count($usersArray);
+
+        for ($i=0; $i <$usersArrayCount ; $i++) { 
+            
+            $insertgoalValues="INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited)
+            VALUES (NULL, :user, :company_goal, NULL, NULL, NULL, NULL, :edited)";
+
+            $prep = $con->prepare($insertgoalValues);
+
+            $prep->bindParam(':user', $usersArray[$i]);
+            $prep->bindParam(':company_goal', $companyGoal);
+            $prep->bindParam(':edited', $edited);
+            $prep->execute();
+
+
+        }
+
+
         
         header("Location: /HrSystem/pages/assignesGoals.php");
     }
@@ -62,6 +84,26 @@ if (isset($_POST['assignGoal'])) {
         $prep->bindParam(':users',  $jsonUsersArray);
     
         $prep->execute();
+
+        $edited=date("y-m-d h:i:s");
+        
+
+        for ($i=0; $i <$newUsersLength ; $i++) { 
+            
+            $insertgoalValues="INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited)
+            VALUES (NULL, :user, :company_goal, NULL, NULL, NULL, NULL, :edited)";
+
+            $prep = $con->prepare($insertgoalValues);
+
+            $prep->bindParam(':user', $newUsersArray[$i]);
+            $prep->bindParam(':company_goal', $fetchedusers['id']);
+            $prep->bindParam(':edited', $edited);
+            $prep->execute();
+
+
+        }   
+
+        
         
         header("Location: /HrSystem/pages/assignesGoals.php");
 
