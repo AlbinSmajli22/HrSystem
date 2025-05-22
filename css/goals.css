@@ -69,17 +69,28 @@ body {
   height: 24px;
   margin-right: 10px;
 }
+.expensesTableHead #showCompleted {
+  background-color: #fff;
+  height: 30px;
+  border: #e7eaec;
+  border-radius: 2px;
+}
 .expensesTableHead #addExpenseCategory {
   background-color: #4caf50;
   color: white;
-
   height: 30px;
   border: #4caf50;
   border-radius: 2px;
 }
-.expensesTableHead button a {
+.expensesTableHead #addExpenseCategory a {
   text-decoration: none;
   color: white;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+.expensesTableHead #showCompleted a {
+  text-decoration: none;
+    color: #676a6c;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
 }
@@ -97,6 +108,13 @@ body {
 .theGoal {
   width: 100%;
   display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid #e7eaec;
+  padding: 20px 0px 10px 0px;
+}
+.theGoalComp {
+  width: 100%;
+  display: none;
   flex-direction: column;
   border-bottom: 2px solid #e7eaec;
   padding: 20px 0px 10px 0px;

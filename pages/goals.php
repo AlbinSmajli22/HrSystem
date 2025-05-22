@@ -43,17 +43,24 @@ include 'addNewGoal.php';
                     <img src="../images/goal.png" alt="">
                     My Goals and Objectives
                 </h5>
-                <button id="addExpenseCategory">
-                    <a href="addGoal.php">
-                        <i class="fa fa-plus"></i>
-                        Add Goal
-                    </a>
-                </button>
-
+                <div>
+                    <button id="showCompleted" class="showCompleted">
+                        <a>
+                            <i class="fa-solid fa-eye"></i>
+                            Show Completed
+                        </a>
+                    </button>
+                    <button id="addExpenseCategory">
+                        <a href="addGoal.php">
+                            <i class="fa fa-plus"></i>
+                            Add Goal
+                        </a>
+                    </button>
+                </div>
             </div>
             <div class="expensesTableBody">
                 <?php foreach ($comapnygoals as $comapnygoal): ?>
-                    <div class="theGoal">
+                    <div class=" <?= $comapnygoal['done'] == 1 ? 'theGoalComp' : 'theGoal' ?>">
                         <div class="Goal2">
                             <div class="description">
                                 <?php if ($comapnygoal['type'] == 'Objective' || $comapnygoal['type'] == 'Counter') { ?>
@@ -81,7 +88,7 @@ include 'addNewGoal.php';
                                         <a class="more">
                                             <i class="fa-solid fa-ellipsis"></i>
                                         </a>
-                                        <?php if($comapnygoal['user_goal']==1): ?>
+                                        <?php if ($comapnygoal['user_goal'] == 1): ?>
                                             <span class="mygoal">My Goal</span>
                                         <?php endif; ?>
                                     </div>
@@ -101,8 +108,8 @@ include 'addNewGoal.php';
                                 </div>
                             </div>
                             <div class='dots-menu'>
-                                <?php if($comapnygoal['done']==1): ?>
-                                <span class="mygoal">Completed</span>
+                                <?php if ($comapnygoal['done'] == 1): ?>
+                                    <span class="mygoal">Completed</span>
                                 <?php endif; ?>
                                 <span class='dots'>⋮</span>
                                 <div class='menu'>
@@ -142,11 +149,11 @@ include 'addNewGoal.php';
                                                         <label for="value">Complete</label><br>
                                                         <input type="checkbox" name="complete" class="complete" value="1">
                                                     </div>
-                                                <?php } elseif($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter'|| $comapnygoal['type'] == 'Currency'){?>
-                                                <div class="mid-part-col2">
-                                                    <label for="value">Update Value</label><br>
-                                                    <input type="text" name="value" class="value">
-                                                </div>
+                                                <?php } elseif ($comapnygoal['type'] == 'Number' || $comapnygoal['type'] == 'Percentage' || $comapnygoal['type'] == 'Counter' || $comapnygoal['type'] == 'Currency') { ?>
+                                                    <div class="mid-part-col2">
+                                                        <label for="value">Update Value</label><br>
+                                                        <input type="text" name="value" class="value">
+                                                    </div>
                                                 <?php } ?>
 
                                             </div>
@@ -230,6 +237,44 @@ include 'addNewGoal.php';
                 comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
             });
         });
+        
+        document.querySelectorAll('.more').forEach(more => {
+            more.addEventListener('click', function () {
+                const parent = this.closest('.theGoalComp'); // Find the closest parent
+                const comments = parent.querySelector('.comments'); // Find comments inside this parent
+
+                /* Hide all other comments
+                document.querySelectorAll('.comments').forEach(c => {
+                    if (c !== comments) c.style.display = 'none';
+                });*/
+
+                // Toggle current comments visibility
+                comments.style.display = comments.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        document.querySelectorAll('.showCompleted').forEach(button => {
+    button.addEventListener('click', function () {
+        const parent = this.closest('.expensesBody');
+        const goals = parent.querySelectorAll('.theGoalComp');
+
+        const isVisible = goals.length > 0 && goals[0].style.display === 'flex';
+
+        goals.forEach(goal => {
+            goal.style.display = isVisible ? 'none' : 'flex';
+        });
+
+        // Update the icon and text
+        const link = this.querySelector('a');
+        if (link) {
+            const newIcon = isVisible ? 'fa-eye' : 'fa-eye-slash';
+            const newText = isVisible ? 'Show Completed' : 'Hide Completed';
+            link.innerHTML = `<i class="fa-solid ${newIcon}"></i> ${newText}`;
+        }
+    });
+});
+
+
     </Script>
 </body>
 

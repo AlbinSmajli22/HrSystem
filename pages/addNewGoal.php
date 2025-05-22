@@ -194,8 +194,8 @@ LEFT JOIN companygoalsvalue v
     ON c.id = v.company_goal 
     AND v.user = :userId -- Ensure we only get the logged-in user's goal value
 WHERE JSON_CONTAINS(c.users, :userIdJson) 
-AND(v.done IS NULL OR v.done = 0) -- Exclude completed goals (boolean check)
-ORDER BY c.id;
+ -- Exclude completed goals (boolean check)
+ORDER BY c.id DESC;
 ";
 
 

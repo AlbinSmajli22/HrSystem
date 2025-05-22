@@ -50,12 +50,12 @@ foreach ($allGoalValues as $val) {
 }
 
 
-$usergoalQ = "SELECT COUNT(*) FROM `goals`";
+$usergoalQ = "SELECT COUNT(*) FROM `companygoalsvalue`";
 $prep = $con->prepare($usergoalQ);
 $prep->execute();
 $userGoals = $prep->fetch();
 
-$usergoalincQ = "SELECT COUNT(*) FROM `goals` WHERE completed = 0";
+$usergoalincQ = "SELECT COUNT(*) FROM `companygoalsvalue` WHERE done is null";
 $prep = $con->prepare($usergoalincQ);
 $prep->execute();
 $incompleteUserGoals = $prep->fetch();
@@ -76,7 +76,7 @@ $thisweekoverdue = $prep->fetch();
 
 
 $ActiveCompGoal = "SELECT COUNT(*)
-FROM companygoals";
+FROM companygoals where user_goal is null";
 $prep = $con->prepare($ActiveCompGoal);
 $prep->execute();
 $ActiveCompGoalNumber = $prep->fetch();
@@ -124,7 +124,6 @@ $ActiveCompGoalNumber = $prep->fetch();
                     <h3><?= $ActiveCompGoalNumber['COUNT(*)'] ?></h3>
                     <p>Company Goals</p>
                 </div>
-                <small>0 Goals Templates</small>
             </div>
             <div class="stats">
                 <div>
