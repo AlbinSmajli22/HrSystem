@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:wght@300&display=swap");
+
+body {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  background-color: #f4f6fa;
+  font-size: 13px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f4f6fa;
+  height: fit-content;
+}
+.pinBoardBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  margin-top: 20px;
+}
+.pinBoardHead {
+  padding-top: 30px;
+  width: 100%;
+  text-align: start;
+  padding-left: 35px;
+}
+.pinBoardHead h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  color: #676a6c;
+  font-size: 24px;
+  align-items: center;
+}
+.intro {
+  font-size: 13.5px;
+  width: 95%;
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.intro .pull-right{
+  float: right;
+}
+.intro p {
+  color: #676a6c;
+  margin: 0px 0px 10px;
+  padding-right: 10px;
+}
+
+.intro button {
+  margin-left: 10px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background-color: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+}
+.pinBoard {
+  margin-bottom: 60px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  width: 95%;
+
+}

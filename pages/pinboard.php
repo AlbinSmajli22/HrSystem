@@ -48,147 +48,56 @@ foreach ($allGoalValues as $val) {
 <html>
 
 <head>
-    <title>Company Goals</title>
-    <style>
-        .goal-progress {
-            width: 100%;
-            background: #ddd;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            height: 24px;
-        }
-
-        .goal-bar {
-            width: 100%;
-            height: 100%;
-            border-radius: 6px;
-            transition: width 0.5s ease;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        .goal-card {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            background-color: #f9f9f9;
-        }
-
-        h2 {
-            margin-top: 0;
-        }
-
-        p {
-            margin: 5px 0;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/pinboard.css">
+    <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body style="background-color: #F4F6FA; ">
+    <div>
+        <?php include '../template/sidebar.php' ?>
+    </div>
+    <div class="content">
+        <?php include '../template/navbar.php' ?>
+        <div class="pinBoardHead">
+            <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
+        </div>
 
-    <h1>Company Goals Overview</h1>
-
-    <?php foreach ($companyGoals as $goal):
-        if ($goal['type'] != 'Objective') {
-            $goalId = $goal['id'];
-            $goalName = $goal['name'];
-            $targetPerUser = $goal['target_value'];
-
-            $users = json_decode($goal['users'], true);
-            $userCount = count($users);
-            $totalTarget = $userCount * $targetPerUser;
-
-            $values = $valuesByGoal[$goalId] ?? [];
-            $totalCompleted = array_sum(array_column($values, 'value'));
-            $percentComplete = $totalTarget > 0 ? round(($totalCompleted / $totalTarget) * 100) : 0;
-            ?>
-
-            <div class="goal-card">
-                <h2><?= htmlspecialchars($goalName) ?></h2>
-                <p><strong><?= $percentComplete ?>%</strong> completed </p>
-
-                <div class="goal-progress">
-                    <div class="goal-bar" style="width: <?= $percentComplete ?>%; 
-                background-color: <?= $percentComplete == 100 ? '#2196f3' : '#4caf50' ?>;">
-                    </div>
+        <div class="pinBoardBody">
+            <div class="intro">
+                <div class="pull-right">
+                    <button type="button"><i class="fa fa-thumb-tack"></i> Add A New Pin</button>
                 </div>
+                <p>
+                    The Pinboard is the area where you can 'pin' short public messages to all other employees. Whether
+                    it is a classified ad, or a 'well done' message to a co-worker, or anything else!
+                </p>
+                <p>
+                    Note: Pins will be displayed for a maximum of <strong>30</strong> days.
+                </p>
 
-                <?php foreach ($values as $val):
-                    $userId = $val['user'];
-                    $userInfo = $userMap[$userId] ?? null;
 
-                    if ($userInfo) {
-                        $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
-                        $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
-                    } else {
-                        $fullName = 'Unknown User';
-                        $profileImage = 'default.png'; // Or some fallback image
-                    }
-                    $userPercentage = ($targetPerUser > 0) ? ($val['value'] / $targetPerUser) * 100 : 0;
-
-                    ?>
-                    <p>
-                        <img src="../userIMG/<?= $profileImage ?>" alt=""
-                            style="width:40px; height:40px; border-radius:50%; vertical-align:middle;">
-                        <strong><?= $fullName ?></strong>: <?= $val['value'] ?> out of <?= $targetPerUser ?>
-                    </p>
-
-                    <div class="goal-progress">
-                        <div class="goal-bar" style="width: <?= $userPercentage ?>%; 
-                background-color: <?= $userPercentage == 100 ? '#2196f3' : '#4caf50' ?>;">
-                        </div>
-                    </div>
-                <?php endforeach; ?>
             </div>
-
-        <?php } else {
-            $goalId = $goal['id'];
-            $goalName = $goal['name'];
+            <div class="pinBoard">
 
 
-            $users = json_decode($goal['users'], true);
-            $userCount = count($users);
 
-            $values = $valuesByGoal[$goalId] ?? [];
-
-            $totalCompleted = array_sum(array_column($values, 'completed'));
-
-            ?>
-            <div class="goal-card">
-                <h2><?= htmlspecialchars($goalName) ?></h2>
-
-                <p>Completed <?= htmlspecialchars($totalCompleted) ?> Not Completed: <?= htmlspecialchars($userCount - $totalCompleted) ?></p>
-
-                <?php foreach ($values as $val):
-                    $userId = $val['user'];
-                    $userInfo = $userMap[$userId] ?? null;
-
-                    if ($userInfo) {
-                        $fullName = htmlspecialchars($userInfo['name'] . ' ' . $userInfo['surname']);
-                        $profileImage = htmlspecialchars($userInfo['image']); // Make sure to escape
-                    } else {
-                        $fullName = 'Unknown User';
-                        $profileImage = 'default.png'; // Or some fallback image
-                    }
-
-
-                    ?>
-                    <p>
-                        <img src="../userIMG/<?= $profileImage ?>" alt=""
-                            style="width:40px; height:40px; border-radius:50%; vertical-align:middle;">
-                        <strong><?= $fullName ?></strong>: <?= $val['completed'] ?> 
-                    </p>
-
-                    
-                <?php endforeach; ?>
             </div>
-
-        <?php }
-    endforeach; ?>
+        </div>
+        <?php include '../template/footer.php'; ?>
+    </div>
 
 </body>
 

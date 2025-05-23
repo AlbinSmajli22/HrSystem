@@ -19,7 +19,7 @@ le te editohet rreshit i qe ja json data me id-t e punonjesve dhe te shtohet nje
 per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
 √ 3. fix bar qe trgon sa % eshte goali  momentalisht.
 √ 4. fetch value te users per qdo goal dhe shfaqi te goali perkates.
-5. fix stats t kompanis per sa users kan goal.
+√ 5. fix stats t kompanis per sa users kan goal.
 
 INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited) VALUES(103, 5, 7, NULL, NULL," ", NULL, 2025-05-05 00:00:00)
 
