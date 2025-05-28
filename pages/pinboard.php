@@ -4,44 +4,14 @@ session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
-// 1. Fetch company goals
-$companyGoalsQ = "SELECT * FROM `companygoals` WHERE company_id = :companyId";
-$prep = $con->prepare($companyGoalsQ);
-$prep->bindParam(':companyId', $companyId);
+$NotesQuery = "SELECT * FROM notes RIGHT JOIN users ON notes.user = users.user_id 
+WHERE notes.company=:company
+ORDER BY created DESC";
+$prep = $con->prepare($NotesQuery);
+$prep->bindParam(':company', $companyId);
 $prep->execute();
-$companyGoals = $prep->fetchAll(PDO::FETCH_ASSOC);
+$notes = $prep->fetchAll();
 
-// 2. Fetch all goal values once
-$allValuesQ = "SELECT * FROM `companygoalsvalue`";
-$prep = $con->prepare($allValuesQ);
-$prep->execute();
-$allGoalValues = $prep->fetchAll(PDO::FETCH_ASSOC);
-
-// 3. Fetch all users once
-$usersQ = "SELECT user_id, image , name, surname FROM users";
-$prep = $con->prepare($usersQ);
-$prep->execute();
-$allUsers = $prep->fetchAll(PDO::FETCH_ASSOC);
-$userMap = [];
-foreach ($allUsers as $user) {
-    $userMap[$user['user_id']] = [
-        'image' => $user['image'],
-        'name' => $user['name'],
-        'surname' => $user['surname']
-
-    ];
-}
-
-
-// 4. Group values by goal ID
-$valuesByGoal = [];
-foreach ($allGoalValues as $val) {
-    $valuesByGoal[$val['company_goal']][] = $val;
-}
-$completedByGoal = [];
-foreach ($allGoalValues as $val) {
-    $completedByGoal[$val['company_goal']][] = $val;
-}
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +48,53 @@ foreach ($allGoalValues as $val) {
         <div class="pinBoardBody">
             <div class="intro">
                 <div class="pull-right">
-                    <button type="button"><i class="fa fa-thumb-tack"></i> Add A New Pin</button>
+                    <button type="button" id="addNewPin" data-bs-toggle="modal" data-bs-target="#addNewPinModal"
+                        data-bs-whatever="@mdo"><i class="fa fa-thumb-tack"></i> Add A New Pin</button>
+
+                    <div class="modal fade-assigne-GoalModal" id="addNewPinModal" tabindex="-1"
+                        aria-labelledby="addNewPinModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated slideInTop">
+                                <form action="pinboardLogic.php" method="post">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                            aria-label="Close">×</button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Add A New Pin</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="beginning-part">
+                                            <div class="row">
+                                                <label for="title">Title</label>
+                                                <input type="text" name="title" maxlength="40" id="title"
+                                                    oninput="countTitleCharacters()">
+                                                <span class="counter" id="titleCharCount">40 characters left</span>
+                                            </div>
+                                            <div class="row">
+                                                <label for="Body">Body</label>
+                                                <textarea name="body" id="body" maxlength="180" rows="3"
+                                                    oninput="countBodyCharacters()"></textarea>
+                                                <span class="counter" id="bodyCharCount">180 characters left</span>
+                                            </div>
+                                        </div>
+                                        <div class="last-part">
+                                            <small>
+                                                <strong>Important Note:</strong>
+                                                Please adhere to your company guidelines when entering a pin. Any pins
+                                                contravening the rules can be reported (by clicking the asterisk icon)
+                                                and may be removed by the administrators.
+                                            </small>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" name="addnote" class="btn-save">Save</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <p>
                     The Pinboard is the area where you can 'pin' short public messages to all other employees. Whether
@@ -92,13 +108,45 @@ foreach ($allGoalValues as $val) {
             </div>
             <div class="pinBoard">
 
-
+                <ul class="notes">
+                    <?php foreach ($notes as $note): ?>
+                        <li>
+                            <div>
+                                <small>By <?=$note['name']?> <?=$note['surname']?> (less than a minute ago)</small>
+                                <h4><?=$note['title']?></h4>
+                                <p> <?=$note['body']?> </p>
+                                <?php if($note['user']==$userId): ?>
+                                <a href="deleteNote.php?notes_id=<?= $note['notes_id'] ?>">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <?php endif; ?>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
 
             </div>
         </div>
         <?php include '../template/footer.php'; ?>
     </div>
+    <script>
+        function countTitleCharacters() {
+            var title = document.getElementById('title');
+            var charCountSpan = document.getElementById('titleCharCount')
+            var length = title.value.length;
 
+            charCountSpan.textContent = (40 - length) + ' characters left';
+
+        }
+        function countBodyCharacters() {
+            var title = document.getElementById('body');
+            var charCountSpan = document.getElementById('bodyCharCount')
+            var length = title.value.length;
+
+            charCountSpan.textContent = (180 - length) + ' characters left';
+
+        }
+    </script>
 </body>
 
 </html>
