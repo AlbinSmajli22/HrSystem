@@ -3,6 +3,12 @@ require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
+$today = date('Y-m-d');
+
+$deleteNews="DELETE FROM news WHERE until < :today";
+$prep = $con->prepare($deleteNews);
+$prep->bindParam(':today', $today);
+$prep->execute();
 
 $NewQuery="SELECT * FROM news RIGHT JOIN users ON news.author=users.user_id 
 WHERE company_id=:company_id";
@@ -11,13 +17,6 @@ $prep->bindParam(':company_id', $companyId);
 $prep->execute();
 $News= $prep->fetchAll();
 
-
-$today = date('Y-m-d');
-
-$deleteNews="DELETE FROM news WHERE until < :today";
-$prep = $con->prepare($deleteNews);
-$prep->bindParam(':today', $today);
-$prep->execute();
 
 ?>
 

@@ -4,6 +4,10 @@ session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
+$deleteOld="DELETE FROM notes WHERE created < NOW() - INTERVAL 30 DAY";
+$prep = $con->prepare($deleteOld);
+$prep->execute();
+
 $NotesQuery = "SELECT * FROM notes RIGHT JOIN users ON notes.user = users.user_id 
 WHERE notes.company=:company
 ORDER BY created DESC";

@@ -1,87 +1,47 @@
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('nav-toggle');
+  const sidebar = document.getElementById('sidebar');
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('shrink');
+    });
+  } else {
+    console.error('Missing nav-toggle or sidebar element.');
+  }
+});
+
+
+function toggleDropdown(element, event) {
+  if (event) event.stopPropagation(); // Prevent parent from toggling
+
+  var dropdown = element.querySelector('.dropdown');
+  if (dropdown) {
+    dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
   }
 }
-function myFunctionTwo() {
-  document.getElementById("leaveConfigure").classList.toggle("showTwo");
-}
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.Leavebtn')) {
-    var dropdowns = document.getElementsByClassName("leave-dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('showTwo')) {
-        openDropdown.classList.remove('showTwo');
-      }
-    }
-  }
-}
-function myFunctionThree() {
-  document.getElementById("expensesConfigure").classList.toggle("showThree");
-}
+ const links = document.querySelectorAll(".sidebarElements li");
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.excbtn')) {
-    var dropdowns = document.getElementsByClassName("leave-dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('showThree')) {
-        openDropdown.classList.remove('showThree');
-      }
-    }
-  }
-}
-function myFunctionFour() {
-  document.getElementById("goalsConfigure").classList.toggle("showFour");
-}
+   // Add click event to each <a> inside the <li>
+  listItems.forEach(li => {
+    const link = li.querySelector("a");
+    link.addEventListener("click", function () {
+      localStorage.setItem("activeLink", this.getAttribute("href"));
+    });
+  });
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.goalbtn')) {
-    var dropdowns = document.getElementsByClassName("goals-dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('showFour')) {
-        openDropdown.classList.remove('showFour');
+  // On page load, apply active class to the correct <li>
+  window.addEventListener("DOMContentLoaded", () => {
+    const activeHref = localStorage.getItem("activeLink");
+    listItems.forEach(li => {
+      const link = li.querySelector("a");
+      if (link.getAttribute("href") === activeHref) {
+        li.classList.add("active");
+      } else {
+        li.classList.remove("active");
       }
-    }
-  }
-}
-function myFunctionFive() {
-  document.getElementById("TemplateConfigure").classList.toggle("showFive");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.templatebtn')) {
-    var dropdowns = document.getElementsByClassName("template-dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('showFive')) {
-        openDropdown.classList.remove('showFive');
-      }
-    }
-  }
-}
+    });
+  });
 
 
