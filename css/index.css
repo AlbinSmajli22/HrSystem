@@ -7,7 +7,7 @@
   background-color: #0277bd;
   width: 220px;
   height: 100%;
-  transition: width 0.3s ease;
+  transition: all .4s;
 }
 
 #sidebarElements {
@@ -97,6 +97,8 @@
   margin: 5px 0;
   display: none;
   background: #0267a4;
+  position: relative; /* Important for default flow */
+  transition: all 0.2s ease;
 }
 #sidebarElements li .dropdown li a {
   padding: 7px 10px 7px 52px;
@@ -106,20 +108,20 @@
   display: block;
 }
 
-/* Add this to your CSS */
+
 #sidebar.shrink {
   width: auto;
+  transition: all .4s;
 }
 
-#sidebar.shrink span,
-#sidebar.shrink strong{
+#sidebar.shrink span{
   display: none;
 }
 #sidebar.shrink #sidebarElements #profile {
   padding: 0;
   height: auto;
 }
-#sidebar.shrink #sidebarElements li a{
+#sidebar.shrink #sidebarElements li .sidebarElements-links{
   font-size: 16px;
 }
 
@@ -128,4 +130,19 @@
 }
 #sidebar.shrink #sidebarElements #profile .logo-element {
   display: block;
+}
+
+
+#sidebar.shrink .dropdown {
+  padding: 10px;
+  margin-left: 69px; 
+  min-width: 160px;
+  max-width: 160px;
+  position: absolute;
+  background: #0277bd;
+}
+#sidebar.shrink ~ .dropdown,
+#sidebar.shrink .dropdown li a{
+  font-size: 12px;
+  padding: 10px 10px 10px 15px;
 }

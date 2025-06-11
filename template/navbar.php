@@ -11,6 +11,7 @@
     }
 
     #nav-toggle {
+        margin-left: 7px;
         text-align: center;
         background-color: #1486ca;
         height: 30px;

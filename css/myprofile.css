@@ -20,8 +20,7 @@ a {
   align-items: center;
   width: 100%;
   background-color: #f4f6fa;
-  height: fit-content;
-  padding-bottom: 50px;
+  height: fit-content;  
 }
 .name {
   width: 100%;

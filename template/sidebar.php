@@ -25,92 +25,122 @@ $userName=$_SESSION['name'];
             <div class="logo-element">HR</div>
         </li>
         <li class="<?= basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : '' ?>">
-            <a href="home.php">
+            <a href="home.php" class="sidebarElements-links">
                 <i class="fa-solid fa-house-chimney"></i>
                 <span>Home</span>
             </a>
         </li>
         <li class="<?= basename($_SERVER['PHP_SELF']) == 'myProfile.php' ? 'active' : '' ?>">
-            <a href="myProfile.php">
+            <a href="myProfile.php" class="sidebarElements-links">
                 <i class="fa-solid fa-user"></i>
                 <span>My Profile</span>
             </a>
         </li>
         <li class="<?= basename($_SERVER['PHP_SELF']) == 'directory.php' ? 'active' : '' ?>">
-            <a href="directory.php">
+            <a href="directory.php" class="sidebarElements-links">
                 <i class="fa-solid fa-list"></i>
                 <span>Directory</span>
             </a>
         </li>
         <li class="<?= basename($_SERVER['PHP_SELF']) == 'orgChart.php' ? 'active' : '' ?>">
-            <a href="orgChart.php">
+            <a href="orgChart.php" class="sidebarElements-links">
                 <i class="fa-solid fa-sitemap"></i>
                 <span>Org. Chart</span>
             </a>
         </li>
         <li class="<?= basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : '' ?>">
-            <a href="calendar.php">
+            <a href="calendar.php" class="sidebarElements-links">
                 <i class="fa-regular fa-calendar-days"></i>
                 <span>Calendar</span>
             </a>
         </li>
         <?php if ($_SESSION['role'] == 0) { ?>
             <li Style="cursor: pointer;" onclick="toggleDropdown(this)">
-                <a>
+                <a class="sidebarElements-links">
                     <i class="fa fa-plane"></i>
-                    <span>Time Off & Leave</span>
-                    <i class="fa-solid fa-caret-right"></i>
+                    <span>
+                        Time Off & Leave
+                        <i class="fa-solid fa-caret-right"></i>
+                    </span>
                 </a>
                 <ul class="dropdown">
-                    <li><a href="request.php"><i class="fa-solid fa-suitcase"></i> Request</a></li>
-                    <li><a href="approverequest.php"> <i class="fa fa-calendar-check-o"></i> Approve</a></li>
-                    <li><a href="requesthistory.php"><i class="fa fa-list"></i> History</a></li>
+                    <li>
+                        <a href="request.php">
+                            <i class="fa-solid fa-suitcase"></i> 
+                            Request
+                        </a>
+                    </li>
+                    <li>
+                        <a href="approverequest.php"> 
+                            <i class="fa fa-calendar-check-o"></i> 
+                            Approve
+                        </a>
+                    </li>
+                    <li>
+                        <a href="requesthistory.php">
+                            <i class="fa fa-list"></i> 
+                            History
+                        </a>
+                    </li>
                 </ul>
             </li>
         <?php } else { ?>
             <li onclick="toggleDropdown(this)">
-                <a>
+                <a class="sidebarElements-links">
                     <i class="fa fa-plane"></i>
-                    <span>Time Off & Leave</span>
-                    <i class="fa-solid fa-caret-right"></i>
+                    <span>
+                        Time Off & Leave
+                        <i class="fa-solid fa-caret-right"></i>
+                    </span>
+                    
                 </a>
 
                 <ul class="dropdown">
                     <li>
                         <a href="planer.php">
                             <i class="fa-regular fa-calendar-days"></i> 
-                            <span>Planer</span>
+                            Planer
                         </a>
                     </li>
                     <li>
                         <a href="approverequest.php"> 
                             <i class="fa fa-plane"></i> 
-                            <span>Requests</span>
+                            Requests
                         </a>
                     </li>
                     <li>
                         <a href="availability.php">
                             <i class="fa-solid fa-rectangle-list"></i>
-                            <span> Availability</span>
+                            Availability
                         </a>
                     </li>
                     <li class="menu-item nested" onclick="toggleDropdown(this, event)">
                         <a>
                             <i class="fa-solid fa-pencil"></i>
-                            <span>Bulk Update</span>
+                            Bulk Update
                             <i class="fa-solid fa-caret-right"></i>
+                            
                         </a>
 
                         <ul class="dropdown">
-                            <li><a href="balances.php"><i class="fa-solid fa-calculator"></i> <span>Balances</span></a></li>
-                            <li><a href="allowance.php"><i class="fa-solid fa-hourglass-half"></i>
-                                    <span>Allowances</span></a></li>
+                            <li>
+                                <a href="balances.php">
+                                    <i class="fa-solid fa-calculator"></i> 
+                                    Balances
+                                </a>
+                            </li>
+                            <li>
+                                <a href="allowance.php">
+                                    <i class="fa-solid fa-hourglass-half"></i>
+                                    Allowances
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <a href="configureLeaves.php">
                             <i class="fa-solid fa-gear"></i> 
-                            <span>Configure</span>
+                            Configure
                         </a>
                     </li>
                 </ul>
@@ -118,30 +148,33 @@ $userName=$_SESSION['name'];
             <?php } ?>
             <?php if ($_SESSION['role'] == 0) { ?>
                 <li Style="cursor: pointer;" class="<?= basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : '' ?>">
-                    <a href="empexpenses.php">
+                    <a href="empexpenses.php" class="sidebarElements-links">
                         <i class="fa-solid fa-money-bill-1-wave"></i>
                         <span>Expenses</span>
                     </a>
                 </li>
             <?php } else { ?>
                 <li Style="cursor: pointer;" onclick="toggleDropdown(this)">
-                    <a>
+                    <a class="sidebarElements-links">
                         <i class="fa-solid fa-money-bill-1-wave"></i>
-                        <span>Expenses</span>
-                        <i class="fa-solid fa-caret-right"></i>
+                        <span>
+                            Expenses
+                            <i class="fa-solid fa-caret-right"></i>
+                        </span>
+                        
                     </a>
 
                     <ul class="dropdown">
                         <li>
                             <a href="expenses.php">
                                 <i class="fa-regular fa-square-check"></i> 
-                                <span>Expenses</span>
+                                Expenses
                             </a>
                         </li>
                         <li>
                             <a href="configureExpenses.php"> 
                                 <i class="fa-solid fa-gear"></i> 
-                                <span>Configure</span>
+                                Configure
                             </a>
                         </li>
                     </ul>
@@ -149,42 +182,46 @@ $userName=$_SESSION['name'];
             <?php } ?>
             <?php if ($_SESSION['role'] == 0) { ?>
                 <li class="<?= basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : '' ?>">
-                    <a href="goals.php">
+                    <a href="goals.php" class="sidebarElements-links">
                         <i class="fa-solid fa-bullseye"></i>
                         <span>Goals</span>
                     </a>
                 </li>
             <?php } else { ?>
                 <li Style="cursor: pointer;" onclick="toggleDropdown(this)">
-                    <a>
+                    <a class="sidebarElements-links">
                         <i class="fa-solid fa-bullseye"></i> 
-                        <span>Goals</span> 
-                        <i class="fa-solid fa-caret-right"></i>
+                        <span>
+                            Goals
+                            <i class="fa-solid fa-caret-right"></i>
+                        </span> 
+                        
                     </a>
                     <ul id="goalsConfigure" class="dropdown">
                         <li>
                             <a href="assignesGoals.php">
                                 <i class="fa-regular fa-square-check"></i>
-                                <span>Assigned</span>
+                                Assigned
                             </a>
                         </li>
                         <li class="menu-item nested" onclick="toggleDropdown(this, event)">
                             <a>
                                 <i class="fa-solid fa-gear"></i> 
-                                <span>Configure</span> 
-                                <i class="fa-solid fa-caret-right"></i>
+                                Configure
+                                <i class="fa-solid fa-caret-right"></i> 
+                                
                             </a>
                             <ul class="dropdown">
                                 <li>
                                     <a href="template.php"> 
                                         <i class="fa-regular fa-file-code"></i> 
-                                        <span>Templates</span>
+                                        Templates
                                     </a>
                                 </li>
                                 <li>
                                     <a href="goalItem.php">
                                         <i class="fa-solid fa-list"></i> 
-                                        <span>Goal Items</span>
+                                        Goal Items
                                     </a>
                                 </li>
                             </ul>
@@ -193,21 +230,21 @@ $userName=$_SESSION['name'];
                 </li>
             <?php } ?>
             <li class="<?= basename($_SERVER['PHP_SELF']) == 'library.php' ? 'active' : '' ?>">
-                <a href="library.php"> 
+                <a href="library.php" class="sidebarElements-links"> 
                     <i class="fa-solid fa-book"></i>
                     <span>Library</span>
                 </a>
             </li>
             <?php if ($_SESSION['role'] == 0) { ?>
                 <li class="<?= basename($_SERVER['PHP_SELF']) == 'empNews.php' ? 'active' : '' ?>">
-                    <a href="empNews.php">
+                    <a href="empNews.php" class="sidebarElements-links">
                         <i class="fa-solid fa-newspaper"></i>
                         <span>News</span>
                     </a>
                 </li>
             <?php } else { ?>
                 <li class="<?= basename($_SERVER['PHP_SELF']) == 'news.php' ? 'active' : '' ?>">
-                    <a href="news.php">
+                    <a href="news.php" class="sidebarElements-links">
                         <i class="fa-solid fa-newspaper"></i>
                         <span>News</span>
                     </a>
@@ -215,19 +252,66 @@ $userName=$_SESSION['name'];
         <?php } ?>
         <?php if ($_SESSION['role'] == 0) { ?>
             <li class="<?= basename($_SERVER['PHP_SELF']) == 'pinboard.php' ? 'active' : '' ?>">
-                <a href="pinboard.php">
+                <a href="pinboard.php" class="sidebarElements-links">
                     <i class="fa-solid fa-thumbtack"></i>
                     <span>Pinboard</span>
                 </a>
             </li>
         <?php } ?>
         <?php if ($_SESSION['role'] == 1) { ?>
-            <li>
-                <a href="setup.php">
-                    <i class="fa-solid fa-wrench"></i>
-                    <span>Setup</span>
-                </a>
-            </li>
+            <li Style="cursor: pointer;" onclick="toggleDropdown(this)">
+                    <a class="sidebarElements-links">
+                        <i class="fa-solid fa-bullseye"></i> 
+                        <span>
+                            Setup
+                            <i class="fa-solid fa-caret-right"></i>
+                        </span> 
+                        
+                    </a>
+                    <ul id="goalsConfigure" class="dropdown">
+                        <li>
+                            <a href="CompanyInfo.php">
+                                <i class="fa-solid fa-landmark"></i>
+                                Company Info
+                            </a>
+                        </li>
+                        <li>
+                            <a href="assignesGoals.php">
+                                <i class="fa-solid fa-key"></i>
+                                Users
+                            </a>
+                        </li>
+                        <li class="menu-item nested" onclick="toggleDropdown(this, event)">
+                            <a>
+                                <i class="fa-solid fa-gear"></i> 
+                                Configure
+                                <i class="fa-solid fa-caret-right"></i> 
+                            </a>
+                            <ul class="dropdown">
+                                <li>
+                                    <a href="template.php"> 
+                                        <i class="fa-solid fa-list"></i> 
+                                        Categories
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="goalItem.php">
+                                        <i class="fa-solid fa-list"></i> 
+                                         List
+                                    </a>
+                                    <a href="goalItem.php">
+                                        <i class="fa-solid fa-table-list"></i>
+                                         Costum Fields
+                                    </a>
+                                </li>
+                            </ul>
+                            <a href="goalItem.php">
+                                <i class="fa-solid fa-server"></i>
+                                Tools
+                            </a>
+                        </li>
+                    </ul>
+                </li>
         <?php } ?>
     </ul>
 </div>
