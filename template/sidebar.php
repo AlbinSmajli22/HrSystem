@@ -261,7 +261,7 @@ $userName=$_SESSION['name'];
         <?php if ($_SESSION['role'] == 1) { ?>
             <li Style="cursor: pointer;" onclick="toggleDropdown(this)">
                     <a class="sidebarElements-links">
-                        <i class="fa-solid fa-bullseye"></i> 
+                        <i class="fa-solid fa-wrench"></i>
                         <span>
                             Setup
                             <i class="fa-solid fa-caret-right"></i>
