@@ -2,7 +2,7 @@
 require_once '../config.php';
 session_start();
 
-include 'addExpensseLogic.php';
+include 'addAuthUsersLogic.php';
 ?>
 
 <head>
@@ -22,21 +22,22 @@ include 'addExpensseLogic.php';
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
 </head>
+
 <body style="background-color: #F4F6FA;">
     <div>
         <?php include '../template/sidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
-        <div class="expensesHead">
+        <div class="authUserHead">
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
-        <div class="expensesBody">
-            <div class="expensesTableHead">
+        <div class="authUserBody">
+            <div class="authUserTableHead">
                 <h5>
                     Authorised Users
                 </h5>
-                <button id="addExpenseCategory" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
+                <button id="addAuthUser" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
                     data-bs-whatever="@mdo">
                     <a>
                         <i class="fa fa-plus"></i>
@@ -44,8 +45,8 @@ include 'addExpensseLogic.php';
                     </a>
                 </button>
             </div>
-            <div class="expensesTableBody">
-                <table class="recentExpenses">
+            <div class="authUserTableBody">
+                <table class="authorisedUseres">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -57,30 +58,31 @@ include 'addExpensseLogic.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($expenses as $expense): ?>
+                        <?php foreach ($authusers as $authuser): ?>
                             <tr>
                                 <td>
-                                    <?= $expense['claim_date'] ?>
+                                    <?= $authuser['name'] ?>
+                                    <?= $authuser['surname'] ?>
                                 </td>
                                 <td>
-                                    <p> <?= $expense['description'] ?></p><br>
-                                    <small><?= $expense['comments'] ?></small>
+                                    <?= $authuser['email'] ?>
                                 </td>
                                 <td>
-                                    <?= $expense['currency'] ?>
-                                    <?= $expense['amount'] ?>
+                                    20 minutes ago
                                 </td>
                                 <td>
-                                    <?= $expense['currency'] ?>
-                                    <?= $expense['tax'] ?>
+                                    √
                                 </td>
                                 <td>
-                                    <?= $expense['status'] ?>
+                                    √
                                 </td>
                                 <td>
-                                    <button class=" btn btn-xs btn-circle btn-outline btn-info m-l-sm"
-                                        data-bs-toggle="modal" data-bs-target="#expenseEditModal<?= $expense['id'] ?>"
-                                        data-bs-whatever="@mdo"> <i class=" fa fa-edit"></i>
+                                    <button id="editAuthUser" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
+                                        data-bs-whatever="@mdo">
+                                        <a>
+                                             <i class=" fa fa-edit"></i>
+                                            Edit
+                                        </a>
                                     </button>
                                 </td>
                             </tr>
@@ -94,4 +96,5 @@ include 'addExpensseLogic.php';
         <?php include '../template/footer.php'; ?>
     </div>
 </body>
+
 </html>

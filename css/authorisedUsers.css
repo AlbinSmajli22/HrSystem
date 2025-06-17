@@ -18,7 +18,7 @@ body {
   background-color: #f4f6fa;
   height: fit-content;
 }
-.expensesBody {
+.authUserBody {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,13 +26,13 @@ body {
   align-items: center;
   padding-bottom: 30px;
 }
-.expensesHead {
+.authUserHead {
   padding-top: 30px;
   width: 100%;
   text-align: start;
   padding-left: 35;
 }
-.expensesHead h2 {
+.authUserHead h2 {
   margin-top: 20px;
   margin-bottom: 10px;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -41,7 +41,7 @@ body {
   font-size: 24px;
   align-items: center;
 }
-.expensesTableHead {
+.authUserTableHead {
   background-color: #e3f2fd;
   display: flex;
   flex-direction: row;
@@ -55,7 +55,7 @@ body {
   padding-left: 20px;
   padding-right: 20px;
 }
-.expensesTableHead h5 {
+.authUserTableHead h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -66,7 +66,7 @@ body {
   height: 25px;
 }
 
-.expensesTableHead #addExpenseCategory {
+.authUserTableHead #addAuthUser {
   background-color: #4caf50;
   color: white;
 
@@ -74,13 +74,13 @@ body {
   border: #4caf50;
   border-radius: 2px;
 }
-.expensesTableHead button a {
+.authUserTableHead button a {
   text-decoration: none;
   color: white;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
 }
-.expensesTableBody {
+.authUserTableBody {
   margin-bottom: 60px;
   background-color: #fff;
   display: flex;
@@ -90,20 +90,20 @@ body {
   width: 95%;
   border: 1px solid #e7eaec;
 }
-.recentExpenses {
+.authorisedUseres {
   width: 95%;
   border-collapse: collapse;
   margin: 20px 10px;
   font-size: 13px;
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.recentExpenses head tr {
+.authorisedUseres head tr {
   text-align: left;
   font-weight: 600;
   color: #676a6c;
   font-size: 13px;
 }
-.recentExpenses thead tr th {
+.authorisedUseres thead tr th {
   padding: 8px;
   text-align: left;
   margin-right: 20px;
@@ -111,53 +111,33 @@ body {
   font-weight: 700;
   color: #676a6c;
 }
-.recentExpenses tbody tr {
+.authorisedUseres tbody tr {
   text-align: left;
   font-weight: 400;
   color: #676a6c;
   border-top: 1px #e7eaec solid;
 }
-.recentExpenses tbody tr td {
+.authorisedUseres tbody tr td {
   padding-bottom: 11px;
   font-size: 13px;
   font-weight: 400;
   min-width: 120px;
   padding: 8;
 }
-.recentExpenses tbody tr td a {
-  width: 30px;
+
+
+.authorisedUseres tbody tr td #editAuthUser { 
+  background-color: #4caf50;
+  color: white;
   height: 30px;
-  padding: 8px 0;
-  border: 1px solid #e53935;
-  border-radius: 15px;
-  color: #e53935;
-  background-color: transparent;
+  border: #4caf50;
+  border-radius: 2px;
+  padding: 2px 10px;
 }   
-.recentExpenses tbody tr td a i{
-    font-size: 12px;
-}
-.recentExpenses tbody tr td a:hover{
-    color: #fff;
-}
-.recentExpenses tbody tr td button { 
-  width: 30px;
-  height: 30px;
-  padding: 6px 0;
-  border: 1px solid #26c6da;
-  border-radius: 15px;
-  color: #26c6da;
-  background-color: transparent;
-  margin-right: 10px;
-}   
-.recentExpenses tbody tr td button i{
-    font-size: 12px;
-}
-.recentExpenses tbody tr td button:hover{
-    color: #fff;
-}
-.recentExpenses tbody tr:nth-child(odd){
+
+.authorisedUseres tbody tr:nth-child(odd){
   background-color: #f9f9f9;
 }
-.recentExpenses tbody tr:hover{
+.authorisedUseres tbody tr:hover{
   background-color: #f9f9f9;
 }
