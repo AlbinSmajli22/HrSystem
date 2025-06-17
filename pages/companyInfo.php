@@ -33,13 +33,14 @@ $companyId = $_SESSION['company'];
         <div class="companyName">
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
-        <div class="editCompany_CompanyLogo">
-            <div class="editCompany">
-                <div class="editCompanyHead">
-                    <h5>Edit Company Details</h5>
-                </div>
-                <div class="editCompanyBody">
-                    <form action="">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="editCompany_CompanyLogo">
+                <div class="editCompany">
+                    <div class="editCompanyHead">
+                        <h5>Edit Company Details</h5>
+                    </div>
+                    <div class="editCompanyBody">
+
                         <label for="companyName">Company Name</label>
                         <input type="text" name="companyName" id="">
 
@@ -60,6 +61,7 @@ $companyId = $_SESSION['company'];
                             <option value="Kosovo">Kosovo</option>
                             <option value="USA">USA</option>
                         </select>
+                        <p>This wil et up the country specific formatting for your company.</p>
 
                         <label for="CompCountry">Your Company Timezone</label>
                         <select name="CompCountry" id="CompCountry">
@@ -69,25 +71,33 @@ $companyId = $_SESSION['company'];
                             <option value="Kosovo">Beijing, Chongqing, Hong Kong, Urumqi</option>
                             <option value="Central America">Central America</option>
                         </select>
+                        <p>Pic the closest timezone applicable for your company (Note: Users default to this, but can
+                            choose their own later).</p>
                         <hr>
-                        <div>
-                            <button type="submit" name="saveCompData">Save</button>
-                            <button type="submit">Cancel</button>
+                        <div class="buttons">
+                            <button type="submit" name="saveCompData" id="save">Save</button>
+                            <a href="" id="cancel">Cancel</a>
                         </div>
 
-                    </form>
-                </div>
 
-            </div>
-            <div class="CompanyLogo">
-                <div class="CompanyLogoHead">
-                    <h5>Company Logo</h5>
-                </div>
-                <div class="CompanyLogoBody">
+                    </div>
 
                 </div>
+                <div class="CompanyLogo">
+                    <div class="CompanyLogoHead">
+                        <h5>Company Logo</h5>
+                    </div>
+                    <div class="CompanyLogoBody">
+                        <span id="logoArea">Drag your company logo image here.</span>
+                        <input type="file" name="logo" id="logo">
+                        <small>
+                            Click on the box above, or drag and drop a new image into the box, in order to update the logo
+                            for your company ( <strong>220px</strong> maximum height recommended. Limit <strong>5MB</strong>. ).
+                        </small>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
 
         <?php include '../template/footer.php' ?>
     </div>

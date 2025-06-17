@@ -32,12 +32,18 @@ body {
   font-size: 24px;
   align-items: center;
 }
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .editCompany_CompanyLogo {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 30px;
+  margin-bottom: 40px;
 }
 .editCompany {
   display: flex;
@@ -65,11 +71,7 @@ body {
   flex-direction: column;
   padding: 30px;
 }
-.editCompanyBody form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
+
 .editCompanyBody label {
   font-size: 13px;
   font-weight: 700;
@@ -79,28 +81,61 @@ body {
 .editCompanyBody input {
   margin-bottom: 15px;
   font-size: 14px;
+  color: #888;
   border: 1px solid #e5e6e7;
   border-radius: 1px;
-  color: inherit;
   padding: 6px 12px;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 .editCompanyBody select {
   width: 40%;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   font-size: 14px;
+  color: #888;
   border: 1px solid #e5e6e7;
   border-radius: 1px;
-  color: inherit;
   padding: 6px 12px;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
+.editCompanyBody p {
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #888;
+}
+.editCompanyBody span {
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #676a6c;
+  font-weight: 600;
+}
+.editCompanyBody .buttons {
+  width: 100%;
+  text-align: end;
+}
 
+.editCompanyBody .buttons #save {
+  font-size: 14px;
+  border: 1px #4caf50;
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-weight: 400;
+}
+.editCompanyBody .buttons #cancel {
+  text-decoration: none;
+  font-size: 14px;
+  color: #337ab7;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-weight: 400;
+}
 .CompanyLogo {
   display: flex;
   flex-direction: column;
   width: 23%;
   border: 1px solid #e7eaec;
+  height: fit-content;
 }
 .CompanyLogoHead {
   align-content: center;
@@ -120,5 +155,32 @@ body {
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
+}
+.CompanyLogoBody #logo {
+  width: 240px;
+  height: 120px;
+  opacity: 0;
+  position: absolute;
+  cursor: pointer;
+}
+.CompanyLogoBody #logoArea {
+  text-align: center;
+  align-items: center;
+  height: 120px;
+  padding: 25px 30px;
+  background-color: #f4f6fa;
+  border: 1px solid #e7eaec;
+  border-radius: 3px;
+  font-size: 15px;
+  color: #676a6c;
+  font-weight: 600;
+}
+.CompanyLogoBody small{
+  margin-top: 10px;
+  font-size: 11px;
+  color: #888;
+}
+.CompanyLogoBody strong{
+  color: #676a6c;
 }

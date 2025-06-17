@@ -147,7 +147,7 @@ $userName=$_SESSION['name'];
             </li>
             <?php } ?>
             <?php if ($_SESSION['role'] == 0) { ?>
-                <li Style="cursor: pointer;" class="<?= basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : '' ?>">
+                <li Style="cursor: pointer;" class="<?= basename($_SERVER['PHP_SELF']) == 'empexpenses.php' ? 'active' : '' ?>">
                     <a href="empexpenses.php" class="sidebarElements-links">
                         <i class="fa-solid fa-money-bill-1-wave"></i>
                         <span>Expenses</span>
@@ -181,7 +181,7 @@ $userName=$_SESSION['name'];
                 </li>
             <?php } ?>
             <?php if ($_SESSION['role'] == 0) { ?>
-                <li class="<?= basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : '' ?>">
+                <li class="<?= basename($_SERVER['PHP_SELF']) == 'goals.php' ? 'active' : '' ?>">
                     <a href="goals.php" class="sidebarElements-links">
                         <i class="fa-solid fa-bullseye"></i>
                         <span>Goals</span>
@@ -276,7 +276,7 @@ $userName=$_SESSION['name'];
                             </a>
                         </li>
                         <li>
-                            <a href="assignesGoals.php">
+                            <a href="authorisedUsers.php">
                                 <i class="fa-solid fa-key"></i>
                                 Users
                             </a>
