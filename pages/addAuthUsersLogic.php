@@ -205,6 +205,7 @@ if (isset($_POST['editExpense'])) {
 
 
 
+
 $authUsersQuery = "SELECT * FROM users
 WHERE company=:company_id AND role=1";
 $prep = $con->prepare($authUsersQuery);

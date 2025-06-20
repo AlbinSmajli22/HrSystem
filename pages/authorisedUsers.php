@@ -39,7 +39,7 @@ include 'addAuthUsersLogic.php';
                 </h5>
                 <button id="addAuthUser" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
                     data-bs-whatever="@mdo">
-                    <a>
+                    <a href="addNewAuthUser.php">
                         <i class="fa fa-plus"></i>
                         Add A New User
                     </a>
@@ -80,7 +80,7 @@ include 'addAuthUsersLogic.php';
                                     <button id="editAuthUser" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
                                         data-bs-whatever="@mdo">
                                         <a>
-                                             <i class=" fa fa-edit"></i>
+                                            <i class=" fa fa-edit"></i>
                                             Edit
                                         </a>
                                     </button>
@@ -90,6 +90,7 @@ include 'addAuthUsersLogic.php';
                     </tbody>
                 </table>
                 <div>
+                    <p>You are using <strong>1</strong> admin users out of <strong>10</strong> allowed</p>
                 </div>
             </div>
         </div>
