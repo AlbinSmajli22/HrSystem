@@ -289,7 +289,7 @@ $userName=$_SESSION['name'];
                             </a>
                             <ul class="dropdown">
                                 <li>
-                                    <a href="template.php"> 
+                                    <a href="categories.php"> 
                                         <i class="fa-solid fa-list"></i> 
                                         Categories
                                     </a>
