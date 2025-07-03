@@ -82,11 +82,11 @@ $goalitems = $prep->fetchAll();
                                 </td>
 
                                 <td>
-                                    <a href="updateGoalItem.php?expense_id=<?= $goalitem['id'] ?>" class="editGoalItem">
+                                    <a href="updateGoalItem.php?goal_id=<?= $goalitem['id'] ?>" class="editGoalItem">
                                         <i class="fa fa-edit"></i>
                                     </a>
 
-                                    <a href="deleteGoalItem.php?expense_id=<?= $goalitem['id'] ?>" class="deleteGoalItem">
+                                    <a href="deleteGoalItem.php?goal_id=<?= $goalitem['id'] ?>" class="deleteGoalItem">
                                     <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
