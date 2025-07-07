@@ -1,9 +1,6 @@
 <?php
-require_once '../config.php';
-session_start();
-$userId = $_SESSION['user_id'];
-$companyId = $_SESSION['company'];
 
+include './categoriesLogic.php'
 
 ?>
 <html lang="en">
@@ -59,7 +56,7 @@ $companyId = $_SESSION['company'];
                         aria-labelledby="addDepartamentModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content animated slideInTop">
-                                <form action="assignGoalLogic.php" method="post" enctype="multipart/form-data">
+                                <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-bs-dismiss="modal"
                                             aria-label="Close">×</button>
@@ -68,14 +65,14 @@ $companyId = $_SESSION['company'];
                                     <div class="modal-body">
                                         <div class="beginning-part">
                                             <div class="row">
-                                                <label for="position">Departament Name</label>
-                                                <input type="text" name="position">
+                                                <label for="departament">Departament Name</label>
+                                                <input type="text" name="departament">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" name="assignGoal" class="btn-save">Save</button>
+                                        <button type="submit" name="addDepartament" class="btn-save">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -90,12 +87,109 @@ $companyId = $_SESSION['company'];
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach($departaments as $departament): ?>
                             <tr>
-                                <td>Administration</td>
+                                <td><?= $departament['departament_name'] ?></td>
                                 <td>
                                     <a data-bs-toggle="modal" data-bs-target="#editDepartamentModal"
                                         data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="CategoriesLogic?departament_id=<?=$goalitem['id'] ?> " class="deleteCategory"> <i class="fa fa-trash"></i></a>
+                                    <a href="categoriesLogic?departament_id=<?=$goalitem['id'] ?> " class="deleteCategory"> <i class="fa fa-trash"></i></a>
+                                </td>
+                                <div class="modal fade-edit-DepartamentModal" id="editDepartamentModal" tabindex="-1"
+                                    aria-labelledby="editDepartamentModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated slideInTop">
+                                            <form action="categoriesLogic.php" method="post"
+                                                enctype="multipart/form-data">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                                        aria-label="Close">×</button>
+                                                    <h4 class="modal-title" id="exampleModalLabel">Edit Departament</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="beginning-part">
+                                                        <div class="row">
+                                                            <label for="position">Departament Name</label>
+                                                            <input type="text" name="position">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn-exit"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" name="saveDepartament"
+                                                        class="btn-save">Save</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                           <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="categories-tables-footer">
+                     <img src="../images/qustionmark.png" alt="">
+                    <p>Departaments let you separate employees into their areas. You can set up access permissions to
+                        employees, documents and other data based on their Departament, so please set them up with this
+                        in mind.</p>
+                </div>
+            </div>
+            <div class="categories-tables">
+                <div class="categories-tables-head">
+                    <h5>
+                        <i class="fa-solid fa-list"></i>
+                        Positions
+                    </h5>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#addPositionModal"
+                        data-bs-whatever="@mdo">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Position
+                    </button>
+                    <div class="modal fade-add-PositionModal" id="addPositionModal" tabindex="-1"
+                        aria-labelledby="addPositionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content animated slideInTop">
+                                <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                            aria-label="Close">×</button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Add Position</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="beginning-part">
+                                            <div class="row">
+                                                <label for="position">Departament Name</label>
+                                                <input type="text" name="position">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-exit" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" name="addPosition" class="btn-save">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="categories-tables-body">
+                    <table class="categories-table">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($positions as $position): ?>
+                            <tr>
+                                <td><?= $position['position_name'] ?></td>
+                                <td>
+                                    <a data-bs-toggle="modal" data-bs-target="#editDepartamentModal"
+                                        data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i> </a>
+                                    <a href="categoriesLogic?departament_id=<?=$goalitem['id'] ?> " class="deleteCategory"> <i class="fa fa-trash"></i></a>
                                 </td>
                                 <div class="modal fade-edit-DepartamentModal" id="editDepartamentModal" tabindex="-1"
                                     aria-labelledby="editDepartamentModalLabel" aria-hidden="true">
@@ -127,159 +221,14 @@ $companyId = $_SESSION['company'];
                                     </div>
                                 </div>
                             </tr>
-                            <tr>
-                                <td>Finance</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="deleteCategory?departament_id=<?=$goalitem['id'] ?> " class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            
+                           <?php endforeach; ?>
                         </tbody>
                     </table>
 
                 </div>
                 <div class="categories-tables-footer">
-                    <span><i class="fa-solid fa-question"></i></span>
-                    <p>Departaments let you separate employees into their areas. You can set up access permissions to
-                        employees, documents and other data based on their Departament, so please set them up with this
-                        in mind.</p>
-                </div>
-            </div>
-            <div class="categories-tables">
-                <div class="categories-tables-head">
-                    <h5>
-                        <i class="fa-solid fa-list"></i>
-                        Positions
-                    </h5>
-                    <button>
-                        <i class="fa-solid fa-plus"></i>
-                        Add Position
-                    </button>
-
-                </div>
-                <div class="categories-tables-body">
-                    <table class="categories-table">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Administration</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Finance</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>General</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            <div class="categories-tables">
-                <div class="categories-tables-head">
-                    <h5>
-                        <i class="fa-solid fa-list"></i>
-                        Departaments
-                    </h5>
-                    <button>
-                        <i class="fa-solid fa-plus"></i>
-                        Add Departament
-                    </button>
-                </div>
-                <div class="categories-tables-body">
-                    <table class="categories-table">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Administration</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Finance</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>General</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-            <div class="categories-tables">
-                <div class="categories-tables-head">
-                    <h5>
-                        <i class="fa-solid fa-list"></i>
-                        Departaments
-                    </h5>
-                    <button>
-                        <i class="fa-solid fa-plus"></i>
-                        Add Departament
-                    </button>
-                </div>
-                <div class="categories-tables-body">
-                    <table class="categories-table">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Administration</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Finance</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>General</td>
-                                <td>
-                                    <a href="" class="editCategory"> <i class="fa fa-edit"></i> </a>
-                                    <a href="" class="deleteCategory"> <i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                    <img src="../images/qustionmark.png" alt="">
+                    <p>This is a list of all positions or position titles within your company. You can create as many as you wish.</p>
                 </div>
             </div>
         </div>

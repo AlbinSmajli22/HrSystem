@@ -188,23 +188,20 @@ body {
   display: flex;
   flex-direction: row;
   align-items: start;
+  justify-content: space-between;
   width: 100%;
   padding: 15px 20px 20px 20px;
 }
-.categories-tables-footer span {
-  margin: 5px 10px 0px 0px;
-  display: inline-block;
-  width: 80px;
+.categories-tables-footer img {
+  min-width: 40px;
   height: 35px;
-  padding: 4px 0;
-  border-radius: 50px;
-  text-align: center;
-  font-size: 12px;
-  line-height: 1.42857143;
-  border: 1px solid #888;
-  color: #fff;
+  border-radius: 50%;
   background-color: #888;
+  border: 1px solid #888;
+  padding: 5px;
+  margin-right: 10px;
 }
+
 .categories-tables-footer span i {
   font-size: 26px;
 }
@@ -222,7 +219,7 @@ body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #676a6c;
 }
-.modal .modal-dialog .modal-content form{
+.modal .modal-dialog .modal-content form {
   margin-bottom: 0px;
 }
 .modal .modal-dialog .modal-content .modal-header {
