@@ -227,9 +227,28 @@ body {
   text-align: center;
   display: block;
 }
+.modal .modal-dialog .modal-content .modal-header-delete {
+   padding: 15px 15px;
+  text-align: left;
+  display: block;
+}
 .modal .modal-dialog .modal-content .modal-header h4 {
   font-size: 26px;
   font-weight: 600;
+}
+
+.modal .modal-dialog .modal-content .modal-header-delete .close {
+  margin-top: -2px;
+  border: none;
+  background-color: transparent;
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity = 20);
+  opacity: 0.2;
 }
 .modal .modal-dialog .modal-content .modal-header .close {
   margin-top: -2px;
@@ -257,6 +276,20 @@ body {
   margin-right: 10px;
   padding: 0;
 }
+.modal .modal-dialog .modal-content .modal-body .delete-part-two {
+  font-size: 13px;
+  display: block;
+  text-align: left;
+  padding: 0 5px;
+}
+.delete-part-two p{
+  margin-bottom: 10px;
+}
+.delete-part-two p span{
+  color: #2196f3;
+  font-weight: 700;
+}
+
 
 .modal .modal-dialog .modal-content .modal-body .beginning-part {
   font-size: 13px;
@@ -301,4 +334,15 @@ body {
   font-size: 14px;
   display: inline-flex;
   align-items: center;
+}
+.modal .modal-dialog .modal-content .modal-footer .deleteButton {
+  color: #fff;
+  background-color: #e53935;
+  border: 1px solid #e53935;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
 }

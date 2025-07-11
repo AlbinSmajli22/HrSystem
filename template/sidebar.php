@@ -48,8 +48,8 @@ $userName=$_SESSION['name'];
                 <span>Org. Chart</span>
             </a>
         </li>
-        <li class="<?= basename($_SERVER['PHP_SELF']) == 'calendar.php' ? 'active' : '' ?>">
-            <a href="calendar.php" class="sidebarElements-links">
+        <li class="<?= basename($_SERVER['PHP_SELF']) == 'userCalendar.php' ? 'active' : '' ?>">
+            <a href="userCalendar.php" class="sidebarElements-links">
                 <i class="fa-regular fa-calendar-days"></i>
                 <span>Calendar</span>
             </a>
