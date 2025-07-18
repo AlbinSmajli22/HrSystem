@@ -138,17 +138,17 @@ if (isset($_POST['editLocation'])) {
     $country = $_POST['country'];
     $timezone = $_POST['timezone'];
 
-   $editLocationQuery = "UPDATE `locations` SET location_name = :location_name, country = :country, timezone = :timezone 
+    $editLocationQuery = "UPDATE `locations` SET location_name = :location_name, country = :country, timezone = :timezone 
     WHERE location_id = :location_id
 ";
 
-$prep = $con->prepare($editLocationQuery);
-$prep->bindParam(':location_name', $location_name);
-$prep->bindParam(':country', $country);
-$prep->bindParam(':timezone', $timezone);
-$prep->bindParam(':location_id', $location_id);
+    $prep = $con->prepare($editLocationQuery);
+    $prep->bindParam(':location_name', $location_name);
+    $prep->bindParam(':country', $country);
+    $prep->bindParam(':timezone', $timezone);
+    $prep->bindParam(':location_id', $location_id);
 
-$prep->execute();
+    $prep->execute();
 
     header("Location: /HrSystem/pages/categories.php");
 
@@ -212,6 +212,108 @@ if (isset($_GET['newscategory_id'])) {
     $prep->execute();
 
     header("Location: /HrSystem/pages/categories.php");
+
+}
+
+// Tags
+// Fetch Tags
+$tagsQuery = "SELECT * FROM tags WHERE company_id=:company_id";
+$prep = $con->prepare($tagsQuery);
+$prep->bindParam(':company_id', $companyId);
+$prep->execute();
+$tags = $prep->fetchAll();
+
+// Add new Tag
+if (isset($_POST['addTag'])) {
+
+    $tag_name = $_POST['tag'];
+
+    $addTagsQuery = "INSERT INTO `tags`(tag_id, tag_name,company_id ) VALUES (null, :tag_name, :company_id )";
+    $prep = $con->prepare($addTagsQuery);
+    $prep->bindParam(':tag_name', $tag_name);
+    $prep->bindParam(':company_id', $companyId);
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/categories.php");
+}
+// Edit Tag
+if (isset($_POST['editTag'])) {
+
+    $tag_name = $_POST['tag'];
+    $tag_id = $_POST['tag_id'];
+
+    $editTagsQuery = " UPDATE  tags SET  tag_name=:tag_name, company_id=:company_id where tag_id=:tag_id";
+    $prep = $con->prepare($editTagsQuery);
+    $prep->bindParam(':tag_name', $tag_name);
+    $prep->bindParam(':tag_id', $tag_id);
+    $prep->bindParam(':company_id', $companyId);
+
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/categories.php");
+
+}
+// Delete Tag
+if (isset($_GET['tag_id'])) {
+    $tag_id = $_GET['tag_id'];
+    $sql = "DELETE FROM tags WHERE tag_id = :tag_id";
+    $prep = $con->prepare($sql);
+    $prep->bindParam(':tag_id', $tag_id, PDO::PARAM_INT);
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/categories.php");
+
+}
+// Employment Statuses
+// Fetch Employment Statuses
+$employmentStatusesQuery = "SELECT * FROM employmentstatuses WHERE company_id=:company_id";
+$prep = $con->prepare($employmentStatusesQuery);
+$prep->bindParam(':company_id', $companyId);
+$prep->execute();
+$employmentStatuses = $prep->fetchAll();
+
+// Add new Employment Status
+if (isset($_POST['addEmploymentStatus'])) {
+
+    $employmentstatus_name = $_POST['employmentStatus'];
+
+    $addEmploymentStatuseQuery = "INSERT INTO `employmentstatuses`(employmentstatus_id, employmentstatus_name,company_id ) VALUES (null, :employmentstatus_name, :company_id )";
+    $prep = $con->prepare($addEmploymentStatuseQuery);
+    $prep->bindParam(':employmentstatus_name', $employmentstatus_name);
+    $prep->bindParam(':company_id', $companyId);
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/categories.php");
+}
+// Edit Employment Status
+if (isset($_POST['editEmploymentStatus'])) {
+
+    $employmentstatus_name = $_POST['employmentStatus'];
+    $employmentstatus_id = $_POST['employmentstatus_id'];
+
+    $editEmploymentStatuseQuery = " UPDATE  employmentstatuses SET  employmentstatus_name=:employmentstatus_name, company_id=:company_id where employmentstatus_id=:employmentstatus_id";
+    $prep = $con->prepare($editEmploymentStatuseQuery);
+    $prep->bindParam(':employmentstatus_name', $employmentstatus_name);
+    $prep->bindParam(':employmentstatus_id', $employmentstatus_id);
+    $prep->bindParam(':company_id', $companyId);
+
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/categories.php");
+
+}
+// Delete Employment Status
+if (isset($_GET['employmentstatus_id'])) {
+
+    $employmentstatus_id = $_GET['employmentstatus_id'];
+
+    $deleteEmploymentStatuseQuery = "DELETE FROM employmentstatuses WHERE employmentstatus_id = :employmentstatus_id";
+    $prep = $con->prepare($deleteEmploymentStatuseQuery);
+    $prep->bindParam(':employmentstatus_id', $employmentstatus_id, PDO::PARAM_INT);
+    $prep->execute();
+
+    header("Location: /HrSystem/pages/categories.php");
+
 
 }
 ?>

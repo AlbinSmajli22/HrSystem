@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2025 at 01:49 AM
+-- Generation Time: Jul 18, 2025 at 02:48 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -45,8 +45,7 @@ CREATE TABLE `adress` (
 
 INSERT INTO `adress` (`adress_id`, `address_type`, `address_line_1`, `address_line_2`, `city`, `state`, `zip_code`, `country`, `user_id`) VALUES
 (2, 'Work', 'Maxhunaj, Rr. Haxhi Nazifi Nr.20', 'Maxhunaj, Rr. Paqja Nr.30', 'Vushtrri', '02', 42000, 'Kosovo', 17),
-(5, 'Visiting', 'Rr. Tringë Smajli Nr.55', '', 'Prishtina', '01', 51000, 'Kosovo', 17),
-(16, 'Previous', 'Maxhunaj, Rr. Haxhi Nazifi', '', 'Vushtrri', '02', 42000, 'Kosovo', 17);
+(5, 'Visiting', 'Rr. Tringë Smajli Nr.55', '', 'Prishtina', '01', 51000, 'Kosovo', 17);
 
 -- --------------------------------------------------------
 
@@ -202,9 +201,11 @@ INSERT INTO `companygoals` (`id`, `name`, `description`, `type`, `due_date`, `cr
 (2, 'Finish Goals CRUD', 'Finish goal selection and user selection and after this fix adding those data into database. ', 'Objective', '2025-03-27', '2025-03-11', NULL, 1, '[\"17\",\"21\"]', NULL),
 (3, 'Flexible sidebar', 'Make the sidebar flexible like when user shrink the page side bar names should be gone and only the icons will remine ', 'Number', '2025-04-01', '2025-03-11', '100', 1, '[\"12\"]', NULL),
 (4, 'Goal 1', 'taskkkkkkk', 'Number', '2025-01-08', '2025-03-16', '200', 1, '[\"17\",\"21\",\"5\",\"15\"]', NULL),
-(7, 'Goal 2', 'goal item details', 'Percentage', '2025-01-11', '2025-03-16', '100', 1, '[\"17\",\"9\",\"12\",\"15\"]', NULL),
-(8, 'test item ', 'comments 2342344', 'Currency', '2025-05-22', '2025-05-02', '300', 1, '[\"5\",\"15\"]', NULL),
-(9, 'Site editing times', 'How many times you edited this site', 'Counter', '2025-05-30', '2025-05-04', '50', 1, '[\"12\"]', NULL);
+(7, 'Goal 2', 'goal item details', 'Percentage', '2025-05-22', '2025-03-16', '100', 1, '[\"17\",\"9\",\"12\",\"15\"]', NULL),
+(8, 'test item ', 'comments 2342344', 'Currency', '2025-05-22', '2025-05-02', '300', 1, '[\"5\",\"15\",\"1\"]', NULL),
+(9, 'Site editing times', 'How many times you edited this site', 'Counter', '2025-05-30', '2025-05-04', '50', 1, '[\"12\"]', NULL),
+(10, 'Reels for Instagram', 'finish editing 10 reels', 'Objective', '2025-05-19', '2025-05-17', '', 1, '\"12\"', 1),
+(11, 'Albin\'s team goal', 'start working at the front of the pin board crud', 'Objective', '2025-05-21', '2025-05-20', '0', 1, '[\"5\",\"12\",\"26\",\"9\"]', NULL);
 
 -- --------------------------------------------------------
 
@@ -219,25 +220,31 @@ CREATE TABLE `companygoalsvalue` (
   `value` int(11) DEFAULT NULL,
   `completed` tinyint(1) DEFAULT NULL,
   `comment` varchar(800) DEFAULT NULL,
-  `done` tinyint(1) DEFAULT NULL
+  `done` tinyint(1) DEFAULT NULL,
+  `edited` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `companygoalsvalue`
 --
 
-INSERT INTO `companygoalsvalue` (`value_id`, `user`, `company_goal`, `value`, `completed`, `comment`, `done`) VALUES
-(2, 17, 1, NULL, 1, 'Done!', 1),
-(4, 9, 7, 100, NULL, 'Done!', 1),
-(5, 17, 7, 70, NULL, 'DOne', NULL),
-(7, 15, 7, 50, NULL, 'DOne', NULL),
-(8, 21, 2, NULL, NULL, 'Almost perfect !!!', 1),
-(45, 12, 3, 100, NULL, '', NULL),
-(46, 12, 1, NULL, NULL, '', NULL),
-(47, 12, 7, 50, NULL, '', NULL),
-(48, 12, 9, 33, NULL, '', NULL),
-(49, 5, 8, 150, NULL, '', NULL),
-(100, 5, 4, 200, NULL, '', NULL);
+INSERT INTO `companygoalsvalue` (`value_id`, `user`, `company_goal`, `value`, `completed`, `comment`, `done`, `edited`) VALUES
+(2, 17, 1, NULL, 1, 'Done!', 1, '2025-05-05 00:00:00'),
+(4, 9, 7, 100, NULL, 'Done!', 1, '2025-05-13 00:00:00'),
+(5, 17, 7, 70, NULL, 'DOne', NULL, '2025-04-29 00:00:00'),
+(7, 15, 7, 50, NULL, 'DOne', NULL, '2025-05-02 00:00:00'),
+(8, 21, 2, NULL, NULL, 'Almost perfect !!!', 1, '2025-04-14 00:00:00'),
+(45, 12, 3, 100, NULL, '', 1, '2025-05-16 01:09:44'),
+(46, 12, 1, NULL, 1, '', 1, '2025-05-14 15:58:18'),
+(47, 12, 7, 100, NULL, '', 1, '2025-05-16 01:09:28'),
+(48, 12, 9, 50, NULL, '', 1, '2025-05-20 04:40:00'),
+(49, 5, 8, 150, NULL, '', NULL, '2025-05-01 00:00:00'),
+(100, 5, 4, 200, NULL, '', NULL, '2025-05-14 14:23:24'),
+(102, 12, 10, NULL, 1, 'done', 1, '2025-05-22 02:31:04'),
+(103, 5, 11, NULL, NULL, NULL, NULL, '2025-05-20 05:53:01'),
+(104, 12, 11, NULL, NULL, NULL, NULL, '2025-05-20 05:53:01'),
+(105, 26, 11, NULL, NULL, NULL, NULL, '2025-05-20 05:53:01'),
+(106, 9, 11, NULL, NULL, NULL, NULL, '2025-05-20 06:12:04');
 
 -- --------------------------------------------------------
 
@@ -302,7 +309,32 @@ INSERT INTO `departament` (`departament_id`, `departament_name`, `company_id`) V
 (16, 'Human Resources', 28),
 (17, 'Human Resources', 29),
 (23, 'Human Resources', 35),
-(28, 'Human Resources', 42);
+(28, 'Human Resources', 42),
+(29, 'IT', 1),
+(30, 'Studio', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employmentstatuses`
+--
+
+CREATE TABLE `employmentstatuses` (
+  `employmentstatus_id` int(11) NOT NULL,
+  `employmentstatus_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employmentstatuses`
+--
+
+INSERT INTO `employmentstatuses` (`employmentstatus_id`, `employmentstatus_name`, `company_id`) VALUES
+(1, 'Full Time', 1),
+(3, 'Part Time', 1),
+(4, 'Contract', 1),
+(5, 'Unpaid', 1),
+(6, 'Casual', 1);
 
 -- --------------------------------------------------------
 
@@ -356,7 +388,8 @@ CREATE TABLE `expenses` (
 
 INSERT INTO `expenses` (`id`, `send_to`, `user_id`, `claim_date`, `currency`, `description`, `comments`, `category`, `details`, `amount`, `tax`, `receipts`, `status`, `created`, `approved`) VALUES
 (9, 17, 12, '2024-12-02', '€', 'Udhetim Jasht Vendit', 'Bilet ekstra ', 'Traveling', 'Details', 3000, 3100, 'c54a6adf-004f-4613-ab41-b0a236730a9e.jpg', 'Approved', '2024-12-04', '2024-12-11'),
-(10, 17, 12, '2024-12-11', 'L', 'description', 'Expense Comments', 'Electricity', 'https://www.linkedin.com/in/fatlind-rashica-4a42912a1/', 50, 70, 'bluza.PNG', 'Declined', '2024-12-11', '2024-12-11');
+(10, 17, 12, '2024-12-11', 'L', 'description', 'Expense Comments', 'Electricity', 'https://www.linkedin.com/in/fatlind-rashica-4a42912a1/', 50, 70, 'bluza.PNG', 'Declined', '2024-12-11', '2024-12-11'),
+(11, 17, 12, '2025-05-22', '€', 'description', 'Comments', 'Electricity', 'Details', 50, 52, 'cs2 craft.PNG', 'Submited', '2025-05-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -378,29 +411,6 @@ INSERT INTO `expensescategory` (`id`, `name`, `company_id`) VALUES
 (1, 'Fule/Gas', 1),
 (3, 'Traveling', 1),
 (4, 'Electricity', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `fruits`
---
-
-CREATE TABLE `fruits` (
-  `id` int(11) NOT NULL,
-  `fruit` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `fruits`
---
-
-INSERT INTO `fruits` (`id`, `fruit`) VALUES
-(1, 'Banana'),
-(2, 'Apple'),
-(3, 'Kivi'),
-(4, 'Pear'),
-(5, 'Wattermelon'),
-(6, 'Strawberry');
 
 -- --------------------------------------------------------
 
@@ -429,39 +439,31 @@ INSERT INTO `goalitems` (`id`, `name`, `details`, `type`, `due_deadline`, `targe
 (1, 'Goal 1', 'taskkkkkkk', 'Number', '2025-01-08', 200, '2024-12-25', '0000-00-00', 1, NULL),
 (2, 'Goal 2', 'goal item details', 'Number', '2025-01-11', 100, '2024-12-30', '0000-00-00', 1, NULL),
 (3, 'test item ', 'comments 2342344', 'currency', '2025-05-22', 300, '2025-05-02', NULL, 1, NULL),
-(4, 'Site editing times', 'How many times you edited this site', 'counter', '2025-05-30', 50, '2025-05-04', NULL, 1, NULL);
+(4, 'Site editing times', 'How many times you edited this site', 'counter', '2025-05-30', 50, '2025-05-04', NULL, 1, NULL),
+(5, 'Albin\'s team goal', 'start working at the front of the pin board crud', 'Objective', '2025-05-21', 0, '2025-05-20', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `goals`
+-- Table structure for table `locations`
 --
 
-CREATE TABLE `goals` (
-  `id` int(11) NOT NULL,
-  `description` varchar(600) NOT NULL,
-  `comments` varchar(600) NOT NULL,
-  `type` varchar(200) NOT NULL,
-  `due_date` date NOT NULL,
-  `target_value` int(11) NOT NULL,
-  `value` varchar(200) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  `completed` tinyint(1) DEFAULT NULL,
-  `created` date NOT NULL,
-  `updated` date DEFAULT NULL,
-  `notes` varchar(300) DEFAULT NULL,
-  `usergoal` tinyint(1) DEFAULT NULL
+CREATE TABLE `locations` (
+  `location_id` int(11) NOT NULL,
+  `location_name` varchar(200) NOT NULL,
+  `country` varchar(200) NOT NULL,
+  `timezone` varchar(500) NOT NULL,
+  `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `goals`
+-- Dumping data for table `locations`
 --
 
-INSERT INTO `goals` (`id`, `description`, `comments`, `type`, `due_date`, `target_value`, `value`, `user_id`, `completed`, `created`, `updated`, `notes`, `usergoal`) VALUES
-(7, 'pershkrimi', 'comments', 'Number', '0000-00-00', 100, '0', 12, 0, '0000-00-00', NULL, NULL, NULL),
-(8, 'test description', 'comments', 'Number', '2025-01-21', 1000, '990', 17, 0, '2025-01-11', NULL, 'task done', NULL),
-(9, 'Goals CRUD', 'Ka met edhe pjesa e adminit me u kry se gati osht', 'Percentage', '2025-01-31', 100, '30', 12, 0, '2025-01-12', '2025-03-21', 'test notes', NULL),
-(10, 'test Number', 'Comments test number!!', 'Number', '2025-04-03', 200, '160', 12, 0, '2025-03-26', NULL, NULL, NULL);
+INSERT INTO `locations` (`location_id`, `location_name`, `country`, `timezone`, `company_id`) VALUES
+(1, 'Main Office', 'Republic of Kosovo', 'Europe/Belgrade', 1),
+(2, 'Production', 'Republic of Kosovo', 'Europe/Belgrade', 1),
+(4, 'Sydney Office', 'Australia', 'Australia/Sydney', 1);
 
 -- --------------------------------------------------------
 
@@ -485,29 +487,96 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `newscategories`
+--
+
+CREATE TABLE `newscategories` (
+  `newscategory_id` int(11) NOT NULL,
+  `newscategory_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `newscategories`
+--
+
+INSERT INTO `newscategories` (`newscategory_id`, `newscategory_name`, `company_id`) VALUES
+(1, 'Breaking', 1),
+(2, 'Important', 1),
+(3, 'General', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notes`
+--
+
+CREATE TABLE `notes` (
+  `notes_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `body` varchar(200) NOT NULL,
+  `created` datetime NOT NULL,
+  `user` int(11) NOT NULL,
+  `company` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notes`
+--
+
+INSERT INTO `notes` (`notes_id`, `title`, `body`, `created`, `user`, `company`) VALUES
+(4, 'First Pin', 'sakfjnsdfjnaq,jhajekbdabkuywefbmadfbmnb.ljtrkhoyijhgman equf2ub ,abuk fwbvieakj dfa ', '2025-05-29 04:17:28', 17, 1),
+(5, 'test', 'test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test ', '2025-05-29 04:17:57', 17, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `position`
 --
 
 CREATE TABLE `position` (
   `position_id` int(11) NOT NULL,
   `position_name` varchar(100) NOT NULL,
-  `Departament_ID` int(11) NOT NULL
+  `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `position`
 --
 
-INSERT INTO `position` (`position_id`, `position_name`, `Departament_ID`) VALUES
-(1, 'CEO', 5),
-(2, 'CFO', 5),
-(5, 'Screenwriter/ Video researcher', 7),
+INSERT INTO `position` (`position_id`, `position_name`, `company_id`) VALUES
+(1, 'CEO', 1),
+(2, 'CFO', 1),
+(5, 'Screenwriter/ Video researcher', 1),
 (6, 'Video Editor', 1),
-(9, 'Publisher', 2),
-(13, 'Python dev', 12),
-(14, 'Human Resource Manager', 16),
-(17, 'Human Resource Manager', 23),
-(22, 'Human Resource Manager', 28);
+(9, 'Publisher', 1),
+(13, 'Python dev', 2),
+(14, 'Human Resource Manager', 28),
+(17, 'Human Resource Manager', 35),
+(22, 'Human Resource Manager', 42),
+(23, 'Human Resource Manager', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `tag_id` int(11) NOT NULL,
+  `tag_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`tag_id`, `tag_name`, `company_id`) VALUES
+(1, 'Intern', 1),
+(2, 'Trainee', 1),
+(3, 'Volunteer', 1),
+(4, 'Project Alpha', 1);
 
 -- --------------------------------------------------------
 
@@ -711,6 +780,12 @@ ALTER TABLE `departament`
   ADD KEY `company_id` (`company_id`);
 
 --
+-- Indexes for table `employmentstatuses`
+--
+ALTER TABLE `employmentstatuses`
+  ADD PRIMARY KEY (`employmentstatus_id`);
+
+--
 -- Indexes for table `expenseapprovers`
 --
 ALTER TABLE `expenseapprovers`
@@ -734,12 +809,6 @@ ALTER TABLE `expensescategory`
   ADD KEY `Company_exceptions` (`company_id`);
 
 --
--- Indexes for table `fruits`
---
-ALTER TABLE `fruits`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `goalitems`
 --
 ALTER TABLE `goalitems`
@@ -747,11 +816,10 @@ ALTER TABLE `goalitems`
   ADD KEY `goal_item_company` (`company_id`);
 
 --
--- Indexes for table `goals`
+-- Indexes for table `locations`
 --
-ALTER TABLE `goals`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_goal` (`user_id`);
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`location_id`);
 
 --
 -- Indexes for table `news`
@@ -762,11 +830,31 @@ ALTER TABLE `news`
   ADD KEY `User_News` (`author`);
 
 --
+-- Indexes for table `newscategories`
+--
+ALTER TABLE `newscategories`
+  ADD PRIMARY KEY (`newscategory_id`);
+
+--
+-- Indexes for table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`notes_id`),
+  ADD KEY `User_Notes` (`user`),
+  ADD KEY `Company_Notes` (`company`);
+
+--
 -- Indexes for table `position`
 --
 ALTER TABLE `position`
   ADD PRIMARY KEY (`position_id`),
-  ADD KEY `Departament_ID` (`Departament_ID`);
+  ADD KEY `Position_Company` (`company_id`);
+
+--
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`tag_id`);
 
 --
 -- Indexes for table `timeoffrequests`
@@ -818,13 +906,13 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT for table `companygoals`
 --
 ALTER TABLE `companygoals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `companygoalsvalue`
 --
 ALTER TABLE `companygoalsvalue`
-  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `value_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -836,7 +924,13 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `departament`
 --
 ALTER TABLE `departament`
-  MODIFY `departament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `departament_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `employmentstatuses`
+--
+ALTER TABLE `employmentstatuses`
+  MODIFY `employmentstatus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `expenseapprovers`
@@ -848,7 +942,7 @@ ALTER TABLE `expenseapprovers`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `expensescategory`
@@ -857,22 +951,16 @@ ALTER TABLE `expensescategory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `fruits`
---
-ALTER TABLE `fruits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `goalitems`
 --
 ALTER TABLE `goalitems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `goals`
+-- AUTO_INCREMENT for table `locations`
 --
-ALTER TABLE `goals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `locations`
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -881,10 +969,28 @@ ALTER TABLE `news`
   MODIFY `new_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `newscategories`
+--
+ALTER TABLE `newscategories`
+  MODIFY `newscategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `notes`
+--
+ALTER TABLE `notes`
+  MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `position`
 --
 ALTER TABLE `position`
-  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `position_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `timeoffrequests`
@@ -967,12 +1073,6 @@ ALTER TABLE `goalitems`
   ADD CONSTRAINT `goal_item_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `goals`
---
-ALTER TABLE `goals`
-  ADD CONSTRAINT `user_goal` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `news`
 --
 ALTER TABLE `news`
@@ -980,10 +1080,17 @@ ALTER TABLE `news`
   ADD CONSTRAINT `User_News` FOREIGN KEY (`author`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `notes`
+--
+ALTER TABLE `notes`
+  ADD CONSTRAINT `Company_Notes` FOREIGN KEY (`company`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `User_Notes` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `position`
 --
 ALTER TABLE `position`
-  ADD CONSTRAINT `Departament_ID` FOREIGN KEY (`Departament_ID`) REFERENCES `departament` (`departament_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Position_Company` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `timeoffrequests`
