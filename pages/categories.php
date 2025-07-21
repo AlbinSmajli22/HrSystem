@@ -357,7 +357,7 @@ include './categoriesLogic.php'
                 <div class="categories-tables">
                     <div class="categories-tables-head">
                         <h5>
-                            <i class="fa-solid fa-tag"></i>
+                            <i class="fa-solid fa-list"></i>
                             Employment Statuses
                         </h5>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#addEmploymentStatusesModal"
@@ -492,6 +492,147 @@ include './categoriesLogic.php'
                     <div class="categories-tables-footer">
                         <img src="../images/qustionmark.png" alt="">
                         <p>These should ideally match your payroll system.
+                        </p>
+                    </div>
+                </div>
+                <div class="categories-tables">
+                    <div class="categories-tables-head">
+                        <h5>
+                            <i class="fa-solid fa-list"></i>
+                            Custom Contact Types
+                        </h5>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addContactTypesModal"
+                            data-bs-whatever="@mdo">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Contact Type
+                        </button>
+                        <div class="modal fade-add-ContactTypesModal" id="addContactTypesModal" tabindex="-1"
+                            aria-labelledby="addContactTypesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated slideInTop">
+                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                aria-label="Close">×</button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Add Contact Type</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="beginning-part">
+                                                <div class="inputs">
+                                                    <label for="ContactType">Contact Type Name</label>
+                                                    <input type="text" name="ContactType" id="ContactType">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-exit"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" name="addContactType" class="btn-save">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="categories-tables-body">
+                        <table class="categories-table">
+                            <thead>
+                                <tr>
+                                    <th>name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($contactTypes as $contactType): ?>
+                                    <tr>
+                                        <td><?= $contactType['contacttype_name'] ?></td>
+                                        <td>
+                                            <a data-bs-toggle="modal"
+                                                data-bs-target="#editContactTypesModal<?= $contactType['contacttype_id'] ?>"
+                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a data-bs-toggle="modal"
+                                                data-bs-target="#deleteContactTypesModal<?= $contactType['contacttype_id'] ?>"
+                                                data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                    class="fa fa-trash"></i></a>
+                                        </td>
+                                        <div class="modal fade-delete-ContactTypesModal"
+                                            id="deleteContactTypesModal<?= $contactType['contacttype_id'] ?>"
+                                            tabindex="-1" aria-labelledby="deleteContactTypesModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content animated slideInTop">
+                                                    <div class="modal-header-delete">
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">×</button>
+                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Employment Status
+                                                        </h6>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="delete-part-two">
+
+                                                            <p>This will delete this item: <span>
+                                                                    <?= $contactType['contacttype_name'] ?> </span> </p>
+                                                            <p>This process is NOT reversible and will result in PERMANENT
+                                                                loss
+                                                                of data. Please be
+                                                                ABSOLUTELY sure that you wish to remove this information
+                                                            </p>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn-exit"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <a href="categoriesLogic.php?contacttype_id=<?= $contactType['contacttype_id'] ?>"
+                                                            class="deleteButton">delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade-edit-ContactTypesModal"
+                                            id="editContactTypesModal<?= $contactType['contacttype_id'] ?>"
+                                            tabindex="-1" aria-labelledby="editContactTypesModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content animated slideInTop">
+                                                    <form action="categoriesLogic.php" method="post"
+                                                        enctype="multipart/form-data">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-bs-dismiss="modal"
+                                                                aria-label="Close">×</button>
+                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Employment Status
+                                                                Category
+                                                            </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="beginning-part">
+                                                                <div class="inputs">
+                                                                    <input type="hidden" name="contacttype_id"
+                                                                        id="contacttype_id"
+                                                                        value="<?= $contactType['contacttype_id'] ?>">
+                                                                    <label for="ContactType">News Category Name</label>
+                                                                    <input type="text" name="ContactType" id="ContactType"
+                                                                        value="<?= $contactType['contacttype_name'] ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn-exit"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" name="editContactType"
+                                                                    class="btn-save">Save</button>
+                                                            </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="categories-tables-footer">
+                        <img src="../images/qustionmark.png" alt="">
+                        <p>You can add custom contact types.
                         </p>
                     </div>
                 </div>
