@@ -118,6 +118,13 @@ body {
   width: 100%;
   border: 1px solid #e7eaec;
 }
+.categories-tables-body .NoData{
+  font-size: 14px;
+  color: #888;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 20px;
+  margin: 0px;
+}
 .categories-table {
   width: 95%;
   border-collapse: collapse;

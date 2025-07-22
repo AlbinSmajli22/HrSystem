@@ -33,8 +33,8 @@ include './categoriesLogic.php'
             <?php echo "<h2>" . $_SESSION['company_name'] . "</h2>"; ?>
         </div>
         <div id="well">
-            <p>These are the various categories that employees can have (i.e. departaments, employment type etc.).
-                Please ensure that you set these up before you begin creating or importing employees.
+            <p>These are the various look up lists that are used when entering other data aginst your employees (i.e. training types, documents etc.).
+                It is highly recommended that you set these up before you begin creating or importing employees.
             </p>
             <p>You can change them later, but pleasa be aware that this will affect all employees already in the
                 system, so pleae be carefully.

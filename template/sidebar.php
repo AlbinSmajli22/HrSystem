@@ -295,7 +295,7 @@ $userName=$_SESSION['name'];
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="goalItem.php">
+                                    <a href="list.php">
                                         <i class="fa-solid fa-list"></i> 
                                          List
                                     </a>
