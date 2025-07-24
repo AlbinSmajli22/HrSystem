@@ -1,0 +1,385 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:wght@300&display=swap");
+
+body {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  position: absolute;
+  background-color: #f4f6fa;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f4f6fa;
+  height: fit-content;
+}
+
+.authUserHead {
+  padding-top: 30px;
+  width: 100%;
+  text-align: start;
+  padding-left: 35;
+}
+.authUserHead h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  color: #676a6c;
+  font-size: 24px;
+  align-items: center;
+}
+#well {
+  width: 95%;
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f4f4f4;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+#well p {
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #676a6c;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.lists {
+  width: 100%;
+  padding: 0px 35px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.lists-left{
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+}
+.lists-right{
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+
+}
+.lists-tables {
+  width: 100%;
+  margin-bottom: 25px;
+}
+.lists-tables-head {
+  background-color: #e3f2fd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  text-align: start;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.lists-tables-head h5 {
+  align-items: center;
+  color: #676a6c;
+  font-size: 14px;
+  font-weight: 600;
+  width: 240px;
+  height: 25px;
+  margin: 0px;
+}
+.lists-tables-head h5 i {
+  margin-right: 10px;
+}
+
+.lists-tables-head button {
+  background-color: #4caf50;
+  color: white;
+  height: 30px;
+  border: #4caf50;
+  border-radius: 2px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+.lists-tables-body {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #e7eaec;
+}
+.lists-tables-body .NoData{
+  font-size: 14px;
+  color: #888;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 20px;
+  margin: 0px;
+}
+.lists-table {
+  width: 95%;
+  border-collapse: collapse;
+  margin: 20px 10px;
+  font-size: 13px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.lists-table head tr {
+  text-align: left;
+  font-weight: 600;
+  color: #676a6c;
+  font-size: 13px;
+}
+.lists-table thead tr th {
+  padding: 8px;
+  text-align: left;
+  margin-right: 20px;
+  padding-bottom: 10px;
+  font-weight: 700;
+  color: #676a6c;
+}
+.lists-table tbody tr {
+  text-align: left;
+  font-weight: 400;
+  color: #676a6c;
+  border-top: 1px #e7eaec solid;
+}
+.lists-table tbody tr td {
+  padding-bottom: 11px;
+  font-size: 13px;
+  font-weight: 400;
+  min-width: 120px;
+  padding: 8;
+}
+.lists-table tbody tr td:last-child {
+  text-align: right;
+}
+.lists-table tbody tr td .editList {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 8px 0;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857143;
+  border: 1px solid #26c6da;
+  color: #26c6da;
+  background-color: transparent;
+  margin-right: 5px;
+}
+.lists-table tbody tr td .editList:hover {
+  background-color: #26c6da;
+  color: #fff;
+}
+.lists-table tbody tr td .deleteList {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 8px 0;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857143;
+  border: 1px solid #e53935;
+  color: #e53935;
+  background-color: transparent;
+}
+.lists-table tbody tr td .deleteList:hover {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.lists-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+.lists-tables-footer {
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  width: 100%;
+  padding: 15px 20px 20px 20px;
+}
+.lists-tables-footer img {
+  min-width: 40px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #888;
+  border: 1px solid #888;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.lists-tables-footer span i {
+  font-size: 26px;
+}
+.lists-tables-footer p {
+  font-size: 13px;
+  color: #676a6c;
+  margin-bottom: 0px;
+  line-height: normal;
+}
+.modal-dialog {
+  min-width: 600px;
+}
+.modal .modal-dialog .modal-content {
+  border-radius: 0px;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #676a6c;
+}
+.modal .modal-dialog .modal-content form {
+  margin-bottom: 0px;
+}
+.modal .modal-dialog .modal-content .modal-header {
+  padding: 30px 15px;
+  text-align: center;
+  display: block;
+}
+.modal .modal-dialog .modal-content .modal-header-delete {
+   padding: 15px 15px;
+  text-align: left;
+  display: block;
+}
+.modal .modal-dialog .modal-content .modal-header h4 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.modal .modal-dialog .modal-content .modal-header-delete .close {
+  margin-top: -2px;
+  border: none;
+  background-color: transparent;
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity = 20);
+  opacity: 0.2;
+}
+.modal .modal-dialog .modal-content .modal-header .close {
+  margin-top: -2px;
+  border: none;
+  background-color: transparent;
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity = 20);
+  opacity: 0.2;
+}
+.modal .modal-dialog .modal-content .modal-body {
+  padding: 20px;
+  background-color: #f4f6fa;
+}
+.modal .modal-dialog .modal-content .modal-body label {
+  text-align: start;
+  font-weight: 700;
+  font-size: 14px;
+  color: #676a6c;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  padding: 0;
+}
+.modal .modal-dialog .modal-content .modal-body .delete-part-two {
+  font-size: 13px;
+  display: block;
+  text-align: left;
+  padding: 0 5px;
+}
+.delete-part-two p{
+  margin-bottom: 10px;
+}
+.delete-part-two p span{
+  color: #2196f3;
+  font-weight: 700;
+}
+
+
+.modal .modal-dialog .modal-content .modal-body .beginning-part {
+  font-size: 13px;
+  display: block;
+  text-align: center;
+  border-bottom: 2px solid #e7eaec;
+  margin-bottom: 20px;
+  padding: 0 10px 20px 10px;
+  width: 100%;
+}
+.beginning-part .inputs{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.beginning-part .inputs input {
+  outline: #e5e6e7;
+  width: 100%;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  font-size: 13px;
+  border: 1px solid #e5e6e7;
+  padding: 6px 12px;
+  color: inherit;
+}
+.beginning-part .drop-downs{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.beginning-part .drop-downs .row-2{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.beginning-part .drop-downs .row-2 select {
+  outline: #e5e6e7;
+  width: 60%;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  font-size: 13px;
+  border: 1px solid #e5e6e7;
+  padding: 6px 12px;
+  color: inherit;
+}
+
+.modal .modal-dialog .modal-content .modal-footer .btn-exit {
+  color: #676a6c;
+  background-color: #fff;
+  border: 1px solid #e7eaec;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+.modal .modal-dialog .modal-content .modal-footer .btn-save {
+  color: #fff;
+  background-color: #4caf50;
+  border: 1px solid #4caf50;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+.modal .modal-dialog .modal-content .modal-footer .deleteButton {
+  color: #fff;
+  background-color: #e53935;
+  border: 1px solid #e53935;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}

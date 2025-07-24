@@ -1,14 +1,14 @@
 <?php
 
-include './categoriesLogic.php'
+include './listsLogic.php';
 
-    ?>
+?>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/categories.css">
+    <link rel="stylesheet" href="../css/lists.css">
     <script src="https://kit.fontawesome.com/3d560ffcbd.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -40,87 +40,87 @@ include './categoriesLogic.php'
                 system, so pleae be carefully.
             </p>
         </div>
-        <div class="categories">
+        <div class="lists">
 
-            <div class="categories-left">
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+            <div class="lists-left">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
-                            Departaments
+                            Absence Statuses
                         </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addDepartamentModal"
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addAbsenceStatusModal"
                             data-bs-whatever="@mdo">
                             <i class="fa-solid fa-plus"></i>
-                            Add Departament
+                            Absence Status
                         </button>
-                        <div class="modal fade-add-DepartamentModal" id="addDepartamentModal" tabindex="-1"
-                            aria-labelledby="addDepartamentModalLabel" aria-hidden="true">
+                        <div class="modal fade-add-AbsenceStatusModal" id="addAbsenceStatusModal" tabindex="-1"
+                            aria-labelledby="addAbsenceStatusModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add Departament</h4>
+                                            <h4 class="modal-title" id="exampleModalLabel">Add Absence Status</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="beginning-part">
                                                 <div class="inputs">
-                                                    <label for="departament">Departament Name</label>
-                                                    <input type="text" name="departament">
+                                                    <label for="absence">Absence Status Name</label>
+                                                    <input type="text" name="absence" id="absence">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn-exit"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addDepartament" class="btn-save">Save</button>
+                                            <button type="submit" name="addAbsenceStatus" class="btn-save">Save</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
-                        <?php if (empty($departaments)) { ?>
+                    <div class="lists-tables-body">
+                        <?php if (empty($absenceStatuses)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                        <table class="categories-table">
+                        <table class="lists-table">
                             <thead>
                                 <tr>
                                     <th>name</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($departaments as $departament): ?>
+                                <?php foreach ($absenceStatuses as $absenceStatus): ?>
                                     <tr>
-                                        <td><?= $departament['departament_name'] ?></td>
+                                        <td><?= $absenceStatus['absencestatus_name'] ?></td>
                                         <td>
                                             <a data-bs-toggle="modal"
-                                                data-bs-target="#editDepartamentModal<?= $departament['departament_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                data-bs-target="#editAbsenceStatusModal<?= $absenceStatus['absencestatus_id'] ?>"
+                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
-                                                data-bs-target="#deleteDepartamentModal<?= $departament['departament_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteCategory"><i class="fa fa-trash"></i>
+                                                data-bs-target="#deleteAbsenceStatusModal<?= $absenceStatus['absencestatus_id'] ?>"
+                                                data-bs-whatever="@mdo" class="deleteList"><i class="fa fa-trash"></i>
                                             </a>
                                         </td>
-                                        <div class="modal fade-delete-DepartamentModal"
-                                            id="deleteDepartamentModal<?= $departament['departament_id'] ?>" tabindex="-1"
-                                            aria-labelledby="deleteDepartamentModalLabel" aria-hidden="true">
+                                        <div class="modal fade-delete-AbsenceStatusModal"
+                                            id="deleteAbsenceStatusModal<?= $absenceStatus['absencestatus_id'] ?>" tabindex="-1"
+                                            aria-labelledby="deleteAbsenceStatusModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
                                                     <div class="modal-header-delete">
                                                         <button type="button" class="close" data-bs-dismiss="modal"
                                                             aria-label="Close">×</button>
-                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Position</h6>
+                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Absence Status</h6>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="delete-part-two">
 
                                                             <p>This will delete this item: <span>
-                                                                    <?= $departament['departament_name'] ?> </span> </p>
+                                                                    <?= $absenceStatus['absencestatus_name'] ?> </span> </p>
                                                             <p>This process is NOT reversible and will result in PERMANENT
                                                                 loss
                                                                 of data. Please be
@@ -132,39 +132,39 @@ include './categoriesLogic.php'
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="categoriesLogic.php?departament_id=<?= $departament['departament_id'] ?>"
+                                                        <a href="listsLogic.php?absencestatus_id=<?= $absenceStatus['absencestatus_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade-edit-DepartamentModal"
-                                            id="editDepartamentModal<?= $departament['departament_id'] ?>" tabindex="-1"
-                                            aria-labelledby="editDepartamentModalLabel" aria-hidden="true">
+                                        <div class="modal fade-edit-AbsenceStatusModal"
+                                            id="editAbsenceStatusModal<?= $absenceStatus['absencestatus_id'] ?>" tabindex="-1"
+                                            aria-labelledby="editAbsenceStatusModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
-                                                    <form action="categoriesLogic.php" method="post">
+                                                    <form action="listsLogic.php" method="post">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                                 aria-label="Close">×</button>
-                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Departament
+                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Absence Status
                                                             </h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="beginning-part">
                                                                 <div class="inputs">
-                                                                    <input type="hidden" name="departament_id" id=""
-                                                                        value="<?= $departament['departament_id'] ?>">
-                                                                    <label for="departament">Departament Name</label>
-                                                                    <input type="text" name="departament"
-                                                                        value="<?= $departament['departament_name'] ?>">
+                                                                    <input type="hidden" name="absencestatus_id" id=""
+                                                                        value="<?= $absenceStatus['absencestatus_id'] ?>">
+                                                                    <label for="absence">Absence Status Name</label>
+                                                                    <input type="text" name="absence" id="absence"
+                                                                        value="<?= $absenceStatus['absencestatus_name'] ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn-exit"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" name="editDepartament"
+                                                            <button type="submit" name="editAbsenceStatus"
                                                                 class="btn-save">Save</button>
                                                         </div>
                                                     </form>
@@ -177,17 +177,10 @@ include './categoriesLogic.php'
                         </table>
                         <?php } ?>
                     </div>
-                    <div class="categories-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>Departaments let you separate employees into their areas. You can set up access permissions
-                            to
-                            employees, documents and other data based on their Departament, so please set them up with
-                            this
-                            in mind.</p>
-                    </div>
+                    
                 </div>
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
                             Locations
@@ -201,7 +194,7 @@ include './categoriesLogic.php'
                             aria-labelledby="addLocationModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
@@ -239,11 +232,11 @@ include './categoriesLogic.php'
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
+                    <div class="lists-tables-body">
                         <?php if (empty($locations)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                        <table class="categories-table">
+                        <table class="lists-table">
                             <thead>
                                 <tr>
                                     <th>name</th>
@@ -256,11 +249,11 @@ include './categoriesLogic.php'
                                         <td>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#editLocationModal<?= $location['location_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#deleteLocationModal<?= $location['location_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
                                         <div class="modal fade-delete-LocationModal"
@@ -289,7 +282,7 @@ include './categoriesLogic.php'
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="categoriesLogic.php?location_id=<?= $location['location_id'] ?>"
+                                                        <a href="listsLogic.php?location_id=<?= $location['location_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
@@ -302,7 +295,7 @@ include './categoriesLogic.php'
                                             data-selected-timezone="<?= htmlspecialchars($location['timezone']) ?>">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
-                                                    <form action="categoriesLogic.php" method="post"
+                                                    <form action="listsLogic.php" method="post"
                                                         enctype="multipart/form-data">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -352,7 +345,7 @@ include './categoriesLogic.php'
                         </table>
                         <?php } ?>  
                     </div>
-                    <div class="categories-tables-footer">
+                    <div class="lists-tables-footer">
                         <img src="../images/qustionmark.png" alt="">
                         <p>You can allocate your employees to a particulat location, and set permission based on them.
                             You can also change timezones for each location if your employees are spread across
@@ -360,8 +353,8 @@ include './categoriesLogic.php'
                             regions. </p>
                     </div>
                 </div>
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
                             Employment Statuses
@@ -375,7 +368,7 @@ include './categoriesLogic.php'
                             tabindex="-1" aria-labelledby="addEmploymentStatusesModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
@@ -400,11 +393,11 @@ include './categoriesLogic.php'
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
+                    <div class="lists-tables-body">
                         <?php if (empty($employmentStatuses)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                        <table class="categories-table">
+                        <table class="lists-table">
                             <thead>
                                 <tr>
                                     <th>name</th>
@@ -417,11 +410,11 @@ include './categoriesLogic.php'
                                         <td>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#editEmploymentStatusesModal<?= $empStatus['employmentstatus_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#deleteEmploymentStatusesModal<?= $empStatus['employmentstatus_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
                                         <div class="modal fade-delete-EmploymentStatusesModal"
@@ -453,7 +446,7 @@ include './categoriesLogic.php'
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="categoriesLogic.php?employmentstatus_id=<?= $empStatus['employmentstatus_id'] ?>"
+                                                        <a href="listsLogic.php?employmentstatus_id=<?= $empStatus['employmentstatus_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
@@ -465,7 +458,7 @@ include './categoriesLogic.php'
                                             aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
-                                                    <form action="categoriesLogic.php" method="post"
+                                                    <form action="listsLogic.php" method="post"
                                                         enctype="multipart/form-data">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -503,14 +496,14 @@ include './categoriesLogic.php'
                         </table>
                         <?php } ?>
                     </div>
-                    <div class="categories-tables-footer">
+                    <div class="lists-tables-footer">
                         <img src="../images/qustionmark.png" alt="">
                         <p>These should ideally match your payroll system.
                         </p>
                     </div>
                 </div>
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
                             Custom Contact Types
@@ -524,7 +517,7 @@ include './categoriesLogic.php'
                             aria-labelledby="addContactTypesModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
@@ -548,11 +541,11 @@ include './categoriesLogic.php'
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
+                    <div class="lists-tables-body">
                         <?php if (empty($contactTypes)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                            <table class="categories-table">
+                            <table class="lists-table">
                                 <thead>
                                     <tr>
                                         <th>name</th>
@@ -565,11 +558,11 @@ include './categoriesLogic.php'
                                             <td>
                                                 <a data-bs-toggle="modal"
                                                     data-bs-target="#editContactTypesModal<?= $contactType['contacttype_id'] ?>"
-                                                    data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                    data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                                 </a>
                                                 <a data-bs-toggle="modal"
                                                     data-bs-target="#deleteContactTypesModal<?= $contactType['contacttype_id'] ?>"
-                                                    data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                    data-bs-whatever="@mdo" class="deleteList"> <i
                                                         class="fa fa-trash"></i></a>
                                             </td>
                                             <div class="modal fade-delete-ContactTypesModal"
@@ -600,7 +593,7 @@ include './categoriesLogic.php'
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn-exit"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                            <a href="categoriesLogic.php?contacttype_id=<?= $contactType['contacttype_id'] ?>"
+                                                            <a href="listsLogic.php?contacttype_id=<?= $contactType['contacttype_id'] ?>"
                                                                 class="deleteButton">delete</a>
                                                         </div>
                                                     </div>
@@ -611,7 +604,7 @@ include './categoriesLogic.php'
                                                 aria-labelledby="editContactTypesModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content animated slideInTop">
-                                                        <form action="categoriesLogic.php" method="post"
+                                                        <form action="listsLogic.php" method="post"
                                                             enctype="multipart/form-data">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-bs-dismiss="modal"
@@ -648,16 +641,16 @@ include './categoriesLogic.php'
                             </table>
                         <?php } ?>
                     </div>
-                    <div class="categories-tables-footer">
+                    <div class="lists-tables-footer">
                         <img src="../images/qustionmark.png" alt="">
                         <p>You can add custom contact types.
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="categories-right">
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+            <div class="lists-right">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
                             Positions
@@ -671,7 +664,7 @@ include './categoriesLogic.php'
                             aria-labelledby="addPositionModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
@@ -695,11 +688,11 @@ include './categoriesLogic.php'
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
+                    <div class="lists-tables-body">
                          <?php if (empty($positions)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                        <table class="categories-table">
+                        <table class="lists-table">
                             <thead>
                                 <tr>
                                     <th>name</th>
@@ -712,11 +705,11 @@ include './categoriesLogic.php'
                                         <td>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#editPositionModal<?= $position['position_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#deletePositionModal<?= $position['position_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
                                         <div class="modal fade-delete-PositionModal"
@@ -745,7 +738,7 @@ include './categoriesLogic.php'
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="categoriesLogic.php?position_id=<?= $position['position_id'] ?>"
+                                                        <a href="listsLogic.php?position_id=<?= $position['position_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
@@ -756,7 +749,7 @@ include './categoriesLogic.php'
                                             aria-labelledby="editPositionModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
-                                                    <form action="categoriesLogic.php" method="post"
+                                                    <form action="listsLogic.php" method="post"
                                                         enctype="multipart/form-data">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -791,16 +784,11 @@ include './categoriesLogic.php'
                         </table>
                         <?php } ?>
                     </div>
-                    <div class="categories-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>This is a list of all positions or position titles within your company. You can create as
-                            many as
-                            you wish.</p>
-                    </div>
+                    
                 </div>
 
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
                             News Category
@@ -814,7 +802,7 @@ include './categoriesLogic.php'
                             aria-labelledby="addNewsCategoriesModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
@@ -838,11 +826,11 @@ include './categoriesLogic.php'
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
+                    <div class="lists-tables-body">
                          <?php if (empty($NewsCategories)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                        <table class="categories-table">
+                        <table class="lists-table">
                             <thead>
                                 <tr>
                                     <th>name</th>
@@ -855,11 +843,11 @@ include './categoriesLogic.php'
                                         <td>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#editNewsCategoriesModal<?= $NewsCategory['newscategory_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
                                                 data-bs-target="#deleteNewsCategoriesModal<?= $NewsCategory['newscategory_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
                                         <div class="modal fade-delete-NewsCategoriesModal"
@@ -890,7 +878,7 @@ include './categoriesLogic.php'
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="categoriesLogic.php?newscategory_id=<?= $NewsCategory['newscategory_id'] ?>"
+                                                        <a href="listsLogic.php?newscategory_id=<?= $NewsCategory['newscategory_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
@@ -901,7 +889,7 @@ include './categoriesLogic.php'
                                             tabindex="-1" aria-labelledby="editNewsCategoriesModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
-                                                    <form action="categoriesLogic.php" method="post"
+                                                    <form action="listsLogic.php" method="post"
                                                         enctype="multipart/form-data">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -937,13 +925,13 @@ include './categoriesLogic.php'
                         </table>
                         <?php } ?>
                     </div>
-                    <div class="categories-tables-footer">
+                    <div class="lists-tables-footer">
                         <img src="../images/qustionmark.png" alt="">
                         <p>These are categories that you allocate to your news articles for your employees. </p>
                     </div>
                 </div>
-                <div class="categories-tables">
-                    <div class="categories-tables-head">
+                <div class="lists-tables">
+                    <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-tag"></i>
                             Tags
@@ -957,7 +945,7 @@ include './categoriesLogic.php'
                             aria-labelledby="addTagsModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
-                                    <form action="categoriesLogic.php" method="post" enctype="multipart/form-data">
+                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
@@ -981,11 +969,11 @@ include './categoriesLogic.php'
                             </div>
                         </div>
                     </div>
-                    <div class="categories-tables-body">
+                    <div class="lists-tables-body">
                         <?php if (empty($tags)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
-                        <table class="categories-table">
+                        <table class="lists-table">
                             <thead>
                                 <tr>
                                     <th>name</th>
@@ -997,10 +985,10 @@ include './categoriesLogic.php'
                                         <td><?= $tag['tag_name'] ?></td>
                                         <td>
                                             <a data-bs-toggle="modal" data-bs-target="#editTagsModal<?= $tag['tag_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editCategory"> <i class="fa fa-edit"></i>
+                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal" data-bs-target="#deleteTagsModal<?= $tag['tag_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteCategory"> <i
+                                                data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
                                         <div class="modal fade-delete-TagsModal" id="deleteTagsModal<?= $tag['tag_id'] ?>"
@@ -1029,7 +1017,7 @@ include './categoriesLogic.php'
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="categoriesLogic.php?tag_id=<?= $tag['tag_id'] ?>"
+                                                        <a href="listsLogic.php?tag_id=<?= $tag['tag_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
@@ -1039,7 +1027,7 @@ include './categoriesLogic.php'
                                             tabindex="-1" aria-labelledby="editTagsModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
-                                                    <form action="categoriesLogic.php" method="post"
+                                                    <form action="listsLogic.php" method="post"
                                                         enctype="multipart/form-data">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
@@ -1074,7 +1062,7 @@ include './categoriesLogic.php'
                         </table>
                         <?php } ?>
                     </div>
-                    <div class="categories-tables-footer">
+                    <div class="lists-tables-footer">
                         <img src="../images/qustionmark.png" alt="">
                         <p>Tags allow you to categories and segment your employees even further.</br>
                             <strong>NOTE:</strong> You can allocate multiple tags to each employee.</br>
