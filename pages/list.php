@@ -183,49 +183,35 @@ include './listsLogic.php';
                     <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
-                            Locations
+                            Asset Types
                         </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addLocationModal"
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addAssetTypeModal"
                             data-bs-whatever="@mdo">
                             <i class="fa-solid fa-plus"></i>
-                            Add Location
+                            Asset Type
                         </button>
-                        <div class="modal fade-add-LocationModal" id="addLocationModal" tabindex="-1"
-                            aria-labelledby="addLocationModalLabel" aria-hidden="true">
+                        <div class="modal fade-add-AssetTypeModal" id="addAssetTypeModal" tabindex="-1"
+                            aria-labelledby="addAssetTypeModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
                                     <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add Location</h4>
+                                            <h4 class="modal-title" id="exampleModalLabel">Add Asset Type</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="beginning-part">
                                                 <div class="inputs">
-                                                    <label for="location">Location Name</label>
-                                                    <input type="text" name="location" id="location">
-                                                </div>
-                                                <div class="drop-downs">
-                                                    <div class="row-2">
-                                                        <label for="country">Country</label>
-                                                        <select id="country" name="country">
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="row-2">
-                                                        <label for="timezone">Timezone</label>
-                                                        <select id="timezone" name="timezone">
-                                                            <option value="" disabled selected>UCT</option>
-                                                        </select>
-                                                    </div>
+                                                    <label for="asset">Asset Type Name</label>
+                                                    <input type="text" name="asset" id="asset">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn-exit"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addLocation" class="btn-save">Save</button>
+                                            <button type="submit" name="addAssetType" class="btn-save">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -233,7 +219,7 @@ include './listsLogic.php';
                         </div>
                     </div>
                     <div class="lists-tables-body">
-                        <?php if (empty($locations)) { ?>
+                        <?php if (empty($assetTypes)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
                         <table class="lists-table">
@@ -243,34 +229,34 @@ include './listsLogic.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($locations as $location): ?>
+                                <?php foreach ($assetTypes as $assetType): ?>
                                     <tr>
-                                        <td><?= $location['location_name'] ?></td>
+                                        <td><?= $assetType['assettype_name'] ?></td>
                                         <td>
                                             <a data-bs-toggle="modal"
-                                                data-bs-target="#editLocationModal<?= $location['location_id'] ?>"
+                                                data-bs-target="#editAssetTypeModal<?= $assetType['assettype_id'] ?>"
                                                 data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
-                                                data-bs-target="#deleteLocationModal<?= $location['location_id'] ?>"
+                                                data-bs-target="#deleteAssetTypeModal<?= $assetType['assettype_id'] ?>"
                                                 data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
-                                        <div class="modal fade-delete-LocationModal"
-                                            id="deleteLocationModal<?= $location['location_id'] ?>" tabindex="-1"
-                                            aria-labelledby="deleteLocationModalLabel" aria-hidden="true">
+                                        <div class="modal fade-delete-AssetTypeModal"
+                                            id="deleteAssetTypeModal<?= $assetType['assettype_id'] ?>" tabindex="-1"
+                                            aria-labelledby="deleteAssetTypeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
                                                     <div class="modal-header-delete">
                                                         <button type="button" class="close" data-bs-dismiss="modal"
                                                             aria-label="Close">×</button>
-                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Location</h6>
+                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Asset Type</h6>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="delete-part-two">
 
                                                             <p>This will delete this item: <span>
-                                                                    <?= $location['location_name'] ?> </span> </p>
+                                                                    <?= $assetType['assettype_name'] ?> </span> </p>
                                                             <p>This process is NOT reversible and will result in PERMANENT
                                                                 loss
                                                                 of data. Please be
@@ -282,17 +268,15 @@ include './listsLogic.php';
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="listsLogic.php?location_id=<?= $location['location_id'] ?>"
+                                                        <a href="listsLogic.php?assettype_id=<?= $assetType['assettype_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade-edit-LocationModal"
-                                            id="editLocationModal<?= $location['location_id'] ?>" tabindex="-1"
-                                            aria-labelledby="editLocationModalLabel" aria-hidden="true"
-                                            data-selected-country="<?= htmlspecialchars($location['country']) ?>"
-                                            data-selected-timezone="<?= htmlspecialchars($location['timezone']) ?>">
+                                        <div class="modal fade-edit-AssetTypeModal"
+                                            id="editAssetTypeModal<?= $assetType['assettype_id'] ?>" tabindex="-1"
+                                            aria-labelledby="editAssetTypeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
                                                     <form action="listsLogic.php" method="post"
@@ -300,39 +284,23 @@ include './listsLogic.php';
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                                 aria-label="Close">×</button>
-                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Location
+                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Asset Type
                                                             </h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="beginning-part">
                                                                 <div class="inputs">
-                                                                    <input type="hidden" name="location_id" id="location_id"
-                                                                        value="<?= $location['location_id'] ?>">
-                                                                    <label for="location">Location Name</label>
-                                                                    <input type="text" name="location" id="location"
-                                                                        value="<?= $location['location_name'] ?>">
-                                                                </div>
-                                                                <div class="drop-downs">
-                                                                    <div class="row-2">
-                                                                        <label for="country">Country</label>
-                                                                        <select id="country" name="country"
-                                                                            class="country-select">
-
-                                                                        </select>
-
-                                                                    </div>
-                                                                    <div class="row-2">
-                                                                        <label
-                                                                            for="timezone<?= $location['location_id'] ?>">Timezone</label>
-                                                                        <select class="form-control timezone-select"
-                                                                            id="timezone<?= $location['location_id'] ?>"></select>
-                                                                    </div>
+                                                                    <input type="hidden" name="assettype_id" id="assettype_id"
+                                                                        value="<?= $assetType['assettype_id'] ?>">
+                                                                    <label for="asset">Asset Type Name</label>
+                                                                    <input type="text" name="asset" id="asset"
+                                                                        value="<?= $assetType['assettype_name'] ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn-exit"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" name="editLocation"
+                                                                <button type="submit" name="editAssetType"
                                                                     class="btn-save">Save</button>
                                                             </div>
                                                     </form>
@@ -345,343 +313,43 @@ include './listsLogic.php';
                         </table>
                         <?php } ?>  
                     </div>
-                    <div class="lists-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>You can allocate your employees to a particulat location, and set permission based on them.
-                            You can also change timezones for each location if your employees are spread across
-                            different
-                            regions. </p>
-                    </div>
                 </div>
-                <div class="lists-tables">
-                    <div class="lists-tables-head">
-                        <h5>
-                            <i class="fa-solid fa-list"></i>
-                            Employment Statuses
-                        </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addEmploymentStatusesModal"
-                            data-bs-whatever="@mdo">
-                            <i class="fa-solid fa-plus"></i>
-                            Add Employment Status
-                        </button>
-                        <div class="modal fade-add-EmploymentStatusesModal" id="addEmploymentStatusesModal"
-                            tabindex="-1" aria-labelledby="addEmploymentStatusesModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content animated slideInTop">
-                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add Employment Statuse</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="beginning-part">
-                                                <div class="inputs">
-                                                    <label for="employmentStatus">Employment Statuse Name</label>
-                                                    <input type="text" name="employmentStatus" id="employmentStatus">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn-exit"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addEmploymentStatus"
-                                                class="btn-save">Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lists-tables-body">
-                        <?php if (empty($employmentStatuses)) { ?>
-                            <p class="NoData"><i> (No data) </i></p>
-                        <?php } else { ?>
-                        <table class="lists-table">
-                            <thead>
-                                <tr>
-                                    <th>name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($employmentStatuses as $empStatus): ?>
-                                    <tr>
-                                        <td><?= $empStatus['employmentstatus_name'] ?></td>
-                                        <td>
-                                            <a data-bs-toggle="modal"
-                                                data-bs-target="#editEmploymentStatusesModal<?= $empStatus['employmentstatus_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal"
-                                                data-bs-target="#deleteEmploymentStatusesModal<?= $empStatus['employmentstatus_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteList"> <i
-                                                    class="fa fa-trash"></i></a>
-                                        </td>
-                                        <div class="modal fade-delete-EmploymentStatusesModal"
-                                            id="deleteEmploymentStatusesModal<?= $empStatus['employmentstatus_id'] ?>"
-                                            tabindex="-1" aria-labelledby="deleteEmploymentStatusesModalLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated slideInTop">
-                                                    <div class="modal-header-delete">
-                                                        <button type="button" class="close" data-bs-dismiss="modal"
-                                                            aria-label="Close">×</button>
-                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Employment
-                                                            Status
-                                                        </h6>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="delete-part-two">
-
-                                                            <p>This will delete this item: <span>
-                                                                    <?= $empStatus['employmentstatus_name'] ?> </span> </p>
-                                                            <p>This process is NOT reversible and will result in PERMANENT
-                                                                loss
-                                                                of data. Please be
-                                                                ABSOLUTELY sure that you wish to remove this information
-                                                            </p>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn-exit"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <a href="listsLogic.php?employmentstatus_id=<?= $empStatus['employmentstatus_id'] ?>"
-                                                            class="deleteButton">delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal fade-edit-EmploymentStatusesModal"
-                                            id="editEmploymentStatusesModal<?= $empStatus['employmentstatus_id'] ?>"
-                                            tabindex="-1" aria-labelledby="editEmploymentStatusesModalLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated slideInTop">
-                                                    <form action="listsLogic.php" method="post"
-                                                        enctype="multipart/form-data">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                                aria-label="Close">×</button>
-                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Employment
-                                                                Status
-                                                                Category
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="beginning-part">
-                                                                <div class="inputs">
-                                                                    <input type="hidden" name="employmentstatus_id"
-                                                                        id="employmentstatus_id"
-                                                                        value="<?= $empStatus['employmentstatus_id'] ?>">
-                                                                    <label for="employmentStatus">News Category Name</label>
-                                                                    <input type="text" name="employmentStatus"
-                                                                        id="employmentStatus"
-                                                                        value="<?= $empStatus['employmentstatus_name'] ?>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn-exit"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" name="editEmploymentStatus"
-                                                                    class="btn-save">Save</button>
-                                                            </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                        <?php } ?>
-                    </div>
-                    <div class="lists-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>These should ideally match your payroll system.
-                        </p>
-                    </div>
-                </div>
-                <div class="lists-tables">
-                    <div class="lists-tables-head">
-                        <h5>
-                            <i class="fa-solid fa-list"></i>
-                            Custom Contact Types
-                        </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addContactTypesModal"
-                            data-bs-whatever="@mdo">
-                            <i class="fa-solid fa-plus"></i>
-                            Add Contact Type
-                        </button>
-                        <div class="modal fade-add-ContactTypesModal" id="addContactTypesModal" tabindex="-1"
-                            aria-labelledby="addContactTypesModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content animated slideInTop">
-                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add Contact Type</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="beginning-part">
-                                                <div class="inputs">
-                                                    <label for="ContactType">Contact Type Name</label>
-                                                    <input type="text" name="ContactType" id="ContactType">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn-exit"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addContactType" class="btn-save">Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lists-tables-body">
-                        <?php if (empty($contactTypes)) { ?>
-                            <p class="NoData"><i> (No data) </i></p>
-                        <?php } else { ?>
-                            <table class="lists-table">
-                                <thead>
-                                    <tr>
-                                        <th>name</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($contactTypes as $contactType): ?>
-                                        <tr>
-                                            <td><?= $contactType['contacttype_name'] ?></td>
-                                            <td>
-                                                <a data-bs-toggle="modal"
-                                                    data-bs-target="#editContactTypesModal<?= $contactType['contacttype_id'] ?>"
-                                                    data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a data-bs-toggle="modal"
-                                                    data-bs-target="#deleteContactTypesModal<?= $contactType['contacttype_id'] ?>"
-                                                    data-bs-whatever="@mdo" class="deleteList"> <i
-                                                        class="fa fa-trash"></i></a>
-                                            </td>
-                                            <div class="modal fade-delete-ContactTypesModal"
-                                                id="deleteContactTypesModal<?= $contactType['contacttype_id'] ?>" tabindex="-1"
-                                                aria-labelledby="deleteContactTypesModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content animated slideInTop">
-                                                        <div class="modal-header-delete">
-                                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                                aria-label="Close">×</button>
-                                                            <h6 class="modal-title" id="exampleModalLabel">Delete Employment
-                                                                Status
-                                                            </h6>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="delete-part-two">
-
-                                                                <p>This will delete this item: <span>
-                                                                        <?= $contactType['contacttype_name'] ?> </span> </p>
-                                                                <p>This process is NOT reversible and will result in PERMANENT
-                                                                    loss
-                                                                    of data. Please be
-                                                                    ABSOLUTELY sure that you wish to remove this information
-                                                                </p>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn-exit"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <a href="listsLogic.php?contacttype_id=<?= $contactType['contacttype_id'] ?>"
-                                                                class="deleteButton">delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal fade-edit-ContactTypesModal"
-                                                id="editContactTypesModal<?= $contactType['contacttype_id'] ?>" tabindex="-1"
-                                                aria-labelledby="editContactTypesModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content animated slideInTop">
-                                                        <form action="listsLogic.php" method="post"
-                                                            enctype="multipart/form-data">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                                    aria-label="Close">×</button>
-                                                                <h4 class="modal-title" id="exampleModalLabel">Edit Employment
-                                                                    Status
-                                                                    Category
-                                                                </h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="beginning-part">
-                                                                    <div class="inputs">
-                                                                        <input type="hidden" name="contacttype_id"
-                                                                            id="contacttype_id"
-                                                                            value="<?= $contactType['contacttype_id'] ?>">
-                                                                        <label for="ContactType">News Category Name</label>
-                                                                        <input type="text" name="ContactType" id="ContactType"
-                                                                            value="<?= $contactType['contacttype_name'] ?>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn-exit"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <button type="submit" name="editContactType"
-                                                                        class="btn-save">Save</button>
-                                                                </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        <?php } ?>
-                    </div>
-                    <div class="lists-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>You can add custom contact types.
-                        </p>
-                    </div>
-                </div>
+                
             </div>
             <div class="lists-right">
                 <div class="lists-tables">
                     <div class="lists-tables-head">
                         <h5>
                             <i class="fa-solid fa-list"></i>
-                            Positions
+                            Pay Levels
                         </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addPositionModal"
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#addPayLevelModal"
                             data-bs-whatever="@mdo">
                             <i class="fa-solid fa-plus"></i>
-                            Add Position
+                            Add Pay Level
                         </button>
-                        <div class="modal fade-add-PositionModal" id="addPositionModal" tabindex="-1"
-                            aria-labelledby="addPositionModalLabel" aria-hidden="true">
+                        <div class="modal fade-add-PayLevelModal" id="addPayLevelModal" tabindex="-1"
+                            aria-labelledby="addPayLevelModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content animated slideInTop">
                                     <form action="listsLogic.php" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                 aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add Position</h4>
+                                            <h4 class="modal-title" id="exampleModalLabel">Add Pay Level</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="beginning-part">
                                                 <div class="inputs">
-                                                    <label for="position">Departament Name</label>
-                                                    <input type="text" name="position">
+                                                    <label for="level">Pay Level Name</label>
+                                                    <input type="text" name="level" id="level">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn-exit"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addPosition" class="btn-save">Save</button>
+                                            <button type="submit" name="addPayLevel" class="btn-save">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -689,7 +357,7 @@ include './listsLogic.php';
                         </div>
                     </div>
                     <div class="lists-tables-body">
-                         <?php if (empty($positions)) { ?>
+                         <?php if (empty($payLevels)) { ?>
                             <p class="NoData"><i> (No data) </i></p>
                         <?php } else { ?>
                         <table class="lists-table">
@@ -699,34 +367,34 @@ include './listsLogic.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($positions as $position): ?>
+                                <?php foreach ($payLevels as $payLevel): ?>
                                     <tr>
-                                        <td><?= $position['position_name'] ?></td>
+                                        <td><?= $payLevel['paylevel_name'] ?></td>
                                         <td>
                                             <a data-bs-toggle="modal"
-                                                data-bs-target="#editPositionModal<?= $position['position_id'] ?>"
+                                                data-bs-target="#editPayLevelModal<?= $payLevel['paylevel_id'] ?>"
                                                 data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
                                             </a>
                                             <a data-bs-toggle="modal"
-                                                data-bs-target="#deletePositionModal<?= $position['position_id'] ?>"
+                                                data-bs-target="#deletePayLevelModal<?= $payLevel['paylevel_id'] ?>"
                                                 data-bs-whatever="@mdo" class="deleteList"> <i
                                                     class="fa fa-trash"></i></a>
                                         </td>
-                                        <div class="modal fade-delete-PositionModal"
-                                            id="deletePositionModal<?= $position['position_id'] ?>" tabindex="-1"
-                                            aria-labelledby="deletePositionModalLabel" aria-hidden="true">
+                                        <div class="modal fade-delete-PayLevelModal"
+                                            id="deletePayLevelModal<?= $payLevel['paylevel_id'] ?>" tabindex="-1"
+                                            aria-labelledby="deletePayLevelModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
                                                     <div class="modal-header-delete">
                                                         <button type="button" class="close" data-bs-dismiss="modal"
                                                             aria-label="Close">×</button>
-                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Position</h6>
+                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Pay Level</h6>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="delete-part-two">
 
                                                             <p>This will delete this item: <span>
-                                                                    <?= $position['position_name'] ?> </span> </p>
+                                                                    <?= $payLevel['paylevel_name'] ?> </span> </p>
                                                             <p>This process is NOT reversible and will result in PERMANENT
                                                                 loss
                                                                 of data. Please be
@@ -738,15 +406,15 @@ include './listsLogic.php';
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn-exit"
                                                             data-bs-dismiss="modal">Close</button>
-                                                        <a href="listsLogic.php?position_id=<?= $position['position_id'] ?>"
+                                                        <a href="listsLogic.php?paylevel_id=<?= $payLevel['paylevel_id'] ?>"
                                                             class="deleteButton">delete</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal fade-edit-PositionModal"
-                                            id="editPositionModal<?= $position['position_id'] ?>" tabindex="-1"
-                                            aria-labelledby="editPositionModalLabel" aria-hidden="true">
+                                        <div class="modal fade-edit-PayLevelModal"
+                                            id="editPayLevelModal<?= $payLevel['paylevel_id'] ?>" tabindex="-1"
+                                            aria-labelledby="editPayLevelModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content animated slideInTop">
                                                     <form action="listsLogic.php" method="post"
@@ -754,24 +422,24 @@ include './listsLogic.php';
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-bs-dismiss="modal"
                                                                 aria-label="Close">×</button>
-                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Position
+                                                            <h4 class="modal-title" id="exampleModalLabel">Edit Pay Level
                                                             </h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="beginning-part">
                                                                 <div class="inputs">
-                                                                    <input type="hidden" name="position_id" id=""
-                                                                        value="<?= $position['position_id'] ?>">
-                                                                    <label for="position">Departament Name</label>
-                                                                    <input type="text" name="position"
-                                                                        value="<?= $position['position_name'] ?>">
+                                                                    <input type="hidden" name="paylevel_id" id=""
+                                                                        value="<?= $payLevel['paylevel_id'] ?>">
+                                                                    <label for="level">Departament Name</label>
+                                                                    <input type="text" name="level" id="level"
+                                                                        value="<?= $payLevel['paylevel_name'] ?>">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn-exit"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" name="editPosition"
+                                                            <button type="submit" name="editPayLevel"
                                                                 class="btn-save">Save</button>
                                                         </div>
                                                     </form>
@@ -787,291 +455,7 @@ include './listsLogic.php';
                     
                 </div>
 
-                <div class="lists-tables">
-                    <div class="lists-tables-head">
-                        <h5>
-                            <i class="fa-solid fa-list"></i>
-                            News Category
-                        </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addNewsCategoriesModal"
-                            data-bs-whatever="@mdo">
-                            <i class="fa-solid fa-plus"></i>
-                            Add News Category
-                        </button>
-                        <div class="modal fade-add-NewsCategoriesModal" id="addNewsCategoriesModal" tabindex="-1"
-                            aria-labelledby="addNewsCategoriesModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content animated slideInTop">
-                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add News Category</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="beginning-part">
-                                                <div class="inputs">
-                                                    <label for="NewsCategory">News Category Name</label>
-                                                    <input type="text" name="NewsCategory" id="NewsCategory">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn-exit"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addNewsCategory" class="btn-save">Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lists-tables-body">
-                         <?php if (empty($NewsCategories)) { ?>
-                            <p class="NoData"><i> (No data) </i></p>
-                        <?php } else { ?>
-                        <table class="lists-table">
-                            <thead>
-                                <tr>
-                                    <th>name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($NewsCategories as $NewsCategory): ?>
-                                    <tr>
-                                        <td><?= $NewsCategory['newscategory_name'] ?></td>
-                                        <td>
-                                            <a data-bs-toggle="modal"
-                                                data-bs-target="#editNewsCategoriesModal<?= $NewsCategory['newscategory_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal"
-                                                data-bs-target="#deleteNewsCategoriesModal<?= $NewsCategory['newscategory_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteList"> <i
-                                                    class="fa fa-trash"></i></a>
-                                        </td>
-                                        <div class="modal fade-delete-NewsCategoriesModal"
-                                            id="deleteNewsCategoriesModal<?= $NewsCategory['newscategory_id'] ?>"
-                                            tabindex="-1" aria-labelledby="deleteNewsCategoriesModalLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated slideInTop">
-                                                    <div class="modal-header-delete">
-                                                        <button type="button" class="close" data-bs-dismiss="modal"
-                                                            aria-label="Close">×</button>
-                                                        <h6 class="modal-title" id="exampleModalLabel">Delete News Category
-                                                        </h6>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="delete-part-two">
-
-                                                            <p>This will delete this item: <span>
-                                                                    <?= $NewsCategory['newscategory_name'] ?> </span> </p>
-                                                            <p>This process is NOT reversible and will result in PERMANENT
-                                                                loss
-                                                                of data. Please be
-                                                                ABSOLUTELY sure that you wish to remove this information
-                                                            </p>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn-exit"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <a href="listsLogic.php?newscategory_id=<?= $NewsCategory['newscategory_id'] ?>"
-                                                            class="deleteButton">delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal fade-edit-NewsCategoriesModal"
-                                            id="editNewsCategoriesModal<?= $NewsCategory['newscategory_id'] ?>"
-                                            tabindex="-1" aria-labelledby="editNewsCategoriesModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated slideInTop">
-                                                    <form action="listsLogic.php" method="post"
-                                                        enctype="multipart/form-data">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                                aria-label="Close">×</button>
-                                                            <h4 class="modal-title" id="exampleModalLabel">Edit News
-                                                                Category
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="beginning-part">
-                                                                <div class="inputs">
-                                                                    <input type="hidden" name="newscategory_id"
-                                                                        id="newscategory_id"
-                                                                        value="<?= $NewsCategory['newscategory_id'] ?>">
-                                                                    <label for="NewsCategory">News Category Name</label>
-                                                                    <input type="text" name="NewsCategory" id="NewsCategory"
-                                                                        value="<?= $NewsCategory['newscategory_name'] ?>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn-exit"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" name="editNewsCategory"
-                                                                    class="btn-save">Save</button>
-                                                            </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                        <?php } ?>
-                    </div>
-                    <div class="lists-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>These are categories that you allocate to your news articles for your employees. </p>
-                    </div>
-                </div>
-                <div class="lists-tables">
-                    <div class="lists-tables-head">
-                        <h5>
-                            <i class="fa-solid fa-tag"></i>
-                            Tags
-                        </h5>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#addTagsModal"
-                            data-bs-whatever="@mdo">
-                            <i class="fa-solid fa-plus"></i>
-                            Add Tag
-                        </button>
-                        <div class="modal fade-add-TagsModal" id="addTagsModal" tabindex="-1"
-                            aria-labelledby="addTagsModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content animated slideInTop">
-                                    <form action="listsLogic.php" method="post" enctype="multipart/form-data">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">×</button>
-                                            <h4 class="modal-title" id="exampleModalLabel">Add Tag</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="beginning-part">
-                                                <div class="inputs">
-                                                    <label for="tag">Tag Name</label>
-                                                    <input type="text" name="tag" id="tag">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn-exit"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" name="addTag" class="btn-save">Save</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lists-tables-body">
-                        <?php if (empty($tags)) { ?>
-                            <p class="NoData"><i> (No data) </i></p>
-                        <?php } else { ?>
-                        <table class="lists-table">
-                            <thead>
-                                <tr>
-                                    <th>name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($tags as $tag): ?>
-                                    <tr>
-                                        <td><?= $tag['tag_name'] ?></td>
-                                        <td>
-                                            <a data-bs-toggle="modal" data-bs-target="#editTagsModal<?= $tag['tag_id'] ?>"
-                                                data-bs-whatever="@mdo" class="editList"> <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#deleteTagsModal<?= $tag['tag_id'] ?>"
-                                                data-bs-whatever="@mdo" class="deleteList"> <i
-                                                    class="fa fa-trash"></i></a>
-                                        </td>
-                                        <div class="modal fade-delete-TagsModal" id="deleteTagsModal<?= $tag['tag_id'] ?>"
-                                            tabindex="-1" aria-labelledby="deleteTagsModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated slideInTop">
-                                                    <div class="modal-header-delete">
-                                                        <button type="button" class="close" data-bs-dismiss="modal"
-                                                            aria-label="Close">×</button>
-                                                        <h6 class="modal-title" id="exampleModalLabel">Delete Tag
-                                                        </h6>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="delete-part-two">
-
-                                                            <p>This will delete this item: <span>
-                                                                    <?= $tag['tag_name'] ?> </span> </p>
-                                                            <p>This process is NOT reversible and will result in PERMANENT
-                                                                loss
-                                                                of data. Please be
-                                                                ABSOLUTELY sure that you wish to remove this information
-                                                            </p>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn-exit"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <a href="listsLogic.php?tag_id=<?= $tag['tag_id'] ?>"
-                                                            class="deleteButton">delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal fade-edit-TagsModal" id="editTagsModal<?= $tag['tag_id'] ?>"
-                                            tabindex="-1" aria-labelledby="editTagsModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content animated slideInTop">
-                                                    <form action="listsLogic.php" method="post"
-                                                        enctype="multipart/form-data">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                                aria-label="Close">×</button>
-                                                            <h4 class="modal-title" id="exampleModalLabel">Edit News
-                                                                Category
-                                                            </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="beginning-part">
-                                                                <div class="inputs">
-                                                                    <input type="hidden" name="tag_id" id="tag_id"
-                                                                        value="<?= $tag['tag_id'] ?>">
-                                                                    <label for="tag">News Category Name</label>
-                                                                    <input type="text" name="tag" id="tag"
-                                                                        value="<?= $tag['tag_name'] ?>">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn-exit"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" name="editTag"
-                                                                    class="btn-save">Save</button>
-                                                            </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                        <?php } ?>
-                    </div>
-                    <div class="lists-tables-footer">
-                        <img src="../images/qustionmark.png" alt="">
-                        <p>Tags allow you to categories and segment your employees even further.</br>
-                            <strong>NOTE:</strong> You can allocate multiple tags to each employee.</br>
-                            <strong>TIP:</strong> You can create a tag for eache project, or eache committee your
-                            emoployee
-                            belongs too.
-                        </p>
-                    </div>
-                </div>
+                
 
             </div>
 
@@ -1082,8 +466,6 @@ include './listsLogic.php';
         <?php include '../template/footer.php'; ?>
     </div>
 
-
-    <script src="../js/categories.js" type="text/javascript"></script>
 </body>
 
 </html>

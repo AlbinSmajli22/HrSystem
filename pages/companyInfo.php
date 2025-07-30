@@ -1,9 +1,5 @@
 <?php
-require_once '../config.php';
-session_start();
-$userId = $_SESSION['user_id'];
-$companyId = $_SESSION['company'];
-
+include './companyInfoLogic.php';
 ?>
 
 <head>
@@ -42,34 +38,24 @@ $companyId = $_SESSION['company'];
                     <div class="editCompanyBody">
 
                         <label for="companyName">Company Name</label>
-                        <input type="text" name="companyName" id="">
+                        <input type="text" name="companyName" id="" value="<?=$companyInfo['company_name'] ?>">
 
                         <label for="subcribedUntil">Subscribed Until</label>
-                        <input type="date" name="subcribedUntil" id="">
+                        <input type="date" name="subcribedUntil" id="" value="<?=$companyInfo['subscribed_until'] ?>">
 
                         <label for="maxEmp">Max. Employees</label>
-                        <input type="date" name="maxEmp" id="">
+                        <input type="text" name="maxEmp" id="" value="<?=$companyInfo['emp_num'] ?>">
 
                         <hr>
                         <span>Locale</span>
 
-                        <label for="CompCountry">Country That Your Company is in</label>
-                        <select name="CompCountry" id="CompCountry">
-                            <option value="Albanian">Albanian</option>
-                            <option value="England">England</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Kosovo">Kosovo</option>
-                            <option value="USA">USA</option>
+                        <label for="country">Country That Your Company is in</label>
+                        <select name="CompCountry" id="country" class="country">
                         </select>
                         <p>This wil et up the country specific formatting for your company.</p>
 
                         <label for="CompCountry">Your Company Timezone</label>
-                        <select name="CompCountry" id="CompCountry">
-                            <option value="Europe/Belgrad">Europe/Belgrad</option>
-                            <option value="Istanbul">Istanbul</option>
-                            <option value="Germany">Noscow, St.Petersburg</option>
-                            <option value="Kosovo">Beijing, Chongqing, Hong Kong, Urumqi</option>
-                            <option value="Central America">Central America</option>
+                        <select name="CompCountry" id="timezone" class="timezone">
                         </select>
                         <p>Pic the closest timezone applicable for your company (Note: Users default to this, but can
                             choose their own later).</p>
@@ -101,7 +87,13 @@ $companyId = $_SESSION['company'];
 
         <?php include '../template/footer.php' ?>
     </div>
-
+    <script>
+    window.appSettings = {
+        selectedCountry: "<?= addslashes($selectedCountry) ?>",
+        selectedTimezone: "<?= addslashes($selectedTimezone) ?>"
+    };
+</script>
+<script src="../js/companyInfo.js" type="text/javascript"></script>
 </body>
 
 </html>
