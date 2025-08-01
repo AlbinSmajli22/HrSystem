@@ -41,10 +41,10 @@ include './companyInfoLogic.php';
                         <input type="text" name="companyName" id="" value="<?=$companyInfo['company_name'] ?>">
 
                         <label for="subcribedUntil">Subscribed Until</label>
-                        <input type="date" name="subcribedUntil" id="" value="<?=$companyInfo['subscribed_until'] ?>">
+                        <input type="date" name="subcribedUntil" id="subcribed" readonly value="<?=$companyInfo['subscribed_until'] ?>">
 
                         <label for="maxEmp">Max. Employees</label>
-                        <input type="text" name="maxEmp" id="" value="<?=$companyInfo['emp_num'] ?>">
+                        <input type="text" name="maxEmp" id="empMax" readonly value="<?=$companyInfo['emp_num'] ?>">
 
                         <hr>
                         <span>Locale</span>
@@ -54,8 +54,8 @@ include './companyInfoLogic.php';
                         </select>
                         <p>This wil et up the country specific formatting for your company.</p>
 
-                        <label for="CompCountry">Your Company Timezone</label>
-                        <select name="CompCountry" id="timezone" class="timezone">
+                        <label for="timezone">Your Company Timezone</label>
+                        <select name="timezone" id="timezone" class="timezone">
                         </select>
                         <p>Pic the closest timezone applicable for your company (Note: Users default to this, but can
                             choose their own later).</p>
@@ -75,7 +75,7 @@ include './companyInfoLogic.php';
                     </div>
                     <div class="CompanyLogoBody">
                         <span id="logoArea">Drag your company logo image here.</span>
-                        <input type="file" name="logo" id="logo">
+                        <input type="file" name="image" id="logo">
                         <small>
                             Click on the box above, or drag and drop a new image into the box, in order to update the logo
                             for your company ( <strong>220px</strong> maximum height recommended. Limit <strong>5MB</strong>. ).
