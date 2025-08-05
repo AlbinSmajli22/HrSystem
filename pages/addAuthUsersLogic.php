@@ -203,7 +203,11 @@ if (isset($_POST['editExpense'])) {
 
 }
 
-
+$allUsers="SELECT * FROM users WHERE company=:company_id AND role=0";
+$prep = $con->prepare($allUsers);
+$prep->bindParam(':company_id', $companyId);
+$prep->execute();
+$users = $prep->fetchAll();
 
 
 $authUsersQuery = "SELECT * FROM users

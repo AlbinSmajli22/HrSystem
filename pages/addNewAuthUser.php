@@ -3,6 +3,7 @@ require_once '../config.php';
 session_start();
 $userId = $_SESSION['user_id'];
 $company_Id = $_SESSION['company'];
+include 'addAuthUsersLogic.php';
 
 ?>
 
@@ -69,7 +70,9 @@ $company_Id = $_SESSION['company'];
                     <div class="form-group">
                         <label for="category">Link to Company Employee</label><br>
                         <select name="category" id="category">
-                            <option value="Breaking">Breaking</option>
+                            <?php foreach($users as $user): ?>
+                            <option value="Breaking"><?= $user['name']?> <?= $user['surname']?></option>
+                            <?php endforeach; ?>
                         </select>
                         <p>If the admin user also ha access to the employee portal, select their employee records here
                             to allow them to easily switch between their admin and employee portals.</p>
