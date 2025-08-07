@@ -52,26 +52,27 @@ include 'addAuthUsersLogic.php';
                 </div>
                 <form action="" method="post">
                     <div class="form-group">
-                        <label for="title">First Name</label><br>
-                        <input type="text" name="title" id="title">
+                        <label for="firsName">First Name</label><br>
+                        <input type="text" name="firsName" id="firsName">
 
                     </div>
                     <div class="form-group">
-                        <label for="title">Last Name</label><br>
-                        <input type="text" name="title" id="title">
+                        <label for="lastName">Last Name</label><br>
+                        <input type="text" name="lastName" id="lastName">
 
                     </div>
                     <div class="form-group">
-                        <label for="title">Email</label><br>
-                        <input type="text" name="title" id="title">
+                        <label for="email">Email</label><br>
+                        <input type="text" name="email" id="email">
 
                     </div>
                     <hr>
                     <div class="form-group">
-                        <label for="category">Link to Company Employee</label><br>
-                        <select name="category" id="category">
+                        <label for="existEmp">Link to Company Employee</label><br>
+                        <select name="existEmp" id="existEmp">
+                            <option value="" disabled selected>Select a user</option>
                             <?php foreach($users as $user): ?>
-                            <option value="Breaking"><?= $user['name']?> <?= $user['surname']?></option>
+                            <option value="<?= $user['user_id']?>"><?= $user['name']?> <?= $user['surname']?></option>
                             <?php endforeach; ?>
                         </select>
                         <p>If the admin user also ha access to the employee portal, select their employee records here
@@ -80,7 +81,7 @@ include 'addAuthUsersLogic.php';
 
 
                     <div class="ArticleFooter">
-                        <button type="submit" name="addNews">Save</button>
+                        <button type="submit" name="addAuthUser">Save</button>
                         <a href="home.php" class="cancel">Cancel</a>
                     </div>
                 </form>
