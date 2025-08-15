@@ -1,4 +1,7 @@
 <?php
+$userId = $_SESSION['user_id'];
+$company_Id = $_SESSION['company'];
+
 if (isset($_POST['addAuthUser'])) {
 
     $name = $_POST['firsName'] ?? '';
@@ -43,7 +46,7 @@ if (isset($_POST['editExpense'])) {
 
 $allUsers = "SELECT * FROM users WHERE company=:company_id AND role=0";
 $prep = $con->prepare($allUsers);
-$prep->bindParam(':company_id', $companyId);
+$prep->bindParam(':company_id', $company_Id);
 $prep->execute();
 $users = $prep->fetchAll();
 
@@ -51,7 +54,7 @@ $users = $prep->fetchAll();
 $authUsersQuery = "SELECT * FROM users
 WHERE company=:company_id AND role=1";
 $prep = $con->prepare($authUsersQuery);
-$prep->bindParam(':company_id', $companyId);
+$prep->bindParam(':company_id', $company_Id);
 $prep->execute();
 $authusers = $prep->fetchAll();
 

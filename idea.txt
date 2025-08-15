@@ -21,6 +21,12 @@ per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
 √ 4. fetch value te users per qdo goal dhe shfaqi te goali perkates.
 √ 5. fix stats t kompanis per sa users kan goal.
 
+
+1.Ndrysho formen e Authorised Users krijo nje tabel tjeter per Authorised Users dhe nje login interface extra per Authorised Users to login,
+rregullo pjesen per edit Authorised Users.
+
+
+
 INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited) VALUES(103, 5, 7, NULL, NULL," ", NULL, 2025-05-05 00:00:00)
 
 

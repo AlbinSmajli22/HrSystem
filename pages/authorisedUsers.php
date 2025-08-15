@@ -1,6 +1,8 @@
 <?php
 require_once '../config.php';
 session_start();
+$userId = $_SESSION['user_id'];
+$company_Id = $_SESSION['company'];
 
 include 'addAuthUsersLogic.php';
 ?>
