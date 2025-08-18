@@ -51,6 +51,7 @@ h3{
 }
 a{
     text-decoration: none;
+    color: #337ab7;
 }
 input{
     width: 272.8px;
@@ -89,3 +90,4 @@ form .error{
     width: 272.8px;
    
    }
+   /*#337ab7*/

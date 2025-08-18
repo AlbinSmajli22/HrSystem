@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-include_once 'loginlogic.php';
+include_once 'adminloginlogic.php';
 
 ?>
 
@@ -31,9 +31,7 @@ include_once 'loginlogic.php';
             <a href=""> <small>Forgot your password</small></a>
             <p Style="margin-bottom: 10px; margin-top: 20px;">
                 <small>
-                    Note: This login is for employees only.
-                    <br>
-                    Admin users please use the <a href="adminLogin.php">admin login form.</a>
+                    Looking for the MetDaan employee portal? <br> <a href="index.php">Click here to sign on as an employee instead.</a>
                 </small>
             </p>
             <p>

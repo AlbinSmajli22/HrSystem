@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /HrSystem/
+
+# Rule for home
+RewriteRule ^home$ pages/home.php [L]
