@@ -25,6 +25,7 @@ per te shmangur duplikimin e vlersimeve kur punonjesi editon vlersimin e par.
 1.Ndrysho formen e Authorised Users krijo nje tabel tjeter per Authorised Users dhe nje login interface extra per Authorised Users to login,
 rregullo pjesen per edit Authorised Users.
 
+te login as admin check if user e ka admin 1 ose 0 nese e ka 1 ather bone loggin si admin nese 0 the error message !!!
 
 
 INSERT INTO companygoalsvalue (value_id, user, company_goal, value, completed, comment, done, edited) VALUES(103, 5, 7, NULL, NULL," ", NULL, 2025-05-05 00:00:00)

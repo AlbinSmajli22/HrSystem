@@ -16,32 +16,28 @@ $previous = $page - 1;
 
 
     $sql = "SELECT * FROM timeoffrequests
-    right join users on users.user_id = timeoffrequests.User_ID
-    WHERE timeoffrequests.Head_ID =$userId and timeoffrequests.status LIKE 'Submited'
-    ORDER BY timeoffrequests.request_id DESC";
+  right join users on users.user_id = timeoffrequests.User_ID
+        WHERE timeoffrequests.status LIKE 'Submited'
+        ORDER BY timeoffrequests.request_id DESC";
     $prep = $con->prepare($sql);
     $prep->execute();
     $requestDatas = $prep->fetchAll();
 
     $sql_count = "SELECT * FROM timeoffrequests
     right join users on users.user_id = timeoffrequests.User_ID
-    WHERE timeoffrequests.Head_ID =:userId and timeoffrequests.status LIKE 'Submited'
-    ORDER BY timeoffrequests.request_id ";
+          WHERE timeoffrequests.status LIKE 'Submited'
+          ORDER BY timeoffrequests.request_id ";
     $prep = $con->prepare($sql_count);
-    $prep->bindParam(':userId', $userId, PDO::PARAM_INT);
     $prep->execute();
     $total_datas = $prep->rowCount();
 
     $total_page = ceil($total_datas / $limit);
 
 
-
 include 'approverequestLogic.php';
 ?>
 
-<?php
-include_once 'GetLeadAndHR.php';
-?>
+
 
 
 
@@ -65,7 +61,7 @@ include_once 'GetLeadAndHR.php';
 
 <body>
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>

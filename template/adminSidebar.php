@@ -20,7 +20,7 @@ $userName=$_SESSION['name'];
             <div class="logo-element">HR</div>
         </li>
         <li class="<?= basename($_SERVER['PHP_SELF']) == 'AdminHome.php' ? 'active' : '' ?>">
-            <a href="home.php" class="sidebarElements-links">
+            <a href="AdminHome.php" class="sidebarElements-links">
                 <i class="fa-solid fa-house-chimney"></i>
                 <span>Home</span>
             </a>
@@ -57,7 +57,7 @@ $userName=$_SESSION['name'];
                         </a>
                     </li>
                     <li>
-                        <a href="approverequest.php"> 
+                        <a href="approverequestAdmin.php"> 
                             <i class="fa fa-plane"></i> 
                             Requests
                         </a>

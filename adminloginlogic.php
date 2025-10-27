@@ -29,11 +29,13 @@ if (isset($_POST['submit'])) {
         $prep->execute();
         $data2= $prep->fetch();
 
-        $_SESSION['company'] = $data['company'];
+         $_SESSION['user_id'] = $data['user_id'];
+        $_SESSION['company'] = $data['company_id'];
         $_SESSION['company_name'] = $data['company_name'];
         $_SESSION['password'] = $data['password'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['name'] = $data['name'] . " " . $data['surname'];
+        $_SESSION['departament'] ="Human Resorce";
 
         
         header("Location: pages/adminHome.php");

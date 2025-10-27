@@ -147,7 +147,7 @@ $prep->execute();
 $amounts = $prep->fetchAll();
 */
 
-include_once 'GetLeadAndHR.php';
+
 ?>
 
 
@@ -172,7 +172,7 @@ include_once 'GetLeadAndHR.php';
 
 <body>
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
