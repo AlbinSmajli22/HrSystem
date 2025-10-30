@@ -33,7 +33,7 @@ $goalitems = $prep->fetchAll();
 
 <body>
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>

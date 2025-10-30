@@ -27,7 +27,7 @@ include 'addAuthUsersLogic.php';
 
 <body style="background-color: #F4F6FA;">
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
@@ -82,7 +82,7 @@ include 'addAuthUsersLogic.php';
 
                     <div class="ArticleFooter">
                         <button type="submit" name="addAuthUser">Save</button>
-                        <a href="home.php" class="cancel">Cancel</a>
+                        <a href="authorisedUsers.php" class="cancel">Cancel</a>
                     </div>
                 </form>
             </div>

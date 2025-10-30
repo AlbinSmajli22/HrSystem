@@ -26,7 +26,7 @@ include 'addExpensseLogic.php';
 
 <body style="background-color: #F4F6FA;">
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>

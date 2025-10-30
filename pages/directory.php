@@ -13,12 +13,13 @@ $filterdatas = $prep->fetchAll();
 
 
 
-$filterquery2 = "SELECT * from position LEFT JOIN departament on position.Departament_ID=departament.departament_id
-WHERE departament.company_id=$companyId";
+$filterquery2 = "SELECT * from position 
+WHERE company_id=$companyId";
 
 $prep = $con->prepare($filterquery2);
 $prep->execute();
 $filterdatas2 = $prep->fetchAll();
+
 if (isset($_GET['page'])) {
   $page = $_GET['page'];
 } else {
