@@ -23,17 +23,33 @@ if (isset($_POST['addAuthUser'])) {
         $prep->bindParam(':surname', $surname);
         $prep->bindParam(':email', $email);
         $prep->bindParam(':password', $password);
-        $prep->bindParam(':company', $companyId);
+        $prep->bindParam(':company', $company_Id);
 
         $prep->execute();
 
-    } else {
-        $sql = "UPDATE users SET role = 1 WHERE user_id=:user_id";
+    } elseif(!empty($existEmp)) {
+
+
+        $sql = "SELECT * FROM users WHERE user_id=:user_id ";
         $prep = $con->prepare($sql);
-
         $prep->bindParam(':user_id', $existEmp);
-
         $prep->execute();
+        $user = $prep->fetch();
+
+
+
+
+        $newAdmin = "INSERT INTO admins (user_id, name, surname, email, password, owner, company_id)
+        VALUES (:user_id, :name, :surname, :email, :password, 0, :company_id)";
+        $prep = $con->prepare($newAdmin);
+        $prep->bindParam(':user_id', $existEmp);
+        $prep->bindParam(':name', $user['name']);
+        $prep->bindParam(':surname', $user['surname']);
+        $prep->bindParam(':email', $user['email']);
+        $prep->bindParam(':password', $user['password']);
+        $prep->bindParam(':company_id', $company_Id);
+
+
     }
     Header("Location:authorisedUsers.php");
     exit;
@@ -44,15 +60,15 @@ if (isset($_POST['editExpense'])) {
 
 }
 
-$allUsers = "SELECT * FROM users WHERE company=:company_id AND role=0";
+$allUsers = "SELECT * FROM users WHERE company=:company_id ";
 $prep = $con->prepare($allUsers);
 $prep->bindParam(':company_id', $company_Id);
 $prep->execute();
 $users = $prep->fetchAll();
 
 
-$authUsersQuery = "SELECT * FROM users
-WHERE company=:company_id AND role=1";
+$authUsersQuery = "SELECT * FROM admins
+WHERE company_id=:company_id";
 $prep = $con->prepare($authUsersQuery);
 $prep->bindParam(':company_id', $company_Id);
 $prep->execute();
