@@ -1,8 +1,8 @@
 <?php
 require_once '../config.php';
 session_start();
-$userId = $_SESSION['user_id'];
 $company_Id = $_SESSION['company'];
+$adminName=  $_SESSION['name']; 
 
 
 if (isset($_POST['addNews'])) {
@@ -17,7 +17,7 @@ if (isset($_POST['addNews'])) {
 
     $newsQuery="INSERT INTO news VALUES (null, :title, :category, :summary, :content, :publish_on, :until, :author, :created, :company_id)";
     $prep=$con->prepare($newsQuery);
-    $prep->bindParam(':author', $userId);
+    $prep->bindParam(':author', $adminName);
     $prep->bindParam(':company_id', $company_Id);
     $prep->bindParam(':title', $title);
     $prep->bindParam(':category', $category);
@@ -61,7 +61,7 @@ if (isset($_POST['addNews'])) {
 
 <body style="background-color: #F4F6FA;">
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>

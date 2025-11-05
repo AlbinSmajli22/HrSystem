@@ -73,15 +73,15 @@ include 'addAuthUsersLogic.php';
                                     20 minutes ago
                                 </td>
                                 <td>
-                                    √
+                                     √
                                 </td>
                                 <td>
-                                    √
+                                    <?= $authuser['owner'] == 0 ? '' : '√' ?>
                                 </td>
                                 <td>
                                     <button id="editAuthUser" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
                                         data-bs-whatever="@mdo">
-                                        <a>
+                                        <a href="editAuthUsers.php">
                                             <i class=" fa fa-edit"></i>
                                             Edit
                                         </a>

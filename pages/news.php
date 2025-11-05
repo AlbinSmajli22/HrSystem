@@ -1,11 +1,10 @@
 <?php
 require_once '../config.php';
 session_start();
-$userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
 
-$NewQuery = "SELECT * FROM news RIGHT JOIN users ON news.author=users.user_id 
+$NewQuery = "SELECT * FROM news
 WHERE company_id=:company_id";
 $prep = $con->prepare($NewQuery);
 $prep->bindParam(':company_id', $companyId);
@@ -74,7 +73,7 @@ if (isset($_POST['editNews'])) {
 
 <body style="background-color: #F4F6FA;">
     <div>
-        <?php include '../template/sidebar.php' ?>
+        <?php include '../template/adminSidebar.php' ?>
     </div>
     <div class="content">
         <?php include '../template/navbar.php' ?>
@@ -118,7 +117,7 @@ if (isset($_POST['editNews'])) {
                                     <?= $New['category'] ?>
                                 </td>
                                 <td>
-                                    <?= $New['name'] ?>     <?= $New['surname'] ?>
+                                    <?= $New['author'] ?>
                                 </td>
                                 <td>
                                     <?= $New['publish_on'] ?>

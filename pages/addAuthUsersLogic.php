@@ -14,20 +14,21 @@ if (isset($_POST['addAuthUser'])) {
 
     if (empty($existEmp)) {
 
-        $sql = "INSERT INTO users (user_id, image,  name, surname, email, password, Position_ID, Departament_ID, role, location, status, report_to, gender, born, started,company) VALUES
-        (null, null,  :name, :surname, :email, :password, null, null, 1, null, null, null, null, null, null,:company)";
+        $sql2 = "INSERT INTO admins (user_id, name, surname, email, password, owner, company_id)
+        VALUES (null, :name, :surname, :email, :password, :owner,:company_id )";
 
-        $prep = $con->prepare($sql);
+        $prep = $con->prepare($sql2);
 
         $prep->bindParam(':name', $name);
         $prep->bindParam(':surname', $surname);
         $prep->bindParam(':email', $email);
         $prep->bindParam(':password', $password);
-        $prep->bindParam(':company', $company_Id);
+        $prep->bindParam(':owner', $owner);
+        $prep->bindParam(':company_id', $company_Id);
 
         $prep->execute();
 
-    } elseif(!empty($existEmp)) {
+    } else {
 
 
         $sql = "SELECT * FROM users WHERE user_id=:user_id ";
@@ -36,11 +37,13 @@ if (isset($_POST['addAuthUser'])) {
         $prep->execute();
         $user = $prep->fetch();
 
+        $owner=0;
+
 
 
 
         $newAdmin = "INSERT INTO admins (user_id, name, surname, email, password, owner, company_id)
-        VALUES (:user_id, :name, :surname, :email, :password, 0, :company_id)";
+        VALUES (:user_id, :name, :surname, :email, :password, :owner, :company_id)";
         $prep = $con->prepare($newAdmin);
         $prep->bindParam(':user_id', $existEmp);
         $prep->bindParam(':name', $user['name']);
@@ -48,7 +51,11 @@ if (isset($_POST['addAuthUser'])) {
         $prep->bindParam(':email', $user['email']);
         $prep->bindParam(':password', $user['password']);
         $prep->bindParam(':company_id', $company_Id);
+        $prep->bindParam(':owner', $owner);
 
+
+        $prep->execute();
+        Header("Location:authorisedUsers.php");
 
     }
     Header("Location:authorisedUsers.php");
