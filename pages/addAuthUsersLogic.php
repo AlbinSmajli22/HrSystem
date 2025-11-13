@@ -37,7 +37,7 @@ if (isset($_POST['addAuthUser'])) {
         $prep->execute();
         $user = $prep->fetch();
 
-        $owner=0;
+        $owner = 0;
 
 
 
@@ -61,10 +61,50 @@ if (isset($_POST['addAuthUser'])) {
     Header("Location:authorisedUsers.php");
     exit;
 }
-if (isset($_POST['editExpense'])) {
+if (isset($_POST['editAuthUser'])) {
+
+    $name = $_POST['firsName'] ?? '';
+    $surname = $_POST['lastName'] ?? '';
+    $existEmp = $_POST['existEmp'] ?? '';
+    $admin_id = $_POST['admin_id'] ?? '';
+
+    if (empty($existEmp)) {
+
+        $sql2 = "UPDATE admins SET  name=:name, surname=:surname WHERE admin_id=:admin_id";
+
+        $prep = $con->prepare($sql2);
+
+       
+        $prep->bindParam(':name', $name);
+        $prep->bindParam(':surname', $surname);
+        $prep->bindParam(':admin_id', $admin_id);
+
+        $prep->execute();
+
+    } else {
+
+
+        $sql = "SELECT * FROM users WHERE user_id=:user_id ";
+        $prep = $con->prepare($sql);
+        $prep->bindParam(':user_id', $existEmp);
+        $prep->execute();
+        $user = $prep->fetch();
 
 
 
+        $newAdmin = "UPDATE admins SET user_id = :user_id WHERE admin_id=:admin_id";
+        $prep = $con->prepare($newAdmin);
+        $prep->bindParam(':user_id', $existEmp);
+        $prep->bindParam(':admin_id', $admin_id);
+
+
+
+        $prep->execute();
+
+
+    }
+    Header("Location:authorisedUsers.php");
+    exit;
 }
 
 $allUsers = "SELECT * FROM users WHERE company=:company_id ";
@@ -80,6 +120,5 @@ $prep = $con->prepare($authUsersQuery);
 $prep->bindParam(':company_id', $company_Id);
 $prep->execute();
 $authusers = $prep->fetchAll();
-
 
 ?>

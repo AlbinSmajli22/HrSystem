@@ -81,7 +81,7 @@ include 'addAuthUsersLogic.php';
                                 <td>
                                     <button id="editAuthUser" data-bs-toggle="modal" data-bs-target="#addExpensesModal"
                                         data-bs-whatever="@mdo">
-                                        <a href="editAuthUsers.php">
+                                        <a href="editAuthUsers.php?admin_id=<?= $authuser['admin_id'] ?>">
                                             <i class=" fa fa-edit"></i>
                                             Edit
                                         </a>

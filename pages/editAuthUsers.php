@@ -1,9 +1,14 @@
 <?php
 require_once '../config.php';
 session_start();
-$userId = $_SESSION['user_id'];
 $company_Id = $_SESSION['company'];
 include 'addAuthUsersLogic.php';
+$admin_id=$_GET['admin_id'];
+$sql="SELECT * FROM admins where admin_id=:admin_id";
+$prep=$con->prepare($sql);
+$prep->bindParam(':admin_id', $admin_id);
+$prep->execute();
+$admin=$prep->fetch();
 
 ?>
 
@@ -48,23 +53,24 @@ include 'addAuthUsersLogic.php';
                         <div class="ArticleBody-left">
                             <div class="form-group">
                                 <label for="firsName">First Name</label><br>
-                                <input type="text" name="firsName" id="firsName">
+                                <input type="text" name="firsName" id="firsName" value="<?=$admin['name'] ?>">
+                                <input type="hidden" name="admin_id" id="admin_id" value="<?=$admin['admin_id'] ?>">
 
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label><br>
-                                <input type="text" name="lastName" id="lastName">
+                                <input type="text" name="lastName" id="lastName" value="<?=$admin['surname'] ?>">
 
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label><br>
-                                <input type="text" readonly name="email" id="email">
+                                <input type="text" readonly name="email" id="email" value="<?=$admin['email'] ?>">
                             </div>
                         </div>
                         <div class="ArticleBody-right">
                             <button>
                                 <i class="fa fa-trash"></i>
-                                <a href=""> Delete this user</a>
+                                <a href="deleteAuthUser.php?admin_id=<?= $admin['admin_id'] ?>"> Delete this user</a>
                             </button>
                         </div>
                     </div>
@@ -90,7 +96,7 @@ include 'addAuthUsersLogic.php';
 
 
                     <div class="ArticleFooter">
-                        <button type="submit" name="addAuthUser">Save</button>
+                        <button type="submit" name="editAuthUser">Save</button>
                         <a href="authorisedUsers.php" class="cancel">Cancel</a>
                     </div>
                 </form>

@@ -107,6 +107,9 @@ body {
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   padding: 6 12 6 12;
 }
+.ArticleBody-top .ArticleBody-left .form-group #email{
+      background-color: #f4f6fa;
+}
 .ArticleBody-top .ArticleBody-right {
   width: 50%;
   display: flex;
