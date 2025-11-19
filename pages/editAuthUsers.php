@@ -3,12 +3,12 @@ require_once '../config.php';
 session_start();
 $company_Id = $_SESSION['company'];
 include 'addAuthUsersLogic.php';
-$admin_id=$_GET['admin_id'];
-$sql="SELECT * FROM admins where admin_id=:admin_id";
-$prep=$con->prepare($sql);
+$admin_id = $_GET['admin_id'];
+$sql = "SELECT * FROM admins where admin_id=:admin_id";
+$prep = $con->prepare($sql);
 $prep->bindParam(':admin_id', $admin_id);
 $prep->execute();
-$admin=$prep->fetch();
+$admin = $prep->fetch();
 
 ?>
 
@@ -53,25 +53,53 @@ $admin=$prep->fetch();
                         <div class="ArticleBody-left">
                             <div class="form-group">
                                 <label for="firsName">First Name</label><br>
-                                <input type="text" name="firsName" id="firsName" value="<?=$admin['name'] ?>">
-                                <input type="hidden" name="admin_id" id="admin_id" value="<?=$admin['admin_id'] ?>">
+                                <input type="text" name="firsName" id="firsName" value="<?= $admin['name'] ?>">
+                                <input type="hidden" name="admin_id" id="admin_id" value="<?= $admin['admin_id'] ?>">
 
                             </div>
                             <div class="form-group">
                                 <label for="lastName">Last Name</label><br>
-                                <input type="text" name="lastName" id="lastName" value="<?=$admin['surname'] ?>">
+                                <input type="text" name="lastName" id="lastName" value="<?= $admin['surname'] ?>">
 
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label><br>
-                                <input type="text" readonly name="email" id="email" value="<?=$admin['email'] ?>">
+                                <input type="text" readonly name="email" id="email" value="<?= $admin['email'] ?>">
                             </div>
                         </div>
                         <div class="ArticleBody-right">
-                            <button>
-                                <i class="fa fa-trash"></i>
-                                <a href="deleteAuthUser.php?admin_id=<?= $admin['admin_id'] ?>"> Delete this user</a>
+                            <button data-bs-toggle="modal" data-bs-target="#exampleModal" id="deleteAuthBtn">
+
+                                <a data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i>
+                                    Delete this user</a>
                             </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title fs-5" id="exampleModalLabel">Delete User</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                           <p> <strong> Deleting this user</strong> means that they will no longer be able to log into this
+                                            company and do any more work in it.</p>
+
+                                            <p> The user will have to be re-invited or apply again to join this company in
+                                            the future. If they do so, bear in mind that all their security settings
+                                            must be set up again from scratch.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-exit"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <a href="deleteAuthUser.php?admin_id=<?= $admin['admin_id'] ?>" class="btn-delete"> Delete this
+                                                user</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

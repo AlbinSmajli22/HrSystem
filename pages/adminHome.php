@@ -29,7 +29,7 @@ $currentTime = date('h:i A');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/homeAdmin.css">
 </head>
 
 <body>
@@ -52,32 +52,23 @@ $currentTime = date('h:i A');
             <div class="shortcutsBody">
                 <div class="shortcutsBodyElements">
                     <img src="../images/request_leave5.png" alt="" width="48px" height="48px">
-                    <h3><a href="newrequest.php">Request Time-Off</a></h3>
+                    <h3><a href="newrequest.php">Add an Employee</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/company_directory.png" alt="" width="48px" height="48px">
-                    <h3><a href="directory.php">Company Directory</a></h3>
+                    <h3><a href="directory.php">Eiew All Employee</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/employee_profile.png" alt="" width="48px" height="48px">
-                    <h3><a href="myprofile.php">My Profile</a></h3>
+                    <h3><a href="myprofile.php">Update Leave Balances</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/fill_checklist.png" alt="" width="48px" height="48px">
-                    <h3><a href="checklist.php">Complete Checklist</a></h3>
+                    <h3><a href="checklist.php">Add an Admin Manager</a></h3>
                 </div>
-                <div class="shortcutsBodyElements">
-                    <img src="../images/company_org_chart.png" alt="" width="48px" height="48px">
-                    <h3><a href="orgchart.php">Company Org. Chart</a></h3>
-                </div>
-                <div class="shortcutsBodyElements">
-                    <img src="../images/read_news_female.png" alt="" width="48px" height="48px">
-                    <h3><a href="empNews.php">News</a></h3>
-                </div>
-                <div class="shortcutsBodyElements">
-                    <img src="../images/expense_claim3.png" alt="" width="48px" height="48px">
-                    <h3><a href="empexpenses.php">File an Expens Claim</a></h3>
-                </div>
+                
+                
+                
             </div>
 
         </div>
