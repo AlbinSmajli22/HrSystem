@@ -29,6 +29,7 @@ $currentTime = date('h:i A');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
+    <script src="../js/adminHome.js"></script>
     <link rel="stylesheet" href="../css/homeAdmin.css">
 </head>
 
@@ -66,76 +67,76 @@ $currentTime = date('h:i A');
                     <img src="../images/fill_checklist.png" alt="" width="48px" height="48px">
                     <h3><a href="checklist.php">Add an Admin Manager</a></h3>
                 </div>
-                
-                
-                
+
+
+
             </div>
 
         </div>
         <div class="thirdContainer">
             <div class="leftDiv">
-                <div class="Activechecklists">
-                    <div class="ActivechecklistsHead">
+                <div class="upcomingBD">
+                    <div class="upcomingBDHead">
                         <h5>
                             <img src="../images/checklist.png" alt="" height="24px" width="24px">
-                            Active Checklists
+                            Upcoming Birthdays
                         </h5>
                     </div>
-                    <div class="ActivechecklistsBody">
-                        <div class="ActivechecklistsNotification">
-                            <p>
-                                <em> You have 1 active checklist that needs completing.</em>
-                            </p>
-                        </div>
-                        <div class="ActivechecklistsContent">
-                            <div class="ActivechecklistsContent1">
-                                <a style="color: #337ab7;">Onboarding</a>
-                            </div>
-                            <div class="ActivechecklistsContent2" style="width:220px;"></div>
-                            <div class="ActivechecklistsContent3">
-                                <a style="color: #fff;">
-                                    <i class="fa-solid fa-pen-to-square" style="color: #fafcff;"></i>
-                                    Update
-                                </a>
+                    <div class="upcomingBDBody">
+                        <div class="upcomingBDContent">
+                            <div>
+                                <p>Albin Smajli</p> <strong>11/27</strong>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="timeOff">
-                    <div class="timeOffHead">
+                <div class="toDoList">
+                    <div class="toDoListHead">
                         <h5>
-                            <img src="../images/balance.png" alt="" height="24px" width="24px">
-                            Time Off/Leave Balances
+                            <img src="../images/checklist.png" alt="" height="24px" width="24px">
+                            Upcoming Birthdays
                         </h5>
                     </div>
-                    <div class="timeOffBody">
-                        <table class="leavs">
-                            <thead>
-                                <tr>
-                                    <td>Time Off/Leave Type</td>
-                                    <td>Allowance <br> (Annual)</td>
-                                    <td>Balance <br> (Accrued)</td>
-                                    <td>Planned <br> (In the future)</td>
-                                    <td>Available <br> (To take)</td>
-                                    <td>Units</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             
-                                    <tr>
-                                        <td class="leavType">sick leave </td>
-                                        <td>3</td>
-                                        <td>5</td>
-                                        <td>5</td>
-                                        <td>5</td>
-                                        <td>Days</td>
-                                    </tr>
-                               
+                    <div class="toDoListBody">
+                        <div class="toDoListContent">
+                            <div class="toDoList-list">
+                                <div class="task">
+                                    <div class="task-info">
+                                        <input type="checkbox" name="done" id="done">
+                                        <small>task name</small>
+                                        <button class="priority">high</button>
+                                    </div>
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                                <div class="task">
+                                    <div>
+                                        <input type="checkbox" name="done" id="done">
+                                        <small>task name</small>
+                                        <button class="priority">high</button>
+                                    </div>
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                            </div>
+                            <div class="add-todo">
+                                <input type="text" name="todo" id="todo">
+                                <div class="todo-dropdown">
+                                    <button class="add-todo-btn">Add</button>
+                                    <button class="addTodoDropdownBtn" onclick="diffToDoFunction()">
+                                        <i class="fa-solid fa-caret-down"></i>
+                                    </button>
+                                    <div id="myToDoDropdown" class="todoDropdownContent">
+                                        <button><i class="fa-solid fa-check" style="color: #e00b0b;"></i> Add High Priority</button>
+                                        <button><i class="fa-solid fa-check" style="color: #000000;"></i> Add High Normal</button>
+                                        <button><i class="fa-solid fa-check" style="color: #cccccc;"></i> Add Low Priority</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
 
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
+
                 <div class="recentLeaveRequests">
                     <div class="recentLeaveRequestsHead">
                         <h5>
@@ -154,26 +155,26 @@ $currentTime = date('h:i A');
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                    <tr>
-                                        <td>
-                                            ???
-                                        </td>
-                                        <td>
-                                            08/20/2025
-                                        </td>
-                                        <td>
-                                            08/25/2025
-                                        </td>
-                                        <td>
-                                          
-                                                <span class='submited'>
-                                                     submited 
-                                                </span>
-                                            
-                                        </td>
-                                    </tr>
-                                
+
+                                <tr>
+                                    <td>
+                                        ???
+                                    </td>
+                                    <td>
+                                        08/20/2025
+                                    </td>
+                                    <td>
+                                        08/25/2025
+                                    </td>
+                                    <td>
+
+                                        <span class='submited'>
+                                            submited
+                                        </span>
+
+                                    </td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -193,11 +194,10 @@ $currentTime = date('h:i A');
                                     today
                                 </button>
                                 <button>
-                                    <
-                                </button>
-                                <button>
-                                    >
-                                </button>
+                                    < </button>
+                                        <button>
+                                            >
+                                        </button>
                             </div>
                         </div>
                         <div class="calendarTableDiv">
@@ -284,7 +284,7 @@ $currentTime = date('h:i A');
                     <div class="MyInfoBody">
                         <div class="MyInfoContent">
                             <table class="personalInfo">
-                                
+
 
                             </table>
                         </div>
@@ -299,7 +299,7 @@ $currentTime = date('h:i A');
                     </div>
                     <div class="ReportsToBody">
                         <img src="../images/albin-smajli.png" alt="">
-                       
+
                     </div>
                 </div>
                 <div class="RecentReviews">
@@ -386,23 +386,7 @@ $currentTime = date('h:i A');
                 </div>
             </div>
             <div class="rightDiv">
-                <div class="JobPortal">
-                    <div class="JobPortalHead">
-                        <h5>
-                            <img src="../images/jobs.png" alt="" height="24px" width="24px">
-                            Job Portal
-                        </h5>
-                    </div>
-                    <div class="JobPortalBody">
-                        <p>
-                            Your company jobs portal is at:
-                        </p>
-                        <a href="https://metdaan.hrpartner.io/jobs">https://metdaan.hrpartner.io/jobs</a>
-                        <p>
-                            <small style=" color: #888;">(There are no jobs currently listed)</small>
-                        </p>
-                    </div>
-                </div>
+
 
             </div>
 
