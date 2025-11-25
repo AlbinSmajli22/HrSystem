@@ -84,8 +84,12 @@ $currentTime = date('h:i A');
                     </div>
                     <div class="upcomingBDBody">
                         <div class="upcomingBDContent">
-                            <div>
-                                <p>Albin Smajli</p> <strong>11/27</strong>
+                            <div class="BDlist">
+                                <div class="userBD">
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                    <p>Albin Smajli</p> 
+                                    <strong>11/27</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,26 +107,19 @@ $currentTime = date('h:i A');
                                 <div class="task">
                                     <div class="task-info">
                                         <input type="checkbox" name="done" id="done">
-                                        <small>task name</small>
+                                        <small>to do high priority</small>
                                         <button class="priority">high</button>
                                     </div>
-                                    <i class="fa fa-trash"></i>
+                                    <a> <i class="fa fa-trash"></i></a>
                                 </div>
-                                <div class="task">
-                                    <div>
-                                        <input type="checkbox" name="done" id="done">
-                                        <small>task name</small>
-                                        <button class="priority">high</button>
-                                    </div>
-                                    <i class="fa fa-trash"></i>
-                                </div>
+                                
                             </div>
                             <div class="add-todo">
-                                <input type="text" name="todo" id="todo">
+                                <input type="text" name="todo" id="todo" placeholder="Enter a to do task...">
                                 <div class="todo-dropdown">
                                     <button class="add-todo-btn">Add</button>
                                     <button class="addTodoDropdownBtn" onclick="diffToDoFunction()">
-                                        <i class="fa-solid fa-caret-down"></i>
+                                        &#9660;
                                     </button>
                                     <div id="myToDoDropdown" class="todoDropdownContent">
                                         <button><i class="fa-solid fa-check" style="color: #e00b0b;"></i> Add High Priority</button>
