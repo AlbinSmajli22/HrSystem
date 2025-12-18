@@ -5,14 +5,25 @@ session_start();
 
 $companyId = $_SESSION['company'];
 $calendar = new Calendar(new CurrentDate(), new CalendarDate());
-
 $calendar->setSundayFirst(false);
-
 $calendar->create();
-
-
 $currentTime = date('h:i A');
 
+
+$upcBDay = "SELECT user_id, name, surname, born,
+       DATE_ADD(
+           born,
+           INTERVAL (YEAR(CURDATE()) - YEAR(born)) YEAR
+       ) AS next_birthday
+FROM users
+WHERE company = :company
+HAVING next_birthday BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+ORDER BY next_birthday";
+
+$prep = $con->prepare($upcBDay);
+$prep->bindParam(':company', $companyId, PDO::PARAM_INT);
+$prep->execute();
+$empUpcBDays = $prep->fetchAll();
 
 ?>
 
@@ -57,7 +68,7 @@ $currentTime = date('h:i A');
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/company_directory.png" alt="" width="48px" height="48px">
-                    <h3><a href="directory.php">Eiew All Employee</a></h3>
+                    <h3><a href="directory.php">View All Employee</a></h3>
                 </div>
                 <div class="shortcutsBodyElements">
                     <img src="../images/employee_profile.png" alt="" width="48px" height="48px">
@@ -85,11 +96,13 @@ $currentTime = date('h:i A');
                     <div class="upcomingBDBody">
                         <div class="upcomingBDContent">
                             <div class="BDlist">
-                                <div class="userBD">
-                                    <i class="fa-solid fa-cake-candles"></i>
-                                    <p>Albin Smajli</p> 
-                                    <strong>11/27</strong>
-                                </div>
+                                <?php foreach ($empUpcBDays as $empUpcBDay): ?>
+                                    <div class="userBD">
+                                        <i class="fa-solid fa-cake-candles"></i>
+                                        <p> <?= $empUpcBDay['name'] ?>     <?= $empUpcBDay['surname'] ?></p>
+                                        <strong><?= $empUpcBDay['next_birthday'] ?></strong>
+                                    </div>
+                                <?php endforeach ?>
                             </div>
                         </div>
                     </div>
@@ -112,7 +125,7 @@ $currentTime = date('h:i A');
                                     </div>
                                     <a> <i class="fa fa-trash"></i></a>
                                 </div>
-                                
+
                             </div>
                             <div class="add-todo">
                                 <input type="text" name="todo" id="todo" placeholder="Enter a to do task...">
@@ -122,10 +135,13 @@ $currentTime = date('h:i A');
                                         &#9660;
                                     </button>
                                     <div id="myToDoDropdown" class="todoDropdownContent">
-                                        <button><i class="fa-solid fa-check" style="color: #e00b0b;"></i> Add High Priority</button>
-                                        <button><i class="fa-solid fa-check" style="color: #000000;"></i> Add High Normal</button>
-                                        <button><i class="fa-solid fa-check" style="color: #cccccc;"></i> Add Low Priority</button>
-                                        
+                                        <button><i class="fa-solid fa-check" style="color: #e00b0b;"></i> Add High
+                                            Priority</button>
+                                        <button><i class="fa-solid fa-check" style="color: #000000;"></i> Add High
+                                            Normal</button>
+                                        <button><i class="fa-solid fa-check" style="color: #cccccc;"></i> Add Low
+                                            Priority</button>
+
                                     </div>
                                 </div>
                             </div>

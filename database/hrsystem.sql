@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2025 at 02:48 AM
+-- Generation Time: Dec 18, 2025 at 02:55 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -20,6 +20,52 @@ SET time_zone = "+00:00";
 --
 -- Database: `hrsystem`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `absencestatuses`
+--
+
+CREATE TABLE `absencestatuses` (
+  `absencestatus_id` int(11) NOT NULL,
+  `absencestatus_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `absencestatuses`
+--
+
+INSERT INTO `absencestatuses` (`absencestatus_id`, `absencestatus_name`, `company_id`) VALUES
+(1, 'Approved', 1),
+(2, 'Pending', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `admin_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `name` varchar(200) NOT NULL,
+  `surname` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(500) NOT NULL,
+  `owner` tinyint(1) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `user_id`, `name`, `surname`, `email`, `password`, `owner`, `company_id`) VALUES
+(1, 17, 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$bV9bJI.VRbsO98/wnSGvkOiTk3XCqFBN1PEwzqBvTI0Bb.ubZa49C', 1, 1),
+(2, 1, 'Mimoza', 'Nuka', 'mimoza@metdaan.com', '$2y$10$bV9bJI.VRbsO98/wnSGvkOiTk3XCqFBN1PEwzqBvTI0Bb.ubZa49C', 0, 1),
+(4, 26, 'Elmedin', 'Smajli', 'elmedin@metdaan.com', '$2y$10$VXKGv7kvu/NN3bNENmBk8OcAxVlss1TyYYordncP.Ey2GAsczszFS', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -152,26 +198,50 @@ INSERT INTO `amountoftimeoff` (`id`, `allowance`, `balance`, `planned`, `availab
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `assettypes`
+--
+
+CREATE TABLE `assettypes` (
+  `assettype_id` int(11) NOT NULL,
+  `assettype_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `assettypes`
+--
+
+INSERT INTO `assettypes` (`assettype_id`, `assettype_name`, `company_id`) VALUES
+(1, 'Computer', 1),
+(3, 'Phone', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `company`
 --
 
 CREATE TABLE `company` (
   `company_id` int(11) NOT NULL,
   `company_name` varchar(200) NOT NULL,
-  `emp_num` smallint(11) NOT NULL
+  `emp_num` smallint(11) NOT NULL,
+  `subscribed_until` date DEFAULT NULL,
+  `timezone` varchar(100) DEFAULT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `company`
 --
 
-INSERT INTO `company` (`company_id`, `company_name`, `emp_num`) VALUES
-(1, 'MetDaan', 100),
-(2, 'StarLabs', 50),
-(28, 'EliTech', 55),
-(29, 'Galaxy', 44),
-(35, 'StarTech', 55),
-(42, 'SLmedia', 23);
+INSERT INTO `company` (`company_id`, `company_name`, `emp_num`, `subscribed_until`, `timezone`, `country`, `image`) VALUES
+(1, 'MetDaan', 100, '2025-08-31', 'Europe/Dublin', 'Ireland', ''),
+(2, 'StarLabs', 50, NULL, NULL, NULL, NULL),
+(28, 'EliTech', 55, NULL, NULL, NULL, NULL),
+(29, 'Galaxy', 44, NULL, NULL, NULL, NULL),
+(35, 'StarTech', 55, NULL, NULL, NULL, NULL),
+(42, 'SLmedia', 23, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -280,6 +350,18 @@ INSERT INTO `contact` (`contact_id`, `contact_type`, `details`, `primary_contact
 (11, 'Email', 'arian@metdaan.com', 1, 1, 0, '', 19),
 (12, 'Email', 'arbenita@metdaan.com', 1, 1, 0, '', 21),
 (13, 'Email', 'elmedin@metdaan.com', 1, 1, 0, '', 26);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacttypes`
+--
+
+CREATE TABLE `contacttypes` (
+  `contacttype_id` int(11) NOT NULL,
+  `contacttype_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -479,10 +561,17 @@ CREATE TABLE `news` (
   `content` varchar(1000) NOT NULL,
   `publish_on` date NOT NULL,
   `until` date DEFAULT NULL,
-  `author` int(200) NOT NULL,
+  `author` varchar(200) NOT NULL,
   `created` date NOT NULL,
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`new_id`, `title`, `category`, `summary`, `content`, `publish_on`, `until`, `author`, `created`, `company_id`) VALUES
+(10, 'titele test', 'Breaking', 'test', 'Content news Content news Content news Content news Content news Content news Content news Content news', '2025-11-01', '2025-11-05', 'Albin Smajli', '2025-11-01', 1);
 
 -- --------------------------------------------------------
 
@@ -520,13 +609,24 @@ CREATE TABLE `notes` (
   `company` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `notes`
+-- Table structure for table `paylevels`
 --
 
-INSERT INTO `notes` (`notes_id`, `title`, `body`, `created`, `user`, `company`) VALUES
-(4, 'First Pin', 'sakfjnsdfjnaq,jhajekbdabkuywefbmadfbmnb.ljtrkhoyijhgman equf2ub ,abuk fwbvieakj dfa ', '2025-05-29 04:17:28', 17, 1),
-(5, 'test', 'test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test test ', '2025-05-29 04:17:57', 17, 1);
+CREATE TABLE `paylevels` (
+  `paylevel_id` int(11) NOT NULL,
+  `paylevel_name` varchar(200) NOT NULL,
+  `company_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `paylevels`
+--
+
+INSERT INTO `paylevels` (`paylevel_id`, `paylevel_name`, `company_id`) VALUES
+(1, 'Junior', 1);
 
 -- --------------------------------------------------------
 
@@ -708,18 +808,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `image`, `name`, `surname`, `email`, `password`, `Position_ID`, `Departament_ID`, `role`, `location`, `status`, `report_to`, `gender`, `born`, `started`, `company`) VALUES
 (1, NULL, 'Mimoza', 'Nuka', 'mimoza@metdaan.com', '$2y$10$biyuRS2zYJqR6AQhljHKm.leMoUZvs6DkCwkWbj9Xl7sq2vn8iCJW', 9, 1, 0, 'Main Office', 'Full Time', 1, 'Fmale', NULL, NULL, 1),
-(4, NULL, 'Gezim', 'Berisha', 'gezim@metdaan.com', '$2y$10$Dpoy8PwyXVdz4p4xsMsoP./8fC9p8jcRx.kEMgdsT9IUpB5vsTTla', 1, 5, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
+(4, NULL, 'Gezim', 'Berisha', 'gezim@metdaan.com', '$2y$10$Dpoy8PwyXVdz4p4xsMsoP./8fC9p8jcRx.kEMgdsT9IUpB5vsTTla', 1, 5, 0, 'Main Office', 'Full Time', 1, 'Male', '1985-12-20', NULL, 1),
 (5, NULL, 'Fatlind', 'Rashica', 'fatlind@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0, 'Main Office', 'Full Time', 17, 'Male', NULL, NULL, 1),
 (8, NULL, 'Arben', 'Berisha', 'arben@metdaan.com', '$2y$10$aX4t7/Rb.8TNYHQO1hCLnu8qA1JKp6RvBuQdid4nMjrbmrC74bH.C', 2, 5, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
 (9, NULL, 'Meriton', 'Feka', 'meriton@metdaan.com', '$2y$10$t4RQUE7iXMbHSSYPj2iEm.bSMICn1us06nZ.DuBHz.YJKcAEvcTWm', 6, 1, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
-(10, NULL, 'Gazmend', 'Berisha', 'gazmend@metdaan.com', '$2y$10$3tEdolNwZUIdoPpZ8xReC.bt.f6dDyQQodDXNgG6Pt3gBvkV837QO', 9, 2, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
-(12, 'bluza2.PNG', 'Valmir', 'Leci', 'valmir@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0, 'Main Office', 'Full Time', 17, 'Male', NULL, NULL, 1),
+(10, NULL, 'Gazmend', 'Berisha', 'gazmend@metdaan.com', '$2y$10$3tEdolNwZUIdoPpZ8xReC.bt.f6dDyQQodDXNgG6Pt3gBvkV837QO', 9, 2, 0, 'Main Office', 'Full Time', 1, 'Male', '1984-12-18', NULL, 1),
+(12, 'bluza2.PNG', 'Valmir', 'Leci', 'valmir@metdaan.com', '$2y$10$PlRdBusrrxqTvN1Dw2qjn.iEHeLFg1Qi99i69CuoZCqMGBjhe8fSC', 6, 1, 0, 'Main Office', 'Full Time', 17, 'Male', '1988-12-21', '2021-10-12', 1),
 (15, NULL, 'Rinor', 'Berisha', 'rinor@metdaan.com', '$2y$10$PB6FHjvF3PbIsu/Lz9k1huXmA1Go2Dr/thStoa6ht9G0U1dLMWWbm', 1, 5, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
 (17, 'profil.jpg', 'Albin', 'Smajli', 'albin@metdaan.com', '$2y$10$bV9bJI.VRbsO98/wnSGvkOiTk3XCqFBN1PEwzqBvTI0Bb.ubZa49C', 5, 7, 1, 'Main Office', 'Full Time', 21, 'Male', '2002-11-27', '2023-03-01', 1),
 (19, NULL, 'Arian', 'Mehmeti', 'arian@metdaan.com', '$2y$10$25BKuMIaT9R9UTN32iwLzOJPsDacreCFxYDW8Mn6o/icaDxP/Tu0u', 6, 1, 0, 'Main Office', 'Full Time', 1, 'Male', NULL, NULL, 1),
 (21, NULL, 'Arbenita', 'Krasniqi', 'arbenita@metdaan.com', '$2y$10$yIkR0ZKjZPbik1BDXS9/JOsE6C7PT0hJ4nDX0BNDez8X.vpECUUOO', 1, 5, 0, 'Production', 'Full Time', 8, 'Fmale', NULL, NULL, 1),
 (26, NULL, 'Elmedin', 'Smajli', 'elmedin@metdaan.com', '$2y$10$VXKGv7kvu/NN3bNENmBk8OcAxVlss1TyYYordncP.Ey2GAsczszFS', 6, 1, 0, 'Main Office', 'Full Time', 19, 'Fmale', '2008-09-29', '2024-05-15', 1),
-(28, NULL, 'Endrit', 'Saiti', 'endrit@starlabs.com', '$2y$10$bV9bJI.VRbsO98/wnSGvkOiTk3XCqFBN1PEwzqBvTI0Bb.ubZa49C', 13, 12, 0, 'Main Office', 'Full Time', 28, NULL, NULL, NULL, 2),
+(28, NULL, 'Endrit', 'Saiti', 'endrit@starlabs.com', '$2y$10$bV9bJI.VRbsO98/wnSGvkOiTk3XCqFBN1PEwzqBvTI0Bb.ubZa49C', 13, 12, 1, 'Main Office', 'Full Time', 28, NULL, NULL, NULL, 2),
 (30, 'pngwing.com (4).png', 'Elmedin', 'Smajli', 'elmedin@gmail.com', '$2y$10$uI023PpTNVQiFD2I8zX5me1UKFBaolks0.TIl3D55LK.alrAltdS2', 14, 16, 1, NULL, NULL, 30, NULL, NULL, '2024-10-14', 28),
 (31, NULL, 'Fisnik', 'Maloku', 'albinibini@outlook.com', '$2y$10$hCbhoACVb8qJNTLa5.KRmuUZVlkHv1XVlmmZiRWs0yQnHRbDryn1S', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, '2024-10-14', 29),
 (38, NULL, 'Albin', 'Smajli', 'albin22@hotmail.com', '$2y$10$mHbo7BlkmFkefEee0ymEQOM3iDXhcm0b2jnOaH9TCUkmCNJSrO7o2', 17, 23, 1, NULL, NULL, NULL, NULL, NULL, '2024-10-17', 35),
@@ -729,6 +829,19 @@ INSERT INTO `users` (`user_id`, `image`, `name`, `surname`, `email`, `password`,
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `absencestatuses`
+--
+ALTER TABLE `absencestatuses`
+  ADD PRIMARY KEY (`absencestatus_id`);
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD KEY `user_id_user_id` (`user_id`);
 
 --
 -- Indexes for table `adress`
@@ -743,6 +856,12 @@ ALTER TABLE `amountoftimeoff`
   ADD PRIMARY KEY (`id`),
   ADD KEY `time_off_type` (`time_off_type`),
   ADD KEY `user_relation` (`user_id`);
+
+--
+-- Indexes for table `assettypes`
+--
+ALTER TABLE `assettypes`
+  ADD PRIMARY KEY (`assettype_id`);
 
 --
 -- Indexes for table `company`
@@ -771,6 +890,12 @@ ALTER TABLE `companygoalsvalue`
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`contact_id`),
   ADD KEY `contact` (`user_id`);
+
+--
+-- Indexes for table `contacttypes`
+--
+ALTER TABLE `contacttypes`
+  ADD PRIMARY KEY (`contacttype_id`);
 
 --
 -- Indexes for table `departament`
@@ -844,6 +969,12 @@ ALTER TABLE `notes`
   ADD KEY `Company_Notes` (`company`);
 
 --
+-- Indexes for table `paylevels`
+--
+ALTER TABLE `paylevels`
+  ADD PRIMARY KEY (`paylevel_id`);
+
+--
 -- Indexes for table `position`
 --
 ALTER TABLE `position`
@@ -878,11 +1009,25 @@ ALTER TABLE `timeofftype`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `report_to` (`report_to`),
-  ADD KEY `company` (`company`);
+  ADD KEY `company` (`company`),
+  ADD KEY `departament_user` (`Departament_ID`),
+  ADD KEY `position_user` (`Position_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `absencestatuses`
+--
+ALTER TABLE `absencestatuses`
+  MODIFY `absencestatus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `adress`
@@ -895,6 +1040,12 @@ ALTER TABLE `adress`
 --
 ALTER TABLE `amountoftimeoff`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
+-- AUTO_INCREMENT for table `assettypes`
+--
+ALTER TABLE `assettypes`
+  MODIFY `assettype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `company`
@@ -919,6 +1070,12 @@ ALTER TABLE `companygoalsvalue`
 --
 ALTER TABLE `contact`
   MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `contacttypes`
+--
+ALTER TABLE `contacttypes`
+  MODIFY `contacttype_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `departament`
@@ -966,7 +1123,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `new_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `new_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `newscategories`
@@ -979,6 +1136,12 @@ ALTER TABLE `newscategories`
 --
 ALTER TABLE `notes`
   MODIFY `notes_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `paylevels`
+--
+ALTER TABLE `paylevels`
+  MODIFY `paylevel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `position`
@@ -1008,11 +1171,17 @@ ALTER TABLE `timeofftype`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `admins`
+--
+ALTER TABLE `admins`
+  ADD CONSTRAINT `user_id_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `amountoftimeoff`
@@ -1076,8 +1245,7 @@ ALTER TABLE `goalitems`
 -- Constraints for table `news`
 --
 ALTER TABLE `news`
-  ADD CONSTRAINT `Company_News` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `User_News` FOREIGN KEY (`author`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Company_News` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `notes`
@@ -1111,6 +1279,8 @@ ALTER TABLE `timeofftype`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `company` FOREIGN KEY (`company`) REFERENCES `company` (`company_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `departament_user` FOREIGN KEY (`Departament_ID`) REFERENCES `departament` (`departament_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `position_user` FOREIGN KEY (`Position_ID`) REFERENCES `position` (`position_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `report_to` FOREIGN KEY (`report_to`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 

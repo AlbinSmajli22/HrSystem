@@ -148,3 +148,42 @@
   font-size: 12px;
   padding: 10px 10px 10px 15px;
 }
+@media (max-width: 600px) {
+  #sidebar {
+  width: auto;
+  transition: all .4s;
+}
+
+#sidebar span{
+  display: none;
+}
+#sidebar #sidebarElements #profile {
+  padding: 0;
+  height: auto;
+}
+#sidebar #sidebarElements li .sidebarElements-links{
+  font-size: 16px;
+}
+
+#sidebar #sidebarElements #profile .profile-element {
+  display: none;
+}
+#sidebar #sidebarElements #profile .logo-element {
+  display: block;
+}
+
+
+#sidebar .dropdown {
+  padding: 10px;
+  margin-left: 69px; 
+  min-width: 160px;
+  max-width: 160px;
+  position: absolute;
+  background: #0277bd;
+}
+#sidebar ~ .dropdown,
+#sidebar .dropdown li a{
+  font-size: 12px;
+  padding: 10px 10px 10px 15px;
+}
+}
