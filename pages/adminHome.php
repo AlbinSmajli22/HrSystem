@@ -110,8 +110,8 @@ $empUpcBDays = $prep->fetchAll();
                 <div class="toDoList">
                     <div class="toDoListHead">
                         <h5>
-                            <img src="../images/checklist.png" alt="" height="24px" width="24px">
-                            Upcoming Birthdays
+                            <img src="../images/todo.png" alt="" height="24px" width="24px">
+                            To Do List
                         </h5>
                     </div>
                     <div class="toDoListBody">
