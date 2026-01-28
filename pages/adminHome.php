@@ -1,6 +1,7 @@
 <?php
 require_once '../config.php';
 require 'Calendar.php';
+require 'adminHomeLogic.php';
 session_start();
 
 $companyId = $_SESSION['company'];
@@ -116,7 +117,7 @@ $empUpcBDays = $prep->fetchAll();
                     </div>
                     <div class="toDoListBody">
                         <div class="toDoListContent">
-                            <div class="toDoList-list">
+                            <div class="toDoList-list" id="todoList">
                                 <div class="task">
                                     <div class="task-info">
                                         <input type="checkbox" name="done" id="done">
@@ -128,9 +129,9 @@ $empUpcBDays = $prep->fetchAll();
 
                             </div>
                             <div class="add-todo">
-                                <input type="text" name="todo" id="todo" placeholder="Enter a to do task...">
+                                <input type="text" name="todo" id="todoInput" placeholder="Enter a to do task...">
                                 <div class="todo-dropdown">
-                                    <button class="add-todo-btn">Add</button>
+                                    <button class="add-todo-btn" id="addTodoBtn">Add</button>
                                     <button class="addTodoDropdownBtn" onclick="diffToDoFunction()">
                                         &#9660;
                                     </button>
