@@ -1,58 +1,59 @@
 <?php
-
+require_once '../config.php';
 $action = $_REQUEST['action'] ?? '';
+
+
 
 switch($action){
 
     // ✅ ADD TASK
     case "add":
-        $task = $_POST['task'];
-        $priority = $_POST['priority'];
+    $task = $_POST['task'] ?? '';
+    $priority = $_POST['priority'] ?? 'normal';
 
-        $stmt = $conn->prepare("INSERT INTO tasks (task, priority) VALUES (?, ?)");
-        $stmt->bind_param("ss", $task, $priority);
-        $stmt->execute();
+    $stmt = $con->prepare("INSERT INTO tasks (task, priority) VALUES (?, ?)");
+    $stmt->execute([$task, $priority]);
 
-        echo json_encode([
-            "id" => $stmt->insert_id,
-            "task" => $task,
-            "priority" => $priority,
-            "done" => 0
-        ]);
-        break;
+    echo json_encode([
+        "id" => $con->lastInsertId(), // ✅ FIXED
+        "task" => $task,
+        "priority" => $priority,
+        "done" => 0
+    ]);
+    break;
 
 
     // ✅ GET ALL TASKS
     case "get":
-        $result = $conn->query("SELECT * FROM tasks ORDER BY id DESC");
+    $stmt = $con->prepare("SELECT * FROM tasks WHERE done=0 ORDER BY id DESC");
+    $stmt->execute();
 
-        $tasks = [];
-        while($row = $result->fetch_assoc()){
-            $tasks[] = $row;
-        }
+    $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo json_encode($tasks);
-        break;
+    echo json_encode($tasks);
+    break;
 
 
     // ✅ DELETE
     case "delete":
-        $id = $_POST['id'];
+    $id = $_POST['id'] ?? 0;
 
-        $stmt = $conn->prepare("DELETE FROM tasks WHERE id=?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        break;
+    $stmt = $con->prepare("DELETE FROM tasks WHERE id=?");
+    $stmt->execute([$id]);
+
+    echo json_encode(["success" => true]);
+    break;
 
 
     // ✅ UPDATE DONE
     case "update":
-        $id = $_POST['id'];
-        $done = $_POST['done'];
+    $id = $_POST['id'] ?? 0;
+    $done = $_POST['done'] ?? 0;
 
-        $stmt = $conn->prepare("UPDATE tasks SET done=? WHERE id=?");
-        $stmt->bind_param("ii", $done, $id);
-        $stmt->execute();
-        break;
+    $stmt = $con->prepare("UPDATE tasks SET done=? WHERE id=?");
+    $stmt->execute([$done, $id]);
+
+    echo json_encode(["success" => true]);
+    break;
 }
 ?>

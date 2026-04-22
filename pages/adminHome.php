@@ -118,14 +118,7 @@ $empUpcBDays = $prep->fetchAll();
                     <div class="toDoListBody">
                         <div class="toDoListContent">
                             <div class="toDoList-list" id="todoList">
-                                <div class="task">
-                                    <div class="task-info">
-                                        <input type="checkbox" name="done" id="done">
-                                        <small>to do high priority</small>
-                                        <button class="priority">high</button>
-                                    </div>
-                                    <a> <i class="fa fa-trash"></i></a>
-                                </div>
+                                
 
                             </div>
                             <div class="add-todo">
