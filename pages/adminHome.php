@@ -97,13 +97,23 @@ $empUpcBDays = $prep->fetchAll();
                     <div class="upcomingBDBody">
                         <div class="upcomingBDContent">
                             <div class="BDlist">
-                                <?php foreach ($empUpcBDays as $empUpcBDay): ?>
-                                    <div class="userBD">
-                                        <i class="fa-solid fa-cake-candles"></i>
-                                        <p> <?= $empUpcBDay['name'] ?>     <?= $empUpcBDay['surname'] ?></p>
-                                        <strong><?= $empUpcBDay['next_birthday'] ?></strong>
-                                    </div>
-                                <?php endforeach ?>
+                                <?php if ($empUpcBDays == null) { ?>
+                                    <p> There is no upcoming birthdays</p>
+                                <?php } else { ?>
+                                    
+                                    <?php foreach ($empUpcBDays as $empUpcBDay): ?>
+                                        <div class="userBD">
+                                            <i class="fa-solid fa-cake-candles"></i>
+                                            <p>
+                                                <?= $empUpcBDay['name'] ?>
+                                                <?= $empUpcBDay['surname'] ?>
+                                            </p>
+                                            <strong>
+                                                <?= $empUpcBDay['next_birthday'] ?>
+                                            </strong>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -118,7 +128,7 @@ $empUpcBDays = $prep->fetchAll();
                     <div class="toDoListBody">
                         <div class="toDoListContent">
                             <div class="toDoList-list" id="todoList">
-                                
+
 
                             </div>
                             <div class="add-todo">

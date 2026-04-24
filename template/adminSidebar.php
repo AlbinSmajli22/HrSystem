@@ -38,7 +38,7 @@ $userName=$_SESSION['name'];
                 <span>Calendar</span>
             </a>
         </li>
-       
+
             <li onclick="toggleDropdown(this)">
                 <a class="sidebarElements-links">
                     <i class="fa fa-plane"></i>
