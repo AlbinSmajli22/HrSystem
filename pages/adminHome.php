@@ -100,7 +100,7 @@ $empUpcBDays = $prep->fetchAll();
                                 <?php if ($empUpcBDays == null) { ?>
                                     <p> There is no upcoming birthdays</p>
                                 <?php } else { ?>
-                                    
+
                                     <?php foreach ($empUpcBDays as $empUpcBDay): ?>
                                         <div class="userBD">
                                             <i class="fa-solid fa-cake-candles"></i>
@@ -139,13 +139,18 @@ $empUpcBDays = $prep->fetchAll();
                                         &#9660;
                                     </button>
                                     <div id="myToDoDropdown" class="todoDropdownContent">
-                                        <button><i class="fa-solid fa-check" style="color: #e00b0b;"></i> Add High
-                                            Priority</button>
-                                        <button><i class="fa-solid fa-check" style="color: #000000;"></i> Add High
-                                            Normal</button>
-                                        <button><i class="fa-solid fa-check" style="color: #cccccc;"></i> Add Low
-                                            Priority</button>
+                                        <button class="priority-option" data-priority="high">
+                                            <i class="fa-solid fa-check" style="color: #e00b0b;"></i> Add High Priority
+                                        </button>
 
+                                        <button class="priority-option" data-priority="normal">
+                                            <i class="fa-solid fa-check" style="color: #000000;"></i> Add Normal
+                                            Priority
+                                        </button>
+
+                                        <button class="priority-option" data-priority="low">
+                                            <i class="fa-solid fa-check" style="color: #cccccc;"></i> Add Low Priority
+                                        </button>
                                     </div>
                                 </div>
                             </div>

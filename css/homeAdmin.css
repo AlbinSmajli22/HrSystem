@@ -247,7 +247,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   background-color: white;
-  min-height: 160px;
+  height: fit-content;
   padding: 10px 0px 10px 0px;
 }
 
@@ -259,15 +259,15 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-
-  height: 40px;
   width: 100%;
 }
 .toDoList-list {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 160px;
+  min-height: 50px;
+  max-height: 137px;
+  overflow: auto;
 }
 .toDoList-list .task {
   display: flex;
@@ -302,8 +302,14 @@ body {
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   background-color: white;
   padding: 15px;
+}
+.add-todo #todoInput{
+  width: 250px;
+  font-size: 14px;
+  border: 1px solid #e7eaec;
 }
 .add-todo .todo-dropdown {
   display: flex;
