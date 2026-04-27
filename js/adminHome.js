@@ -65,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
       list.innerHTML = ""; // ✅ clear existing items
 
       if (tasks.length === 0) {
-        list.innerHTML = `<p>You dont have any outstanding 'to do' items.</p>`;
+        list.innerHTML = `<p class="empty-message">You dont have any outstanding 'to do' items.</p>`;
         return;
       }
 
@@ -85,7 +85,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // if no tasks left → show message
       if (list.children.length === 0) {
-        list.innerHTML = `<p>You dont have any outstanding 'to do' items.</p>`;
+        list.innerHTML = `<p class="empty-message">You dont have any outstanding 'to do' items.</p>`;
       }
     });
   };
@@ -116,9 +116,9 @@ window.addEventListener("DOMContentLoaded", () => {
     let priorityBtn = "";
 
     if (task.priority === "high") {
-      priorityBtn = `<button style="background-color:#e53935; color:white;" class="priority">High</button>`;
+      priorityBtn = `<button style="background-color:#e53935; border:solid #e53935 1px; color:white;" class="priority">High</button>`;
     } else if (task.priority === "low") {
-      priorityBtn = `<button style="background-color:#D1DADE; color:#747576;" class="priority">Low</button>`;
+      priorityBtn = `<button style="background-color:#D1DADE; border:solid #D1DADE 1px;  color:#747576;" class="priority">Low</button>`;
     } else {
       priorityBtn = ``;
     }
