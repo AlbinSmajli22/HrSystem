@@ -35,15 +35,14 @@ window.addEventListener("DOMContentLoaded", () => {
       }),
     })
       .then((res) => res.json())
-      .then(data => {
+      .then((data) => {
+        // ❗ remove empty message if it exists
+        const emptyMsg = list.querySelector("p");
+        if (emptyMsg) emptyMsg.remove();
 
-    // ❗ remove empty message if it exists
-    const emptyMsg = list.querySelector("p");
-    if (emptyMsg) emptyMsg.remove();
-
-    createTaskElement(data);
-    input.value = "";
-});
+        createTaskElement(data);
+        input.value = "";
+      });
   }
   addBtn.addEventListener("click", () => {
     addTask("high");
@@ -114,6 +113,15 @@ window.addEventListener("DOMContentLoaded", () => {
   function createTaskElement(task) {
     const div = document.createElement("div");
     div.className = "task";
+    let priorityBtn = "";
+
+    if (task.priority === "high") {
+      priorityBtn = `<button style="background-color:#e53935; color:white;" class="priority">High</button>`;
+    } else if (task.priority === "low") {
+      priorityBtn = `<button style="background-color:#D1DADE; color:#747576;" class="priority">Low</button>`;
+    } else {
+      priorityBtn = ``;
+    }
 
     div.innerHTML = `
         <div class="task-info">
@@ -123,8 +131,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <small class="task-text ${task.done == 1 ? "done" : ""}">
                 ${task.task}
             </small>
-
-            <button class="priority">${task.priority}</button>
+            ${priorityBtn}
         </div>
         <a onclick="deleteTask(${task.id}, this)">
             <i class="fa fa-trash"></i>
