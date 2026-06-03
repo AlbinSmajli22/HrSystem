@@ -26,6 +26,21 @@ $prep->bindParam(':company', $companyId, PDO::PARAM_INT);
 $prep->execute();
 $empUpcBDays = $prep->fetchAll();
 
+$upcEAnn = "SELECT user_id, name, surname, started,
+       DATE_ADD(
+           started,
+           INTERVAL (YEAR(CURDATE()) - YEAR(started)) YEAR
+       ) AS next_anniversaries
+FROM users
+WHERE company = :company
+HAVING next_anniversaries BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+ORDER BY next_anniversaries";
+
+$prep = $con->prepare($upcEAnn);
+$prep->bindParam(':company', $companyId, PDO::PARAM_INT);
+$prep->execute();
+$empUpcAnns = $prep->fetchAll();
+
 ?>
 
 <head>
@@ -90,7 +105,7 @@ $empUpcBDays = $prep->fetchAll();
                 <div class="upcomingBD">
                     <div class="upcomingBDHead">
                         <h5>
-                            <img src="../images/checklist.png" alt="" height="24px" width="24px">
+                            <i class="fa-solid fa-cake-candles"></i>
                             Upcoming Birthdays
                         </h5>
                     </div>
@@ -121,7 +136,7 @@ $empUpcBDays = $prep->fetchAll();
                 <div class="toDoList">
                     <div class="toDoListHead">
                         <h5>
-                            <img src="../images/todo.png" alt="" height="24px" width="24px">
+                            <i class="fa-regular fa-square-check"></i>
                             To Do List
                         </h5>
                     </div>
@@ -159,46 +174,35 @@ $empUpcBDays = $prep->fetchAll();
                     </div>
                 </div>
 
-                <div class="recentLeaveRequests">
-                    <div class="recentLeaveRequestsHead">
+                <div class="upcomingAnn">
+                    <div class="upcomingAnnHead">
                         <h5>
-                            <img src="../images/plan.png" alt="" height="24px" width="24px">
-                            Recent Leave Requests
+                            <i class="fa-regular fa-calendar-check" ></i>
+                            Upcoming Work Anniversaries
                         </h5>
                     </div>
-                    <div class="recentLeaveRequestsBody">
-                        <table class="recentLeave">
-                            <thead>
-                                <tr>
-                                    <td>Description</td>
-                                    <td>From</td>
-                                    <td>To</td>
-                                    <td>Status</td>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="upcomingAnnBody">
+                        <div class="upcomingAnnContent">
+                            <div class="Annlist">
+                                <?php if ($empUpcAnns == null) { ?>
+                                    <p> There is no employee work anniversaries coming up soon.</p>
+                                <?php } else { ?>
 
-                                <tr>
-                                    <td>
-                                        ???
-                                    </td>
-                                    <td>
-                                        08/20/2025
-                                    </td>
-                                    <td>
-                                        08/25/2025
-                                    </td>
-                                    <td>
-
-                                        <span class='submited'>
-                                            submited
-                                        </span>
-
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                                    <?php foreach ($empUpcAnns as $empUpcAnn): ?>
+                                        <div class="userAnn">
+                                            <i class="fa-regular fa-calendar-check" ></i>
+                                            <p>
+                                                <?= $empUpcAnn['name'] ?>
+                                                <?= $empUpcAnn['surname'] ?>
+                                            </p>
+                                            <strong>
+                                                <?= $empUpcAnn['next_anniversaries'] ?>
+                                            </strong>
+                                        </div>
+                                    <?php endforeach ?>
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="Calendar">
