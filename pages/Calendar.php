@@ -16,7 +16,7 @@ trait DateHelpers{
     }
     public function getMonthName()
     {
-        return (int) $this->format('M');
+        return $this->format('F');
     }
     public function getYear()
     {
@@ -57,7 +57,7 @@ class Calendar
     ];
     
     protected $MonthLabels = [
-        "January", "February", "March", "Aplril", "May", "June", "July", "August", "September",
+        "January", "February", "March", "April", "May", "June", "July", "August", "September",
         "October", "November", "December"
     ];
     protected $sundayFirst;
@@ -100,14 +100,9 @@ class Calendar
         $day = $this->calendarDate->getMonthStartDayOfWeek();
 
         if ($this->sundayFirst) {
-            if ($day === 7) {
-                return 1;
-            }
-            if ($day < 7) {
-                return ($day + 1);
-            }
+            return $day % 7;
         }
-        return $day;
+        return $day - 1;
     }
 
     public function isCurrentDate($dayNumber)
@@ -128,47 +123,26 @@ class Calendar
 
     public function create()
     {
-        $day = array_fill(0, ($this->getMonthFirstDay() - 1), ['currentMonth' => false, 'dayNumber' => '']);
+        $days = [];
+        $leadingDays = $this->getMonthFirstDay();
+        $monthLength = $this->calendarDate->getMonthNumberDays();
+        $previousMonth = clone $this->calendarDate;
+        $previousMonth->modify('-1 month');
 
-        //current date
-        for ($x=1; $x <= $this->calendarDate->getMonthNumberDays(); $x++) {
+        for ($day = $previousMonth->getMonthNumberDays() - $leadingDays + 1; $day <= $previousMonth->getMonthNumberDays(); $day++) {
+            $days[] = ['currentMonth' => false, 'dayNumber' => $day];
+        }
 
-            $days[] = ['currentMonth' => true, 'dayNumber' => $x];
+        for ($day = 1; $day <= $monthLength; $day++) {
+            $days[] = ['currentMonth' => true, 'dayNumber' => $day];
+        }
+
+        $trailingDays = (7 - count($days) % 7) % 7;
+        for ($day = 1; $day <= $trailingDays; $day++) {
+            $days[] = ['currentMonth' => false, 'dayNumber' => $day];
         }
 
         $this->weeks = array_chunk($days, 7);
-
-        //last month
-        $firstWeek = $this->weeks[0];
-        $prevMonth = clone $this->calendarDate;
-        $prevMonth->modify('-1 month');
-        $prevMonthNumDays = $prevMonth->getMonthNumberDays();
-
-        for ($x=6; $x >=0 ; $x--) 
-        { 
-            if (!$firstWeek[$x]['dayNumber']) {
-                $firstWeek[$x]['dayNumber'] = $prevMonthNumDays;
-                $prevMonthNumDays -= 1 ;
-            }
-        }
-        $this->weeks[0] = $firstWeek;
-
-        //next month
-        $lastWeek = $this->weeks[count($this->weeks) -1];
-        $nextMonth = clone $this->calendarDate;
-        $nextMonth->modify('+1 month');
-        
-        $c = 1;
-        for ($x=0; $x < 7 ; $x++) { 
-            if (!isset($lastWeek[$x])) {
-                $lastWeek[$x]['currentMonth'] = false;
-                $lastWeek[$x]['dayNumber']= $c;
-                $c++;
-            }
-        }
-
-        $this->weeks[count($this->weeks) -1] = $lastWeek;
-
     }
 }
 ?>

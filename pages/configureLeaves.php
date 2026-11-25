@@ -8,12 +8,14 @@ $companyId = $_SESSION['company'];
 if (isset($_POST['AddLeave'])) {
     $time_off = $_POST['time_off'];
     $company_id = $_POST['company_id'];
+    $color = $_POST['color'];
 
-    $insertLeave = "INSERT INTO timeofftype VALUES(null,:time_off, :company_id)";
+    $insertLeave = "INSERT INTO timeofftype VALUES(null,:time_off, :company_id, :color)";
 
     $prep = $con->prepare($insertLeave);
     $prep->bindParam(':time_off', $time_off);
     $prep->bindParam(':company_id', $company_id);
+    $prep->bindParam(':color', $color);
     $prep->execute();
 
 }
@@ -21,13 +23,15 @@ if (isset($_POST['editLeave'])) {
     $id = $_POST['id'];
     $time_off = $_POST['time_off'];
     $company_id = $_POST['company_id'];
+    $color = $_POST['color'];
 
-    $insertLeave = "UPDATE timeofftype SET id=:id, time_off=:time_off, company_id=:company_id WHERE id=:id";
+    $insertLeave = "UPDATE timeofftype SET id=:id, time_off=:time_off, company_id=:company_id, color=:color WHERE id=:id";
 
     $prep = $con->prepare($insertLeave);
     $prep->bindParam(':id', $id);
     $prep->bindParam(':time_off', $time_off);
     $prep->bindParam(':company_id', $company_id);
+    $prep->bindParam(':color', $color);
     $prep->execute();
 
 }
@@ -43,7 +47,7 @@ $next = $page + 1;
 $previous = $page - 1;
 
 
-$leaveTypeQuery = "SELECT id, time_off
+$leaveTypeQuery = "SELECT id, time_off, color
         FROM timeofftype
         WHERE company_id = :companyId
         LIMIT $start , $limit
@@ -53,7 +57,7 @@ $stmt->bindParam(':companyId', $companyId, PDO::PARAM_INT);
 $stmt->execute();
 $leaveTypes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$leaveTypeCount = "SELECT id, time_off
+$leaveTypeCount = "SELECT id, time_off, color
         FROM timeofftype
         WHERE company_id = :companyId
         
@@ -125,6 +129,8 @@ $total_page = ceil($total_datas / $limit);
                                     <div class="mb-3">
                                         <label for="name" class="col-form-label">Leave Name</label>
                                         <input type="text" class="form-control" name="time_off" id="name">
+                                        <label for="color" class="col-form-label">Leave Color</label>
+                                        <input type="color" class="form-control" name="color" id="color">
                                     </div>
                                     <div class="modal-footer">
                                         <input type="hidden" class="form-control" name="company_id" id="company_id"
@@ -177,6 +183,8 @@ $total_page = ceil($total_datas / $limit);
                                                     <div class="mb-3">
                                                         <label for="name" class="col-form-label">Leave Name</label>
                                                         <input type="text" class="form-control" name="time_off" id="name" value="<?= $leaveType['time_off'] ?>">
+                                                        <label for="color" class="col-form-label">Leave Color</label>
+                                                        <input type="color" class="form-control" name="color" id="color" value="<?= $leaveType['color'] ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <input type="hidden" class="form-control" name="company_id"

@@ -1,3 +1,14 @@
+- Shto reminders CRUD tek admin home.----- on hold for when it finished not a good feature for the begining.
+- Shto Absence/Leave Calendar tek admin home.
+- Shto Time off History tek admin home.
+- Shto employes away tek admin home.
+- Pie charts (Employee mix, Departament, Employment Status) tek admin home.
+- Employee count tek admin home.   
+
+
+
+
+
 company goals me join me company goals values :-
 
 SELECT * FROM companygoalsvalue v RIGHT JOIN companygoals c ON v.company_goal = c.id

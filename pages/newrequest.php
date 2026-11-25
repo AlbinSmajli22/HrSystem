@@ -75,6 +75,7 @@ $timeoffs = $prep->fetchAll();
                             <option value="Moving Day">Moving Day</option>
                             <option value="Wedding Day">Wedding Day</option>
                             <option value="Sick Leave">Sick Leave</option>
+                            <option value="Work From Home">Work From Home</option>
                         </select>
                     </div>
                 </div>

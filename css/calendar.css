@@ -1,0 +1,115 @@
+.currentDate h5 {
+  margin-bottom: 0;
+}
+.currentDate {
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.calendarControls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  gap: 8px;
+}
+.calendarControls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  min-width: 36px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #344054;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.calendarControls button:hover:not(:disabled) {
+  border-color: #3772d7;
+  background-color: #f0f6ff;
+  color: #1d5e9f;
+}
+.calendarControls button:focus-visible {
+  outline: 2px solid #3772d7;
+  outline-offset: 2px;
+}
+.calendarControls .calendar-today {
+  min-width: 64px;
+  padding: 0 10px;
+  border-color: #3772d7;
+  background-color: #3772d7;
+  color: #fff;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.calendarControls .calendar-today:hover:not(:disabled) {
+  border-color: #245eb4;
+  background-color: #245eb4;
+  color: #fff;
+}
+.calendarControls button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+.calendar-error {
+  margin: 8px 12px 0;
+  color: #b42318;
+  font-size: 12px;
+}
+.calendarTableDiv {
+  overflow-y: auto;
+}
+.calendarTable {
+  height: auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.calendarTable thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: auto;
+  background-color: white;
+}
+.calendarTable tbody tr td {
+  text-align: left;
+  vertical-align: top;
+  padding: 3px;
+  height: 55px;
+}
+.calendarTable tbody tr td .calendar-date {
+  height: auto;
+  text-align: right;
+  padding: 0 2px 2px;
+}
+.calendar-other-month .calendar-date {
+  color: #c5c9cc;
+}
+.calendar-date.is-today {
+  background-color: #fcf8e3;
+  border-radius: 3px;
+  font-weight: 700;
+}
+.calendar-events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.leave-event {
+  overflow-wrap: anywhere;
+  border-radius: 3px;
+  padding: 2px 3px;
+  color: #343434;
+  font-size: 9px;
+  line-height: 1.2;
+}
+.leave-event span {
+  display: block;
+  font-size: 8px;
+}

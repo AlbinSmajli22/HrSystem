@@ -20,7 +20,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById("todoList");
   const input = document.getElementById("todoInput");
   const addBtn = document.getElementById("addTodoBtn");
-
   // ✅ ADD
   function addTask(priority = "high") {
     const task = input.value.trim();

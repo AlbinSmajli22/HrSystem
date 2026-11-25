@@ -1,16 +1,31 @@
 <?php
 require_once '../config.php';
 require 'Calendar.php';
+require 'calendarData.php';
 session_start();
 $userId = $_SESSION['user_id'];
 $companyId = $_SESSION['company'];
 
-$calendar = new Calendar(new CurrentDate(), new CalendarDate());
+$requestedMonth = filter_input(INPUT_GET, 'month', FILTER_VALIDATE_INT);
+$requestedYear = filter_input(INPUT_GET, 'year', FILTER_VALIDATE_INT);
+$calendarMonth = ($requestedMonth !== false && $requestedMonth !== null && $requestedMonth >= 1 && $requestedMonth <= 12)
+    ? $requestedMonth
+    : (int) date('n');
+$calendarYear = ($requestedYear !== false && $requestedYear !== null && $requestedYear >= 1000 && $requestedYear <= 9999)
+    ? $requestedYear
+    : (int) date('Y');
 
+$calendarDate = new CalendarDate();
+$calendarDate->setDate($calendarYear, $calendarMonth, 1);
+$calendar = new Calendar(new CurrentDate(), $calendarDate);
 $calendar->setSundayFirst(false);
-
 $calendar->create();
 
+$monthStart = $calendarDate->format('Y-m-01');
+$monthEnd = $calendarDate->format('Y-m-t');
+$calendarData = getCalendarLeaveData($con, $companyId, $monthStart, $monthEnd, $userId);
+$calendarEvents = $calendarData['events'];
+$calendarLeaveTypes = $calendarData['leaveTypes'];
 
 $currentTime = date('h:i A');
 
@@ -67,7 +82,9 @@ $requestDatas = $prep->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
+    <script src="../js/calendar.js"></script>
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/calendar.css">
 </head>
 
 <body>
@@ -250,41 +267,52 @@ $requestDatas = $prep->fetchAll();
                             Calendar
                         </h5>
                     </div>
+                    <p class="calendar-error" role="alert" hidden></p>
                     <div class="calendarBody">
-                        <div class="currentDate">
-                            <h5> October 2023</h5>
-                            <div>
-                                <button style="font-size:12px; height:28px; margin-right: 5px; width:60px;">
+                        <div class="currentDate" data-month="<?= $calendarMonth ?>" data-year="<?= $calendarYear ?>">
+                            <h5><?= htmlspecialchars($calendar->getCalendarMonth() . ' ' . $calendarDate->getYear(), ENT_QUOTES, 'UTF-8') ?></h5>
+                            <div class="calendarControls">
+                                <button type="button" class="calendar-today">
                                     today
                                 </button>
-                                <button>
-                                    <
-                                </button>
-                                <button>
-                                    >
-                                </button>
+                                <button type="button" class="bck" aria-label="Previous month">&lt;</button>
+                                <button type="button" class="forward" aria-label="Next month">&gt;</button>
                             </div>
                         </div>
                         <div class="calendarTableDiv">
                             <table class="calendarTable">
                                 <thead>
-                                    <?php foreach ($calendar->getDayLabels() as $dayLabel): ?>
-                                        <th>
-                                            <?php echo $dayLabel ?>
-                                        </th>
-                                    <?php endforeach; ?>
+                                    <tr>
+                                        <?php foreach ($calendar->getDayLabels() as $dayLabel): ?>
+                                            <th scope="col"><?= htmlspecialchars($dayLabel, ENT_QUOTES, 'UTF-8') ?></th>
+                                        <?php endforeach; ?>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    <div>
-                                    </div>
                                     <?php foreach ($calendar->getWeeks() as $week): ?>
                                         <tr>
                                             <?php foreach ($week as $day): ?>
-                                                <td <?php if (!$day['currentMonth']): ?> style="color:#e7eaec;" <?php endif; ?>>
-                                                    <span <?php if ($calendar->isCurrentDate($day['dayNumber'])): ?>
-                                                            style=" background-color:fcf8e3;" <?php endif; ?>>
-                                                        <?php echo $day['dayNumber']; ?>
+                                                <?php
+                                                $dayDate = $day['currentMonth']
+                                                    ? sprintf('%04d-%02d-%02d', $calendarYear, $calendarMonth, $day['dayNumber'])
+                                                    : null;
+                                                $isToday = $day['currentMonth'] && $calendar->isCurrentDate($day['dayNumber']);
+                                                ?>
+                                                <td class="<?= $day['currentMonth'] ? 'calendar-current-month' : 'calendar-other-month' ?>">
+                                                    <span class="calendar-date<?= $isToday ? ' is-today' : '' ?>">
+                                                        <?= $day['dayNumber'] ?>
                                                     </span>
+                                                    <?php if ($dayDate !== null && !empty($calendarEvents[$dayDate])): ?>
+                                                        <div class="calendar-events">
+                                                            <?php foreach ($calendarEvents[$dayDate] as $event): ?>
+                                                                <div class="leave-event"
+                                                                    style="background-color: <?= htmlspecialchars($event['color'], ENT_QUOTES, 'UTF-8') ?>"
+                                                                    title="<?= htmlspecialchars($event['leaveType'], ENT_QUOTES, 'UTF-8') ?>">
+                                                                    <?= htmlspecialchars($event['leaveType'], ENT_QUOTES, 'UTF-8') ?>
+                                                                </div>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </td>
                                             <?php endforeach; ?>
                                         </tr>
@@ -295,22 +323,15 @@ $requestDatas = $prep->fetchAll();
                         <div class="legendGuide">
                             <p>Legend:</p>
                             <div class="legendColor">
-                                <div class="legend" style="background-color:#B8B790;"></div>
-                                <p>Annual Leave</p>
-                                <div class="legend" style="background-color:#C0A8A5;"></div>
-                                <p>Child born</p>
-                                <div class="legend" style="background-color:#87CFE3;"></div>
-                                <p>Death of Family Member</p>
-                                <div class="legend" style="background-color:#8BD2AC;"></div>
-                                <p>Maternity Leave</p>
-                                <div class="legend" style="background-color:#D3AB9D;"></div>
-                                <p>Moving Day</p>
-                                <div class="legend" style="background-color:#F3B188;"></div>
-                                <p>Sick Leave</p>
-                                <div class="legend" style="background-color:#CACDAF;"></div>
-                                <p>Wedding Day</p>
-                                <div class="legend" style="background-color:#AAE6A0;"></div>
-                                <p>Work from Home</p>
+                                <?php if (!$calendarLeaveTypes): ?>
+                                    <p>No leave types configured.</p>
+                                <?php else: ?>
+                                    <?php foreach ($calendarLeaveTypes as $leaveType): ?>
+                                        <div class="legend"
+                                            style="background-color: <?= htmlspecialchars($leaveType['color'], ENT_QUOTES, 'UTF-8') ?>"></div>
+                                        <p><?= htmlspecialchars($leaveType['name'], ENT_QUOTES, 'UTF-8') ?></p>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
