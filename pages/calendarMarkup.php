@@ -36,9 +36,8 @@
                                             <div class="leave-event"
                                                 style="background-color: <?= htmlspecialchars($event['color'], ENT_QUOTES, 'UTF-8') ?>"
                                                 title="<?= htmlspecialchars($event['leaveType'], ENT_QUOTES, 'UTF-8') ?>">
-                                                <?php if ($calendarShowsNames): ?>
+                                                <?php if (!empty($calendarShowsNames)): ?>
                                                     <strong><?= htmlspecialchars($event['name'], ENT_QUOTES, 'UTF-8') ?></strong>
-                                               
                                                 <?php else: ?>
                                                     <?= htmlspecialchars($event['leaveType'], ENT_QUOTES, 'UTF-8') ?>
                                                 <?php endif; ?>

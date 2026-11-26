@@ -11,6 +11,7 @@
   flex-shrink: 0;
   margin-left: auto;
   gap: 8px;
+  padding: 10px 0px;
 }
 .calendarControls button {
   display: inline-flex;

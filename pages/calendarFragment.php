@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_id'], $_SESSION['company'])) {
 
 $companyId = (int) $_SESSION['company'];
 $userId = isset($_SESSION['role']) ? (int) $_SESSION['user_id'] : null;
+$calendarShowsNames = $userId === null;
 
 $requestedMonth = filter_input(INPUT_GET, 'month', FILTER_VALIDATE_INT);
 $requestedYear = filter_input(INPUT_GET, 'year', FILTER_VALIDATE_INT);
